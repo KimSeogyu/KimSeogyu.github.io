@@ -161,6 +161,20 @@ int removed = origin & (origin-1);
 ```
 </td>
 </tr>
+<tr>
+<td>
+부분 집합 순회
+</td>
+<td>
+
+```
+집합 A의 부분집합 순회
+for (int i = A;; i = ((i - 1) & A)) {
+    ...
+}
+```
+</td>
+</tr>
 </tbody>
 </table>
 
