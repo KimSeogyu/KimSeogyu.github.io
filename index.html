@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김서규 | 인터랙티브 이력서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 기본 폰트 및 스크롤 부드럽게 */
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Noto Sans KR', 'Poppins', sans-serif;
+        }
+        /* 활성 네비게이션 링크 스타일 */
+        .nav-link.active {
+            color: #FF6B6B;
+            font-weight: 600;
+        }
+        /* 섹션 제목 밑줄 애니메이션 */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 4px;
+            background-color: #FF6B6B;
+            transition: width .3s;
+            border-radius: 2px;
+        }
+        .section-title.in-view::after {
+            width: 60px;
+        }
+        /* 프로젝트 카드 호버 효과 */
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        /* 차트 컨테이너 스타일 */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* 최대 너비 설정 */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* 기본 높이 */
+            max-height: 350px; /* 최대 높이 */
+        }
+        @media (min-width: 768px) { /* 데스크탑에서 차트 높이 조정 */
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        /* 스킬 바 스타일 */
+        .skill-bar-fill {
+            transition: width 0.8s ease-out;
+        }
+        /* 아코디언 스타일 */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+        .accordion-content.open {
+            max-height: 1000px; /* 충분한 높이 */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .accordion-button i {
+            transition: transform 0.3s ease-out;
+        }
+        .accordion-button.open i {
+            transform: rotate(180deg);
+        }
+    </style>
+    <!-- Visualization & Content Choices: 
+        - Hero: Name, Title (Static HTML/Tailwind). Goal: Immediate identification.
+        - Summary: Text block, Key strengths list (Static HTML/Tailwind). Goal: Overview of capabilities.
+        - Skills: 
+            - Languages: Chart.js horizontal bar chart for proficiency (Go, TypeScript, Python, Rust). Goal: Visual comparison of language skills. Interaction: Hover tooltips.
+            - DB/Storage, DevOps/Cloud: Categorized lists (HTML/Tailwind). Goal: Clear presentation of other technical skills.
+        - Experience: Timeline layout (HTML/Tailwind). Each item expandable via JS to show details. Goal: Chronological overview with in-depth exploration. Interaction: Click to expand/collapse.
+        - Projects: Card layout (HTML/Tailwind). Each card expandable.
+            - Quantifiable achievements (TPS, failure rate %): Animated number counters or simple text highlights (JS). Goal: Dynamic and engaging presentation of results. Interaction: Click to expand/collapse.
+        - Contact: Clickable links for email, GitHub, LinkedIn (HTML/Tailwind). Goal: Easy access to contact methods.
+        - General: Unicode icons (Font Awesome) for section titles and visual cues.
+        - Justification: These choices aim to transform static resume data into an engaging, interactive experience, making it easier for users to digest key information and understand the candidate's profile. Chart.js for skills provides a clear visual hierarchy. Expandable sections for experience and projects prevent information overload while allowing detailed exploration.
+        - Library/Method: Chart.js (CDN), Vanilla JS, Tailwind CSS.
+    -->
+    </head>
+<body class="bg-[#F0F2F5] text-[#3A3A3A]">
+
+    <header class="bg-[#1E2A38] text-white p-4 fixed w-full top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#hero" class="text-xl font-bold hover:text-[#FF6B6B] transition-colors">김서규</a>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#summary" class="nav-link hover:text-[#FF6B6B] transition-colors">소개</a></li>
+                    <li><a href="#skills" class="nav-link hover:text-[#FF6B6B] transition-colors">기술</a></li>
+                    <li><a href="#experience" class="nav-link hover:text-[#FF6B6B] transition-colors">경력</a></li>
+                    <li><a href="#projects" class="nav-link hover:text-[#FF6B6B] transition-colors">프로젝트</a></li>
+                    <li><a href="#contact" class="nav-link hover:text-[#FF6B6B] transition-colors">연락처</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-16"> <section id="hero" class="bg-[#1E2A38] text-white py-24 px-6 md:px-0 min-h-[calc(50vh-4rem)] flex items-center">
+            <div class="container mx-auto text-center">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 font-['Poppins']">김서규</h1>
+                <p class="text-2xl md:text-3xl text-[#BDC3C7] font-['Poppins']">블록체인 기반 백엔드 엔지니어</p>
+                <a href="#summary" class="mt-8 inline-block bg-[#FF6B6B] text-white font-semibold py-3 px-8 rounded-lg hover:bg-opacity-80 transition-colors text-lg">더 알아보기 <i class="fas fa-arrow-down ml-2"></i></a>
+            </div>
+        </section>
+
+        <section id="summary" class="py-16 md:py-24 px-6 bg-white">
+            <div class="container mx-auto">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-[#1E2A38] mb-12 text-center"><i class="fas fa-user-astronaut mr-3 text-[#FF6B6B]"></i>경력 요약 / 자기소개</h2>
+                <div class="max-w-3xl mx-auto text-lg md:text-xl space-y-6">
+                    <p>Go 언어 기반의 대규모 분산 시스템 및 블록체인 연동 서비스 개발 전문가, 김서규입니다. Fault-Tolerant 시스템 설계와 최적화 경험을 바탕으로 안정적이고 확장 가능한 백엔드 솔루션을 제공하며, 특히 블록체인 인프라 연동 및 미들웨어 개발을 통해 실질적인 비즈니스 가치 창출에 기여합니다.</p>
+                    <ul class="list-none space-y-3">
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#1E2A38] mr-3 mt-1 text-xl"></i>Go 기반 대규모 분산 시스템(블록체인 Offchain DB, Fault-Tolerant 시스템, GIS 기반 서비스 등) 설계, 개발 및 최적화 경험</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#1E2A38] mr-3 mt-1 text-xl"></i>견고하고 테스트 용이성이 높은 백엔드 아키텍처 설계 및 MSA(Microservices Architecture) 환경 구축 역량</li>
+                        <li class="flex items-start"><i class="fas fa-check-circle text-[#1E2A38] mr-3 mt-1 text-xl"></i>제품 중심의 심층적인 문제 해결 능력 및 다양한 직군과의 원활한 커뮤니케이션을 통한 성공적인 협업 경험</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-16 md:py-24 px-6">
+            <div class="container mx-auto">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-[#1E2A38] mb-16 text-center"><i class="fas fa-tools mr-3 text-[#FF6B6B]"></i>기술 스택</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-[#1E2A38] mb-6 text-center md:text-left"><i class="fas fa-code mr-2 text-[#FF6B6B]"></i>프로그래밍 언어</h3>
+                        <div class="chart-container mb-8">
+                            <canvas id="languageSkillsChart"></canvas>
+                        </div>
+                        <div class="space-y-4 text-sm md:text-base">
+                            <p><strong class="font-semibold text-[#1E2A38]">Go:</strong> 대규모 분산 MSA 개발 및 운영, 고성능 블록체인 연동 API 서버 구축 주력. 클린 아키텍처 적용 경험.</p>
+                            <p><strong class="font-semibold text-[#1E2A38]">TypeScript:</strong> 거래소 입출금 백엔드, 메타버스 토지 거래 백엔드 개발 경험. 사내 어드민 페이지와 블록체인 연동 프론트엔드 개발 경험.</p>
+                            <p><strong class="font-semibold text-[#1E2A38]">Python:</strong> 테스트 자동화(PyTest), 시스템 스크립트, 사내 미들웨어 및 CI/CD 파이프라인 스크립트 개발 활용.</p>
+                            <p><strong class="font-semibold text-[#1E2A38]">Rust:</strong> Rust 기반 블록체인 인덱서와 블록체인 노드 연동 모듈 개발 경험.</p>
+                        </div>
+                    </div>
+                    <div class="grid gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#1E2A38] mb-6 text-center md:text-left"><i class="fas fa-database mr-2 text-[#FF6B6B]"></i>데이터베이스 & 스토리지</h3>
+                            <ul class="space-y-3 text-sm md:text-base">
+                                <li class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"><strong>PostgreSQL (PostGIS):</strong> 복잡한 SQL 쿼리 최적화, LBS 데이터 모델링 및 공간 연산, 대용량 DB 튜닝.</li>
+                                <li class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"><strong>Redis:</strong> 캐싱 전략, Redis Streams 메시지 큐, Pub/Sub, 분산 락.</li>
+                                <li class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"><strong>MongoDB:</strong> Document 스키마 설계, BSON 최적화, Aggregation Pipeline, Offchain 데이터 저장/인덱싱.</li>
+                                <li class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"><strong>AWS S3:</strong> 대용량 파일 스토리지, 정적 호스팅, 백업/아카이빙, Presigned URL 보안 접근.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#1E2A38] mb-6 text-center md:text-left"><i class="fas fa-server mr-2 text-[#FF6B6B]"></i>DevOps, 클라우드 & 모니터링</h3>
+                            <ul class="space-y-3 text-sm md:text-base">
+                                <li class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"><strong>Docker & Kubernetes:</strong> Containerization, Helm Chart, Istio Service Mesh, Kustomize, CI/CD 자동 배포.</li>
+                                <li class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"><strong>GitLab CI:</strong> CI/CD 파이프라인 구축/최적화, 자동화된 테스트/빌드/배포.</li>
+                                <li class="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"><strong>Datadog / Prometheus & Grafana:</strong> 통합 모니터링, Log 파싱(Grok), 커스텀 대시보드, SLA/SLO 알림.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-16 md:py-24 px-6 bg-white">
+            <div class="container mx-auto">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-[#1E2A38] mb-16 text-center"><i class="fas fa-building-user mr-3 text-[#FF6B6B]"></i>경력</h2>
+                <div class="relative">
+                    <div class="hidden md:block absolute top-0 bottom-0 left-1/2 w-1 bg-[#D0D0D0] -ml-0.5"></div>
+                    
+                    <div id="experienceContainer" class="space-y-12">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-16 md:py-24 px-6">
+            <div class="container mx-auto">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-[#1E2A38] mb-16 text-center"><i class="fas fa-rocket mr-3 text-[#FF6B6B]"></i>주요 프로젝트</h2>
+                <div id="projectContainer" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 md:py-24 px-6 bg-[#1E2A38] text-white">
+            <div class="container mx-auto text-center">
+                <h2 class="section-title text-3xl md:text-4xl font-bold mb-12 text-white"><i class="fas fa-paper-plane mr-3 text-[#FF6B6B]"></i>연락처</h2>
+                <p class="text-xl md:text-2xl mb-8 text-[#BDC3C7]">흥미로운 프로젝트나 아이디어가 있으시다면 언제든지 편하게 연락주세요.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 text-lg">
+                    <a href="mailto:asap0208@gmail.com" class="hover:text-[#FF6B6B] transition-colors"><i class="fas fa-envelope mr-2"></i> asap0208@gmail.com</a>
+                    <a href="https://github.com/kimseogyu" target="_blank" class="hover:text-[#FF6B6B] transition-colors"><i class="fab fa-github mr-2"></i> github.com/kimseogyu</a>
+                    <a href="https://www.linkedin.com/in/seogyu-kim-7b5a88195/" target="_blank" class="hover:text-[#FF6B6B] transition-colors"><i class="fab fa-linkedin mr-2"></i> LinkedIn 프로필</a>
+                    <span class="hover:text-[#FF6B6B] transition-colors"><i class="fas fa-phone-alt mr-2"></i> 010-2400-4572</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center p-8 bg-[#E9ECEF] text-[#777]">
+        <p>&copy; 2024 김서규. All Rights Reserved.</p>
+        <p class="text-sm mt-2">Modern Resume Design</p>
+    </footer>
+
+    <script>
+        // 데이터 (이력서 내용 기반)
+        const contactInfo = {
+            email: "asap0208@gmail.com",
+            github: "https://github.com/kimseogyu",
+            linkedin: "https://www.linkedin.com/in/seogyu-kim-7b5a88195/",
+            phone: "010-2400-4572"
+        };
+
+        const languageSkillsData = {
+            labels: ['Go (4년+)', 'TypeScript (5년+)', 'Python (2년+)', 'Rust (1년+)'],
+            datasets: [{
+                label: '숙련도',
+                data: [5, 5, 5, 3], // 5점 만점 기준 (별점과 유사하게)
+                backgroundColor: [
+                    'rgba(255, 107, 107, 0.7)', // FF6B6B with alpha
+                    'rgba(30, 42, 56, 0.7)',  // 1E2A38 with alpha
+                    'rgba(255, 193, 7, 0.7)',   // FFC107 with alpha
+                    'rgba(189, 195, 199, 0.7)' // BDC3C7 with alpha
+                ],
+                borderColor: [
+                    '#FF6B6B',
+                    '#1E2A38',
+                    '#FFC107',
+                    '#BDC3C7'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const experiences = [
+            {
+                company: "42dot",
+                role: "백엔드 엔지니어",
+                period: "2023.05 ~ 현재",
+                description: "42dot 블록체인 플랫폼의 백엔드 시스템 설계, 개발 및 운영.",
+                tasks: [
+                    "Offchain Database 개발 : Custom Merkle Patricia Trie 및 Erasure Coding (예: Reed-Solomon) 기반 분산 저장 구조 설계/구현. 데이터 고신뢰성 및 수평적 확장성 확보.",
+                    "Kubernetes(EKS) 환경 기반 REST/gRPC API 서버 구축 및 운영, AWS S3 연동, Redis 기반 분산 락 시스템 설계 및 안정화.",
+                    "시스템 아키텍처 설계 및 주요 기술 의사결정 참여, 코드 리뷰 및 팀원 멘토링."
+                ]
+            },
+            {
+                company: "코인원",
+                role: "백엔드 엔지니어",
+                period: "2022.02 ~ 2023.05",
+                description: "암호화폐 '월렛 입출금 플랫폼' 백엔드 시스템 개발 및 안정성 강화.",
+                tasks: [
+                    "입출금 실패율 <span class='font-bold text-[#D94A4A]'>10% &rarr; 0.1%</span> 달성: 자동 재처리 로직 고도화 및 다단계 실패 감지 시스템 설계/구현. 이를 통해 <strong class='text-[#FF6B6B]'>CS 문의 건수 대폭 감소 및 개발자 수동 개입 최소화</strong>로 운영 효율성 증대.",
+                    "레거시 시스템(Pure JS)을 TypeScript 기반으로 점진적 리팩토링 및 테스트 커버리지 <span class='font-bold text-[#D94A4A]'>50%</span> 확보. 코드 품질 향상 및 구조 개선으로 <strong class='text-[#FF6B6B]'>신규 팀원의 개발 참여 및 온보딩 기간 단축에 기여</strong>.",
+                    "주요 블록체인(Bitcoin, Ethereum 등) 노드 연동 모듈 개발 및 사내 미들웨어 프레임워크(메시지 큐, 로깅) 개발 참여."
+                ]
+            },
+            {
+                company: "Axiasoft - TheFutureCompany",
+                role: "백엔드 엔지니어",
+                period: "2021.03 ~ 2022.02",
+                description: "메타버스 플랫폼 '가상 토지 거래 시스템'의 핵심 백엔드 시스템 <strong class='text-[#FF6B6B]'>설계부터 개발, 배포, 운영까지 전 과정을 주도적으로 총괄</strong>하였습니다.",
+                tasks: [
+                    "PostGIS 및 Turf.js를 활용하여 <span class='font-bold text-[#D94A4A]'>한국, 미국, 유럽 등 글로벌 지역을 포괄하는 대규모 폴리곤 데이터</span> 기반 정밀 공간 연산 로직을 구현하고, 실시간 토지 거래 시스템을 성공적으로 구축하여 <strong class='text-[#FF6B6B]'>초기 사용자 트래픽 급증에 안정적으로 대응</strong>했습니다.",
+                    "다국적 결제 시스템(PayPal, Coocon 등) 연동을 통해 <strong class='text-[#FF6B6B]'>글로벌 서비스 확장의 기술적 기반을 마련</strong>하였으며, 복잡한 환율 변동에 대응하는 API 및 안정적인 대규모 정산 배치 시스템을 구현했습니다.",
+                    "프로젝트 초기 기획 단계부터 참여하여 핵심 아키텍처를 설계하고, <strong class='text-[#FF6B6B]'>프로젝트의 성공적인 MVP 런칭 및 시장 안착에 핵심적으로 기여</strong>했습니다."
+                ]
+            },
+            {
+                company: "홍익대학교 시각디자인학과",
+                role: "백엔드 엔지니어 (계약)",
+                period: "2020.09 ~ 2021.03",
+                description: "홍익대학교 시각디자인학과의 공식 학과 홈페이지(<a href='https://sidi.hongik.ac.kr/' target='_blank' class='text-[#FF6B6B] underline hover:text-opacity-80'>sidi.hongik.ac.kr</a>) 백엔드 시스템 및 관리자 페이지 개발.",
+                tasks: [
+                    "Python, Django, Django REST Framework를 사용하여 RESTful API 서버를 구축하였습니다.",
+                    "AWS 클라우드 환경(EC2, S3, Route53)을 활용하여 안정적인 서비스 배포 및 운영 환경을 구성했습니다.",
+                    "주요 기능: 학과 공지사항, 작품 아카이빙, 전시/행사 정보, 학사 일정, 소식지 등 학과 구성원(학생, 조교, 교수) 간의 정보 공유 및 소통 플랫폼 역할 수행.",
+                    "<strong class='text-[#FF6B6B]'>현재까지 안정적으로 운영</strong>되며 학과 커뮤니티 활성화 및 정보 접근성 향상에 기여하고 있습니다."
+                ]
+            }
+        ];
+
+        const projects = [
+            {
+                title: "Offchain Database 개발 (42dot)",
+                problem: "블록체인 상의 데이터 저장 비용 및 성능 한계를 극복하고, 신뢰성과 유연성을 갖춘 대용량 Offchain 데이터 저장 시스템 구축 필요.",
+                solutions: [
+                    "Custom Merkle Patricia Trie 설계 및 구현, 데이터 무결성 검증 최적화.",
+                    "Erasure Coding (예: Reed-Solomon) 기반 분산 저장 아키텍처 설계로 Fault-Tolerance 및 데이터 가용성 극대화. (N+M 구성)",
+                    "MPC(Multi-Party Computation) 구조를 활용한 키 관리 및 데이터 접근 제어 로직 일부 설계 참여.",
+                    "MongoDB 기반 데이터 저장 및 관리: <strong class='text-[#FF6B6B]'>JSON Schema Draft 07 스펙 기준의 커스텀 스키마 관리 기능을 개발</strong>하여 데이터 유효성 검증을 강화하고, 유연한 데이터 모델링을 지원.",
+                    "<strong class='text-[#FF6B6B]'>이벤트 드리븐 아키텍쳐 설계와 분산 트랜잭션 관리:</strong> 메시지 큐(Redis Streams 사용)를 활용한 이벤트 드리븐 아키텍처를 설계하고, Saga 패턴에 기반한 보상 트랜잭션을 설계하여 분산 환경에서의 데이터 최종 일관성 및 안정적인 롤백 로직을 구현.",
+                    "REST + gRPC API 제공, AWS S3 연동, Redis 기반 분산 락 시스템 설계."
+                ],
+                achievements: [
+                    "단일 인스턴스 기준 <span class='font-bold text-[#D94A4A] achievement-value' data-value='1500'>0</span> TPS 이상의 트랜잭션 처리 가능한 고신뢰성/고가용성 데이터 저장 구조 확보.",
+                    "데이터 무결성 <span class='font-bold text-[#D94A4A]'>99.999%</span> 달성 및 수평적 확장(Scale-out) 용이한 서비스 아키텍처 완성.",
+                    "복잡한 분산 시스템 설계 및 블록체인 연동 핵심 기술 역량 내재화."
+                ]
+            },
+            {
+                title: "입출금 플랫폼 실패율 개선 (코인원)",
+                problem: "높은 입출금 실패율로 인한 사용자 경험 저하, CS 및 운영 비용 증가, 시스템 신뢰도 하락.",
+                solutions: [
+                    "다단계 자동 재처리 시스템 및 정교한 실패 감지/분류 시스템 설계 및 구현.",
+                    "Pure JS 레거시 코드를 TypeScript로 점진적 리팩토링 (Strangler Fig 패턴 활용), 주요 로직 테스트 커버리지 <span class='font-bold text-[#D94A4A]'>50%</span> 이상 확보.",
+                    "블록체인 노드 상태 모니터링 강화 및 사내 미들웨어 프레임워크(메시지 큐 기반 비동기 처리) 개선 참여."
+                ],
+                achievements: [
+                    "입출금 실패율 <span class='font-bold text-[#D94A4A]'>10% &rarr; 0.1% 미만</span>으로 대폭 감소시켜 <strong class='text-[#FF6B6B]'>CS 문의 건수 및 개발자 수동 처리 업무 현저히 절감</strong>.",
+                    "시스템 안정성 및 복원력 향상, TypeScript 전환 및 구조 개선을 통해 <strong class='text-[#FF6B6B]'>팀 전체의 개발 생산성 및 유지보수 효율성 증대</strong>."
+                ]
+            },
+            {
+                title: "메타버스 토지 거래 백엔드 개발 (Axiasoft)",
+                problem: "대규모 사용자 접속 및 동시 거래 처리가 가능한 메타버스 내 가상 토지 거래 시스템 구축. 정밀한 공간 데이터 연산 및 다양한 글로벌 결제 수단 연동 필요.",
+                solutions: [
+                    "JWT 및 OAuth 2.0 기반 사용자 인증/인가 시스템 설계.",
+                    "PostGIS와 Turf.js 활용, R-tree 인덱싱 기반 멀티 폴리곤 공간 검색 및 거래 가능 영역 연산 최적화.",
+                    "실시간 체결 엔진 개발 및 운영.",
+                    "PayPal, Stripe 등 다국적 PG 연동 및 Coocon 외부 금융 API 연동, 환율 변동 대응 스케줄러 개발."
+                ],
+                achievements: [
+                    "<strong class='text-[#FF6B6B]'>대규모 동시 접속 및 실시간 거래 처리가 가능한</strong> 메타버스 부동산 백엔드 완성.",
+                    "PostGIS 공간 쿼리 최적화를 통해 <strong class='text-[#FF6B6B]'>복잡한 폴리곤 연산 처리 성능을 대폭 향상시켜 사용자 경험 개선</strong>.",
+                    "글로벌 사용자 대상 서비스 확장 기반 마련."
+                ]
+            }
+        ];
+
+        // 네비게이션 활성화 및 스크롤 감지
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id]');
+            const sectionTitles = document.querySelectorAll('.section-title');
+
+            function updateActiveLink() {
+                let index = sections.length;
+                while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+                
+                navLinks.forEach((link) => link.classList.remove('active'));
+                if (sections[index]) {
+                    const activeLink = document.querySelector(`.nav-link[href="#${sections[index].id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            }
+
+            function checkSectionInView() {
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const title = section.querySelector('.section-title');
+                    if (title && window.scrollY + window.innerHeight > sectionTop + 100 && window.scrollY < sectionTop + sectionHeight - 100) {
+                        title.classList.add('in-view');
+                        // 해당 섹션의 애니메이션 시작 (예: 숫자 카운팅)
+                        if (section.id === 'projects') {
+                           startAchievementAnimations();
+                        }
+                    } else if (title) {
+                       // title.classList.remove('in-view'); // 뷰에서 벗어나면 다시 애니메이션 하려면 주석 해제
+                    }
+                });
+            }
+            
+            updateActiveLink();
+            checkSectionInView();
+            window.addEventListener('scroll', () => {
+                updateActiveLink();
+                checkSectionInView();
+            });
+
+            // 언어 기술 스택 차트 생성
+            const ctx = document.getElementById('languageSkillsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar', // 가로 막대 차트는 'bar'로 하고 indexAxis: 'y' 설정
+                data: languageSkillsData,
+                options: {
+                    indexAxis: 'y', // 이 옵션으로 가로 막대 차트 생성
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 5, // 별점과 유사하게 5점 만점
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#1E2A38'
+                            }
+                        },
+                        y: {
+                             grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#1E2A38',
+                                font: {
+                                    size: 12 // 레이블 폰트 크기
+                                },
+                                // 레이블 줄바꿈 로직 (Chart.js v3+)
+                                callback: function(value, index, values) {
+                                    const label = this.getLabelForValue(value);
+                                    const maxLength = 15; // 최대 글자 수
+                                    if (label.length > maxLength) {
+                                        return label.substring(0, maxLength) + '...';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // 범례 숨기기
+                        },
+                        tooltip: {
+                            backgroundColor: '#1E2A38',
+                            titleColor: '#FF6B6B',
+                            bodyColor: '#FFFFFF',
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.x !== null) {
+                                        label += context.parsed.x + ' / 5';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 경력 섹션 동적 생성
+            const experienceContainer = document.getElementById('experienceContainer');
+            experiences.forEach((exp, index) => {
+                const isLeft = index % 2 === 0;
+                const item = document.createElement('div');
+                item.className = `md:flex ${isLeft ? 'md:flex-row-reverse' : ''} items-start mb-12 relative`;
+                
+                item.innerHTML = `
+                    <div class="md:w-1/2 ${isLeft ? 'md:pl-8' : 'md:pr-8'}">
+                        <div class="bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                            <h3 class="text-2xl font-bold text-[#1E2A38] mb-1">${exp.role}</h3>
+                            <p class="text-lg text-[#FF6B6B] font-semibold mb-2">${exp.company}</p>
+                            <p class="text-sm text-gray-500 mb-3">${exp.period}</p>
+                            <p class="text-gray-700 mb-4">${exp.description}</p>
+                            <button class="accordion-button text-[#1E2A38] font-semibold hover:text-[#FF6B6B] transition-colors focus:outline-none">
+                                상세 내용 보기 <i class="fas fa-chevron-down ml-1"></i>
+                            </button>
+                            <div class="accordion-content mt-2 text-gray-600 text-sm">
+                                <ul class="list-disc list-inside space-y-2">
+                                    ${exp.tasks.map(task => `<li>${task}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex md:w-1/2 ${isLeft ? 'md:pr-8 justify-end text-right' : 'md:pl-8 justify-start text-left'} items-center">
+                        <div class="w-8 h-8 bg-[#FF6B6B] rounded-full absolute ${isLeft ? 'left-1/2 -ml-4' : 'left-1/2 -ml-4'} transform translate-y-1/2 border-4 border-white shadow-md"></div>
+                    </div>
+                     <div class="md:hidden w-6 h-6 bg-[#FF6B6B] rounded-full absolute left-0 -ml-3 mt-1 border-4 border-white shadow-md"></div>
+                `;
+                // 모바일에서는 왼쪽에 타임라인 선이 보이도록 조정
+                if (window.innerWidth < 768) {
+                    item.classList.add('pl-8'); // 왼쪽 패딩으로 선과 내용 분리
+                }
+                experienceContainer.appendChild(item);
+            });
+
+            // 프로젝트 섹션 동적 생성
+            const projectContainer = document.getElementById('projectContainer');
+            projects.forEach(proj => {
+                const card = document.createElement('div');
+                card.className = 'project-card bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col';
+                card.innerHTML = `
+                    <h3 class="text-xl font-bold text-[#1E2A38] mb-3">${proj.title}</h3>
+                    <div class="text-gray-700 mb-4 flex-grow">
+                        <p class="font-semibold text-gray-800">문제 정의:</p>
+                        <p class="text-sm mb-3">${proj.problem}</p>
+                    </div>
+                    <button class="accordion-button mt-auto text-[#1E2A38] font-semibold hover:text-[#FF6B6B] transition-colors focus:outline-none self-start">
+                        해결 방안 및 성과 보기 <i class="fas fa-chevron-down ml-1"></i>
+                    </button>
+                    <div class="accordion-content mt-2 text-gray-600 text-sm">
+                        <p class="font-semibold text-gray-800 mt-2">핵심 해결 방안:</p>
+                        <ul class="list-disc list-inside space-y-1 text-xs">
+                            ${proj.solutions.map(sol => `<li>${sol}</li>`).join('')}
+                        </ul>
+                        <p class="font-semibold text-gray-800 mt-3">주요 성과:</p>
+                        <ul class="list-disc list-inside space-y-1 text-xs">
+                            ${proj.achievements.map(ach => `<li>${ach}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                projectContainer.appendChild(card);
+            });
+            
+            // 아코디언 기능
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('open');
+                    content.classList.toggle('open');
+                });
+            });
+        });
+
+        // 숫자 카운팅 애니메이션
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        let achievementAnimationsDone = false;
+        function startAchievementAnimations() {
+            if (achievementAnimationsDone) return;
+            document.querySelectorAll('.achievement-value').forEach(el => {
+                const value = parseInt(el.dataset.value);
+                animateValue(el, 0, value, 1500);
+            });
+            achievementAnimationsDone = true; // 한번만 실행되도록 플래그 설정
+        }
+
+    </script>
+</body>
+</html>
