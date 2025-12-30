@@ -94,7 +94,7 @@ export const Mermaid = forwardRef<HTMLDivElement, { chart: string } & React.HTML
   return (
     <div 
       ref={localRef} 
-      className={`mermaid-container my-8 p-8 rounded-2xl overflow-x-auto transition-all shadow-sm cursor-zoom-in ${
+      className={`mermaid-container p-8 rounded-2xl overflow-x-auto transition-all shadow-sm cursor-zoom-in ${
         isDark 
           ? 'bg-slate-800/60 border-2 border-slate-600/50 shadow-indigo-500/10' 
           : 'bg-amber-50/80 border-2 border-amber-300/60 shadow-amber-500/10'

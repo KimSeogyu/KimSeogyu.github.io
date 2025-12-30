@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getPostByFullPath, getAllPosts } from '~/lib/posts'
 import { siteConfig } from '~/config/site'
 import { Badge } from '~/components/ui/badge'
@@ -65,6 +65,24 @@ export const Route = createFileRoute('/blog/$')({
 function PostDetail() {
   const { post, relatedPosts } = Route.useLoaderData()
   const { addRecentPost, setRightSidebarTitle, setRightSidebarContent } = useLayout()
+  const [isDark, setIsDark] = useState(false)
+
+  // 다크모드 감지 (Zoom 리마운트 및 스타일링용)
+  useEffect(() => {
+    const checkDarkMode = () => {
+      setIsDark(document.documentElement.classList.contains('dark'))
+    }
+    
+    checkDarkMode()
+    
+    const observer = new MutationObserver(checkDarkMode)
+    observer.observe(document.documentElement, { 
+      attributes: true, 
+      attributeFilter: ['class'] 
+    })
+    
+    return () => observer.disconnect()
+  }, [])
   
   // Slot Pattern: Right Sidebar TOC 컨텐츠 설정
   useEffect(() => {
@@ -197,21 +215,25 @@ function PostDetail() {
                         if (match && match[1] === 'mermaid') {
                           const codeContent = codeElement.children
                           return (
-                            <Zoom>
-                              <div style={{ width: '100%' }}>
-                                <Mermaid chart={String(codeContent).replace(/\n$/, '')} />
-                              </div>
-                            </Zoom>
+                            <div className="my-8">
+                              <Zoom key={isDark ? 'mermaid-dark' : 'mermaid-light'}>
+                                <div style={{ width: '100%' }}>
+                                  <Mermaid chart={String(codeContent).replace(/\n$/, '')} />
+                                </div>
+                              </Zoom>
+                            </div>
                           )
                         }
                         if (match && match[1] === 'excalidraw-json') {
                           const codeContent = codeElement.children
                           return (
-                            <Zoom>
-                              <div style={{ width: '100%' }}>
-                                <Excalidraw data={String(codeContent).replace(/\n$/, '')} />
-                              </div>
-                            </Zoom>
+                            <div className="my-8">
+                              <Zoom key={isDark ? 'excalidraw-dark' : 'excalidraw-light'}>
+                                <div style={{ width: '100%' }}>
+                                  <Excalidraw data={String(codeContent).replace(/\n$/, '')} />
+                                </div>
+                              </Zoom>
+                            </div>
                           )
                         }
                       }

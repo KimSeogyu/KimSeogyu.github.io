@@ -72,12 +72,10 @@ export const Excalidraw = forwardRef<HTMLDivElement, { data: string } & React.HT
   return (
     <div 
       ref={localRef} 
-      className={`excalidraw-container my-8 p-6 rounded-2xl overflow-x-auto transition-all shadow-sm flex justify-center items-center min-h-[200px] cursor-zoom-in ${
-        isDark 
-          ? 'bg-slate-900/40 border border-slate-800' 
-          : 'bg-slate-50 border border-slate-200'
-      } ${className || ''}`}
-      style={style}
+      className={`excalidraw-container p-4 rounded-lg overflow-hidden transition-all bg-white dark:bg-zinc-800 border border-gray-200 dark:border-gray-700 cursor-zoom-in ${className || ''}`}
+      style={{
+        ...style
+      }}
       {...props}
     />
   )
