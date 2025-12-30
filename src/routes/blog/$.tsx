@@ -12,6 +12,8 @@ import remarkMath from 'remark-math'
 import rehypeRaw from 'rehype-raw'
 import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 import { ArrowLeft, Calendar, Clock, Tag, Share2, Twitter, Linkedin, Link as LinkIcon, MessageCircle } from 'lucide-react'
 import { Mermaid } from '~/components/blog/mermaid'
 import { Excalidraw } from '~/components/blog/excalidraw'
@@ -194,11 +196,19 @@ function PostDetail() {
                         const match = /language-([\w-]+)/.exec(className)
                         if (match && match[1] === 'mermaid') {
                           const codeContent = codeElement.children
-                          return <Mermaid chart={String(codeContent).replace(/\n$/, '')} />
+                          return (
+                            <Zoom>
+                              <Mermaid chart={String(codeContent).replace(/\n$/, '')} />
+                            </Zoom>
+                          )
                         }
                         if (match && match[1] === 'excalidraw-json') {
                           const codeContent = codeElement.children
-                          return <Excalidraw data={String(codeContent).replace(/\n$/, '')} />
+                          return (
+                            <Zoom>
+                              <Excalidraw data={String(codeContent).replace(/\n$/, '')} />
+                            </Zoom>
+                          )
                         }
                       }
                       return <pre {...props}>{children}</pre>
@@ -229,12 +239,14 @@ function PostDetail() {
                       )
                     },
                     img: (props) => (
-                      <img
-                        {...props}
-                        className="rounded-lg border shadow-xs my-8"
-                        loading="lazy"
-                        decoding="async"
-                      />
+                      <Zoom>
+                        <img
+                          {...props}
+                          className="rounded-lg border shadow-xs my-8 cursor-zoom-in"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </Zoom>
                     ),
                     a: ({ node, ...props }) => {
                       // 외부 링크인지 확인
