@@ -92,7 +92,7 @@ export function SidebarLayout({ children, tree, showRightSidebar = true }: Sideb
           >
             <ScrollArea className="h-full w-full">
               <div className="flex justify-between items-center px-4 h-14 border-b">
-                <span className="font-semibold text-sm">{rightSidebarTitle || 'On This Page'}</span>
+                <span className="font-semibold text-sm">{rightSidebarTitle}</span>
                 <Button variant="ghost" size="icon-sm" onClick={() => setRightSidebarOpen(false)}>
                   <PanelRight className="h-4 w-4" />
                 </Button>
