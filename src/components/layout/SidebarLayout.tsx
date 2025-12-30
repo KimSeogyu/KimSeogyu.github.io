@@ -1,12 +1,10 @@
-// src/components/layout/SidebarLayout.tsx
-// 홈화면과 블로그에서 공용으로 사용하는 사이드바 레이아웃
-
 import { ScrollArea } from '~/components/ui/scroll-area'
-import { PanelLeft, PanelRight } from 'lucide-react'
+import { PanelLeft, PanelRight, Menu, List } from 'lucide-react'
 import { Button } from '~/components/ui/button'
 import { cn } from '~/lib/utils'
 import { useLayout } from '~/contexts/LayoutContext'
 import { Sidebar } from './Sidebar'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '~/components/ui/sheet'
 import type { ContentNode } from '~/types'
 import type { ReactNode } from 'react'
 
@@ -19,23 +17,105 @@ interface SidebarLayoutProps {
 
 export function SidebarLayout({ children, tree, showRightSidebar = true }: SidebarLayoutProps) {
   const { 
+    isMobile,
     isLeftSidebarOpen, setLeftSidebarOpen, toggleLeftSidebar, 
     isRightSidebarOpen, setRightSidebarOpen, toggleRightSidebar,
     rightSidebarTitle, rightSidebarContent,
     recentPosts
   } = useLayout()
   
+  // Mobile Layout
+  if (isMobile) {
+    return (
+      <div className="min-h-screen pt-16 bg-background">
+        {/* Mobile Header Buttons (Fixed) */}
+        <div className="fixed top-14 left-0 right-0 z-40 h-10 px-4 flex items-center justify-between pointer-events-none">
+          {/* Left Toggle */}
+          <Button 
+            variant="ghost" 
+            size="icon-sm" 
+            onClick={toggleLeftSidebar}
+            className="pointer-events-auto bg-background/80 backdrop-blur border shadow-sm"
+          >
+            <Menu className="h-4 w-4" />
+          </Button>
+
+          {/* Right Toggle (Only if enabled) */}
+          {showRightSidebar && (
+             <Button 
+             variant="ghost" 
+             size="icon-sm" 
+             onClick={toggleRightSidebar}
+             className="pointer-events-auto bg-background/80 backdrop-blur border shadow-sm"
+           >
+             <List className="h-4 w-4" />
+           </Button>
+          )}
+        </div>
+
+        {/* Mobile Left Sidebar (Sheet) */}
+        <Sheet open={isLeftSidebarOpen} onOpenChange={setLeftSidebarOpen}>
+          <SheetContent side="left" className="w-[80%] max-w-xs p-0 pt-10">
+            <SheetHeader className="px-4 pb-2 border-b">
+              <SheetTitle>Contents</SheetTitle>
+              <SheetDescription className="sr-only">Directory navigation</SheetDescription>
+            </SheetHeader>
+            <ScrollArea className="h-[calc(100vh-4rem)]">
+              <div className="p-2 pb-20">
+                <Sidebar tree={tree} />
+              </div>
+            </ScrollArea>
+          </SheetContent>
+        </Sheet>
+        
+        {/* Mobile Right Sidebar (Sheet) */}
+         {showRightSidebar && (
+          <Sheet open={isRightSidebarOpen} onOpenChange={setRightSidebarOpen}>
+            <SheetContent side="right" className="w-[80%] max-w-xs p-0 pt-10">
+              <SheetHeader className="px-4 pb-2 border-b">
+                <SheetTitle>{rightSidebarTitle || 'Menu'}</SheetTitle>
+                 <SheetDescription className="sr-only">Table of contents or related items</SheetDescription>
+              </SheetHeader>
+              <ScrollArea className="h-[calc(100vh-4rem)]">
+                <div className="p-4 pb-20">
+                  {rightSidebarContent || (
+                     <div className="space-y-4">
+                     <p className="text-sm text-muted-foreground">최근 본 글</p>
+                     {recentPosts.length > 0 ? (
+                       <ul className="space-y-2">
+                         {recentPosts.slice(0, 5).map(post => (
+                           <li key={post.id}>
+                             <a 
+                               href={`/blog/${post.fullPath}`}
+                               className="text-sm hover:text-primary transition-colors line-clamp-2"
+                             >
+                               {post.title}
+                             </a>
+                           </li>
+                         ))}
+                       </ul>
+                     ) : (
+                       <p className="text-xs text-muted-foreground">아직 방문한 글이 없습니다.</p>
+                     )}
+                   </div>
+                  )}
+                </div>
+              </ScrollArea>
+            </SheetContent>
+          </Sheet>
+        )}
+
+        {/* Main Content (Full Width) */}
+        <main className="w-full px-4 pb-10">
+          {children}
+        </main>
+      </div>
+    )
+  }
+
+  // Desktop Layout (Existing Behavior)
   return (
     <div className="flex min-h-screen pt-20 relative">
-      {/* Mobile Overlay Backdrop */}
-      {isLeftSidebarOpen && (
-        <div 
-          className="fixed inset-0 z-30 bg-black/50 md:hidden"
-          onClick={() => setLeftSidebarOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
       {/* Left Sidebar */}
       <aside 
         className={cn(
@@ -72,9 +152,9 @@ export function SidebarLayout({ children, tree, showRightSidebar = true }: Sideb
       {/* Main Content */}
       <main 
         className={cn(
-          "flex-1 w-full min-w-0 transition-all duration-300 ease-in-out px-4 md:px-8 pb-10",
-          isLeftSidebarOpen ? "md:ml-72" : "md:ml-0",
-          showRightSidebar && isRightSidebarOpen ? "xl:mr-72" : "xl:mr-0"
+          "flex-1 w-full min-w-0 transition-all duration-300 ease-in-out px-8 pb-10",
+          isLeftSidebarOpen ? "ml-72" : "ml-0",
+          showRightSidebar && isRightSidebarOpen ? "mr-72" : "mr-0"
         )}
       >
         {children}

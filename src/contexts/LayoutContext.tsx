@@ -12,6 +12,7 @@ export interface RecentPost {
 }
 
 interface LayoutContextType {
+  isMobile: boolean;
   isLeftSidebarOpen: boolean;
   setLeftSidebarOpen: (open: boolean) => void;
   toggleLeftSidebar: () => void;
@@ -45,33 +46,64 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
     setIsMac(navigator.platform.toLowerCase().includes('mac'));
   }, []);
 
-  // Sidebar States (Default: Open)
+  // Mobile Detection
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Use a reliable hook or simple resize listener for mobile state
+  useEffect(() => {
+    // Media query to match standard mobile breakdown (often md: 768px in Tailwind)
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    
+    // Initial check
+    setIsMobile(mediaQuery.matches);
+    
+    // Listener
+    const handleResize = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+    
+    mediaQuery.addEventListener('change', handleResize);
+    return () => mediaQuery.removeEventListener('change', handleResize);
+  }, []);
+
+  // Sidebar States
+  // Desktop: Default Open
+  // Mobile: Default Closed
   const [isLeftSidebarOpen, setLeftSidebarOpen] = useState(true);
   const [isRightSidebarOpen, setRightSidebarOpen] = useState(true);
+
+  // Initialize/Reset Sidebars based on Device Type
+  useEffect(() => {
+    if (isMobile) {
+      // Mobile: Always start closed
+      setLeftSidebarOpen(false);
+      setRightSidebarOpen(false);
+    } else {
+      // Desktop: Restore from session or default to true
+      const savedLeft = sessionStorage.getItem('sidebar-left-state');
+      // If no saved state, default to open on desktop
+      setLeftSidebarOpen(savedLeft !== 'false');
+
+      const savedRight = sessionStorage.getItem('sidebar-right-state');
+      setRightSidebarOpen(savedRight !== 'false');
+    }
+  }, [isMobile]);
   
   // Search State (Default: Closed)
   const [isSearchOpen, setSearchOpen] = useState(false);
-  // Restore Sidebar States from SessionStorage (Client Only)
+
+  // Persist Sidebar States (Only for Desktop)
   useEffect(() => {
-    const savedLeft = sessionStorage.getItem('sidebar-left-state');
-    if (savedLeft === 'false') {
-      setLeftSidebarOpen(false);
+    if (!isMobile) {
+      sessionStorage.setItem('sidebar-left-state', String(isLeftSidebarOpen));
     }
+  }, [isLeftSidebarOpen, isMobile]);
 
-    const savedRight = sessionStorage.getItem('sidebar-right-state');
-    if (savedRight === 'false') {
-      setRightSidebarOpen(false);
+  useEffect(() => {
+    if (!isMobile) {
+      sessionStorage.setItem('sidebar-right-state', String(isRightSidebarOpen));
     }
-  }, []);
-
-  // Persist Sidebar States
-  useEffect(() => {
-    sessionStorage.setItem('sidebar-left-state', String(isLeftSidebarOpen));
-  }, [isLeftSidebarOpen]);
-
-  useEffect(() => {
-    sessionStorage.setItem('sidebar-right-state', String(isRightSidebarOpen));
-  }, [isRightSidebarOpen]);
+  }, [isRightSidebarOpen, isMobile]);
 
   // Global Keyboard Shortcuts
   useEffect(() => {
@@ -146,6 +178,7 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
   return (
     <LayoutContext.Provider
       value={{
+        isMobile,
         isLeftSidebarOpen,
         setLeftSidebarOpen,
         toggleLeftSidebar,

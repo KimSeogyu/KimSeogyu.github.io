@@ -124,7 +124,7 @@ function ResumePage() {
                     },
                     {
                       label: "Hybrid RAG 파이프라인",
-                      content: "Kiwi 기반 BM25 + FAISS EnsembleRetriever. Multi-Query(5개) + RRF 재순위화 + LLM Reasoning Loop 구현."
+                      content: "Kiwi 기반 BM25 + FAISS EnsembleRetriever. Multi-Query + RRF 재순위화 + LLM Reasoning Loop 구현."
                     },
                     {
                       label: "시스템 최적화",
