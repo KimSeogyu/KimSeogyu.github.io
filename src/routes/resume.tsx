@@ -44,10 +44,10 @@ function ResumePage() {
                 <Phone className="w-4 h-4" /> 010-2400-4572
               </a>
               <div className="flex gap-4 mt-1 print:hidden">
-                <a href="https://linkedin.com/in/seogyu-kim-7b5a88195" target="_blank" rel="noreferrer" className="hover:text-[#0077b5] transition-colors">
+                <a href="https://linkedin.com/in/seogyu-kim-7b5a88195" target="_blank" rel="noreferrer" className="hover:text-[#0077b5] transition-colors" aria-label="LinkedIn">
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="https://github.com/KimSeogyu" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">
+                <a href="https://github.com/KimSeogyu" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors" aria-label="GitHub">
                   <Github className="w-5 h-5" />
                 </a>
               </div>
@@ -68,7 +68,7 @@ function ResumePage() {
           </h2>
           <Card className="bg-muted/30 border-none shadow-sm print:shadow-none print:break-inside-avoid">
             <CardContent className="pt-6 relative print:pt-4 print:pb-4">
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-blue-500 to-purple-500 rounded-l-md opacity-70 print:w-[2px]" />
+              <div className="absolute top-0 left-0 w-1 h-full bg-linear-to-b from-blue-500 to-purple-500 rounded-l-md opacity-70 print:w-[2px]" />
               <p className="text-lg leading-relaxed text-muted-foreground italic pl-2 mb-6 print:text-base print:mb-3">
                 "새로운 도전을 즐기고 의미 있는 일을 열망하는 개발자 입니다."
               </p>
@@ -250,7 +250,8 @@ function ResumePage() {
                     { label: "기능 구현", content: "작품 아카이브, 전시 안내, 뉴스레터 및 비개발자용 관리자 페이지 개발." },
                     { label: "인프라", content: "AWS EC2, S3, Route53 기반 서버 및 스토리지 구성." }
                   ],
-                  outcome: "현재까지 학과 공식 커뮤니케이션 허브로 안정적 운영 중."
+                  outcome: "현재까지 학과 공식 커뮤니케이션 허브로 안정적 운영 중.",
+                  link: "https://sidi.hongik.ac.kr"
                 }
               ]}
             />
@@ -327,6 +328,7 @@ interface ProjectDetail {
 
 interface Project {
   title: string
+  link?: string
   description?: string
   techStack: string[]
   details: ProjectDetail[]
@@ -367,9 +369,22 @@ function ExperienceItem({ company, role, period, location, projects }: Experienc
         <div className="space-y-8 print:space-y-4">
           {projects.map((project, idx) => (
             <div key={idx} className="bg-muted/10 p-5 rounded-lg border border-border/50 hover:border-border transition-colors print:bg-transparent print:border-none print:p-0 print:rounded-none">
-              <h4 className="text-lg font-bold mb-2 flex items-center gap-2 print:text-base print:mb-1">
-                {project.title}
-              </h4>
+              <div className="flex items-center gap-2 mb-2">
+                <h4 className="text-lg font-bold flex items-center gap-2 print:text-base print:mb-1">
+                  {project.title}
+                </h4>
+                {project.link && (
+                  <a 
+                    href={project.link}
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                    aria-label={`Visit ${project.title} project`}
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                )}
+              </div>
               {project.description && (
                 <p className="text-sm text-muted-foreground mb-4 print:mb-2 print:text-xs">{project.description}</p>
               )}

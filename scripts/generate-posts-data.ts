@@ -24,6 +24,7 @@ interface Post {
   isFeatured: boolean
   isPublic: boolean
   date?: string
+  image?: string
 }
 
 interface ContentNode {
@@ -210,7 +211,8 @@ function parseMarkdownFile(filePath: string, relativePath: string): Post | null 
       wordCount,
       isFeatured: frontmatter.isFeatured || false,
       isPublic: frontmatter.public === true,
-      date: String(frontmatter.date || new Date().toISOString().split('T')[0])
+      date: String(frontmatter.date || new Date().toISOString().split('T')[0]),
+      image: frontmatter.image
     }
   } catch (error) {
     console.error(`Error parsing ${filePath}:`, error)

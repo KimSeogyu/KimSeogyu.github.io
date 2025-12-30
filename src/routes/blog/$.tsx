@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { getPostByFullPath, getAllPosts } from '~/lib/posts'
+import { siteConfig } from '~/config/site'
 import { Badge } from '~/components/ui/badge'
 import { ReadingProgressBar } from '~/components/ui/ReadingProgressBar'
 import { TableOfContents } from '~/components/ui/TableOfContents'
@@ -50,7 +51,9 @@ export const Route = createFileRoute('/blog/$')({
         { property: 'og:title', content: loaderData.post.title },
         { property: 'og:description', content: loaderData.post.excerpt },
         { property: 'og:type', content: 'article' },
+        { property: 'og:image', content: loaderData.post.image || siteConfig.ogImage },
         { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:image', content: loaderData.post.image || siteConfig.ogImage },
       ],
     }
   },
@@ -223,6 +226,34 @@ function PostDetail() {
                         <code className={className} {...props}>
                           {children}
                         </code>
+                      )
+                    },
+                    img: (props) => (
+                      <img
+                        {...props}
+                        className="rounded-lg border shadow-xs my-8"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ),
+                    a: ({ node, ...props }) => {
+                      // 외부 링크인지 확인
+                      const isExternal = props.href?.startsWith('http')
+                      if (isExternal) {
+                        return (
+                          <a
+                            {...props}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+                          />
+                        )
+                      }
+                      return (
+                         <a
+                            {...props}
+                            className="text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+                          />
                       )
                     }
                   }}

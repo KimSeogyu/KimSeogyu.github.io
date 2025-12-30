@@ -17,6 +17,13 @@
             "title": "서비스 규모에 따른 스케일링 전략"
           },
           {
+            "name": "스파이크 트래픽 대응 전략",
+            "type": "post",
+            "path": "backend/devops/seupaikeu-teuraepig-daeeung-jeonryag",
+            "slug": "seupaikeu-teuraepig-daeeung-jeonryag",
+            "title": "스파이크 트래픽 대응 전략"
+          },
+          {
             "name": "Helm 환경별 Values 오버라이드 전략",
             "type": "post",
             "path": "backend/devops/helm-environment-management",
@@ -498,27 +505,6 @@
             "path": "blockchain/solana/solana-sol",
             "slug": "solana-sol",
             "title": "Solana (SOL)"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Daily Notes",
-    "type": "folder",
-    "path": "daily-notes",
-    "children": [
-      {
-        "name": "2023",
-        "type": "folder",
-        "path": "daily-notes/2023",
-        "children": [
-          {
-            "name": "2023년",
-            "type": "post",
-            "path": "daily-notes/2023/2023nyeon",
-            "slug": "2023nyeon",
-            "title": "2023년"
           }
         ]
       }

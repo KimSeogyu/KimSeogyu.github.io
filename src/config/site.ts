@@ -20,6 +20,7 @@ export const siteConfig = {
     siteName: 'Kim Seogyu Portfolio',
     locale: 'ko_KR',
   },
+  ogImage: 'https://github.com/KimSeogyu.png',
   twitter: {
     card: 'summary_large_image',
   },

@@ -17,6 +17,7 @@ export interface Post {
   wordCount: number
   isFeatured: boolean
   date?: string
+  image?: string
 }
 
 export interface ContentNode {
