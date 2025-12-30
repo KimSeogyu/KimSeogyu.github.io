@@ -1,0 +1,28 @@
+/**
+ * 사이트 메타데이터 설정
+ * 
+ * SEO, 소셜 미디어 공유 등에 사용되는 사이트 정보를 중앙 관리합니다.
+ */
+
+export const siteConfig = {
+  name: 'Seogyu Kim',
+  title: 'Seogyu Kim | Software Engineer',
+  description: 'Software Engineer leveraging deep backend expertise to build scalable systems and tackle complex challenges in AI.',
+  url: 'https://kimseogyu.github.io',
+  author: {
+    name: 'Seogyu Kim',
+    email: 'asap0208@gmail.com',
+    github: 'https://github.com/KimSeogyu',
+    linkedin: 'https://www.linkedin.com/in/seogyu-kim-7b5a88195/',
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'Seogyu Kim Portfolio',
+    locale: 'ko_KR',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+} as const
+
+export type SiteConfig = typeof siteConfig

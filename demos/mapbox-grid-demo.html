@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mapbox Grid Demo</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://unpkg.com/@turf/turf@7/turf.min.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { width: 100vw; height: 100vh; }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic2VvZ3l1Z2ltIiwiYSI6ImNrb3g1aGtrMzBjbHEyd21wYTNndjZqZ3gifQ.GFJUMM7FtxxBlNzzwLBxqg';
+    
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/dark-v11',
+        center: [127.0, 37.5],
+        zoom: 13
+    });
+
+    function createGrid(bounds, cellSize) {
+        const bbox = [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()];
+        const grid = turf.squareGrid(bbox, cellSize, { units: 'kilometers' });
+        grid.features.forEach((cell, i) => {
+            cell.id = i;
+        });
+        return grid;
+    }
+
+    map.on('load', () => {
+        const grid = createGrid(map.getBounds(), 0.5);
+        
+        map.addSource('grid', {
+            type: 'geojson',
+            data: grid,
+            generateId: true
+        });
+        
+        map.addLayer({
+            id: 'grid-fill',
+            type: 'fill',
+            source: 'grid',
+            paint: {
+                'fill-color': [
+                    'case',
+                    ['boolean', ['feature-state', 'selected'], false], '#00ff88',
+                    ['boolean', ['feature-state', 'hover'], false], '#00ff88',
+                    'transparent'
+                ],
+                'fill-opacity': [
+                    'case',
+                    ['boolean', ['feature-state', 'selected'], false], 0.6,
+                    ['boolean', ['feature-state', 'hover'], false], 0.3,
+                    0
+                ]
+            }
+        });
+        
+        map.addLayer({
+            id: 'grid-line',
+            type: 'line',
+            source: 'grid',
+            paint: {
+                'line-color': '#00ff88',
+                'line-width': 1,
+                'line-opacity': 0.6
+            }
+        });
+        
+        let hoveredId = null;
+        const selectedCells = new Set();
+        
+        map.on('mousemove', 'grid-fill', (e) => {
+            if (e.features.length > 0) {
+                if (hoveredId !== null) {
+                    map.setFeatureState({ source: 'grid', id: hoveredId }, { hover: false });
+                }
+                hoveredId = e.features[0].id;
+                map.setFeatureState({ source: 'grid', id: hoveredId }, { hover: true });
+            }
+        });
+        
+        map.on('mouseleave', 'grid-fill', () => {
+            if (hoveredId !== null) {
+                map.setFeatureState({ source: 'grid', id: hoveredId }, { hover: false });
+            }
+            hoveredId = null;
+        });
+        
+        map.on('click', 'grid-fill', (e) => {
+            const cellId = e.features[0].id;
+            if (selectedCells.has(cellId)) {
+                selectedCells.delete(cellId);
+                map.setFeatureState({ source: 'grid', id: cellId }, { selected: false });
+            } else {
+                selectedCells.add(cellId);
+                map.setFeatureState({ source: 'grid', id: cellId }, { selected: true });
+            }
+        });
+
+        // 몇 개 미리 선택해서 보여주기
+        setTimeout(() => {
+            [10, 11, 12, 20, 21, 22, 30, 31, 32].forEach(id => {
+                if (id < grid.features.length) {
+                    selectedCells.add(id);
+                    map.setFeatureState({ source: 'grid', id }, { selected: true });
+                }
+            });
+        }, 1000);
+    });
+</script>
+</body>
+</html>

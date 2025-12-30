@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Turf.js Polygon Operations Demo</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://unpkg.com/@turf/turf@7/turf.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #1a1a2e; }
+        .container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px; height: 100vh; }
+        .map-container { background: #16213e; border-radius: 12px; overflow: hidden; position: relative; }
+        .map { width: 100%; height: 100%; }
+        .label { 
+            position: absolute; top: 15px; left: 15px; z-index: 10;
+            background: rgba(0,0,0,0.8); color: #fff; padding: 8px 16px;
+            border-radius: 8px; font-size: 16px; font-weight: 600;
+        }
+        .label span { font-size: 12px; font-weight: 400; opacity: 0.7; display: block; }
+        .legend {
+            position: absolute; bottom: 15px; left: 15px; z-index: 10;
+            background: rgba(0,0,0,0.8); color: #fff; padding: 10px 14px;
+            border-radius: 8px; font-size: 11px;
+        }
+        .legend-item { display: flex; align-items: center; margin: 4px 0; }
+        .legend-color { width: 14px; height: 14px; border-radius: 3px; margin-right: 8px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Union -->
+    <div class="map-container">
+        <div class="label">Union (합집합)<span>turf.union()</span></div>
+        <div id="map-union" class="map"></div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color" style="background:#ff6b6b"></div>Polygon A</div>
+            <div class="legend-item"><div class="legend-color" style="background:#4ecdc4"></div>Polygon B</div>
+            <div class="legend-item"><div class="legend-color" style="background:#ffd93d; border: 2px solid #fff;"></div>Result</div>
+        </div>
+    </div>
+    
+    <!-- Difference -->
+    <div class="map-container">
+        <div class="label">Difference (차집합)<span>turf.difference()</span></div>
+        <div id="map-difference" class="map"></div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color" style="background:#ff6b6b"></div>Polygon A (Base)</div>
+            <div class="legend-item"><div class="legend-color" style="background:#4ecdc4"></div>Polygon B (Subtract)</div>
+            <div class="legend-item"><div class="legend-color" style="background:#ffd93d; border: 2px solid #fff;"></div>A - B</div>
+        </div>
+    </div>
+    
+    <!-- Intersect -->
+    <div class="map-container">
+        <div class="label">Intersect (교집합)<span>turf.intersect()</span></div>
+        <div id="map-intersect" class="map"></div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color" style="background:#ff6b6b"></div>Polygon A</div>
+            <div class="legend-item"><div class="legend-color" style="background:#4ecdc4"></div>Polygon B</div>
+            <div class="legend-item"><div class="legend-color" style="background:#ffd93d; border: 2px solid #fff;"></div>A ∩ B</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic2VvZ3l1Z2ltIiwiYSI6ImNrb3g1aGtrMzBjbHEyd21wYTNndjZqZ3gifQ.GFJUMM7FtxxBlNzzwLBxqg';
+    
+    const center = [127.0, 37.5];
+    
+    // 두 개의 겹치는 폴리곤
+    const polyA = turf.polygon([[
+        [126.97, 37.48], [127.02, 37.48], [127.02, 37.53], [126.97, 37.53], [126.97, 37.48]
+    ]]);
+    
+    const polyB = turf.polygon([[
+        [127.00, 37.50], [127.05, 37.50], [127.05, 37.55], [127.00, 37.55], [127.00, 37.50]
+    ]]);
+    
+    // 연산 수행
+    const unionResult = turf.union(turf.featureCollection([polyA, polyB]));
+    const differenceResult = turf.difference(turf.featureCollection([polyA, polyB]));
+    const intersectResult = turf.intersect(turf.featureCollection([polyA, polyB]));
+    
+    function createMap(containerId, resultGeometry, showOriginals = true) {
+        const map = new mapboxgl.Map({
+            container: containerId,
+            style: 'mapbox://styles/mapbox/dark-v11',
+            center: [127.01, 37.515],
+            zoom: 11.5,
+            interactive: false
+        });
+        
+        map.on('load', () => {
+            if (showOriginals) {
+                // Polygon A
+                map.addSource('polyA', { type: 'geojson', data: polyA });
+                map.addLayer({
+                    id: 'polyA-fill',
+                    type: 'fill',
+                    source: 'polyA',
+                    paint: { 'fill-color': '#ff6b6b', 'fill-opacity': 0.4 }
+                });
+                map.addLayer({
+                    id: 'polyA-line',
+                    type: 'line',
+                    source: 'polyA',
+                    paint: { 'line-color': '#ff6b6b', 'line-width': 2 }
+                });
+                
+                // Polygon B
+                map.addSource('polyB', { type: 'geojson', data: polyB });
+                map.addLayer({
+                    id: 'polyB-fill',
+                    type: 'fill',
+                    source: 'polyB',
+                    paint: { 'fill-color': '#4ecdc4', 'fill-opacity': 0.4 }
+                });
+                map.addLayer({
+                    id: 'polyB-line',
+                    type: 'line',
+                    source: 'polyB',
+                    paint: { 'line-color': '#4ecdc4', 'line-width': 2 }
+                });
+            }
+            
+            // Result
+            if (resultGeometry) {
+                map.addSource('result', { type: 'geojson', data: resultGeometry });
+                map.addLayer({
+                    id: 'result-fill',
+                    type: 'fill',
+                    source: 'result',
+                    paint: { 'fill-color': '#ffd93d', 'fill-opacity': 0.7 }
+                });
+                map.addLayer({
+                    id: 'result-line',
+                    type: 'line',
+                    source: 'result',
+                    paint: { 'line-color': '#ffffff', 'line-width': 3 }
+                });
+            }
+        });
+        
+        return map;
+    }
+    
+    // 세 개의 맵 생성
+    createMap('map-union', unionResult);
+    createMap('map-difference', differenceResult);
+    createMap('map-intersect', intersectResult);
+</script>
+</body>
+</html>

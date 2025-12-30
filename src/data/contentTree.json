@@ -1,0 +1,912 @@
+[
+  {
+    "name": "Backend",
+    "type": "folder",
+    "path": "backend",
+    "children": [
+      {
+        "name": "Devops",
+        "type": "folder",
+        "path": "backend/devops",
+        "children": [
+          {
+            "name": "서비스 규모에 따른 스케일링 전략",
+            "type": "post",
+            "path": "backend/devops/seobiseu-gyumoe-ddareun-seukeilring-jeonryag",
+            "slug": "seobiseu-gyumoe-ddareun-seukeilring-jeonryag",
+            "title": "서비스 규모에 따른 스케일링 전략"
+          },
+          {
+            "name": "Helm 환경별 Values 오버라이드 전략",
+            "type": "post",
+            "path": "backend/devops/helm-environment-management",
+            "slug": "helm-environment-management",
+            "title": "Helm 환경별 Values 오버라이드 전략"
+          },
+          {
+            "name": "Linux 파일 디스크립터 제한 (ulimit) 완벽 가이드",
+            "type": "post",
+            "path": "backend/devops/linux-ulimit-guide",
+            "slug": "linux-ulimit-guide",
+            "title": "Linux 파일 디스크립터 제한 (ulimit) 완벽 가이드"
+          },
+          {
+            "name": "Locust 기반 환경별 E2E 테스트 자동화",
+            "type": "post",
+            "path": "backend/devops/locust-e2e-testing",
+            "slug": "locust-e2e-testing",
+            "title": "Locust 기반 환경별 E2E 테스트 자동화"
+          },
+          {
+            "name": "Trunk-Based Development",
+            "type": "post",
+            "path": "backend/devops/trunk-based-development",
+            "slug": "trunk-based-development",
+            "title": "Trunk-Based Development"
+          }
+        ]
+      },
+      {
+        "name": "Go",
+        "type": "folder",
+        "path": "backend/go",
+        "children": [
+          {
+            "name": "Buf v2 기반 Proto 관리 및 코드 자동 생성",
+            "type": "post",
+            "path": "backend/go/buf-protobuf-management",
+            "slug": "buf-protobuf-management",
+            "title": "Buf v2 기반 Proto 관리 및 코드 자동 생성"
+          },
+          {
+            "name": "Ginkgo와 Testcontainers를 활용한 통합 테스트 전략",
+            "type": "post",
+            "path": "backend/go/ginkgo-bdd-testing",
+            "slug": "ginkgo-bdd-testing",
+            "title": "Ginkgo와 Testcontainers를 활용한 통합 테스트 전략"
+          },
+          {
+            "name": "Go 가비지 컬렉터(GC) 이해와 튜닝 경험",
+            "type": "post",
+            "path": "backend/go/gc-tuning-experience",
+            "slug": "gc-tuning-experience",
+            "title": "Go 가비지 컬렉터(GC) 이해와 튜닝 경험"
+          },
+          {
+            "name": "Go pprof를 활용한 성능 프로파일링 가이드",
+            "type": "post",
+            "path": "backend/go/pprof-profiling-guide",
+            "slug": "pprof-profiling-guide",
+            "title": "Go pprof를 활용한 성능 프로파일링 가이드"
+          },
+          {
+            "name": "Wire를 활용한 Go 의존성 주입(DI) 구현",
+            "type": "post",
+            "path": "backend/go/wire-dependency-injection",
+            "slug": "wire-dependency-injection",
+            "title": "Wire를 활용한 Go 의존성 주입(DI) 구현"
+          }
+        ]
+      },
+      {
+        "name": "Http",
+        "type": "folder",
+        "path": "backend/http",
+        "children": [
+          {
+            "name": "EADDRNOTAVAIL",
+            "type": "post",
+            "path": "backend/http/eaddrnotavail",
+            "slug": "eaddrnotavail",
+            "title": "EADDRNOTAVAIL"
+          },
+          {
+            "name": "gRPC-Gateway로 단일 API 듀얼 프로토콜 지원",
+            "type": "post",
+            "path": "backend/http/grpc-gateway-dual-protocol",
+            "slug": "grpc-gateway-dual-protocol",
+            "title": "gRPC-Gateway로 단일 API 듀얼 프로토콜 지원"
+          },
+          {
+            "name": "Http 요청 최소화 기법",
+            "type": "post",
+            "path": "backend/http/http-yoceong-coesohwa-gibeob",
+            "slug": "http-yoceong-coesohwa-gibeob",
+            "title": "Http 요청 최소화 기법"
+          },
+          {
+            "name": "HTTP 쿠키 보안 설정",
+            "type": "post",
+            "path": "backend/http/http-kuki-boan-seoljeong",
+            "slug": "http-kuki-boan-seoljeong",
+            "title": "HTTP 쿠키 보안 설정"
+          },
+          {
+            "name": "HTTP Transfer 크기를 줄이는 법",
+            "type": "post",
+            "path": "backend/http/http-transfer-keugireul-julineun-beob",
+            "slug": "http-transfer-keugireul-julineun-beob",
+            "title": "HTTP Transfer 크기를 줄이는 법"
+          }
+        ]
+      },
+      {
+        "name": "Nestjs",
+        "type": "folder",
+        "path": "backend/nestjs",
+        "children": [
+          {
+            "name": "데코레이터를 이용한 Nest.js에서의 AOP 적용",
+            "type": "post",
+            "path": "backend/nestjs/dekoreiteoreul-iyonghan-nest-jseseoyi-aop-jeogyong",
+            "slug": "dekoreiteoreul-iyonghan-nest-jseseoyi-aop-jeogyong",
+            "title": "데코레이터를 이용한 Nest.js에서의 AOP 적용"
+          },
+          {
+            "name": "NestJS Dynamic Module 주의점",
+            "type": "post",
+            "path": "backend/nestjs/nestjs-dynamic-module-juyijeom",
+            "slug": "nestjs-dynamic-module-juyijeom",
+            "title": "NestJS Dynamic Module 주의점"
+          },
+          {
+            "name": "NestJS, Cache-Manager v5 사용시 문제 해결법",
+            "type": "post",
+            "path": "backend/nestjs/nestjs-cache-manager-v5-sayongsi-munje-haegyeolbeob",
+            "slug": "nestjs-cache-manager-v5-sayongsi-munje-haegyeolbeob",
+            "title": "NestJS, Cache-Manager v5 사용시 문제 해결법"
+          }
+        ]
+      },
+      {
+        "name": "Patterns",
+        "type": "folder",
+        "path": "backend/patterns",
+        "children": [
+          {
+            "name": "개체 지향 프로그래밍 (Object Oriented Programming)",
+            "type": "post",
+            "path": "backend/patterns/gaece-jihyang-peurogeuraeming-object-oriented-programming",
+            "slug": "gaece-jihyang-peurogeuraeming-object-oriented-programming",
+            "title": "개체 지향 프로그래밍 (Object Oriented Programming)"
+          },
+          {
+            "name": "개체 vs 객체",
+            "type": "post",
+            "path": "backend/patterns/gaece-vs-gaegce",
+            "slug": "gaece-vs-gaegce",
+            "title": "개체 vs 객체"
+          },
+          {
+            "name": "데코레이터 (Decorator)",
+            "type": "post",
+            "path": "backend/patterns/dekoreiteo-decorator",
+            "slug": "dekoreiteo-decorator",
+            "title": "데코레이터 (Decorator)"
+          },
+          {
+            "name": "Append-Only 문서 버저닝 설계 및 구현",
+            "type": "post",
+            "path": "backend/patterns/append-only-versioning",
+            "slug": "append-only-versioning",
+            "title": "Append-Only 문서 버저닝 설계 및 구현"
+          },
+          {
+            "name": "Functional Options 패턴을 활용한 Go 설정 관리",
+            "type": "post",
+            "path": "backend/patterns/functional-options-pattern",
+            "slug": "functional-options-pattern",
+            "title": "Functional Options 패턴을 활용한 Go 설정 관리"
+          },
+          {
+            "name": "SOLID 원칙",
+            "type": "post",
+            "path": "backend/patterns/solid-weoncig",
+            "slug": "solid-weoncig",
+            "title": "SOLID 원칙"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Blockchain",
+    "type": "folder",
+    "path": "blockchain",
+    "children": [
+      {
+        "name": "Aptos",
+        "type": "folder",
+        "path": "blockchain/aptos",
+        "children": [
+          {
+            "name": "Aptos Integration Guide",
+            "type": "post",
+            "path": "blockchain/aptos/aptos-integration-guide",
+            "slug": "aptos-integration-guide",
+            "title": "Aptos Integration Guide"
+          },
+          {
+            "name": "Aptos Move Structure",
+            "type": "post",
+            "path": "blockchain/aptos/aptos-move-structure",
+            "slug": "aptos-move-structure",
+            "title": "Aptos Move Structure"
+          },
+          {
+            "name": "Aptos Whitepaper",
+            "type": "post",
+            "path": "blockchain/aptos/aptos-whitepaper",
+            "slug": "aptos-whitepaper",
+            "title": "Aptos Whitepaper"
+          },
+          {
+            "name": "Interact with the Move VM",
+            "type": "post",
+            "path": "blockchain/aptos/interact-with-the-move-vm",
+            "slug": "interact-with-the-move-vm",
+            "title": "Interact with the Move VM"
+          },
+          {
+            "name": "Move on Aptos",
+            "type": "post",
+            "path": "blockchain/aptos/move-on-aptos",
+            "slug": "move-on-aptos",
+            "title": "Move on Aptos"
+          },
+          {
+            "name": "Upgrade Move code",
+            "type": "post",
+            "path": "blockchain/aptos/upgrade-move-code",
+            "slug": "upgrade-move-code",
+            "title": "Upgrade Move code"
+          }
+        ]
+      },
+      {
+        "name": "Bitcoin",
+        "type": "folder",
+        "path": "blockchain/bitcoin",
+        "children": [
+          {
+            "name": "비트코인 NFT와 BRC-20(FT)",
+            "type": "post",
+            "path": "blockchain/bitcoin/biteukoin-nftwa-brc-20-ft",
+            "slug": "biteukoin-nftwa-brc-20-ft",
+            "title": "비트코인 NFT와 BRC-20(FT)"
+          },
+          {
+            "name": "Address",
+            "type": "post",
+            "path": "blockchain/bitcoin/address",
+            "slug": "address",
+            "title": "Address"
+          },
+          {
+            "name": "Bitcoin Script",
+            "type": "post",
+            "path": "blockchain/bitcoin/bitcoin-script",
+            "slug": "bitcoin-script",
+            "title": "Bitcoin Script"
+          },
+          {
+            "name": "Bitcoin Segwit",
+            "type": "post",
+            "path": "blockchain/bitcoin/bitcoin-segwit",
+            "slug": "bitcoin-segwit",
+            "title": "Bitcoin Segwit"
+          },
+          {
+            "name": "SPV (Simplified Payment Verification)",
+            "type": "post",
+            "path": "blockchain/bitcoin/spv-simplified-payment-verification",
+            "slug": "spv-simplified-payment-verification",
+            "title": "SPV (Simplified Payment Verification)"
+          }
+        ]
+      },
+      {
+        "name": "Celestia",
+        "type": "folder",
+        "path": "blockchain/celestia",
+        "children": [
+          {
+            "name": "Celestia 데이터 가용성 샘플링(DAS) 분석",
+            "type": "post",
+            "path": "blockchain/celestia/celestia-deiteo-gayongseong-saempeulring-das-bunseog",
+            "slug": "celestia-deiteo-gayongseong-saempeulring-das-bunseog",
+            "title": "Celestia 데이터 가용성 샘플링(DAS) 분석"
+          },
+          {
+            "name": "celestia-node 'file' 패키지 분석",
+            "type": "post",
+            "path": "blockchain/celestia/celestia-node-file-paekiji-bunseog",
+            "slug": "celestia-node-file-paekiji-bunseog",
+            "title": "celestia-node 'file' 패키지 분석"
+          },
+          {
+            "name": "Celestia가 트랜잭션 배열을 ODS로 변환하는 방법",
+            "type": "post",
+            "path": "blockchain/celestia/celestiaga-teuraenjaegsyeon-baeyeoleul-odsro-byeonhwanhaneun-bangbeob",
+            "slug": "celestiaga-teuraenjaegsyeon-baeyeoleul-odsro-byeonhwanhaneun-bangbeob",
+            "title": "Celestia가 트랜잭션 배열을 ODS로 변환하는 방법"
+          },
+          {
+            "name": "Celestia의 데이터 가용성 증명(Data Availability Proof) 메커니즘",
+            "type": "post",
+            "path": "blockchain/celestia/celestiayi-deiteo-gayongseong-jeungmyeong-data-availability-proof-mekeonijeum",
+            "slug": "celestiayi-deiteo-gayongseong-jeungmyeong-data-availability-proof-mekeonijeum",
+            "title": "Celestia의 데이터 가용성 증명(Data Availability Proof) 메커니즘"
+          },
+          {
+            "name": "Celestia의 데이터 저장 공간 사용량",
+            "type": "post",
+            "path": "blockchain/celestia/celestiayi-deiteo-jeojang-gonggan-sayongryang",
+            "slug": "celestiayi-deiteo-jeojang-gonggan-sayongryang",
+            "title": "Celestia의 데이터 저장 공간 사용량"
+          },
+          {
+            "name": "Celestia의 EDS(Extended Data Square)",
+            "type": "post",
+            "path": "blockchain/celestia/celestiayi-eds-extended-data-square",
+            "slug": "celestiayi-eds-extended-data-square",
+            "title": "Celestia의 EDS(Extended Data Square)"
+          },
+          {
+            "name": "Namespaced Merkle Tree (NMT)란?",
+            "type": "post",
+            "path": "blockchain/celestia/namespaced-merkle-tree-nmt-ran",
+            "slug": "namespaced-merkle-tree-nmt-ran",
+            "title": "Namespaced Merkle Tree (NMT)란?"
+          }
+        ]
+      },
+      {
+        "name": "Ethereum",
+        "type": "folder",
+        "path": "blockchain/ethereum",
+        "children": [
+          {
+            "name": "Ethereum (ETH)",
+            "type": "post",
+            "path": "blockchain/ethereum/ethereum-eth",
+            "slug": "ethereum-eth",
+            "title": "Ethereum (ETH)"
+          },
+          {
+            "name": "go-ethereum Merkle Trie를 활용한 데이터 무결성 검증",
+            "type": "post",
+            "path": "blockchain/ethereum/merkle-trie-integrity",
+            "slug": "merkle-trie-integrity",
+            "title": "go-ethereum Merkle Trie를 활용한 데이터 무결성 검증"
+          },
+          {
+            "name": "How Base Gas Works",
+            "type": "post",
+            "path": "blockchain/ethereum/how-base-gas-works",
+            "slug": "how-base-gas-works",
+            "title": "How Base Gas Works"
+          }
+        ]
+      },
+      {
+        "name": "Fundamentals",
+        "type": "folder",
+        "path": "blockchain/fundamentals",
+        "children": [
+          {
+            "name": "\"단순 해시 검증\"의 한계와 데이터 가용성 문제",
+            "type": "post",
+            "path": "blockchain/fundamentals/dansun-haesi-geomjeung-yi-hangyewa-deiteo-gayongseong-munje",
+            "slug": "dansun-haesi-geomjeung-yi-hangyewa-deiteo-gayongseong-munje",
+            "title": "\"단순 해시 검증\"의 한계와 데이터 가용성 문제"
+          },
+          {
+            "name": "롤업이란?",
+            "type": "post",
+            "path": "blockchain/fundamentals/roleobiran",
+            "slug": "roleobiran",
+            "title": "롤업이란?"
+          },
+          {
+            "name": "블록체인의 이해",
+            "type": "post",
+            "path": "blockchain/fundamentals/beulrogceinyi-ihae",
+            "slug": "beulrogceinyi-ihae",
+            "title": "블록체인의 이해"
+          },
+          {
+            "name": "Checksum",
+            "type": "post",
+            "path": "blockchain/fundamentals/checksum",
+            "slug": "checksum",
+            "title": "Checksum"
+          }
+        ]
+      },
+      {
+        "name": "Others",
+        "type": "folder",
+        "path": "blockchain/others",
+        "children": [
+          {
+            "name": "***Istanbul Byzantine Fault***",
+            "type": "post",
+            "path": "blockchain/others/istanbul-byzantine-fault",
+            "slug": "istanbul-byzantine-fault",
+            "title": "***Istanbul Byzantine Fault***"
+          },
+          {
+            "name": "Biance Smart Chain (BNB)",
+            "type": "post",
+            "path": "blockchain/others/biance-smart-chain-bnb",
+            "slug": "biance-smart-chain-bnb",
+            "title": "Biance Smart Chain (BNB)"
+          },
+          {
+            "name": "Filecoin (FIL)",
+            "type": "post",
+            "path": "blockchain/others/filecoin-fil",
+            "slug": "filecoin-fil",
+            "title": "Filecoin (FIL)"
+          },
+          {
+            "name": "Harmony (ONE)",
+            "type": "post",
+            "path": "blockchain/others/harmony-one",
+            "slug": "harmony-one",
+            "title": "Harmony (ONE)"
+          },
+          {
+            "name": "HD(Hierarchical Deterministic) Wallet",
+            "type": "post",
+            "path": "blockchain/others/hd-hierachy-deterministic-wallet",
+            "slug": "hd-hierachy-deterministic-wallet",
+            "title": "HD(Hierarchical Deterministic) Wallet"
+          },
+          {
+            "name": "Ripple (XRP)",
+            "type": "post",
+            "path": "blockchain/others/ripple-xrp",
+            "slug": "ripple-xrp",
+            "title": "Ripple (XRP)"
+          },
+          {
+            "name": "Stellar Lumens (XLM)",
+            "type": "post",
+            "path": "blockchain/others/stellar-lumens-xlm",
+            "slug": "stellar-lumens-xlm",
+            "title": "Stellar Lumens (XLM)"
+          },
+          {
+            "name": "Tezos (XTZ)",
+            "type": "post",
+            "path": "blockchain/others/tezos-xtz",
+            "slug": "tezos-xtz",
+            "title": "Tezos (XTZ)"
+          }
+        ]
+      },
+      {
+        "name": "Solana",
+        "type": "folder",
+        "path": "blockchain/solana",
+        "children": [
+          {
+            "name": "Solana (SOL)",
+            "type": "post",
+            "path": "blockchain/solana/solana-sol",
+            "slug": "solana-sol",
+            "title": "Solana (SOL)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Daily Notes",
+    "type": "folder",
+    "path": "daily-notes",
+    "children": [
+      {
+        "name": "2023",
+        "type": "folder",
+        "path": "daily-notes/2023",
+        "children": [
+          {
+            "name": "2023년",
+            "type": "post",
+            "path": "daily-notes/2023/2023nyeon",
+            "slug": "2023nyeon",
+            "title": "2023년"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Database",
+    "type": "folder",
+    "path": "database",
+    "children": [
+      {
+        "name": "Concepts",
+        "type": "folder",
+        "path": "database/concepts",
+        "children": [
+          {
+            "name": "대량 데이터 처리 시 Upsert 패턴 활용법",
+            "type": "post",
+            "path": "database/concepts/upsert-vs-unique-key-constraint",
+            "slug": "upsert-vs-unique-key-constraint",
+            "title": "대량 데이터 처리 시 Upsert 패턴 활용법"
+          },
+          {
+            "name": "ACID",
+            "type": "post",
+            "path": "database/concepts/acid",
+            "slug": "acid",
+            "title": "ACID"
+          }
+        ]
+      },
+      {
+        "name": "Mongodb",
+        "type": "folder",
+        "path": "database/mongodb",
+        "children": [
+          {
+            "name": "MongoDB 샤딩(Sharding) 완벽 가이드",
+            "type": "post",
+            "path": "database/mongodb/sharding-guide",
+            "slug": "sharding-guide",
+            "title": "MongoDB 샤딩(Sharding) 완벽 가이드"
+          },
+          {
+            "name": "MongoDB WiredTiger 스토리지 엔진 이해하기",
+            "type": "post",
+            "path": "database/mongodb/wiredtiger-storage-engine",
+            "slug": "wiredtiger-storage-engine",
+            "title": "MongoDB WiredTiger 스토리지 엔진 이해하기"
+          }
+        ]
+      },
+      {
+        "name": "Mysql",
+        "type": "folder",
+        "path": "database/mysql",
+        "children": [
+          {
+            "name": "MySQL 트랜잭션 쿼리 예시 ",
+            "type": "post",
+            "path": "database/mysql/mysql-teuraenjaegsyeon-kweori-yesi",
+            "slug": "mysql-teuraenjaegsyeon-kweori-yesi",
+            "title": "MySQL 트랜잭션 쿼리 예시 "
+          },
+          {
+            "name": "Which is best isolation level for a common situation",
+            "type": "post",
+            "path": "database/mysql/which-is-best-isolation-level-for-a-common-situation",
+            "slug": "which-is-best-isolation-level-for-a-common-situation",
+            "title": "Which is best isolation level for a common situation"
+          }
+        ]
+      },
+      {
+        "name": "Postgresql",
+        "type": "folder",
+        "path": "database/postgresql",
+        "children": [
+          {
+            "name": "PostGIS와 GeoJSON을 활용한 공간 데이터 관리",
+            "type": "post",
+            "path": "database/postgresql/postgis-geojson-guide",
+            "slug": "postgis-geojson-guide",
+            "title": "PostGIS와 GeoJSON을 활용한 공간 데이터 관리"
+          }
+        ]
+      },
+      {
+        "name": "Redis",
+        "type": "folder",
+        "path": "database/redis",
+        "children": [
+          {
+            "name": "AWS ElastiCache for Redis (OSS) - 샤딩과 마스터 Failover 정리",
+            "type": "post",
+            "path": "database/redis/aws-elasticache-for-redis-oss-syadinggwa-maseuteo-failover-jeongri",
+            "slug": "aws-elasticache-for-redis-oss-syadinggwa-maseuteo-failover-jeongri",
+            "title": "AWS ElastiCache for Redis (OSS) - 샤딩과 마스터 Failover 정리"
+          },
+          {
+            "name": "Redis 기반 분산 락 가이드",
+            "type": "post",
+            "path": "database/redis/redis-giban-bunsan-rag-gaideu",
+            "slug": "redis-giban-bunsan-rag-gaideu",
+            "title": "Redis 기반 분산 락 가이드"
+          },
+          {
+            "name": "Redis Streams 기반 비동기 감사 파이프라인 구축",
+            "type": "post",
+            "path": "database/redis/streams-audit-pipeline",
+            "slug": "streams-audit-pipeline",
+            "title": "Redis Streams 기반 비동기 감사 파이프라인 구축"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Distributed Systems",
+    "type": "folder",
+    "path": "distributed-systems",
+    "children": [
+      {
+        "name": "Ceph",
+        "type": "folder",
+        "path": "distributed-systems/ceph",
+        "children": [
+          {
+            "name": "Ceph Erasure Coding 데이터 저장 흐름",
+            "type": "post",
+            "path": "distributed-systems/ceph/ceph-erasure-coding-deiteo-jeojang-heureum",
+            "slug": "ceph-erasure-coding-deiteo-jeojang-heureum",
+            "title": "Ceph Erasure Coding 데이터 저장 흐름"
+          },
+          {
+            "name": "Ceph Erasure Coding 데이터 조회 흐름",
+            "type": "post",
+            "path": "distributed-systems/ceph/ceph-erasure-coding-deiteo-johoe-heureum",
+            "slug": "ceph-erasure-coding-deiteo-johoe-heureum",
+            "title": "Ceph Erasure Coding 데이터 조회 흐름"
+          },
+          {
+            "name": "Ceph Erasure Coding 메타데이터 관리",
+            "type": "post",
+            "path": "distributed-systems/ceph/ceph-erasure-coding-metadeiteo-gwanri",
+            "slug": "ceph-erasure-coding-metadeiteo-gwanri",
+            "title": "Ceph Erasure Coding 메타데이터 관리"
+          },
+          {
+            "name": "CRUSH (Controlled Replication Under Scalable Hashing)",
+            "type": "post",
+            "path": "distributed-systems/ceph/crush-controlled-replication-under-scalable-hashing",
+            "slug": "crush-controlled-replication-under-scalable-hashing",
+            "title": "CRUSH (Controlled Replication Under Scalable Hashing)"
+          }
+        ]
+      },
+      {
+        "name": "Data Availability",
+        "type": "folder",
+        "path": "distributed-systems/data-availability",
+        "children": [
+          {
+            "name": "“2024 Data Replication Design Spectrum” 요약",
+            "type": "post",
+            "path": "distributed-systems/data-availability/2024-data-replication-design-spectrum-yoyag",
+            "slug": "2024-data-replication-design-spectrum-yoyag",
+            "title": "“2024 Data Replication Design Spectrum” 요약"
+          },
+          {
+            "name": "Succinct Proofs of Random Access (SPoRA) 번역",
+            "type": "post",
+            "path": "distributed-systems/data-availability/succinct-proofs-of-random-access-spora-beonyeog",
+            "slug": "succinct-proofs-of-random-access-spora-beonyeog",
+            "title": "Succinct Proofs of Random Access (SPoRA) 번역"
+          }
+        ]
+      },
+      {
+        "name": "Erasure Coding",
+        "type": "folder",
+        "path": "distributed-systems/erasure-coding",
+        "children": [
+          {
+            "name": "데이터 원본을 전체적으로 리드솔로몬 인코딩 후 샤드 분배 vs. 2. 스트라이핑 후 개별 블록 단위로 리드솔로몬 인코딩 후 샤드 분배 비교",
+            "type": "post",
+            "path": "distributed-systems/erasure-coding/deiteo-weonboneul-jeoncejeogeuro-rideusolromon-inkoding-hu-syadeu-bunbae-vs-2-seuteuraiping-hu-gaebyeol-beulrog-danwiro-rideusolromon-inkoding-hu-syadeu-bunbae-bigyo",
+            "slug": "deiteo-weonboneul-jeoncejeogeuro-rideusolromon-inkoding-hu-syadeu-bunbae-vs-2-seuteuraiping-hu-gaebyeol-beulrog-danwiro-rideusolromon-inkoding-hu-syadeu-bunbae-bigyo",
+            "title": "데이터 원본을 전체적으로 리드솔로몬 인코딩 후 샤드 분배 vs. 2. 스트라이핑 후 개별 블록 단위로 리드솔로몬 인코딩 후 샤드 분배 비교"
+          },
+          {
+            "name": "리드-솔로몬 코드의 수학적 원리",
+            "type": "post",
+            "path": "distributed-systems/erasure-coding/rideu-solromon-kodeuyi-suhagjeog-weonri",
+            "slug": "rideu-solromon-kodeuyi-suhagjeog-weonri",
+            "title": "리드-솔로몬 코드의 수학적 원리"
+          },
+          {
+            "name": "용어 정리",
+            "type": "post",
+            "path": "distributed-systems/erasure-coding/yongeo-jeongri",
+            "slug": "yongeo-jeongri",
+            "title": "용어 정리"
+          },
+          {
+            "name": "주요 구현 내용",
+            "type": "post",
+            "path": "distributed-systems/erasure-coding/juyo-guhyeon-naeyong",
+            "slug": "juyo-guhyeon-naeyong",
+            "title": "주요 구현 내용"
+          }
+        ]
+      },
+      {
+        "name": "Minio",
+        "type": "folder",
+        "path": "distributed-systems/minio",
+        "children": [
+          {
+            "name": "MinIO의 손상 감지 알고리즘",
+            "type": "post",
+            "path": "distributed-systems/minio/minioyi-sonsang-gamji-algorijeum",
+            "slug": "minioyi-sonsang-gamji-algorijeum",
+            "title": "MinIO의 손상 감지 알고리즘"
+          },
+          {
+            "name": "MinIO의 이레이저 코딩 구현",
+            "type": "post",
+            "path": "distributed-systems/minio/minioyi-ireijeo-koding-guhyeon",
+            "slug": "minioyi-ireijeo-koding-guhyeon",
+            "title": "MinIO의 이레이저 코딩 구현"
+          },
+          {
+            "name": "MinIO의 힐링(Healing) 메커니즘",
+            "type": "post",
+            "path": "distributed-systems/minio/minioyi-hilring-healing-mekeonijeum",
+            "slug": "minioyi-hilring-healing-mekeonijeum",
+            "title": "MinIO의 힐링(Healing) 메커니즘"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Frontend",
+    "type": "folder",
+    "path": "frontend",
+    "children": [
+      {
+        "name": "Maps",
+        "type": "folder",
+        "path": "frontend/maps",
+        "children": [
+          {
+            "name": "Mapbox GL JS로 인터랙티브 지도 구현하기",
+            "type": "post",
+            "path": "frontend/maps/mapbox-gl-guide",
+            "slug": "mapbox-gl-guide",
+            "title": "Mapbox GL JS로 인터랙티브 지도 구현하기"
+          },
+          {
+            "name": "Turf.js로 폴리곤 공간 연산 수행하기",
+            "type": "post",
+            "path": "frontend/maps/turf-polygon-operations",
+            "slug": "turf-polygon-operations",
+            "title": "Turf.js로 폴리곤 공간 연산 수행하기"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Languages",
+    "type": "folder",
+    "path": "languages",
+    "children": [
+      {
+        "name": "Dart",
+        "type": "folder",
+        "path": "languages/dart",
+        "children": [
+          {
+            "name": "Dart Programming Language",
+            "type": "post",
+            "path": "languages/dart/dart-programming-language",
+            "slug": "dart-programming-language",
+            "title": "Dart Programming Language"
+          }
+        ]
+      },
+      {
+        "name": "Others",
+        "type": "folder",
+        "path": "languages/others",
+        "children": [
+          {
+            "name": "비트 연산 활용",
+            "type": "post",
+            "path": "languages/others/biteu-yeonsan-hwalyong",
+            "slug": "biteu-yeonsan-hwalyong",
+            "title": "비트 연산 활용"
+          },
+          {
+            "name": "C# Overview",
+            "type": "post",
+            "path": "languages/others/c-overview",
+            "slug": "c-overview",
+            "title": "C# Overview"
+          }
+        ]
+      },
+      {
+        "name": "Rust",
+        "type": "folder",
+        "path": "languages/rust",
+        "children": [
+          {
+            "name": "Rust에서 OS CPU 갯수 찾기",
+            "type": "post",
+            "path": "languages/rust/rusteseo-os-cpu-gaessu-cajgi",
+            "slug": "rusteseo-os-cpu-gaessu-cajgi",
+            "title": "Rust에서 OS CPU 갯수 찾기"
+          }
+        ]
+      },
+      {
+        "name": "Typescript",
+        "type": "folder",
+        "path": "languages/typescript",
+        "children": [
+          {
+            "name": "Enum 대신 사용할 수 있는 `as const`",
+            "type": "post",
+            "path": "languages/typescript/enum-daesin-sayonghal-su-issneun-as-const",
+            "slug": "enum-daesin-sayonghal-su-issneun-as-const",
+            "title": "Enum 대신 사용할 수 있는 `as const`"
+          },
+          {
+            "name": "Mocha의 NODE_ENV는?",
+            "type": "post",
+            "path": "languages/typescript/mochayi-node-envneun",
+            "slug": "mochayi-node-envneun",
+            "title": "Mocha의 NODE_ENV는?"
+          },
+          {
+            "name": "Typescript 5.0 RC 발표에서 데코레이터 부분 요약",
+            "type": "post",
+            "path": "languages/typescript/typescript-5-0-rc-balpyoeseo-dekoreiteo-bubun-yoyag",
+            "slug": "typescript-5-0-rc-balpyoeseo-dekoreiteo-bubun-yoyag",
+            "title": "Typescript 5.0 RC 발표에서 데코레이터 부분 요약"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Misc",
+    "type": "folder",
+    "path": "misc",
+    "children": [
+      {
+        "name": "김서규의 노트 Seogyu's notes",
+        "type": "post",
+        "path": "misc/gimseogyuyi-noteu-seogyu-s-notes",
+        "slug": "gimseogyuyi-noteu-seogyu-s-notes",
+        "title": "김서규의 노트 Seogyu's notes"
+      },
+      {
+        "name": "FreeCodeCamp",
+        "type": "post",
+        "path": "misc/freecodecamp",
+        "slug": "freecodecamp",
+        "title": "FreeCodeCamp"
+      },
+      {
+        "name": "Mac OS Finder에서 사용자 루트 디렉토리로 이동하는 법",
+        "type": "post",
+        "path": "misc/mac-os-findereseo-sayongja-ruteu-diregtoriro-idonghaneun-beob",
+        "slug": "mac-os-findereseo-sayongja-ruteu-diregtoriro-idonghaneun-beob",
+        "title": "Mac OS Finder에서 사용자 루트 디렉토리로 이동하는 법"
+      },
+      {
+        "name": "Useful Links",
+        "type": "post",
+        "path": "misc/useful-links",
+        "slug": "useful-links",
+        "title": "Useful Links"
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "projectName": "mypage",
+  "mode": "file-router",
+  "typescript": true,
+  "tailwind": true,
+  "packageManager": "pnpm",
+  "addOnOptions": {
+    "drizzle": {
+      "database": "sqlite"
+    }
+  },
+  "git": true,
+  "version": 1,
+  "framework": "react-cra",
+  "chosenAddOns": [
+    "cloudflare",
+    "start",
+    "strapi",
+    "drizzle",
+    "db",
+    "form",
+    "shadcn",
+    "table",
+    "store",
+    "tanstack-query"
+  ]
+}

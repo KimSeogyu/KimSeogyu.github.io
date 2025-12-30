@@ -1,0 +1,17 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+count.txt
+.env
+.nitro
+.tanstack
+.wrangler
+.output
+.vinxi
+todos.json
+.obsidian/
+
+# CI에서 빌드하므로 로컬 빌드 결과물 제외
+docs/

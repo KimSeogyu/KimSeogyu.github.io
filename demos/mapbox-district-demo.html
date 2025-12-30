@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mapbox District Demo</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; }
+        #map { width: 100vw; height: 100vh; }
+        #legend {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            font-size: 12px;
+        }
+        #legend h4 { margin: 0 0 10px 0; font-size: 14px; }
+        .legend-item { display: flex; align-items: center; margin: 5px 0; }
+        .legend-color { width: 24px; height: 14px; margin-right: 8px; border-radius: 2px; }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="legend">
+    <h4>평당 가격 (만원)</h4>
+    <div class="legend-item"><div class="legend-color" style="background:#fef0d9"></div>500 이하</div>
+    <div class="legend-item"><div class="legend-color" style="background:#fdbb84"></div>500 ~ 1,000</div>
+    <div class="legend-item"><div class="legend-color" style="background:#fc8d59"></div>1,000 ~ 1,500</div>
+    <div class="legend-item"><div class="legend-color" style="background:#d7301f"></div>1,500 이상</div>
+</div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic2VvZ3l1Z2ltIiwiYSI6ImNrb3g1aGtrMzBjbHEyd21wYTNndjZqZ3gifQ.GFJUMM7FtxxBlNzzwLBxqg';
+    
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: [127.03, 37.52],
+        zoom: 11.5
+    });
+
+    // 서울시 주요 구 데이터 (실제 좌표 기반 간소화)
+    const districtsData = {
+        type: 'FeatureCollection',
+        features: [
+            {
+                type: 'Feature',
+                id: 1,
+                properties: { name: '강남구', avgPrice: 18500000, changeRate: 2.3 },
+                geometry: { type: 'Polygon', coordinates: [[[127.02, 37.49], [127.08, 37.49], [127.08, 37.53], [127.02, 37.53], [127.02, 37.49]]] }
+            },
+            {
+                type: 'Feature',
+                id: 2,
+                properties: { name: '서초구', avgPrice: 16200000, changeRate: 1.8 },
+                geometry: { type: 'Polygon', coordinates: [[[126.96, 37.47], [127.02, 37.47], [127.02, 37.51], [126.96, 37.51], [126.96, 37.47]]] }
+            },
+            {
+                type: 'Feature',
+                id: 3,
+                properties: { name: '송파구', avgPrice: 14800000, changeRate: 3.1 },
+                geometry: { type: 'Polygon', coordinates: [[[127.08, 37.50], [127.14, 37.50], [127.14, 37.54], [127.08, 37.54], [127.08, 37.50]]] }
+            },
+            {
+                type: 'Feature',
+                id: 4,
+                properties: { name: '마포구', avgPrice: 9500000, changeRate: 1.2 },
+                geometry: { type: 'Polygon', coordinates: [[[126.90, 37.54], [126.96, 37.54], [126.96, 37.58], [126.90, 37.58], [126.90, 37.54]]] }
+            },
+            {
+                type: 'Feature',
+                id: 5,
+                properties: { name: '용산구', avgPrice: 12300000, changeRate: 2.0 },
+                geometry: { type: 'Polygon', coordinates: [[[126.96, 37.52], [127.02, 37.52], [127.02, 37.56], [126.96, 37.56], [126.96, 37.52]]] }
+            },
+            {
+                type: 'Feature',
+                id: 6,
+                properties: { name: '성동구', avgPrice: 8700000, changeRate: 1.5 },
+                geometry: { type: 'Polygon', coordinates: [[[127.02, 37.54], [127.08, 37.54], [127.08, 37.58], [127.02, 37.58], [127.02, 37.54]]] }
+            },
+            {
+                type: 'Feature',
+                id: 7,
+                properties: { name: '광진구', avgPrice: 7200000, changeRate: 0.8 },
+                geometry: { type: 'Polygon', coordinates: [[[127.08, 37.54], [127.12, 37.54], [127.12, 37.58], [127.08, 37.58], [127.08, 37.54]]] }
+            },
+            {
+                type: 'Feature',
+                id: 8,
+                properties: { name: '강동구', avgPrice: 6500000, changeRate: 1.1 },
+                geometry: { type: 'Polygon', coordinates: [[[127.12, 37.52], [127.18, 37.52], [127.18, 37.56], [127.12, 37.56], [127.12, 37.52]]] }
+            }
+        ]
+    };
+
+    map.on('load', () => {
+        map.addSource('districts', {
+            type: 'geojson',
+            data: districtsData,
+            generateId: true
+        });
+        
+        map.addLayer({
+            id: 'districts-fill',
+            type: 'fill',
+            source: 'districts',
+            paint: {
+                'fill-color': [
+                    'interpolate',
+                    ['linear'],
+                    ['get', 'avgPrice'],
+                    5000000, '#fef0d9',
+                    10000000, '#fdbb84',
+                    15000000, '#fc8d59',
+                    20000000, '#d7301f'
+                ],
+                'fill-opacity': [
+                    'case',
+                    ['boolean', ['feature-state', 'hover'], false], 0.9,
+                    0.7
+                ]
+            }
+        });
+        
+        map.addLayer({
+            id: 'districts-outline',
+            type: 'line',
+            source: 'districts',
+            paint: {
+                'line-color': '#ffffff',
+                'line-width': [
+                    'case',
+                    ['boolean', ['feature-state', 'hover'], false], 3,
+                    1.5
+                ]
+            }
+        });
+        
+        map.addLayer({
+            id: 'districts-label',
+            type: 'symbol',
+            source: 'districts',
+            layout: {
+                'text-field': [
+                    'format',
+                    ['get', 'name'], { 'font-scale': 1.1 },
+                    '\n', {},
+                    ['concat', ['to-string', ['/', ['round', ['/', ['get', 'avgPrice'], 10000]], 1]], '만'], { 'font-scale': 0.85 }
+                ],
+                'text-font': ['DIN Pro Medium', 'Arial Unicode MS Bold'],
+                'text-size': 13,
+                'text-anchor': 'center'
+            },
+            paint: {
+                'text-color': '#ffffff',
+                'text-halo-color': 'rgba(0,0,0,0.8)',
+                'text-halo-width': 1.5
+            }
+        });
+        
+        let hoveredId = null;
+        
+        map.on('mousemove', 'districts-fill', (e) => {
+            map.getCanvas().style.cursor = 'pointer';
+            if (e.features.length > 0) {
+                if (hoveredId !== null) {
+                    map.setFeatureState({ source: 'districts', id: hoveredId }, { hover: false });
+                }
+                hoveredId = e.features[0].id;
+                map.setFeatureState({ source: 'districts', id: hoveredId }, { hover: true });
+            }
+        });
+        
+        map.on('mouseleave', 'districts-fill', () => {
+            map.getCanvas().style.cursor = '';
+            if (hoveredId !== null) {
+                map.setFeatureState({ source: 'districts', id: hoveredId }, { hover: false });
+            }
+            hoveredId = null;
+        });
+        
+        map.on('click', 'districts-fill', (e) => {
+            const props = e.features[0].properties;
+            const changeColor = props.changeRate >= 0 ? '#e53935' : '#1976d2';
+            const changeSign = props.changeRate >= 0 ? '▲' : '▼';
+            
+            new mapboxgl.Popup({ offset: 10 })
+                .setLngLat(e.lngLat)
+                .setHTML(`
+                    <div style="padding: 5px; min-width: 120px;">
+                        <div style="font-weight: bold; font-size: 15px; margin-bottom: 8px;">${props.name}</div>
+                        <div style="font-size: 13px; color: #333;">평당 <b>${(props.avgPrice / 10000).toFixed(0)}만원</b></div>
+                        <div style="font-size: 12px; color: ${changeColor}; margin-top: 4px;">
+                            ${changeSign} ${props.changeRate}%
+                        </div>
+                    </div>
+                `)
+                .addTo(map);
+        });
+    });
+</script>
+</body>
+</html>
