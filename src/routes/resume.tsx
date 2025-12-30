@@ -18,7 +18,7 @@ function ResumePage() {
           <div className="flex flex-col md:flex-row justify-between items-start gap-4">
             <div>
               <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2 print:text-5xl print:mb-0">
-                <span className="gradient-text">Seogyu Kim</span>
+                <span className="gradient-text">Kim Seogyu</span>
               </h1>
               <p className="text-xl text-muted-foreground font-light print:text-lg">
                 Senior Software Engineer

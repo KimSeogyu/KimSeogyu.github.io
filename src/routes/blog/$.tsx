@@ -41,11 +41,11 @@ export const Route = createFileRoute('/blog/$')({
   },
   head: ({ loaderData }) => {
     if (!loaderData?.post) {
-      return { meta: [{ title: 'Not Found | Seogyu Kim' }] }
+      return { meta: [{ title: 'Not Found | Kim Seogyu' }] }
     }
     return {
       meta: [
-        { title: `${loaderData.post.title} | Seogyu Kim` },
+        { title: `${loaderData.post.title} | Kim Seogyu` },
         { name: 'description', content: loaderData.post.excerpt || `Technical article about ${loaderData.post.category}` },
         { property: 'og:title', content: loaderData.post.title },
         { property: 'og:description', content: loaderData.post.excerpt },

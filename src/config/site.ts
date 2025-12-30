@@ -5,19 +5,19 @@
  */
 
 export const siteConfig = {
-  name: 'Seogyu Kim',
-  title: 'Seogyu Kim | Software Engineer',
+  name: 'Kim Seogyu',
+  title: 'Kim Seogyu | Software Engineer',
   description: 'Software Engineer leveraging deep backend expertise to build scalable systems and tackle complex challenges in AI.',
   url: 'https://kimseogyu.github.io',
   author: {
-    name: 'Seogyu Kim',
+    name: 'Kim Seogyu',
     email: 'asap0208@gmail.com',
     github: 'https://github.com/KimSeogyu',
     linkedin: 'https://www.linkedin.com/in/seogyu-kim-7b5a88195/',
   },
   openGraph: {
     type: 'website',
-    siteName: 'Seogyu Kim Portfolio',
+    siteName: 'Kim Seogyu Portfolio',
     locale: 'ko_KR',
   },
   twitter: {

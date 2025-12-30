@@ -29,7 +29,7 @@ export default function Header() {
               to="/"
               className="text-xl font-bold tracking-tight transition-colors hover:opacity-80"
             >
-              <span className="gradient-text">Seogyu Kim</span>
+              <span className="gradient-text">Kim Seogyu</span>
             </Link>
 
             {/* Right Actions */}

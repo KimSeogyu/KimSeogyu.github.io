@@ -82,10 +82,11 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
       const isCmdOrCtrl = e.metaKey || e.ctrlKey;
       if (!isCmdOrCtrl) return;
 
-      const key = e.key.toLowerCase();
+      // Use e.code for physical key detection (independent of layout/modifiers)
+      const code = e.code;
 
       // Cmd+K or Cmd+P: Toggle Search
-      if (key === 'k' || key === 'p') {
+      if (code === 'KeyK' || code === 'KeyP') {
         e.preventDefault();
         e.stopPropagation();
         setSearchOpen(prev => !prev);
@@ -93,8 +94,8 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Cmd+B: Toggle Left Sidebar
-      // Cmd+Alt+B: Toggle Right Sidebar
-      if (key === 'b') {
+      // Cmd+Option+B: Toggle Right Sidebar
+      if (code === 'KeyB') {
         e.preventDefault();
         e.stopPropagation();
         if (e.altKey) {
