@@ -1,10 +1,19 @@
-
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, forwardRef } from 'react'
 import mermaid from 'mermaid'
 
-export function Mermaid({ chart }: { chart: string }) {
-  const ref = useRef<HTMLDivElement>(null)
+export const Mermaid = forwardRef<HTMLDivElement, { chart: string } & React.HTMLAttributes<HTMLDivElement>>(({ chart, className, style, ...props }, ref) => {
+  const localRef = useRef<HTMLDivElement>(null)
   const [isDark, setIsDark] = useState(false)
+
+  // Merge refs (simple version)
+  useEffect(() => {
+    if (!ref) return
+    if (typeof ref === 'function') {
+      ref(localRef.current)
+    } else {
+      ref.current = localRef.current
+    }
+  }, [ref])
 
   // 다크모드 감지
   useEffect(() => {
@@ -25,7 +34,7 @@ export function Mermaid({ chart }: { chart: string }) {
   }, [])
 
   useEffect(() => {
-    if (ref.current) {
+    if (localRef.current) {
       // 다크모드에 따라 테마 변경 + handDrawn 스타일
       mermaid.initialize({
         startOnLoad: false,
@@ -75,8 +84,8 @@ export function Mermaid({ chart }: { chart: string }) {
       })
 
       mermaid.render(`mermaid-${Math.random().toString(36).substr(2, 9)}`, chart).then(({ svg }) => {
-        if (ref.current) {
-          ref.current.innerHTML = svg
+        if (localRef.current) {
+          localRef.current.innerHTML = svg
         }
       })
     }
@@ -84,17 +93,21 @@ export function Mermaid({ chart }: { chart: string }) {
 
   return (
     <div 
-      ref={ref} 
-      className={`mermaid-container my-8 p-8 rounded-2xl overflow-x-auto transition-all shadow-sm ${
+      ref={localRef} 
+      className={`mermaid-container my-8 p-8 rounded-2xl overflow-x-auto transition-all shadow-sm cursor-zoom-in ${
         isDark 
           ? 'bg-slate-800/60 border-2 border-slate-600/50 shadow-indigo-500/10' 
           : 'bg-amber-50/80 border-2 border-amber-300/60 shadow-amber-500/10'
-      }`}
+      } ${className || ''}`}
       style={{
         backgroundImage: isDark 
           ? 'none'
           : 'repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(217, 119, 6, 0.05) 24px, rgba(217, 119, 6, 0.05) 25px)',
+        ...style
       }}
+      {...props}
     />
   )
-}
+})
+
+Mermaid.displayName = 'Mermaid'
