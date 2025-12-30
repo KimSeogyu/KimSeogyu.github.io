@@ -198,7 +198,9 @@ function PostDetail() {
                           const codeContent = codeElement.children
                           return (
                             <Zoom>
-                              <Mermaid chart={String(codeContent).replace(/\n$/, '')} />
+                              <div style={{ width: '100%' }}>
+                                <Mermaid chart={String(codeContent).replace(/\n$/, '')} />
+                              </div>
                             </Zoom>
                           )
                         }
@@ -206,7 +208,9 @@ function PostDetail() {
                           const codeContent = codeElement.children
                           return (
                             <Zoom>
-                              <Excalidraw data={String(codeContent).replace(/\n$/, '')} />
+                              <div style={{ width: '100%' }}>
+                                <Excalidraw data={String(codeContent).replace(/\n$/, '')} />
+                              </div>
                             </Zoom>
                           )
                         }
