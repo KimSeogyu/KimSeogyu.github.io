@@ -213,6 +213,20 @@
             "title": "SOLID 원칙"
           }
         ]
+      },
+      {
+        "name": "Websocket",
+        "type": "folder",
+        "path": "backend/websocket",
+        "children": [
+          {
+            "name": "확장 가능한 실시간 WebSocket 서버 아키텍처 설계",
+            "type": "post",
+            "path": "backend/websocket/hwagjang-ganeunghan-silsigan-websocket-seobeo-akitegceo-seolgye",
+            "slug": "hwagjang-ganeunghan-silsigan-websocket-seobeo-akitegceo-seolgye",
+            "title": "확장 가능한 실시간 WebSocket 서버 아키텍처 설계"
+          }
+        ]
       }
     ]
   },

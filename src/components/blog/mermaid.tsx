@@ -1,19 +1,15 @@
-import { useEffect, useRef, useState, forwardRef } from 'react'
+import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react'
 import mermaid from 'mermaid'
 
-export const Mermaid = forwardRef<HTMLDivElement, { chart: string } & React.HTMLAttributes<HTMLDivElement>>(({ chart, className, style, ...props }, ref) => {
+export const Mermaid = ({ chart, className, style, ...props }: { chart: string } & React.HTMLAttributes<HTMLDivElement>) => {
   const localRef = useRef<HTMLDivElement>(null)
   const [isDark, setIsDark] = useState(false)
 
-  // Merge refs (simple version)
-  useEffect(() => {
-    if (!ref) return
-    if (typeof ref === 'function') {
-      ref(localRef.current)
-    } else {
-      ref.current = localRef.current
-    }
-  }, [ref])
+  // 다크모드 감지
+
+  /* 
+     Removed manual ref merging useEffect
+  */
 
   // 다크모드 감지
   useEffect(() => {
@@ -39,7 +35,6 @@ export const Mermaid = forwardRef<HTMLDivElement, { chart: string } & React.HTML
       mermaid.initialize({
         startOnLoad: false,
         theme: isDark ? 'dark' : 'default',
-        look: 'handDrawn', // Excalidraw 스타일
         securityLevel: 'loose',
         fontFamily: '"Comic Sans MS", "Segoe Print", cursive, "Noto Sans KR", sans-serif',
         flowchart: {
@@ -51,20 +46,22 @@ export const Mermaid = forwardRef<HTMLDivElement, { chart: string } & React.HTML
           useMaxWidth: true,
         },
         themeVariables: isDark ? {
-          primaryColor: '#6366f1',
-          primaryTextColor: '#f1f5f9',
+          primaryColor: '#c7d2fe', // Indigo 200 (Light node background for Dark Text)
+          primaryTextColor: '#0f172a', // Slate 900 (Dark Text)
           primaryBorderColor: '#818cf8',
-          lineColor: '#94a3b8',
+          lineColor: '#cbd5e1',
           secondaryColor: '#334155',
-          tertiaryColor: '#1e293b',
-          background: '#0f172a',
-          mainBkg: '#1e293b',
+          tertiaryColor: '#cbd5e1', // Lighter tertiary for readability if used
+          background: '#0f172a', // Dark Canvas
+          mainBkg: '#1e293b', // Dark Group/Cluster Bkg
           nodeBorder: '#818cf8',
           clusterBkg: '#1e293b',
           clusterBorder: '#475569',
-          titleColor: '#f1f5f9',
-          edgeLabelBackground: '#1e293b',
+          titleColor: '#f8fafc', // Title stays Light
+          edgeLabelBackground: '#e2e8f0', // Light background for edge labels
           fontSize: '16px',
+          textColor: '#0f172a', // Unified Dark Text (for Nodes & Edge Labels)
+          labelColor: '#0f172a', // Internal labels Dark
         } : {
           primaryColor: '#fef3c7',
           primaryTextColor: '#1e293b',
@@ -108,6 +105,4 @@ export const Mermaid = forwardRef<HTMLDivElement, { chart: string } & React.HTML
       {...props}
     />
   )
-})
-
-Mermaid.displayName = 'Mermaid'
+}

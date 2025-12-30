@@ -1545,6 +1545,23 @@
     "date": "2025-12-27"
   },
   {
+    "id": "확장 가능한 실시간 WebSocket 서버 아키텍처 설계",
+    "slug": "hwagjang-ganeunghan-silsigan-websocket-seobeo-akitegceo-seolgye",
+    "path": "backend/websocket",
+    "fullPath": "backend/websocket/hwagjang-ganeunghan-silsigan-websocket-seobeo-akitegceo-seolgye",
+    "title": "확장 가능한 실시간 WebSocket 서버 아키텍처 설계",
+    "excerpt": "확장 가능한 실시간 WebSocket 서버 아키텍처 설계",
+    "content": "# 확장 가능한 실시간 WebSocket 서버 아키텍처 설계\n\n## (Redis Pub/Sub & Streams를 활용한 세션 관리)\n\n실시간 통신 환경에서 서버를 수평 확장(Horizontal Scaling)할 때 가장 큰 걸림돌은 **'상태(State)'** 관리입니다. 특정 클라이언트가 현재 어느 서버에 연결되어 있는지를 정확히 파악하고 메시지를 라우팅하는 것이 핵심입니다.\n\n### 전체 아키텍처 개요\n\n여러 대의 WebSocket 서버가 로드밸런서 뒤에 배치되고, 중앙의 Redis가 세션과 메시지 브로커 역할을 수행하는 구조입니다.\n\n```mermaid\ngraph TD\n    C1[Client User A] --> LB(\"Load Balancer / Nginx\")\n    C2[Client User B] --> LB\n    LB --> WS1[\"WS Server 1<br/>(ID: SVR_1)\"]\n    LB --> WS2[\"WS Server 2<br/>(ID: SVR_2)\"]\n    \n    subgraph Redis_Layer [Redis Layer]\n        R_HASH[(\"Redis Hash<br/>Session Store\")]\n        R_PUBSUB((\"(Redis Pub/Sub<br/>Msg Broker)\"))\n        R_STREAM[\"Redis Streams<br/>Msg Log\"]\n    end\n\n    WS1 <--> R_HASH\n    WS2 <--> R_HASH\n    WS1 <--> R_PUBSUB\n    WS2 <--> R_PUBSUB\n    WS1 -.-> R_STREAM\n    WS2 -.-> R_STREAM\n\n    style LB fill:#f9f,stroke:#333,stroke-width:2px\n    style Redis_Layer fill:#eee,stroke:#f66,stroke-width:2px,stroke-dasharray: 5 5\n```\n\n---\n\n### 1. 왜 Redis인가?\n\nWebSocket 서버 간 통신(Inter-server communication)을 위해 Redis는 가장 효율적인 선택지입니다.\n\n- **In-memory 성능:** 밀리초 단위의 지연 시간이 중요한 실시간 서비스에 최적화되어 있습니다.\n\n- **다양한 자료구조:** Pub/Sub(이벤트), Hash(세션 상태), Streams(메시지 영속성)를 한 곳에서 관리할 수 있습니다.\n\n---\n\n### 2. Redis Pub/Sub vs Streams 선택 기준\n\n|**비교 항목**|**Redis Pub/Sub**|**Redis Streams**|\n|---|---|---|\n|**메시지 보존**|휘발성 (Fire-and-forget)|영속성 (Append-only log)|\n|**전달 보장**|구독 중이 아니면 메시지 유실|ACK를 통한 재처리 가능|\n|**주요 용도**|단순 알림, 브로드캐스팅|채팅 로그, 신뢰성이 필요한 메시징|\n\n---\n\n### 3. 핵심 시나리오 및 흐름\n\n#### ① 세션 등록 (Redis Hash)\n\n클라이언트가 연결될 때, 해당 유저가 어떤 서버에 접속했는지 기록합니다.\n\n```mermaid\nsequenceDiagram\n    participant UserA as Client (User A)\n    participant WS1 as WS Server 1 (ID: SVR_1)\n    participant Redis as Redis Hash (user:session)\n\n    Note over UserA, WS1: 1. WebSocket 연결 시도\n    UserA->>WS1: Connect Request\n    activate WS1\n    \n    Note over WS1, Redis: 2. 세션 정보 등록\n    WS1->>Redis: HSET user:session \"UserA\" \"SVR_1\"\n    Redis-->>WS1: OK\n    \n    WS1-->>UserA: Connected (ACK)\n    deactivate WS1\n```\n\n#### ② 메시지 라우팅 (Redis Pub/Sub)\n\n상대방 유저가 다른 서버에 접속해 있더라도 Redis 채널을 통해 메시지를 전달합니다.\n\n```mermaid\nsequenceDiagram\n    participant WS1 as WS Server 1 (User A)\n    participant RedisH as Redis Hash\n    participant RedisPS as Redis Pub/Sub\n    participant WS2 as WS Server 2 (User B)\n    participant UserB as Client (User B)\n\n    Note over WS1, RedisH: 1. User B 위치 조회\n    WS1->>RedisH: HGET user:session \"UserB\"\n    RedisH-->>WS1: \"SVR_2\" 확인\n\n    Note over WS1, RedisPS: 2. Server 2 채널로 발행\n    WS1->>RedisPS: PUBLISH \"server:SVR_2\" \"{msg: 'Hello'}\"\n\n    Note over RedisPS, WS2: 3. Server 2가 메시지 수신\n    RedisPS->>WS2: Message Received\n\n    Note over WS2, UserB: 4. User B에게 최종 전송\n    WS2->>UserB: WebSocket Send\n```\n\n#### ③ 재연결 처리 (Redis Streams)\n\n네트워크 불안정으로 연결이 끊겼을 때, 누락된 메시지를 `Last-Event-ID`를 기반으로 복구합니다.\n\n```mermaid\nflowchart TD\n    Start([클라이언트 재연결]) --> SendID[Last-Event-ID 전송]\n    SendID --> CheckID{ID 유효성 검사}\n    \n    CheckID -- \"유효함\" --> ReadMissing[XREAD: Last-ID 이후 데이터 추출]\n    CheckID -- \"첫 연결/만료\" --> ReadNew[XREAD: 최신 데이터부터 구독]\n    \n    ReadMissing --> SendWS[WebSocket으로 데이터 전송]\n    ReadNew --> Normal[실시간 통신 모드]\n    SendWS --> Normal\n\n    style Start fill:#f9f,stroke:#333\n    style Normal fill:#ccf,stroke:#333\n```\n\n---\n\n### 4. 운영 시 주의사항\n\n1. **Zombie Session 관리:** 서버 장애 시 Redis에 남은 잘못된 세션 정보를 방지하기 위해, **Heartbeat(Ping/Pong)**를 통한 TTL(Time To Live) 갱신이 필수적입니다.\n\n2. **Graceful Shutdown:** 서버 종료 시 자신이 관리하던 세션을 `HDEL`로 명시적으로 삭제하는 로직을 구현해야 합니다.\n\n3. **Redis 부하 분산:** 트래픽이 매우 높을 경우 Redis를 Cluster 모드로 구성하여 Pub/Sub 부하를 분산시켜야 합니다.\n\n---\n\n### 5. 마무리하며\n\n분산 WebSocket 아키텍처에서 Redis는 단순한 캐시가 아니라, 서버들 사이를 잇는 **신경망**과 같습니다. **Hash**로 위치를 찾고, **Pub/Sub**으로 대화하며, **Streams**로 기억(영속성)을 유지하는 설계를 통해 견고한 실시간 시스템을 구축해 보세요.",
+    "docType": "original",
+    "category": "Backend_Websocket",
+    "tags": [],
+    "readingTime": 3,
+    "wordCount": 548,
+    "isFeatured": false,
+    "isPublic": true,
+    "date": "2025-12-27"
+  },
+  {
     "id": "데코레이터-decorator",
     "slug": "dekoreiteo-decorator",
     "path": "backend/patterns",

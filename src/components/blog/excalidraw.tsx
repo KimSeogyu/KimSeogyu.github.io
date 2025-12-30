@@ -1,18 +1,9 @@
-import { useEffect, useRef, useState, forwardRef } from 'react'
+import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react'
 
-export const Excalidraw = forwardRef<HTMLDivElement, { data: string } & React.HTMLAttributes<HTMLDivElement>>(({ data, className, style, ...props }, ref) => {
+
+export const Excalidraw = ({ data, className, style, ...props }: { data: string } & React.HTMLAttributes<HTMLDivElement>) => {
   const localRef = useRef<HTMLDivElement>(null)
   const [isDark, setIsDark] = useState(false)
-
-  // Merge refs
-  useEffect(() => {
-    if (!ref) return
-    if (typeof ref === 'function') {
-      ref(localRef.current)
-    } else {
-      ref.current = localRef.current
-    }
-  }, [ref])
 
   // 다크모드 감지
   useEffect(() => {
@@ -79,6 +70,4 @@ export const Excalidraw = forwardRef<HTMLDivElement, { data: string } & React.HT
       {...props}
     />
   )
-})
-
-Excalidraw.displayName = 'Excalidraw'
+}

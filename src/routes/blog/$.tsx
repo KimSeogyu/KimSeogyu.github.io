@@ -217,7 +217,7 @@ function PostDetail() {
                           return (
                             <div className="my-8">
                               <Zoom key={isDark ? 'mermaid-dark' : 'mermaid-light'}>
-                                <div style={{ width: '100%' }}>
+                                <div className="w-full">
                                   <Mermaid chart={String(codeContent).replace(/\n$/, '')} />
                                 </div>
                               </Zoom>
@@ -229,7 +229,7 @@ function PostDetail() {
                           return (
                             <div className="my-8">
                               <Zoom key={isDark ? 'excalidraw-dark' : 'excalidraw-light'}>
-                                <div style={{ width: '100%' }}>
+                                <div className="w-full">
                                   <Excalidraw data={String(codeContent).replace(/\n$/, '')} />
                                 </div>
                               </Zoom>
