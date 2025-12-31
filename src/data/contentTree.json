@@ -1,5 +1,33 @@
 [
   {
+    "name": "Ai Ml",
+    "type": "folder",
+    "path": "ai-ml",
+    "children": [
+      {
+        "name": "BM25: 검색 엔진의 핵심 랭킹 알고리즘",
+        "type": "post",
+        "path": "ai-ml/bm25-geomsaeg-enjinyi-haegsim-raengking-algorijeum",
+        "slug": "bm25-geomsaeg-enjinyi-haegsim-raengking-algorijeum",
+        "title": "BM25: 검색 엔진의 핵심 랭킹 알고리즘"
+      },
+      {
+        "name": "Faiss와 OpenSearch 벡터 검색 비교",
+        "type": "post",
+        "path": "ai-ml/faiss-wa-opensearch-begteo-geomsaeg-bigyo",
+        "slug": "faiss-wa-opensearch-begteo-geomsaeg-bigyo",
+        "title": "Faiss와 OpenSearch 벡터 검색 비교"
+      },
+      {
+        "name": "RRF: 하이브리드 검색의 핵심 랭크 퓨전 알고리즘",
+        "type": "post",
+        "path": "ai-ml/rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum",
+        "slug": "rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum",
+        "title": "RRF: 하이브리드 검색의 핵심 랭크 퓨전 알고리즘"
+      }
+    ]
+  },
+  {
     "name": "Backend",
     "type": "folder",
     "path": "backend",
