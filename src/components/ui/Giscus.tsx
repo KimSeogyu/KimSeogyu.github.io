@@ -15,12 +15,8 @@ export function BlogComments({
   category = import.meta.env.VITE_GISCUS_CATEGORY || 'Announcements',
   categoryId = import.meta.env.VITE_GISCUS_CATEGORY_ID || '',
 }: GiscusCommentsProps) {
-  const { theme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  
-  const resolvedTheme = theme === 'system' 
-    ? (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-    : theme
 
   useEffect(() => {
     setMounted(true)
