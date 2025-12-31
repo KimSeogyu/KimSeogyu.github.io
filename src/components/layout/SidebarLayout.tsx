@@ -4,6 +4,7 @@ import { Button } from '~/components/ui/button'
 import { cn } from '~/lib/utils'
 import { useLayout } from '~/contexts/LayoutContext'
 import { Sidebar } from './Sidebar'
+import { Footer } from './Footer'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '~/components/ui/sheet'
 import type { ContentNode } from '~/types'
 import type { ReactNode } from 'react'
@@ -109,6 +110,9 @@ export function SidebarLayout({ children, tree, showRightSidebar = true }: Sideb
         <main className="w-full px-4 pb-10">
           {children}
         </main>
+
+        {/* Footer */}
+        <Footer />
       </div>
     )
   }
@@ -158,6 +162,9 @@ export function SidebarLayout({ children, tree, showRightSidebar = true }: Sideb
         )}
       >
         {children}
+
+        {/* Footer */}
+        <Footer />
       </main>
 
       {/* Right Sidebar - xl+ only (when enabled) */}
