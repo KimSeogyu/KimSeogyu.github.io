@@ -47,21 +47,26 @@ export const Mermaid = ({ chart, className, style, ...props }: { chart: string }
         },
         themeVariables: isDark ? {
           primaryColor: '#c7d2fe', // Indigo 200 (Light node background for Dark Text)
-          primaryTextColor: '#0f172a', // Slate 900 (Dark Text)
+          primaryTextColor: '#f8fafc', // 밝은 텍스트 색상 (Slate 50)
           primaryBorderColor: '#818cf8',
           lineColor: '#cbd5e1',
           secondaryColor: '#334155',
-          tertiaryColor: '#cbd5e1', // Lighter tertiary for readability if used
-          background: '#0f172a', // Dark Canvas
-          mainBkg: '#1e293b', // Dark Group/Cluster Bkg
+          tertiaryColor: '#cbd5e1',
+          background: '#0f172a',
+          mainBkg: '#1e293b',
           nodeBorder: '#818cf8',
           clusterBkg: '#1e293b',
           clusterBorder: '#475569',
-          titleColor: '#f8fafc', // Title stays Light
-          edgeLabelBackground: '#e2e8f0', // Light background for edge labels
+          titleColor: '#f8fafc',
+          edgeLabelBackground: '#334155',
           fontSize: '16px',
-          textColor: '#0f172a', // Unified Dark Text (for Nodes & Edge Labels)
-          labelColor: '#0f172a', // Internal labels Dark
+          // 다크 모드에서 텍스트 가시성을 위한 추가 속성
+          textColor: '#f8fafc',
+          labelColor: '#f8fafc',
+          nodeTextColor: '#f8fafc',
+          actorTextColor: '#f8fafc',
+          signalTextColor: '#f8fafc',
+          labelTextColor: '#f8fafc',
         } : {
           primaryColor: '#fef3c7',
           primaryTextColor: '#1e293b',
@@ -83,6 +88,23 @@ export const Mermaid = ({ chart, className, style, ...props }: { chart: string }
       mermaid.render(`mermaid-${Math.random().toString(36).substr(2, 9)}`, chart).then(({ svg }) => {
         if (localRef.current) {
           localRef.current.innerHTML = svg
+          
+          // 다크 모드에서 SVG 텍스트 색상 강제 보정
+          if (isDark) {
+            const textElements = localRef.current.querySelectorAll('text, .nodeLabel, .edgeLabel, .label, span')
+            textElements.forEach((el) => {
+              const htmlEl = el as HTMLElement
+              const currentColor = window.getComputedStyle(htmlEl).color
+              // 어두운 색상인 경우 밝은 색상으로 변경
+              if (currentColor === 'rgb(0, 0, 0)' || 
+                  currentColor === 'rgb(15, 23, 42)' ||
+                  currentColor.includes('rgb(0,') ||
+                  currentColor.includes('rgb(1')) {
+                htmlEl.style.fill = '#f8fafc'
+                htmlEl.style.color = '#f8fafc'
+              }
+            })
+          }
         }
       })
     }
