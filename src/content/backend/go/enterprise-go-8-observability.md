@@ -41,14 +41,14 @@ graph TB
 
 ---
 
-## Logging (slog)
+## Logging (uber/zap)
 
 ### 구조화된 로깅
 
 | 패턴 | Java | Go |
 |------|------|-----|
-| 구조화 로깅 | Logback + JSON | slog (1.21+) |
-| 컨텍스트 전파 | MDC | Context + slog.With |
+| 구조화 로깅 | Logback + JSON | uber/zap |
+| 컨텍스트 전파 | MDC | Context + zap.With |
 
 ### 로그 레벨 가이드
 
@@ -74,6 +74,30 @@ sequenceDiagram
     UseCase->>Logger: logger.With(ctx)
     Logger->>Logger: requestID 자동 포함
 ```
+
+### 로거 초기화 패턴
+
+| 패턴 | 방식 | 장단점 |
+|------|------|--------|
+| **ReplaceGlobals** | `zap.ReplaceGlobals(logger)` | 간편, 테스트 어려움 |
+| **DI 주입** | Wire로 주입 | 테스트 용이, 명시적 |
+
+**ReplaceGlobals**: 빠른 프로토타이핑에 적합
+
+```go
+logger, _ := zap.NewProduction()
+zap.ReplaceGlobals(logger)
+// 이후 어디서든 zap.L().Info(...)
+```
+
+**DI (권장)**: 정식 프로젝트에서는 Wire로 주입
+
+```go
+// wire.go
+func InitializeServer(logger *zap.Logger) *Server { ... }
+```
+
+테스트 시 Mock 로거 주입 가능, 의존성 명시적
 
 ---
 
@@ -183,7 +207,7 @@ graph LR
 graph TB
     APP[Go Application]
     
-    APP -->|slog| LOKI[Loki]
+    APP -->|zap| LOKI[Loki]
     APP -->|Prometheus Client| PROM[Prometheus]
     APP -->|OTLP| TEMPO[Tempo]
     
@@ -225,7 +249,7 @@ graph TD
 
 | 요소 | 도구 | 용도 |
 |------|------|------|
-| Logs | slog → Loki | 디버깅, 감사 |
+| Logs | zap → Loki | 디버깅, 감사 |
 | Metrics | Prometheus → Grafana | 모니터링, Alert |
 | Traces | OpenTelemetry → Tempo | 병목 분석 |
 | Profile | pprof | 성능 최적화 |
@@ -246,12 +270,13 @@ graph TD
 | 6 | 외부 통신 | 패턴 조합 순서 |
 | 7 | 테스트 | Mock, Testcontainers, Ginkgo |
 | 8 | Observability | RED/USE, Grafana Alert |
+| 9 | Makefile | 개발 워크플로우 자동화, Façade |
 
 ---
 
 ## 참고 자료
 
-- [log/slog](https://pkg.go.dev/log/slog)
+- [uber/zap](https://github.com/uber-go/zap)
 - [Prometheus Go Client](https://github.com/prometheus/client_golang)
 - [OpenTelemetry Go](https://opentelemetry.io/docs/instrumentation/go/)
 - [Grafana Loki](https://grafana.com/oss/loki/)

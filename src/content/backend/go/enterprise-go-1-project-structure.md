@@ -148,6 +148,34 @@ graph TB
 - `adapter/`에서 구현 → 인프라 교체 용이
 - Output Port 인터페이스는 Domain에, 구현체는 Adapter에
 
+### UseCase는 Façade다
+
+AdminUseCase를 설계할 때 고민이 있었습니다:
+
+> "UserRepository, OrderRepository, StatsRepository... 다 주입해야 하는데 이게 맞나?"
+
+**맞습니다.** UseCase는 **Façade 패턴**입니다.
+
+```mermaid
+graph LR
+    subgraph "Façade"
+        UC["AdminUseCase"]
+    end
+    
+    UC --> USER[UserRepository]
+    UC --> ORDER[OrderRepository]
+    UC --> STATS[StatsRepository]
+    UC --> LOG[AuditLogRepository]
+```
+
+| 역할 | 설명 |
+|------|------|
+| Handler | 단일 UseCase 호출 |
+| **UseCase (Façade)** | 여러 Repository 조합, 트랜잭션 경계 |
+| Repository | 단일 테이블/도메인 담당 |
+
+Handler는 단순해지고, 복잡한 조합은 UseCase에서 처리합니다.
+
 ---
 
 ## Cobra: 다중 진입점 관리
