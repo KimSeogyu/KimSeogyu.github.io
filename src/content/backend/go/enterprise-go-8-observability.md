@@ -262,7 +262,7 @@ graph TD
 
 | 편 | 주제 | 핵심 요점 |
 |----|------|----------|
-| 1 | 프로젝트 설계 | golang-standards + 모노레포 + 헥사고날 |
+| 1 | 프로젝트 설계 | Cosmos SDK 구조, /internal 캡슐화 |
 | 2 | HTTP 서버 | 미들웨어 순서, Graceful Shutdown |
 | 3 | Context | 타임아웃, 취소 전파, Request ID |
 | 4 | 동시성 | Goroutine 제한, errgroup |
