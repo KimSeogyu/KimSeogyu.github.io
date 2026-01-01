@@ -1,5 +1,5 @@
 ---
-public: true
+public: false
 title: 김서규의 노트 Seogyu's notes
 date: '2025-12-27'
 category: Research
