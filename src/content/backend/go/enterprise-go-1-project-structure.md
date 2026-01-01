@@ -4,335 +4,227 @@ title: "Enterprise Go 시리즈 #1: 프로젝트 설계와 구조화"
 date: '2026-01-01'
 category: Backend
 tags: [Go, Monorepo, Hexagonal Architecture, Cobra, Wire, DI, Enterprise]
-excerpt: "모노레포 환경에서 Hexagonal Architecture를 적용하여 확장 가능한 엔터프라이즈 Go 프로젝트를 설계하는 원칙과 실전 경험을 공유합니다."
+excerpt: "모노레포 환경에서 golang-standards 레이아웃과 Hexagonal Architecture를 결합하여 확장 가능한 엔터프라이즈 Go 프로젝트를 설계합니다."
 ---
 
 # Enterprise Go 시리즈 #1: 프로젝트 설계와 구조화
 
+> **대상 독자**: Java, Node.js 등 다른 생태계에서 충분한 경험을 쌓은 후 Go로 전환하는 시니어 엔지니어
+
 ## 시리즈 소개
 
-이 시리즈는 엔터프라이즈 레벨의 Go 애플리케이션을 구축하는 실전 가이드입니다. 기술적 주제가 아닌, **실제 개발자가 마주하는 상황** 순서대로 구성했습니다.
-
-| # | 주제 | 핵심 내용 |
-|---|------|----------|
-| **1** | 프로젝트 설계와 구조화 | 모노레포, Hexagonal Architecture |
-| 2 | 견고한 HTTP 서버 구축 | Echo, Middleware |
-| 3 | Context로 요청 생명주기 관리 | Timeout, Cancellation |
-| 4 | Goroutine과 Channel 실전 활용 | Fearless Concurrency |
-| 5 | 데이터베이스 연동 패턴 | 트랜잭션 전파 |
-| 6 | Resilient한 외부 통신 | Circuit Breaker |
-| 7 | 테스트 전략과 실전 | 통합 테스트 |
-| 8 | Observability와 Debugging | 관찰가능성 |
+| # | 주제 | 다른 언어에서의 대응 개념 |
+|---|------|------------------------|
+| **1** | 프로젝트 설계 | Maven 멀티모듈, Gradle 컨벤션 |
+| 2 | HTTP 서버 | Spring MVC, Express |
+| 3 | Context | ThreadLocal, AsyncLocalStorage |
+| 4 | 동시성 | ExecutorService, Worker Threads |
+| 5 | 데이터베이스 | @Transactional, Sequelize |
+| 6 | 외부 통신 | Resilience4j, Polly |
+| 7 | 테스트 | JUnit, Jest |
+| 8 | Observability | Micrometer, Winston |
 
 ---
 
-## 왜 아키텍처가 중요한가?
+## 모노레포를 선택한 이유
 
-엔터프라이즈 환경에서 겪는 현실적인 문제들:
+### 멀티레포에서 겪은 문제
 
-> "처음엔 HTTP 서버 하나였는데, 이제 gRPC도 필요하고 배치 워커도 있고..."
-> "팀이 커지면서 코드 충돌이 너무 잦아요"
-> "테스트 환경 구성하는 게 본 작업보다 오래 걸려요"
+빠른 프로토타이핑을 위해 각 서비스를 별도 저장소로 분리했으나, 정식 프로젝트 채택 이후 문제가 드러났습니다:
 
-이런 문제들은 **처음부터 확장 가능한 구조**로 시작해야 해결됩니다.
+- **공통 라이브러리 버전 파편화**: 서비스 A는 v1.0, B는 v1.2 → 호환성 이슈
+- **Cross-cutting 변경의 어려움**: 인증 방식 변경 시 PR 5개 + 배포 조율
+- **의존성 업데이트 지옥**: 보안 패치 하나에 N개 저장소 수정
 
----
-
-## 모노레포(Monorepo)를 선택한 이유
-
-### 멀티레포 vs 모노레포
+### 모노레포로 전환 후
 
 ```mermaid
-flowchart LR
-    subgraph 멀티레포
-        A1[user-service] --> B1[공통 라이브러리 v1.0]
-        A2[order-service] --> B2[공통 라이브러리 v1.2]
-        A3[payment-service] --> B3[공통 라이브러리 v1.1]
+graph LR
+    subgraph Before
+        A[user-repo] -.->|v1.0| L1[lib v1.0]
+        B[order-repo] -.->|v1.2| L2[lib v1.2]
     end
-
-    subgraph 모노레포
-        C1[user-service] --> D[shared/]
-        C2[order-service] --> D
-        C3[payment-service] --> D
+    
+    subgraph After
+        C[monorepo/apps/user]
+        D[monorepo/apps/order]
+        E[monorepo/pkg/shared]
+        C --> E
+        D --> E
     end
 ```
 
-### 실전 경험에서 배운 것
-
-**멀티레포의 고통:**
-
-- 공통 라이브러리 버전 파편화 → 서비스마다 다른 버전 의존
-- 크로스 서비스 변경 시 PR 3개 이상 필요
-- "이 변경이 다른 서비스에 영향 주나요?" 확인 어려움
-
-**모노레포의 장점:**
-
-- **Atomic Commit**: 관련 변경을 한 커밋에
-- **통합 CI/CD**: 변경된 서비스만 빌드/배포
-- **코드 공유 용이**: import 경로만 맞추면 됨
-
-**모노레포의 trade-off:**
-
-- 초기 설정 복잡도 증가
-- CI/CD 파이프라인 설계 필요
-- 권한 관리 고민 (폴더별 CODEOWNERS)
+- Atomic Commit으로 관련 변경을 한 번에
+- `go.work`를 활용한 로컬 모듈 개발 (replace 없이 로컬 변경 즉시 반영)
+- 변경된 서비스만 빌드하는 CI 구성 가능
 
 ---
 
-## 모노레포 디렉토리 구조
+## golang-standards + 모노레포 + 헥사고날
+
+### 디렉토리 구조
+
+[golang-standards/project-layout](https://github.com/golang-standards/project-layout)을 기반으로 모노레포와 헥사고날을 녹여낸 구조입니다.
+
+```
+monorepo/
+├── apps/                          # 배포 단위별 서비스
+│   ├── user-api/
+│   │   ├── cmd/                   # 엔트리포인트 (Cobra)
+│   │   │   └── main.go
+│   │   └── internal/              # 외부 import 불가
+│   │       ├── port/              # Inbound (HTTP, gRPC)
+│   │       │   └── http/
+│   │       ├── app/               # UseCase, Domain
+│   │       │   ├── usecase/
+│   │       │   └── domain/
+│   │       └── adapter/           # Outbound (DB, External)
+│   │           └── repository/
+│   │
+│   └── order-api/
+│       └── (동일 구조)
+│
+├── pkg/                           # 외부 공개 가능한 공용 코드
+│   ├── logger/
+│   ├── errors/
+│   └── config/
+│
+├── internal/                      # 모노레포 내부 공유, 외부 비공개
+│   └── shared/
+│       └── domain/                # 공유 도메인 모델
+│
+├── api/                           # OpenAPI, Protobuf 정의
+│   └── proto/
+│
+├── scripts/                       # 빌드, 배포 스크립트
+├── go.work                        # Go 워크스페이스
+└── go.work.sum
+```
+
+### 핵심 디렉토리 역할
+
+| 디렉토리 | Go 컴파일러 강제 | 역할 |
+|----------|-----------------|------|
+| `/cmd` | - | 엔트리포인트, 최소한의 main() |
+| `/internal` | ✅ import 제한 | 외부 패키지에서 import 불가 |
+| `/pkg` | - | 외부 공개 가능, 신중하게 사용 |
+| `/api` | - | OpenAPI, Protobuf 정의 |
+
+---
+
+## 헥사고날 적용 시 고민했던 점
+
+### Port와 Adapter를 어디에 둘 것인가?
 
 ```mermaid
 graph TB
-    ROOT[monorepo/] --> APPS[apps/]
-    ROOT --> PKG[pkg/]
-    ROOT --> SHARED[shared/]
-    ROOT --> SCRIPTS[scripts/]
-    
-    APPS --> USER[user-api/]
-    APPS --> ORDER[order-api/]
-    APPS --> WORKER[batch-worker/]
-    
-    PKG --> LOGGER[logger/]
-    PKG --> CONFIG[config/]
-    PKG --> ERRORS[errors/]
-    
-    SHARED --> DOMAIN[domain/]
-    SHARED --> PROTO[proto/]
-    
-    style APPS fill:#e1f5fe
-    style PKG fill:#fff3e0
-    style SHARED fill:#f3e5f5
-```
-
-| 디렉토리 | 역할 | 예시 |
-|----------|------|------|
-| `apps/` | 배포 가능한 서비스들 | user-api, order-api, worker |
-| `pkg/` | 범용 유틸리티 | logger, config, errors |
-| `shared/` | 도메인 공유 코드 | domain 모델, proto 정의 |
-| `scripts/` | 빌드/배포 스크립트 | Makefile, CI 스크립트 |
-
----
-
-## Hexagonal Architecture (Port & Adapter)
-
-### 핵심 원칙
-
-> 비즈니스 로직은 외부 세계(DB, HTTP, 메시지 큐)를 몰라야 한다.
-
-```mermaid
-flowchart TB
-    subgraph "Primary Adapters (입력)"
-        HTTP[HTTP Handler]
-        GRPC[gRPC Server]
-        CLI[CLI Command]
-    end
-    
-    subgraph "Application Core"
-        PORT_IN[Port - Input]
-        USECASE[Use Case]
-        DOMAIN[Domain Logic]
-        PORT_OUT[Port - Output]
-    end
-    
-    subgraph "Secondary Adapters (출력)"
-        DB[(Database)]
-        CACHE[(Redis)]
-        EXT[External API]
-    end
-    
-    HTTP --> PORT_IN
-    GRPC --> PORT_IN
-    CLI --> PORT_IN
-    
-    PORT_IN --> USECASE
-    USECASE --> DOMAIN
-    USECASE --> PORT_OUT
-    
-    PORT_OUT --> DB
-    PORT_OUT --> CACHE
-    PORT_OUT --> EXT
-    
-    style DOMAIN fill:#c8e6c9
-    style USECASE fill:#c8e6c9
-```
-
-### 왜 이 구조인가?
-
-**경험담**: 초기에는 Handler에서 직접 DB 쿼리를 호출했습니다. 문제는:
-
-- gRPC 추가 시 Handler 로직 복붙
-- 테스트할 때 실제 DB 필요
-- 외부 결제 API 변경 시 수십 개 파일 수정
-
-**Hexagonal 적용 후:**
-
-- UseCase 하나로 HTTP/gRPC/CLI 모두 처리
-- Port(인터페이스) 덕분에 Mock 주입 용이
-- Adapter만 교체하면 인프라 변경 가능
-
----
-
-## 서비스 하나의 구조
-
-```mermaid
-graph TB
-    subgraph "apps/user-api/"
-        CMD[cmd/main.go<br/>Cobra 엔트리포인트]
+    subgraph "apps/user-api/internal/"
+        subgraph "port/ - Inbound"
+            HTTP[http/handler.go]
+            GRPC[grpc/server.go]
+        end
         
-        subgraph internal/
-            subgraph port/
-                HTTP_PORT[http/<br/>Echo Handler]
-                GRPC_PORT[grpc/<br/>gRPC Server]
-            end
-            
-            subgraph app/
-                USECASE[usecase/<br/>비즈니스 로직]
-                DOMAIN[domain/<br/>모델 + 인터페이스]
-            end
-            
-            subgraph adapter/
-                REPO[repository/<br/>GORM]
-                CLIENT[client/<br/>외부 API]
-            end
+        subgraph "app/ - Core"
+            UC[usecase/user.go]
+            DOM[domain/user.go]
+            PORT_OUT[domain/repository.go<br/>인터페이스 정의]
+        end
+        
+        subgraph "adapter/ - Outbound"
+            REPO[repository/user_gorm.go<br/>인터페이스 구현]
         end
     end
     
-    CMD --> HTTP_PORT
-    CMD --> GRPC_PORT
-    HTTP_PORT --> USECASE
-    GRPC_PORT --> USECASE
-    USECASE --> DOMAIN
-    USECASE --> REPO
-    USECASE --> CLIENT
-    
-    style DOMAIN fill:#c8e6c9
-    style USECASE fill:#c8e6c9
+    HTTP --> UC
+    GRPC --> UC
+    UC --> DOM
+    UC --> PORT_OUT
+    REPO -.->|implements| PORT_OUT
 ```
+
+**결정 근거:**
+
+- `domain/`에 인터페이스 정의 → 의존성 역전
+- `adapter/`에서 구현 → 인프라 교체 용이
+- Output Port 인터페이스는 Domain에, 구현체는 Adapter에
 
 ---
 
-## Cobra: CLI 엔트리포인트
+## Cobra: 다중 진입점 관리
 
-### 설계 원칙
+### 왜 Cobra인가?
 
-Cobra를 선택한 이유:
-
-- 서브커맨드로 **다중 Port 선택** 가능
-- Viper와 자연스럽게 연동
-- 자동 Help 생성
+하나의 바이너리로 여러 역할 수행이 필요했습니다:
 
 ```mermaid
 graph LR
-    MAIN[myapp] --> SERVE[serve<br/>HTTP 서버]
-    MAIN --> GRPC[grpc<br/>gRPC 서버]
-    MAIN --> WORKER[worker<br/>배치 워커]
-    MAIN --> MIGRATE[migrate<br/>DB 마이그레이션]
+    BIN[user-api] --> SERVE[serve<br/>HTTP 서버]
+    BIN --> GRPC[grpc<br/>gRPC 서버]
+    BIN --> WORKER[worker<br/>백그라운드 작업]
+    BIN --> MIGRATE[migrate<br/>DB 마이그레이션]
 ```
 
-### 핵심 패턴
-
-```go
-// 서브커맨드에서 Wire로 의존성 주입
-rootCmd.AddCommand(
-    newServeCmd(),   // Wire → HTTP Server
-    newGRPCCmd(),    // Wire → gRPC Server
-    newWorkerCmd(),  // Wire → Background Worker
-)
-```
-
-**실전 팁:**
-
-- 각 커맨드는 독립적인 의존성 그래프
-- `serve`와 `worker`가 다른 Adapter를 사용할 수 있음
-- Graceful Shutdown은 커맨드 레벨에서 처리
+- **배포 단순화**: 하나의 Docker 이미지, 다른 커맨드
+- **설정 공유**: Viper로 공통 설정, 커맨드별 오버라이드
+- **테스트 용이**: 각 커맨드 독립적으로 테스트 가능
 
 ---
 
-## Wire: 의존성 주입
+## Wire: 컴파일 타임 DI
 
-### 왜 Wire인가?
+### 다른 DI 도구와 비교
 
-| 방식 | 에러 발견 시점 | 복잡도 |
-|------|--------------|--------|
-| 수동 DI | 컴파일 타임 | 보일러플레이트 ↑ |
-| fx, dig | 런타임 | 디버깅 어려움 |
-| **Wire** | 컴파일 타임 | 코드 생성 |
+| 도구 | 에러 발견 시점 | 특징 |
+|------|--------------|------|
+| uber/fx | 런타임 | 유연하나 런타임 에러 |
+| google/wire | 컴파일 타임 | 코드 생성, 안전 |
+| 수동 DI | 컴파일 타임 | 보일러플레이트 증가 |
 
-**경험담**: uber/fx를 사용했다가 "런타임에서야 에러 발견" 문제로 Wire로 전환했습니다. 컴파일 타임에 의존성 그래프 오류를 잡을 수 있어 안심됩니다.
-
-### Wire 패턴
-
-```mermaid
-graph LR
-    subgraph Provider Set
-        A[NewUserRepository] --> B[NewUserUseCase]
-        B --> C[NewHTTPHandler]
-        C --> D[NewServer]
-    end
-    
-    INJECTOR[wire.Build] --> D
-```
-
-**핵심 원칙:**
-
-1. Provider는 단일 타입 반환
-2. Provider Set으로 레이어별 그룹핑
-3. Injector에서 최종 조립
+빠른 프로토타이핑 시에는 수동 DI로 시작했으나, 정식 채택 후 의존성이 복잡해지면서 Wire로 전환했습니다. 컴파일 타임에 의존성 그래프 오류를 잡을 수 있어 배포 후 장애를 예방할 수 있습니다.
 
 ---
 
 ## Functional Options 패턴
 
-### 문제 상황
+Java의 Builder 패턴, JavaScript의 옵션 객체에 대응하는 Go의 관용구입니다:
 
 ```go
-// 매개변수가 계속 늘어남
-func NewServer(port int, timeout time.Duration, logger Logger, ...) *Server
-```
-
-### 해결
-
-```mermaid
-graph LR
-    NEW[NewServer] --> OPT1[WithPort]
-    NEW --> OPT2[WithTimeout]
-    NEW --> OPT3[WithLogger]
+// Go 관용적 방식
+server := NewServer(
+    WithPort(8080),
+    WithTimeout(30 * time.Second),
+    WithLogger(logger),
+)
 ```
 
 **장점:**
 
-- 기본값 제공 가능
-- 옵션 추가 시 기존 코드 영향 없음
-- 가독성 향상
+- 기본값 내장 (zero value보다 명시적)
+- 옵션 추가 시 기존 코드 호환
+- 문서화 없이도 사용법 명확
 
 ---
 
-## 정리: 설계 원칙 체크리스트
+## 정리
 
-| 원칙 | 질문 |
+| 선택 | 근거 |
 |------|------|
-| **모노레포** | 서비스 간 코드 공유가 필요한가? |
-| **Hexagonal** | 비즈니스 로직이 인프라에 의존하지 않는가? |
-| **Cobra** | 다중 진입점(HTTP, gRPC, CLI)이 필요한가? |
-| **Wire** | 의존성 그래프가 복잡한가? |
-| **Functional Options** | 설정이 다양한 컴포넌트가 있는가? |
+| 모노레포 | Cross-cutting 변경, 버전 통일 |
+| golang-standards | Go 생태계 표준, 팀 온보딩 |
+| 헥사고날 | 인프라 교체, 테스트 용이 |
+| Cobra | 다중 진입점, 설정 관리 |
+| Wire | 컴파일 타임 안전성 |
 
 ---
 
 ## 다음 편 예고
 
-**2편: 견고한 HTTP 서버 구축**에서는:
-
-- Echo 미들웨어 체인 설계
-- 일관된 에러 응답 패턴
-- Graceful Shutdown
-
-을 다룹니다.
+**2편: 견고한 HTTP 서버 구축**에서는 Spring MVC의 Filter/Interceptor에 대응하는 Echo 미들웨어 설계를 다룹니다.
 
 ---
 
 ## 참고 자료
 
+- [golang-standards/project-layout](https://github.com/golang-standards/project-layout)
 - [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/)
-- [Cobra 공식 문서](https://cobra.dev/)
 - [Google Wire](https://github.com/google/wire)
