@@ -4,7 +4,7 @@ title: "Enterprise Go 시리즈 #1: 프로젝트 설계와 구조화"
 date: '2026-01-01'
 category: Backend
 tags: [Go, Monorepo, Project Layout, Cobra, Wire, DI, Enterprise]
-excerpt: "golang-standards/project-layout을 기반으로 엔터프라이즈 Go 프로젝트 구조를 설계합니다."
+excerpt: "Kubernetes, Docker CLI, Prometheus, Hugo의 소스 코드를 분석하여 도출한 Go 프로젝트 구조 베스트 프랙티스를 소개합니다."
 ---
 
 # Enterprise Go 시리즈 #1: 프로젝트 설계와 구조화
@@ -27,173 +27,199 @@ excerpt: "golang-standards/project-layout을 기반으로 엔터프라이즈 Go 
 
 ---
 
-## Go 표준 프로젝트 레이아웃
+## 실제 프로덕션 프로젝트 분석
 
-[golang-standards/project-layout](https://github.com/golang-standards/project-layout)은 Go 커뮤니티에서 널리 사용되는 디렉토리 구조입니다.
+이론이 아닌 **실제 코드**를 분석했습니다:
 
-### 핵심 디렉토리
-
-| 디렉토리 | 역할 | Go 강제 |
-|----------|------|--------|
-| `/cmd` | 바이너리 진입점 | - |
-| `/internal` | **외부 import 불가** | ✅ 컴파일러 강제 |
-| `/pkg` | 외부 공개 가능 | - |
-| `/api` | OpenAPI, Protobuf 정의 | - |
+| 프로젝트 | 특성 | Main 역할 | 조립 코드 위치 |
+|---------|------|----------|--------------|
+| Kubernetes | 거대 모놀리스 | 최소화 | `cmd/<bin>/app/` |
+| Docker CLI | CLI 도구 | 최소화 | `cli/command/` |
+| Prometheus | 데몬/서비스 | 중간 | `main.go` 내부 |
+| Hugo | 컴파일러 | 최소화 | `commands/` |
 
 ---
 
-## /cmd: 진입점은 얇게
+## 핵심 인사이트: Hollow Main 패턴
 
-```
-cmd/
-├── api/
-│   └── main.go
-└── worker/
-    └── main.go
+> **프로젝트가 성숙할수록 main 함수는 비어간다.**
+
+### Fat Main의 문제
+
+```go
+// ❌ 나쁜 예: Fat Main
+func main() {
+    cfg := loadConfig()
+    db := connectDB(cfg)
+    userRepo := NewUserRepo(db)
+    userService := NewUserService(userRepo)
+    handler := NewHandler(userService)
+    http.ListenAndServe(":8080", handler)
+}
 ```
 
-**원칙**: main.go는 **조립만**, 비즈니스 로직은 `/internal`에.
+**문제점:**
+
+- `main`은 테스트 불가
+- `main` 패키지는 다른 곳에서 import 불가
+
+### Hollow Main (권장)
+
+```go
+// ✅ 좋은 예: Hollow Main
+package main
+
+import "myproject/internal/app"
+
+func main() {
+    if err := app.Run(); err != nil {
+        os.Exit(1)
+    }
+}
+```
+
+모든 로직은 `internal/app`으로 이동 → **테스트 가능**.
 
 ---
 
-## /internal: Go가 강제하는 캡슐화
-
-### Java와 비교
-
-| Java | Go |
-|------|-----|
-| `package-private` (default) | **`/internal` 디렉토리** |
-| 같은 패키지만 접근 | 같은 모듈만 import 가능 |
-| 컨벤션 | **컴파일러가 강제** |
-
-### 구조
-
-```
-internal/
-├── user/           # 도메인별 패키지
-│   ├── handler.go
-│   ├── service.go
-│   └── repository.go
-├── order/
-└── shared/         # 내부 공유 코드
-    └── middleware/
-```
-
----
-
-## /pkg: 외부 공개 (신중하게)
-
-다른 프로젝트에서 import할 수 있는 코드. **정말 공개할 게 아니면 `/internal` 사용**.
-
-```
-pkg/
-├── logger/
-└── errors/
-```
-
----
-
-## 전체 구조
+## 권장 디렉토리 구조
 
 ```
 project/
-├── cmd/                    # 바이너리 진입점
-│   ├── api/
-│   │   └── main.go
-│   └── worker/
-│       └── main.go
+├── cmd/
+│   └── myapp/
+│       └── main.go         # 텅 비어있음
 │
-├── internal/               # 외부 import 불가
-│   ├── user/
-│   ├── order/
-│   └── shared/
+├── internal/
+│   ├── app/                # 조립 코드 (Composition Root)
+│   │   ├── app.go          # Run() 함수
+│   │   └── config.go       # 설정 로드
+│   ├── api/                # HTTP 핸들러, gRPC
+│   ├── biz/                # 비즈니스 로직
+│   └── data/               # DB, 외부 API
 │
-├── pkg/                    # 외부 공개 (선택)
-│
+├── pkg/                    # 외부 공개 (신중하게)
+├── configs/                # 설정 파일
 ├── api/                    # OpenAPI, Protobuf
-├── scripts/                # 빌드/배포 스크립트
-├── go.work                 # 로컬 모듈 개발용
 └── Makefile
 ```
 
 ---
 
-## 도메인별 vs 레이어별 패키지
-
-### 레이어별 (비추천)
-
-```
-internal/
-├── handler/    # 모든 핸들러
-├── service/    # 모든 서비스
-└── repository/ # 모든 저장소
-```
-
-### 도메인별 (추천) ✅
-
-```
-internal/
-├── user/       # user 관련 전부
-├── order/      # order 관련 전부
-└── payment/    # payment 관련 전부
-```
-
-**장점**: 관련 코드가 한 곳에, 팀별 담당 가능, 마이크로서비스 분리 용이
-
----
-
-## Wire: 의존성 조립
+## internal/app: 조립의 중심
 
 ```go
-// cmd/api/wire.go
-func InitializeServer() (*http.Server, error) {
-    wire.Build(
-        config.ProviderSet,
-        user.ProviderSet,
-        order.ProviderSet,
-        NewServer,
-    )
-    return nil, nil
+// internal/app/app.go
+func Run() error {
+    cfg := LoadConfig()
+    
+    // 의존성 조립 (DI)
+    db := data.NewDatabase(cfg.DSN)
+    svc := biz.NewService(db)
+    server := api.NewServer(svc)
+    
+    // 서버 시작
+    return server.Start()
 }
 ```
 
+**이 위치의 장점:**
+
+- `cmd/`에서 분리 → 테스트 가능
+- 설정 로드, DI, 라이프사이클 관리 집중
+
 ---
 
-## go.work: 로컬 모듈 개발
+## 프로젝트 진화 단계
 
-```go
-// go.work
-go 1.21
+### 1단계: 프로토타입
 
-use (
-    ./cmd/api
-    ./internal/user
-    ./pkg/logger
-)
+```
+project/
+├── main.go
+└── go.mod
 ```
 
-`replace` 없이 로컬 변경 즉시 반영.
+500줄 미만의 PoC. 괜찮습니다.
+
+### 2단계: 모듈화
+
+```
+project/
+├── cmd/myapp/main.go
+└── internal/
+    ├── app/
+    ├── api/
+    └── data/
+```
+
+1000줄을 넘어가거나, DB 코드와 핸들러가 섞이기 시작하면.
+
+### 3단계: 멀티 바이너리
+
+```
+project/
+├── cmd/
+│   ├── api/
+│   ├── worker/
+│   └── admin-cli/
+└── internal/        # 공유
+```
+
+웹 서버 + 워커 + CLI가 같은 로직을 공유할 때.
+
+---
+
+## CLI 도구용 구조
+
+웹 서비스가 아닌 CLI 도구라면:
+
+```
+cmd/myapp/
+└── main.go
+
+internal/cli/
+├── root.go         # 루트 커맨드
+├── serve.go        # serve 서브커맨드
+└── migrate.go      # migrate 서브커맨드
+```
+
+**패턴:** `cmd.Execute()` 한 줄로 위임
+
+---
+
+## internal/ 우선 전략
+
+| 언제 internal/ | 언제 pkg/ |
+|---------------|----------|
+| 기본값 | 외부에서 import 필요할 때 |
+| 리팩토링 자유 | API 안정성 약속 |
+| 초기 개발 | 프로젝트 성숙 후 |
+
+> **경험칙:** 처음부터 pkg/를 쓰지 마세요. 나중에 필요하면 옮기세요.
 
 ---
 
 ## 정리
 
-| 디렉토리 | 역할 | 사용 |
-|----------|------|------|
-| `/cmd` | 바이너리 진입점 | 필수 |
-| `/internal` | 캡슐화된 코드 | 필수 |
-| `/pkg` | 외부 공개 | 선택 (신중하게) |
-| `/api` | API 정의 | gRPC/OpenAPI 시 |
+| 원칙 | 설명 |
+|------|------|
+| **Hollow Main** | main.go는 텅 비워두세요 |
+| **internal/app** | 조립 코드는 여기에 |
+| **internal/ 우선** | pkg/는 성숙 후에 |
+| **단계별 진화** | 프로토타입 → 모듈화 → 멀티 바이너리 |
 
 ---
 
 ## 다음 편 예고
 
-**2편: 견고한 HTTP 서버 구축**에서는 Echo 미들웨어 설계를 다룹니다.
+**2편: 견고한 HTTP 서버 구축**에서는 Echo 미들웨어 설계와 Graceful Shutdown을 다룹니다.
 
 ---
 
 ## 참고 자료
 
 - [golang-standards/project-layout](https://github.com/golang-standards/project-layout)
+- [Kubernetes cmd 구조](https://github.com/kubernetes/kubernetes/tree/master/cmd)
+- [Docker CLI 구조](https://github.com/docker/cli/tree/master/cmd)
 - [Google Wire](https://github.com/google/wire)

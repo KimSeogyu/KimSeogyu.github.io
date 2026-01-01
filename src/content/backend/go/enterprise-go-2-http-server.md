@@ -108,6 +108,37 @@ sequenceDiagram
 | 타임아웃 | spring.lifecycle.timeout-per-shutdown-phase | WithTimeout |
 | 시그널 | 자동 처리 | signal.NotifyContext |
 
+### run.Group 패턴 (Prometheus 방식)
+
+서버가 여러 고루틴(웹 서버, 워커, 헬스체크 등)으로 구성될 때:
+
+```go
+import "github.com/oklog/run"
+
+var g run.Group
+
+// HTTP 서버
+g.Add(func() error {
+    return server.ListenAndServe()
+}, func(err error) {
+    server.Shutdown(ctx)
+})
+
+// 백그라운드 워커
+g.Add(func() error {
+    return worker.Run()
+}, func(err error) {
+    worker.Stop()
+})
+
+// 하나라도 종료되면 전체 종료
+if err := g.Run(); err != nil {
+    log.Error(err)
+}
+```
+
+**장점:** 시그널 처리, 에러 전파, 종료 순서를 한 곳에서 관리
+
 ---
 
 ## 정리
@@ -116,7 +147,7 @@ sequenceDiagram
 |------|------|
 | 미들웨어 순서 | Recover → RequestID → Logger → Auth |
 | 에러 핸들링 | 도메인 에러 → HTTP 상태 매핑 |
-| Graceful Shutdown | SIGTERM 처리, 타임아웃 설정 |
+| Graceful Shutdown | SIGTERM 처리, run.Group 패턴 |
 
 ---
 

@@ -262,8 +262,8 @@ graph TD
 
 | 편 | 주제 | 핵심 요점 |
 |----|------|----------|
-| 1 | 프로젝트 설계 | Cosmos SDK 구조, /internal 캡슐화 |
-| 2 | HTTP 서버 | 미들웨어 순서, Graceful Shutdown |
+| 1 | 프로젝트 설계 | Hollow Main, internal/app, 진화 단계 |
+| 2 | HTTP 서버 | 미들웨어 순서, run.Group, Graceful Shutdown |
 | 3 | Context | 타임아웃, 취소 전파, Request ID |
 | 4 | 동시성 | Goroutine 제한, errgroup |
 | 5 | 데이터베이스 | WithTx로 @Transactional 경험 |
