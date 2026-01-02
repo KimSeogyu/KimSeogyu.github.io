@@ -644,6 +644,97 @@
     ]
   },
   {
+    "name": "Data Engineering",
+    "type": "folder",
+    "path": "data-engineering",
+    "children": [
+      {
+        "name": "데이터 엔지니어링 시리즈 #1: 백엔드 개발자가 데이터 엔지니어링을 배워야 하는 이유",
+        "type": "post",
+        "path": "data-engineering/de-01-why-data-engineering",
+        "slug": "de-01-why-data-engineering",
+        "title": "데이터 엔지니어링 시리즈 #1: 백엔드 개발자가 데이터 엔지니어링을 배워야 하는 이유"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #10: 데이터 레이크 vs 웨어하우스 - 레이크하우스 아키텍처",
+        "type": "post",
+        "path": "data-engineering/de-10-lakehouse-architecture",
+        "slug": "de-10-lakehouse-architecture",
+        "title": "데이터 엔지니어링 시리즈 #10: 데이터 레이크 vs 웨어하우스 - 레이크하우스 아키텍처"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #11: 데이터 모델링 - Star Schema와 Slowly Changing Dimensions",
+        "type": "post",
+        "path": "data-engineering/de-11-dimensional-modeling",
+        "slug": "de-11-dimensional-modeling",
+        "title": "데이터 엔지니어링 시리즈 #11: 데이터 모델링 - Star Schema와 Slowly Changing Dimensions"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #12: 데이터 품질 - 테스트, 모니터링, 관측성",
+        "type": "post",
+        "path": "data-engineering/de-12-data-quality",
+        "slug": "de-12-data-quality",
+        "title": "데이터 엔지니어링 시리즈 #12: 데이터 품질 - 테스트, 모니터링, 관측성"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #2: 데이터 아키텍처 101 - 전체 그림 이해하기",
+        "type": "post",
+        "path": "data-engineering/de-02-data-architecture-101",
+        "slug": "de-02-data-architecture-101",
+        "title": "데이터 엔지니어링 시리즈 #2: 데이터 아키텍처 101 - 전체 그림 이해하기"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #3: Spark 핵심 개념 - RDD에서 DataFrame까지",
+        "type": "post",
+        "path": "data-engineering/de-03-spark-core-concepts",
+        "slug": "de-03-spark-core-concepts",
+        "title": "데이터 엔지니어링 시리즈 #3: Spark 핵심 개념 - RDD에서 DataFrame까지"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #4: Spark 내부 동작 원리 - Job, Stage, Task",
+        "type": "post",
+        "path": "data-engineering/de-04-spark-internals",
+        "slug": "de-04-spark-internals",
+        "title": "데이터 엔지니어링 시리즈 #4: Spark 내부 동작 원리 - Job, Stage, Task"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #5: PySpark 실전 - 데이터 처리 패턴과 최적화",
+        "type": "post",
+        "path": "data-engineering/de-05-pyspark-patterns",
+        "slug": "de-05-pyspark-patterns",
+        "title": "데이터 엔지니어링 시리즈 #5: PySpark 실전 - 데이터 처리 패턴과 최적화"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #6: Airflow 핵심 개념 - DAG, Operator, Task",
+        "type": "post",
+        "path": "data-engineering/de-06-airflow-core-concepts",
+        "slug": "de-06-airflow-core-concepts",
+        "title": "데이터 엔지니어링 시리즈 #6: Airflow 핵심 개념 - DAG, Operator, Task"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #7: Airflow 실전 - 프로덕션급 파이프라인 구축",
+        "type": "post",
+        "path": "data-engineering/de-07-airflow-production",
+        "slug": "de-07-airflow-production",
+        "title": "데이터 엔지니어링 시리즈 #7: Airflow 실전 - 프로덕션급 파이프라인 구축"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #8: Kafka 핵심 - 메시지 큐를 넘어 이벤트 스트리밍으로",
+        "type": "post",
+        "path": "data-engineering/de-08-kafka-fundamentals",
+        "slug": "de-08-kafka-fundamentals",
+        "title": "데이터 엔지니어링 시리즈 #8: Kafka 핵심 - 메시지 큐를 넘어 이벤트 스트리밍으로"
+      },
+      {
+        "name": "데이터 엔지니어링 시리즈 #9: Spark Structured Streaming - 실시간 데이터 처리",
+        "type": "post",
+        "path": "data-engineering/de-09-spark-structured-streaming",
+        "slug": "de-09-spark-structured-streaming",
+        "title": "데이터 엔지니어링 시리즈 #9: Spark Structured Streaming - 실시간 데이터 처리"
+      }
+    ]
+  },
+  {
     "name": "Database",
     "type": "folder",
     "path": "database",
