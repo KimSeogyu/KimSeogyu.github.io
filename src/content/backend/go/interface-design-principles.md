@@ -81,6 +81,10 @@ func NewUserService(repo UserRepository) *UserService {
 
 ### 소비자 측에서 정의 (권장)
 
+[Go Wiki](https://go.dev/wiki/CodeReviewComments#interfaces)에서는 다음과 같이 권장합니다:
+
+> "Go interfaces generally belong in the package that **uses** values of the interface type, not the package that implements those values."
+
 ```go
 // ❌ 구현자가 인터페이스 정의 (Java 스타일)
 // repository/interfaces.go
@@ -104,6 +108,10 @@ type UserService struct {
 > Go의 암묵적 인터페이스 구현 덕분에, 소비자가 필요한 메서드만 정의할 수 있습니다.
 
 ### 작은 인터페이스 선호
+
+Rob Pike의 [Go Proverbs](https://go-proverbs.github.io/)에서:
+
+> "The bigger the interface, the weaker the abstraction."
 
 ```go
 // ❌ 너무 큰 인터페이스
