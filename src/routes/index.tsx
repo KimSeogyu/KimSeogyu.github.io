@@ -1,9 +1,10 @@
 // src/routes/index.tsx
 import { useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 import { getAllPosts, getCategories, getContentTree } from '~/lib/posts'
 import { PostCard } from '~/features/blog/components'
 import { SidebarLayout } from '~/components/layout/SidebarLayout'
+import { Tag, BookOpen } from 'lucide-react'
 
 export const Route = createFileRoute('/')(  {
   loader: async () => {
@@ -64,6 +65,24 @@ function BlogIndex() {
               {cat.category} · {cat.count}
             </button>
           ))}
+          
+          {/* Tags & Series 링크 */}
+          <div className="flex gap-2 ml-auto">
+            <Link
+              to="/blog/tags"
+              className="px-4 py-2 text-sm font-medium rounded-full border border-border text-muted-foreground hover:text-(--gradient-cyan) hover:border-(--gradient-cyan)/50 transition-all flex items-center gap-1.5"
+            >
+              <Tag className="w-3.5 h-3.5" />
+              Tags
+            </Link>
+            <Link
+              to="/blog/series"
+              className="px-4 py-2 text-sm font-medium rounded-full border border-border text-muted-foreground hover:text-(--gradient-purple) hover:border-(--gradient-purple)/50 transition-all flex items-center gap-1.5"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              Series
+            </Link>
+          </div>
         </div>
         
         {/* 글 목록 - 3열 그리드 (사이드바 공간 확보) */}
