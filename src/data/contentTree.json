@@ -171,6 +171,20 @@
             "title": "Go 가비지 컬렉터(GC) 이해와 튜닝 경험"
           },
           {
+            "name": "Go 에러 핸들링 전략 완벽 가이드",
+            "type": "post",
+            "path": "backend/go/error-handling-strategy",
+            "slug": "error-handling-strategy",
+            "title": "Go 에러 핸들링 전략 완벽 가이드"
+          },
+          {
+            "name": "Go 인터페이스 설계 원칙 - Accept Interfaces, Return Structs",
+            "type": "post",
+            "path": "backend/go/interface-design-principles",
+            "slug": "interface-design-principles",
+            "title": "Go 인터페이스 설계 원칙 - Accept Interfaces, Return Structs"
+          },
+          {
             "name": "Go pprof를 활용한 성능 프로파일링 가이드",
             "type": "post",
             "path": "backend/go/pprof-profiling-guide",

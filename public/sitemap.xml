@@ -26,6 +26,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://seogyukim.com/blog/interface-design-principles</loc>
+    <lastmod>2026-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://seogyukim.com/blog/error-handling-strategy</loc>
+    <lastmod>2026-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://seogyukim.com/blog/enterprise-go-9-makefile</loc>
     <lastmod>2026-01-02</lastmod>
     <changefreq>weekly</changefreq>
