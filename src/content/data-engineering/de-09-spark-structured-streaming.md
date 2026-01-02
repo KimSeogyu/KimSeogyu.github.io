@@ -9,7 +9,7 @@ excerpt: "Spark Structured Streaming으로 실시간 데이터 파이프라인�
 
 # 데이터 엔지니어링 시리즈 #9: Spark Structured Streaming - 실시간 데이터 처리
 
-> **대상 독자**: 6년 이상의 경험을 가진 백엔드/풀스택 엔지니어로, Spark과 Kafka 기본 개념을 익히고 실시간 처리를 배우려는 분
+> **대상 독자**: 충분한 경험을 가진 백엔드/풀스택 엔지니어로, Spark과 Kafka 기본 개념을 익히고 실시간 처리를 배우려는 분
 
 ## 이 편에서 다루는 것
 

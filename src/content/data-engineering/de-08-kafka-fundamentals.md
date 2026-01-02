@@ -9,7 +9,7 @@ excerpt: "Kafka의 핵심 개념을 배웁니다. Redis Streams와 비교하며 
 
 # 데이터 엔지니어링 시리즈 #8: Kafka 핵심 - 메시지 큐를 넘어 이벤트 스트리밍으로
 
-> **대상 독자**: 6년 이상의 경험을 가진 백엔드/풀스택 엔지니어로, Redis Streams나 RabbitMQ에 익숙하지만 Kafka는 처음인 분
+> **대상 독자**: 충분한 경험을 가진 백엔드/풀스택 엔지니어로, Redis Streams나 RabbitMQ에 익숙하지만 Kafka는 처음인 분
 
 ## 이 편에서 다루는 것
 
@@ -348,6 +348,8 @@ finally:
 ---
 
 ## Exactly-Once Semantics
+
+> ⚠️ **주의**: Kafka의 Exactly-Once는 **"Kafka 내부"**에서의 보장입니다. 외부 DB/API로의 End-to-End Exactly-Once는 **애플리케이션 레벨에서 추가 처리**가 필요합니다.
 
 ### 메시지 전달 보장 수준
 
