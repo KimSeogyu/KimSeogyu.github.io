@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { getAllTags } from '~/lib/posts'
 import { ArrowLeft, Tag } from 'lucide-react'
 
-export const Route = createFileRoute('/blog/tags')({
+export const Route = createFileRoute('/blog/tags/')({
   loader: () => {
     const tags = getAllTags()
     return { tags }

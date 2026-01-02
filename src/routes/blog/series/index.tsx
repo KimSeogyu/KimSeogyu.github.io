@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { getAllSeries } from '~/lib/posts'
 import { ArrowLeft, BookOpen, ChevronRight } from 'lucide-react'
 
-export const Route = createFileRoute('/blog/series')({
+export const Route = createFileRoute('/blog/series/')({
   loader: () => {
     const series = getAllSeries()
     return { series }
