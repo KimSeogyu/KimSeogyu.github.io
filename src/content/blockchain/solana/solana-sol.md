@@ -3,7 +3,7 @@ public: true
 title: Solana (SOL)
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: "Solana (SOL)\n\n<aside>\n\U0001F4A1 Cheatsheet of SOL for web3 developers.\n\n</aside>\n\n 요약\n\n1. 중앙화를 벗어나지 못함. 재단에서 네트워크를 껐다 켰다 할 수 있음\n2. 노드가 엄청 잘 죽음 (올해만 몇 번 중지..."
 ---
 # Solana (SOL)

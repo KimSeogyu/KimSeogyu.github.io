@@ -3,7 +3,7 @@ public: true
 title: Go 에러 핸들링 전략 완벽 가이드
 date: '2026-01-02'
 category: Backend
-tags: [Go, Error Handling, Best Practices]
+tags: [Backend, Error Handling, Go]
 excerpt: "errors.Is, errors.As, 커스텀 에러 타입, 스택 트레이스를 활용한 Go의 효과적인 에러 핸들링 전략을 알아봅니다."
 ---
 # Go 에러 핸들링 전략 완벽 가이드

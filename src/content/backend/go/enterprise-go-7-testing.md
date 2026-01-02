@@ -4,7 +4,7 @@ title: "Enterprise Go 시리즈 #7: 테스트 전략과 실전"
 date: '2026-01-01'
 category: Backend
 series: enterprise-go
-tags: [Go, Testing, gomock, Testcontainers, Ginkgo, BDD, Enterprise]
+tags: [Backend, Enterprise, Go, Testing]
 excerpt: "JUnit, Jest에 익숙한 개발자를 위한 Go 테스트 생태계 가이드. Mock, 통합 테스트, BDD 스타일을 다룹니다."
 ---
 

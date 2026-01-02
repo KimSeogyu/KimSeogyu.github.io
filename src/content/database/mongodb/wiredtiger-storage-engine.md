@@ -3,7 +3,7 @@ public: true
 title: MongoDB WiredTiger 스토리지 엔진 이해하기
 date: '2025-12-30'
 category: Database
-tags: [MongoDB, WiredTiger, Database, Storage Engine]
+tags: [Database, MongoDB, WiredTiger]
 excerpt: "MongoDB의 기본 스토리지 엔진인 WiredTiger의 아키텍처, 캐시, 체크포인트, Lock-Free 알고리즘까지 깊이 있게 알아봅니다."
 ---
 # MongoDB WiredTiger 스토리지 엔진 이해하기

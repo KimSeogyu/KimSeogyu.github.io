@@ -3,7 +3,7 @@ public: true
 title: PostgreSQL 쿼리 성능 튜닝 완벽 가이드
 date: '2026-01-02'
 category: Database
-tags: [PostgreSQL, Performance, EXPLAIN, Index, Query Optimization]
+tags: [Database, Performance, PostgreSQL]
 excerpt: "EXPLAIN ANALYZE를 활용한 쿼리 분석과 인덱스 전략으로 PostgreSQL 성능을 극대화하는 방법을 알아봅니다."
 ---
 # PostgreSQL 쿼리 성능 튜닝 완벽 가이드

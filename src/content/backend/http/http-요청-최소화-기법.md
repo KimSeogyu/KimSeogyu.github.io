@@ -3,7 +3,7 @@ public: true
 title: Http 요청 최소화 기법
 date: '2025-12-27'
 category: Backend_DevOps
-tags: []
+tags: [Backend, HTTP]
 excerpt: >-
   Http 요청 최소화 기법
 

@@ -3,7 +3,7 @@ public: true
 title: Upgrade Move code
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: |-
   Upgrade Move code
 

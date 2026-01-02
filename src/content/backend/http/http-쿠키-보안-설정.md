@@ -3,7 +3,7 @@ public: true
 title: HTTP 쿠키 보안 설정
 date: '2025-12-27'
 category: Backend_DevOps
-tags: []
+tags: [Backend, HTTP]
 excerpt: >-
   HTTP 쿠키 보안 설정
 

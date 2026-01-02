@@ -3,7 +3,7 @@ public: true
 title: Celestia의 데이터 저장 공간 사용량
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: |-
   Celestia의 데이터 저장 공간 사용량
 

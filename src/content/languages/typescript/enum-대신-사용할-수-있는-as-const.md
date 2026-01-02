@@ -3,7 +3,7 @@ public: true
 title: Enum 대신 사용할 수 있는 `as const`
 date: '2025-12-27'
 category: Research
-tags: []
+tags: [TypeScript]
 excerpt: >-
   Enum 대신 사용할 수 있는 `as const`
 

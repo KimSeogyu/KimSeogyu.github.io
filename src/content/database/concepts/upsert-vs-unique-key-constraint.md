@@ -3,7 +3,7 @@ public: true
 title: 대량 데이터 처리 시 Upsert 패턴 활용법
 date: '2025-12-27'
 category: Database
-tags: [PostgreSQL, MySQL, Database, Performance]
+tags: [Database, MySQL, Performance, PostgreSQL]
 excerpt: >-
   대량 데이터 인덱싱 작업에서 INSERT와 Upsert 패턴을 비교하고, 효율적인 배치 처리 방법을 알아봅니다.
 ---

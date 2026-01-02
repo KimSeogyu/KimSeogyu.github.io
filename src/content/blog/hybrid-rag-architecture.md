@@ -3,7 +3,7 @@ title: "금융 리스크 검출을 위한 Hybrid RAG 아키텍처 구현기"
 description: "Kiwi 형태소 분석기와 BM25, FAISS Vector Search를 결합하여 정확도를 95%까지 끌어올린 RAG 파이프라인 구축 경험을 공유합니다."
 date: "2024-12-30"
 category: "AI Engineering"
-tags: ["RAG", "LLM", "Python", "LangChain", "Faiss"]
+tags: [AI/ML, Faiss, Python]
 ---
 
 금융 도메인에서 비정형 문서를 분석하여 리스크 요인을 자동 검출하는 에이전트를 개발하며 겪었던 **정확도 문제**와 이를 해결하기 위해 도입한 **Hybrid RAG (Retrieval-Augmented Generation) 아키텍처**에 대해 공유하고자 합니다.

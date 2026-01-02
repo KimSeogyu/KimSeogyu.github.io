@@ -3,7 +3,7 @@ public: true
 title: Celestia 데이터 가용성 샘플링(DAS) 분석
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: |-
   데이터 가용성 샘플링(DAS)에서 샘플 수량 결정 방식
 

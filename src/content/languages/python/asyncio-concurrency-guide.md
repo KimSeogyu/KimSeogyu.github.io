@@ -3,7 +3,7 @@ public: true
 title: Python asyncio 비동기 프로그래밍 완벽 가이드
 date: '2026-01-02'
 category: Languages
-tags: [Python, asyncio, Async, Concurrency, Coroutine]
+tags: [Concurrency, Python]
 excerpt: "Python asyncio를 활용한 비동기 프로그래밍의 핵심 개념과 실전 동시성 패턴을 알아봅니다."
 ---
 # Python asyncio 비동기 프로그래밍 완벽 가이드

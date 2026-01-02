@@ -3,7 +3,7 @@ public: true
 title: Stellar Lumens (XLM)
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: "Stellar Lumens (XLM)\n\n<aside> \U0001F4A1 Cheatsheet of XLM for web3 developers.\n\n</aside>\n\n 요약\n\n1.  리플 v2\n2.  protobuf같은 프로토콜인 xdr을 사용하는 특이사항이 있음\n3.  트랜잭션..."
 ---
 

@@ -3,7 +3,7 @@ public: true
 title: Go pprof를 활용한 성능 프로파일링 가이드
 date: '2025-12-30'
 category: Backend
-tags: [Go, Performance, pprof, Profiling]
+tags: [Backend, Go, Performance]
 excerpt: "Go의 내장 프로파일링 도구 pprof를 활용하여 CPU, 메모리, 고루틴 병목을 분석하는 방법을 알아봅니다."
 ---
 # Go pprof를 활용한 성능 프로파일링 가이드

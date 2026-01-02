@@ -3,7 +3,7 @@ public: true
 title: 'NestJS, Cache-Manager v5 사용시 문제 해결법'
 date: '2025-12-27'
 category: Backend_DevOps
-tags: []
+tags: [Backend, NestJS]
 excerpt: |-
   NestJS, Cache-Manager v5 사용시 문제 해결법
 

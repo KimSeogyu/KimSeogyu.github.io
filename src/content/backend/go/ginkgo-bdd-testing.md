@@ -3,7 +3,7 @@ public: true
 title: Ginkgo와 Testcontainers를 활용한 통합 테스트 전략
 date: '2025-12-30'
 category: Backend
-tags: [Go, Testing, BDD, Ginkgo, Testcontainers, Docker, MongoDB, Redis]
+tags: [Backend, Docker, Go, MongoDB, Redis, Testing]
 excerpt: "Ginkgo BDD 프레임워크와 Testcontainers를 결합하여 실제 데이터베이스를 사용하는 신뢰성 높은 통합 테스트를 구축하는 방법을 알아봅니다."
 ---
 # Ginkgo와 Testcontainers를 활용한 통합 테스트 전략

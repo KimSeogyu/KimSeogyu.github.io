@@ -3,7 +3,7 @@ public: true
 title: Ceph Erasure Coding 데이터 조회 흐름
 date: '2025-12-27'
 category: Distributed Systems
-tags: []
+tags: [Distributed Systems]
 excerpt: |-
   Ceph Erasure Coding 데이터 조회 흐름
 

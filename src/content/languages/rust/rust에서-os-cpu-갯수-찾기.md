@@ -3,7 +3,7 @@ public: true
 title: Rust에서 OS CPU 갯수 찾기
 date: '2025-12-27'
 category: Research
-tags: []
+tags: [Rust]
 excerpt: |-
   > 참고
 

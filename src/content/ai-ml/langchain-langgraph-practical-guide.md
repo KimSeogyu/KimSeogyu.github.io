@@ -3,7 +3,7 @@ public: true
 title: LangChain & LangGraph 실전 가이드 (2025)
 date: '2026-01-02'
 category: AI/ML
-tags: [LangChain, LangGraph, LLM, Agent, RAG, Python]
+tags: [AI/ML, Python]
 excerpt: "LangChain과 LangGraph의 최신 API를 활용한 LLM 애플리케이션 및 에이전트 개발 실전 가이드입니다."
 ---
 # LangChain & LangGraph 실전 가이드 (2025)

@@ -3,7 +3,7 @@ public: true
 title: Docker 멀티스테이지 빌드 최적화 가이드
 date: '2026-01-02'
 category: Backend
-tags: [Docker, DevOps, Container, Optimization, BuildKit]
+tags: [Backend, DevOps, Docker, Performance]
 excerpt: "멀티스테이지 빌드로 Docker 이미지 크기를 줄이고, 빌드 속도와 보안을 개선하는 실전 전략을 알아봅니다."
 ---
 # Docker 멀티스테이지 빌드 최적화 가이드

@@ -3,7 +3,7 @@ title: "비정형 금융 문서의 구조화 전략: 단순 텍스트 추출을 
 description: "RAG 성능을 결정짓는 핵심 전처리 기술, Paragraph Tree 구축과 Rule-based Parsing을 통한 문서 구조 복원 전략을 소개합니다."
 date: "2024-12-30"
 category: "Data Engineering"
-tags: ["Python", "Data Structure", "PDF Parsing", "RAG"]
+tags: [AI/ML, Data Structure, PDF Parsing, Python]
 ---
 
 RAG(Retrieval-Augmented Generation) 시스템을 구축할 때 가장 간과하기 쉽지만, 사실 성능에 가장 큰 영향을 미치는 단계는 바로 **데이터 전처리(Preprocessing)**입니다. 특히 금융 투자설명서나 법률 계약서처럼 형식이 복잡하고 긴 문서를 다룰 때는 단순한 `CharacterSplitter`로는 한계에 부딪힐 수밖에 없습니다.

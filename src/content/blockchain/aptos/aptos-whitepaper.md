@@ -3,7 +3,7 @@ public: true
 title: Aptos Whitepaper
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: |-
   Aptos Whitepaper
 

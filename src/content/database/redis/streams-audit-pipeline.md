@@ -3,7 +3,7 @@ public: true
 title: Redis Streams 기반 비동기 감사 파이프라인 구축
 date: '2025-12-30'
 category: Backend
-tags: [Go, Redis, Streams, Event-Driven, Architecture]
+tags: [Architecture, Database, Go, Kafka, Redis, Streaming]
 excerpt: "Redis Streams와 Consumer Group을 활용하여 At-least-once 전달과 Dead Letter 처리를 지원하는 비동기 감사 파이프라인을 구축하는 방법을 알아봅니다."
 ---
 

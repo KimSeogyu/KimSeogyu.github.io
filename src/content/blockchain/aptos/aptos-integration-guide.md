@@ -3,7 +3,7 @@ public: true
 title: Aptos Integration Guide
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: |-
   Aptos Integration Guide
 

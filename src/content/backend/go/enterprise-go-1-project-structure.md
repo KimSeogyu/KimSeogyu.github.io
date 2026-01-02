@@ -4,7 +4,7 @@ title: "Enterprise Go 시리즈 #1: 프로젝트 설계와 구조화"
 date: '2026-01-01'
 category: Backend
 series: enterprise-go
-tags: [Go, Monorepo, Project Layout, Cobra, Wire, DI, Enterprise]
+tags: [Architecture, Backend, DI, Enterprise, Go, Tooling]
 excerpt: "Kubernetes, Docker CLI, Prometheus, Hugo의 소스 코드를 분석하여 도출한 Go 프로젝트 구조 베스트 프랙티스를 소개합니다."
 ---
 

@@ -3,7 +3,7 @@ public: true
 title: Bitcoin Script
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: >-
   Bitcoin Script
 

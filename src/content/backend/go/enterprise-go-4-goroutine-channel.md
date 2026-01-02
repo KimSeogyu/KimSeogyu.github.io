@@ -4,7 +4,7 @@ title: "Enterprise Go 시리즈 #4: Goroutine과 Channel 실전 활용"
 date: '2026-01-01'
 category: Backend
 series: enterprise-go
-tags: [Go, Goroutine, Channel, Concurrency, errgroup, Enterprise]
+tags: [Backend, Concurrency, Enterprise, Go]
 excerpt: "ExecutorService, Worker Threads에 익숙한 개발자를 위한 Go 동시성 모델 가이드. Goroutine의 메모리 특성과 안전한 패턴을 다룹니다."
 ---
 

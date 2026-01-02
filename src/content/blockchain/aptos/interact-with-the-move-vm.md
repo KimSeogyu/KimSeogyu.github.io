@@ -3,7 +3,7 @@ public: true
 title: Interact with the Move VM
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: >-
   Interact with the Move VM
 

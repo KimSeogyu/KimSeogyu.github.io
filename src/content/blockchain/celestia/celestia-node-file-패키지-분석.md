@@ -3,7 +3,7 @@ public: true
 title: celestia-node 'file' 패키지 분석
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: >-
   celestia-node 'file' 패키지 분석
 

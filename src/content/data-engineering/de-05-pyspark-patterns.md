@@ -4,7 +4,7 @@ title: "데이터 엔지니어링 시리즈 #5: PySpark 실전 - 데이터 처�
 date: '2026-01-02'
 category: Data Engineering
 series: data-engineering
-tags: [Spark, PySpark, DataFrame, UDF, Optimization, Best Practices]
+tags: [Data Engineering, Performance, Spark, UDF]
 excerpt: "실무에서 자주 사용하는 PySpark 패턴을 배웁니다. DataFrame 연산, UDF 최적화, 조인 전략, 캐싱, 그리고 피해야 할 안티패턴까지."
 ---
 

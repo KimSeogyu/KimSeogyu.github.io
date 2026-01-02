@@ -3,7 +3,7 @@ public: true
 title: Locust 기반 환경별 E2E 테스트 자동화
 date: '2025-12-30'
 category: Backend
-tags: [Testing, E2E, Locust, Python, Performance, Load Testing, Kubernetes]
+tags: [Backend, DevOps, Kubernetes, Performance, Python, Testing]
 excerpt: "Locust를 활용하여 개발부터 프로덕션까지 환경별 E2E 테스트를 자동화하고 Kubernetes에서 실행하는 방법을 알아봅니다."
 ---
 # Locust 기반 환경별 E2E 테스트 자동화

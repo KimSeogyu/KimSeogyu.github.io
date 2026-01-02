@@ -3,7 +3,7 @@ public: true
 title: Trunk-Based Development
 date: '2025-12-27'
 category: Backend_DevOps
-tags: []
+tags: [Backend, DevOps]
 excerpt: >-
   Trunk-Based Development
 

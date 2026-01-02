@@ -3,7 +3,7 @@ public: true
 title: Bitcoin Segwit
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: >-
   Bitcoin Segwit
 

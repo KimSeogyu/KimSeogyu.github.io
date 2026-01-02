@@ -3,7 +3,7 @@ public: true
 title: AWS ElastiCache for Redis (OSS) - 샤딩과 마스터 Failover 정리
 date: '2025-12-27'
 category: Backend_DevOps
-tags: []
+tags: [Database]
 excerpt: "AWS ElastiCache for Redis (OSS) - 샤딩과 마스터 Failover 정리\n\n![[Pasted image 20250328100819.png]]\n\n \U0001F4CC 핵심 개념 요약\n\n- Redis Cluster 모드에서는 데이터를 샤딩하여 여러 마스터..."
 ---
 # AWS ElastiCache for Redis (OSS) - 샤딩과 마스터 Failover 정리

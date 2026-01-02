@@ -3,7 +3,7 @@ public: true
 title: 데이터 원본을 전체적으로 리드솔로몬 인코딩 후 샤드 분배 vs. 2. 스트라이핑 후 개별 블록 단위로 리드솔로몬 인코딩 후 샤드 분배 비교
 date: '2025-12-27'
 category: Distributed Systems
-tags: []
+tags: [Distributed Systems]
 excerpt: "---\n\n\U0001F539 1. 데이터 원본을 리드솔로몬 인코딩 후 노드마다 샤드를 나누는 방식\n\n  \n\n\U0001F6E0️ 개요\n\n• 원본 데이터를 한 번에 큰 단위로 리드솔로몬(Erasure Coding, EC) 인코딩을 수행한 뒤, 생성된 데이터 블록(원본)과 패리티..."
 ---
 

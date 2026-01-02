@@ -3,7 +3,7 @@ public: true
 title: gRPC-Gateway로 단일 API 듀얼 프로토콜 지원
 date: '2025-12-30'
 category: Backend
-tags: [Go, gRPC, REST, HTTP, API, Gateway]
+tags: [Architecture, Backend, Go, HTTP, gRPC]
 excerpt: "하나의 Proto 정의로 gRPC와 RESTful HTTP API를 동시에 제공하는 gRPC-Gateway 구현 방법을 알아봅니다."
 ---
 # gRPC-Gateway로 단일 API 듀얼 프로토콜 지원

@@ -3,7 +3,7 @@ public: true
 title: Typescript 5.0 RC 발표에서 데코레이터 부분 요약
 date: '2025-12-27'
 category: Research
-tags: []
+tags: [TypeScript]
 excerpt: |-
   Typescript 5.0 RC 발표에서 데코레이터 부분 요약
 

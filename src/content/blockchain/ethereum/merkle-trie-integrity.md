@@ -3,7 +3,7 @@ public: true
 title: go-ethereum Merkle Trie를 활용한 데이터 무결성 검증
 date: '2025-12-30'
 category: Blockchain
-tags: [Go, Ethereum, MerkleTrie, Cryptography, DataIntegrity]
+tags: [Blockchain, Go, MerkleTrie, Transaction]
 excerpt: "go-ethereum의 Merkle Trie 구현을 활용하여 대량 데이터의 무결성을 효율적으로 검증하는 방법을 알아봅니다."
 ---
 # go-ethereum Merkle Trie를 활용한 데이터 무결성 검증

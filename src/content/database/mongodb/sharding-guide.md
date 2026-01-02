@@ -3,7 +3,7 @@ public: true
 title: MongoDB 샤딩(Sharding) 완벽 가이드
 date: '2025-12-30'
 category: Database
-tags: [MongoDB, Sharding, Distributed Systems, Database]
+tags: [Database, Distributed Systems, MongoDB, Scaling]
 excerpt: "MongoDB 샤딩의 개념부터 샤드 키 선택, 클러스터 구성까지 실전 가이드를 제공합니다."
 ---
 # MongoDB 샤딩(Sharding) 완벽 가이드

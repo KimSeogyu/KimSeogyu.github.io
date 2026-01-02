@@ -3,7 +3,7 @@ public: true
 title: Succinct Proofs of Random Access (SPoRA) 번역
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Distributed Systems]
 excerpt: >-
   ---
 

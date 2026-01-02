@@ -3,7 +3,7 @@ public: true
 title: Go 인터페이스 설계 원칙 - Accept Interfaces, Return Structs
 date: '2026-01-02'
 category: Backend
-tags: [Go, Interface, Design Patterns, Best Practices]
+tags: [Backend, Design Patterns, Go, Interface]
 excerpt: "'Accept interfaces, return structs' 원칙과 포인터 vs 값 수신자 선택 기준을 알아봅니다."
 ---
 # Go 인터페이스 설계 원칙

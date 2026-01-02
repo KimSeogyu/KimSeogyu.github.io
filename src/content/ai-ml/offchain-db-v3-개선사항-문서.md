@@ -3,7 +3,7 @@ public: false
 title: Offchain DB v3 개선사항 문서
 date: '2025-12-27'
 category: AI_ML
-tags: []
+tags: [AI/ML]
 excerpt: >-
   Offchain DB v3 개선사항 문서
 

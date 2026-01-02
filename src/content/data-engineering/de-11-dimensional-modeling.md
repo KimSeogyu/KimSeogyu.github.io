@@ -4,7 +4,7 @@ title: "데이터 엔지니어링 시리즈 #11: 데이터 모델링 - Star Sche
 date: '2026-01-02'
 category: Data Engineering
 series: data-engineering
-tags: [Data Modeling, Star Schema, SCD, Dimension, Fact Table, Kimball]
+tags: [Data Engineering, Data Modeling]
 excerpt: "분석용 데이터 모델링의 핵심을 배웁니다. Star Schema, Fact/Dimension 테이블, SCD Type 2 패턴을 Delta Lake MERGE로 구현합니다."
 ---
 

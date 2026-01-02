@@ -3,7 +3,7 @@ public: true
 title: Redis 기반 분산 락 가이드
 date: '2025-12-27'
 category: Database
-tags: [Redis, Distributed Systems, Concurrency]
+tags: [Concurrency, Database, Distributed Systems, Redis]
 excerpt: "분산 시스템에서 Redis를 활용한 분산 락 구현 방법과 Redlock 알고리즘을 알아봅니다."
 ---
 # Redis 기반 분산 락 가이드

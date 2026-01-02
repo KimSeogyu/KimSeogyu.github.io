@@ -3,7 +3,7 @@ public: true
 title: Buf v2 기반 Proto 관리 및 코드 자동 생성
 date: '2025-12-30'
 category: Backend
-tags: [Go, Protobuf, buf, gRPC, gRPC-Gateway, OpenAPI]
+tags: [Backend, Go, OpenAPI, buf, gRPC]
 excerpt: "Buf v2를 활용하여 Protobuf 스키마를 체계적으로 관리하고, gRPC 서버/클라이언트, HTTP Gateway, OpenAPI 스펙을 자동 생성하는 방법을 알아봅니다."
 ---
 # Buf v2 기반 Proto 관리 및 코드 자동 생성

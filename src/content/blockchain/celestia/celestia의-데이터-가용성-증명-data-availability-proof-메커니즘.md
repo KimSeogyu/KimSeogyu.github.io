@@ -3,7 +3,7 @@ public: true
 title: Celestia의 데이터 가용성 증명(Data Availability Proof) 메커니즘
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: >-
   Celestia의 데이터 가용성 증명(Data Availability Proof) 메커니즘
 

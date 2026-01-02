@@ -3,7 +3,7 @@ public: true
 title: Move on Aptos
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: >-
   Move on Aptos
 

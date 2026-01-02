@@ -3,7 +3,7 @@ public: true
 title: Ripple (XRP)
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: "Ripple (XRP)\n\n<aside> \U0001F4A1 Cheatsheet of XRP for web3 developers.\n\n</aside>\n\n 요약\n\n1.  국제 송금망을 타겟으로 한 블록체인\n2.  속도를 위해서 탈중앙을 포기한 사례\n3.  개발자 도구나 커뮤니티가 훌..."
 ---
 # Ripple (XRP)

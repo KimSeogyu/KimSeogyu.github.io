@@ -3,7 +3,7 @@ public: false
 title: Go 프로젝트를 위한 Monorepo 전략
 date: '2025-12-30'
 category: Backend
-tags: [Go, Monorepo, Architecture, DevOps]
+tags: [Architecture, Backend, DevOps, Go]
 excerpt: "Go 언어에서 Monorepo를 효과적으로 구성하고 운영하는 전략과 도구를 알아봅니다."
 ---
 # Go 프로젝트를 위한 Monorepo 전략

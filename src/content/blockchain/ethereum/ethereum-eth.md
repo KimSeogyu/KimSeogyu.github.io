@@ -3,7 +3,7 @@ public: true
 title: Ethereum (ETH)
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: "Ethereum (ETH)\n\n<aside> \U0001F4A1 이더리움은 월드 와이드 컴퓨터를 꿈꾼다\n\n</aside>\n\n 장점\n\n1.  개발자 커뮤니티 1등인듯, 어지간한 에러나 이슈는 이미 레퍼런스가 모두 있음. 디버깅 매우 편함\n2.  그러다보니 web3, ethers.j..."
 ---
 # Ethereum (ETH)

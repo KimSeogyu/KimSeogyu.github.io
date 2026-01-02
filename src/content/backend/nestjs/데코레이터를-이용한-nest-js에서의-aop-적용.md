@@ -3,7 +3,7 @@ public: true
 title: 데코레이터를 이용한 Nest.js에서의 AOP 적용
 date: '2025-12-27'
 category: Backend_DevOps
-tags: []
+tags: [Backend, NestJS]
 excerpt: >-
   데코레이터를 이용한 Nest.js에서의 AOP 적용
 

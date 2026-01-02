@@ -3,7 +3,7 @@ public: true
 title: MinIO의 이레이저 코딩 구현
 date: '2025-12-27'
 category: Distributed Systems
-tags: []
+tags: [Distributed Systems]
 excerpt: >-
   MinIO의 이레이저 코딩 구현
 

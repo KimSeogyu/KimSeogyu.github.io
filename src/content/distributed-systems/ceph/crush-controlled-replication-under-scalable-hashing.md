@@ -3,7 +3,7 @@ public: true
 title: CRUSH (Controlled Replication Under Scalable Hashing)
 date: '2025-12-27'
 category: Distributed Systems
-tags: []
+tags: [Distributed Systems]
 excerpt: |-
   CRUSH (Controlled Replication Under Scalable Hashing)
 

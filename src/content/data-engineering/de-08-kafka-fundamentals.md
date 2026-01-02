@@ -4,7 +4,7 @@ title: "데이터 엔지니어링 시리즈 #8: Kafka 핵심 - 메시지 큐를 
 date: '2026-01-02'
 category: Data Engineering
 series: data-engineering
-tags: [Kafka, Streaming, Event, Partition, Consumer Group, Exactly-Once]
+tags: [Data Engineering, Kafka, Partitioning, Streaming]
 excerpt: "Kafka의 핵심 개념을 배웁니다. Redis Streams와 비교하며 Topic, Partition, Consumer Group, Exactly-Once Semantics를 이해합니다."
 ---
 

@@ -3,7 +3,7 @@ public: true
 title: Wire를 활용한 Go 의존성 주입(DI) 구현
 date: '2025-12-30'
 category: Backend
-tags: [Go, DI, Wire, Architecture]
+tags: [Architecture, Backend, DI, Go]
 excerpt: "Google의 Wire를 사용하여 Go 애플리케이션에서 컴파일 타임 의존성 주입을 구현하는 방법을 알아봅니다."
 ---
 # Wire를 활용한 Go 의존성 주입(DI) 구현

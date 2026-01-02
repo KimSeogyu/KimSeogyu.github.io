@@ -3,7 +3,7 @@ public: true
 title: 비트코인 NFT와 BRC-20(FT)
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: >-
   비트코인 NFT와 BRC-20(FT)
 

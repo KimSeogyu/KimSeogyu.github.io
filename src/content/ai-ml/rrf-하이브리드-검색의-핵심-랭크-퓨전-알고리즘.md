@@ -3,7 +3,7 @@ public: true
 title: 'RRF: 하이브리드 검색의 핵심 랭크 퓨전 알고리즘'
 date: '2025-12-31'
 category: AI-ML
-tags:
+tags: [AI/ML, Search]
   - information-retrieval
   - search
   - rrf

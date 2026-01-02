@@ -5,32 +5,11 @@
     "path": "ai-ml",
     "children": [
       {
-        "name": "BM25: 검색 엔진의 핵심 랭킹 알고리즘",
-        "type": "post",
-        "path": "ai-ml/bm25-geomsaeg-enjinyi-haegsim-raengking-algorijeum",
-        "slug": "bm25-geomsaeg-enjinyi-haegsim-raengking-algorijeum",
-        "title": "BM25: 검색 엔진의 핵심 랭킹 알고리즘"
-      },
-      {
-        "name": "Faiss와 OpenSearch 벡터 검색 비교",
-        "type": "post",
-        "path": "ai-ml/faiss-wa-opensearch-begteo-geomsaeg-bigyo",
-        "slug": "faiss-wa-opensearch-begteo-geomsaeg-bigyo",
-        "title": "Faiss와 OpenSearch 벡터 검색 비교"
-      },
-      {
         "name": "LangChain & LangGraph 실전 가이드 (2025)",
         "type": "post",
         "path": "ai-ml/langchain-langgraph-practical-guide",
         "slug": "langchain-langgraph-practical-guide",
         "title": "LangChain & LangGraph 실전 가이드 (2025)"
-      },
-      {
-        "name": "RRF: 하이브리드 검색의 핵심 랭크 퓨전 알고리즘",
-        "type": "post",
-        "path": "ai-ml/rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum",
-        "slug": "rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum",
-        "title": "RRF: 하이브리드 검색의 핵심 랭크 퓨전 알고리즘"
       }
     ]
   },
@@ -44,13 +23,6 @@
         "type": "folder",
         "path": "backend/devops",
         "children": [
-          {
-            "name": "서비스 규모에 따른 스케일링 전략",
-            "type": "post",
-            "path": "backend/devops/seobiseu-gyumoe-ddareun-seukeilring-jeonryag",
-            "slug": "seobiseu-gyumoe-ddareun-seukeilring-jeonryag",
-            "title": "서비스 규모에 따른 스케일링 전략"
-          },
           {
             "name": "스파이크 트래픽 대응 전략",
             "type": "post",

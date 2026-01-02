@@ -4,7 +4,7 @@ title: "데이터 엔지니어링 시리즈 #12: 데이터 품질 - 테스트, �
 date: '2026-01-02'
 category: Data Engineering
 series: data-engineering
-tags: [dbt, Data Quality, Testing, Monitoring, Lineage, Great Expectations]
+tags: [Data Engineering, Data Quality, Great Expectations, Lineage, Observability, Testing, dbt]
 excerpt: "데이터 파이프라인의 품질을 보장하는 방법을 배웁니다. dbt 테스트, Great Expectations, 데이터 계보, 관측성까지."
 ---
 

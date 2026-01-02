@@ -3,7 +3,7 @@ public: true
 title: Celestia의 EDS(Extended Data Square)
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: >-
   EDS(Extended Data Square)란?
 

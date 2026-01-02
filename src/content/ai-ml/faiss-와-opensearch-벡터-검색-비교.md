@@ -3,7 +3,7 @@ public: true
 title: Faiss와 OpenSearch 벡터 검색 비교
 date: '2025-12-31'
 category: AI-ML
-tags:
+tags: [AI/ML, Search, Vector Search]
   - vector-search
   - faiss
   - opensearch

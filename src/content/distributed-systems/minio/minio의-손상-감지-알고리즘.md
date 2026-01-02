@@ -3,7 +3,7 @@ public: true
 title: MinIO의 손상 감지 알고리즘
 date: '2025-12-27'
 category: Distributed Systems
-tags: []
+tags: [Distributed Systems]
 excerpt: >-
   MinIO의 손상 감지 알고리즘
 

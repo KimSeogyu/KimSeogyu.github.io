@@ -3,7 +3,7 @@ public: true
 title: “2024 Data Replication Design Spectrum” 요약
 date: '2025-12-27'
 category: Research
-tags: []
+tags: [Distributed Systems]
 excerpt: >-
   “2024 Data Replication Design Spectrum” 요약
 

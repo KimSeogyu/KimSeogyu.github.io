@@ -3,7 +3,7 @@ public: true
 title: Mapbox GL JS로 인터랙티브 지도 구현하기
 date: '2025-12-30'
 category: Frontend
-tags: [Mapbox, JavaScript, GeoJSON, Visualization, Maps]
+tags: [Geospatial, JavaScript, Visualization]
 excerpt: "Mapbox GL JS v3로 Earth2 스타일 격자 그리드와 네이버부동산 스타일 영역 레이어를 구현하는 방법을 알아봅니다."
 ---
 # Mapbox GL JS로 인터랙티브 지도 구현하기

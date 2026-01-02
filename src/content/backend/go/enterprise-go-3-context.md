@@ -4,7 +4,7 @@ title: "Enterprise Go 시리즈 #3: Context로 요청 생명주기 관리"
 date: '2026-01-01'
 category: Backend
 series: enterprise-go
-tags: [Go, Context, Timeout, Cancellation, Tracing, Enterprise]
+tags: [Backend, Cancellation, Concurrency, Enterprise, Go, Observability, Timeout]
 excerpt: "Java의 ThreadLocal, Node.js의 AsyncLocalStorage에 익숙한 개발자를 위한 Go Context 패턴 가이드입니다."
 ---
 

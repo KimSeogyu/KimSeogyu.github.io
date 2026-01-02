@@ -3,7 +3,7 @@ public: true
 title: Linux 파일 디스크립터 제한 (ulimit) 완벽 가이드
 date: '2025-12-30'
 category: Backend
-tags: [Linux, DevOps, Performance, ulimit]
+tags: [Backend, DevOps, Infrastructure, Performance]
 excerpt: "대용량 트래픽 서버에서 'Too many open files' 오류를 해결하기 위한 ulimit 설정 방법을 알아봅니다."
 ---
 # Linux 파일 디스크립터 제한 (ulimit) 완벽 가이드

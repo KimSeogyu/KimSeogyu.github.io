@@ -3,7 +3,7 @@ public: true
 title: 'MySQL 트랜잭션 쿼리 예시 '
 date: '2025-12-27'
 category: Database
-tags: []
+tags: [Database]
 excerpt: |-
   MySQL 트랜잭션 쿼리 예시 
 

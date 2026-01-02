@@ -3,7 +3,7 @@ public: false
 title: OffchainDB P2P 프로토콜 설계
 date: '2025-12-27'
 category: AI_ML
-tags: []
+tags: [AI/ML]
 excerpt: >-
   OffchainDB P2P 프로토콜 설계
 

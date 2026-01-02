@@ -3,7 +3,7 @@ public: true
 title: Turf.js로 폴리곤 공간 연산 수행하기
 date: '2025-12-30'
 category: Frontend
-tags: [Turf.js, GeoJSON, JavaScript, Spatial, GIS]
+tags: [Geospatial, JavaScript]
 excerpt: "Turf.js를 사용하여 멀티폴리곤의 합집합, 차집합, 교집합 연산을 수행하는 방법을 알아봅니다."
 ---
 # Turf.js로 폴리곤 공간 연산 수행하기

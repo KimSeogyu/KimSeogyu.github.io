@@ -4,7 +4,7 @@ title: "데이터 엔지니어링 시리즈 #10: 데이터 레이크 vs 웨어�
 date: '2026-01-02'
 category: Data Engineering
 series: data-engineering
-tags: [Delta Lake, Iceberg, Data Lake, Data Warehouse, Lakehouse, ACID]
+tags: [Data Architecture, Data Engineering, Delta Lake, Iceberg, Transaction]
 excerpt: "데이터 저장소 아키텍처의 종류와 선택 기준을 배웁니다. Delta Lake의 ACID, Time Travel, Schema Evolution을 심층 분석합니다."
 ---
 

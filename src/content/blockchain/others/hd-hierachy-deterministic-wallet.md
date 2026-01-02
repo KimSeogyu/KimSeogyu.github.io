@@ -3,7 +3,7 @@ public: true
 title: HD(Hierarchical Deterministic) Wallet
 date: '2025-12-27'
 category: Blockchain
-tags: [Blockchain, Wallet, BIP-32, BIP-39, BIP-44]
+tags: [Blockchain]
 excerpt: "HD 지갑의 개념과 BIP-32/39/44 표준, 키 파생 경로 구조를 알아봅니다."
 ---
 # HD(Hierarchical Deterministic) Wallet

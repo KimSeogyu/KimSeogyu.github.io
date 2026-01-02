@@ -3,7 +3,7 @@ public: true
 title: How Base Gas Works
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: >-
   How Base Gas Works
 

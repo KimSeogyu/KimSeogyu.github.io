@@ -3,7 +3,7 @@ public: true
 title: Append-Only 문서 버저닝 설계 및 구현
 date: '2025-12-30'
 category: Backend
-tags: [Architecture, Go, MongoDB, Versioning, Audit]
+tags: [Architecture, Audit, Go, MongoDB]
 excerpt: "데이터 불변성과 완전한 감사 추적을 보장하는 Append-Only 문서 버저닝 아키텍처의 설계 원칙과 Go 구현 방법을 알아봅니다."
 ---
 # Append-Only 문서 버저닝 설계 및 구현

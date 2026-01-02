@@ -4,7 +4,7 @@ title: "데이터 엔지니어링 시리즈 #1: 백엔드 개발자가 데이터
 date: '2026-01-02'
 category: Data Engineering
 series: data-engineering
-tags: [Data Engineering, OLTP, OLAP, ETL, Data Pipeline, Backend]
+tags: [Backend, Data Engineering, Data Pipeline, OLAP, OLTP]
 excerpt: "왜 백엔드 개발자가 데이터 엔지니어링을 알아야 할까요? OLTP의 한계에서 시작하는 데이터 파이프라인의 세계로 안내합니다."
 ---
 

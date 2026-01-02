@@ -3,7 +3,7 @@ public: false
 title: Excalidraw Data
 date: '2025-12-27'
 category: AI_ML
-tags:
+tags: [excalidraw]
   - excalidraw
 excerpt: >-
   ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==

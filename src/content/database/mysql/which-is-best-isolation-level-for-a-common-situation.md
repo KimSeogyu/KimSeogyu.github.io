@@ -3,7 +3,7 @@ public: true
 title: Which is best isolation level for a common situation
 date: '2025-12-27'
 category: Database
-tags: []
+tags: [Database]
 excerpt: >-
   Which is best isolation level for a common situation
 

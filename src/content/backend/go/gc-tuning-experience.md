@@ -3,7 +3,7 @@ public: true
 title: Go 가비지 컬렉터(GC) 이해와 튜닝 경험
 date: '2025-12-30'
 category: Backend
-tags: [Go, GC, Performance, Memory]
+tags: [Backend, Go, Performance]
 excerpt: "Go의 가비지 컬렉터 동작 원리와 프로덕션 환경에서의 GC 튜닝 경험을 공유합니다."
 ---
 # Go 가비지 컬렉터(GC) 이해와 튜닝 경험

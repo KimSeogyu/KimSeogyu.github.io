@@ -3,7 +3,7 @@ public: false
 title: ERD
 date: '2025-12-27'
 category: Research
-tags:
+tags: [excalidraw]
   - excalidraw
 excerpt: >-
   ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==

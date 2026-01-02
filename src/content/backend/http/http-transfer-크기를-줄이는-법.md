@@ -3,7 +3,7 @@ public: true
 title: HTTP Transfer 크기를 줄이는 법
 date: '2025-12-27'
 category: Backend_DevOps
-tags: []
+tags: [Backend, HTTP]
 excerpt: |-
   HTTP Transfer 크기를 줄이는 법
 

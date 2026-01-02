@@ -3,7 +3,7 @@ public: true
 title: PostGIS와 GeoJSON을 활용한 공간 데이터 관리
 date: '2025-12-30'
 category: Database
-tags: [PostGIS, PostgreSQL, GeoJSON, Spatial, GIS]
+tags: [Database, Geospatial, PostgreSQL]
 excerpt: "PostGIS에서 GeoJSON 형식의 공간 데이터를 저장, 변환, 조회하는 핵심 함수와 인덱싱 전략을 알아봅니다."
 ---
 # PostGIS와 GeoJSON을 활용한 공간 데이터 관리

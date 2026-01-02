@@ -3,7 +3,7 @@ public: true
 title: SPV (Simplified Payment Verification)
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: |-
   SPV (Simplified Payment Verification)
 

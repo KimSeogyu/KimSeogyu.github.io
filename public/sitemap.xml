@@ -176,24 +176,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum</loc>
-    <lastmod>2026-01-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://seogyukim.com/blog/faiss-wa-opensearch-begteo-geomsaeg-bigyo</loc>
-    <lastmod>2026-01-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://seogyukim.com/blog/bm25-geomsaeg-enjinyi-haegsim-raengking-algorijeum</loc>
-    <lastmod>2026-01-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://seogyukim.com/blog/turf-polygon-operations</loc>
     <lastmod>2026-01-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -285,12 +267,6 @@
   </url>
   <url>
     <loc>https://seogyukim.com/blog/seupaikeu-teuraepig-daeeung-jeonryag</loc>
-    <lastmod>2026-01-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://seogyukim.com/blog/seobiseu-gyumoe-ddareun-seukeilring-jeonryag</loc>
     <lastmod>2026-01-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

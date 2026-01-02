@@ -3,7 +3,7 @@ public: true
 title: Ceph Erasure Coding 메타데이터 관리
 date: '2025-12-27'
 category: Distributed Systems
-tags: []
+tags: [Distributed Systems]
 excerpt: |-
   Ceph Erasure Coding 메타데이터 관리
 

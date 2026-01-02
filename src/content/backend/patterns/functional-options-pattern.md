@@ -3,7 +3,7 @@ public: true
 title: Functional Options 패턴을 활용한 Go 설정 관리
 date: '2025-12-30'
 category: Backend
-tags: [Go, Design Patterns, Configuration, Clean Code]
+tags: [Architecture, Design Patterns, Go]
 excerpt: "Go의 Functional Options 패턴을 활용하여 필수 파라미터와 선택적 설정을 명확히 분리하고, 합리적인 기본값 위에 유연한 커스터마이징을 제공하는 방법을 알아봅니다."
 ---
 # Functional Options 패턴을 활용한 Go 설정 관리

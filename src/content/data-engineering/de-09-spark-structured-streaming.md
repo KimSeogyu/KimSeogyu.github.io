@@ -4,7 +4,7 @@ title: "데이터 엔지니어링 시리즈 #9: Spark Structured Streaming - 실
 date: '2026-01-02'
 category: Data Engineering
 series: data-engineering
-tags: [Spark, Streaming, Kafka, Watermark, Window, Real-time]
+tags: [Airflow, Data Engineering, Kafka, Spark, Streaming, Window]
 excerpt: "Spark Structured Streaming으로 실시간 데이터 파이프라인을 구축합니다. Kafka 연동, Watermark, Window 연산, 체크포인팅까지."
 ---
 

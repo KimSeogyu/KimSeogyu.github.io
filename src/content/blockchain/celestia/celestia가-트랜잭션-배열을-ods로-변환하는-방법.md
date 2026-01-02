@@ -3,7 +3,7 @@ public: true
 title: Celestia가 트랜잭션 배열을 ODS로 변환하는 방법
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: |-
   1. 핵심 개념
 

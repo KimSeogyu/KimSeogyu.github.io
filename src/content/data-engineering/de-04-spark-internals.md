@@ -4,7 +4,7 @@ title: "데이터 엔지니어링 시리즈 #4: Spark 내부 동작 원리 - Job
 date: '2026-01-02'
 category: Data Engineering
 series: data-engineering
-tags: [Spark, PySpark, Shuffle, Partitioning, Performance, Spark UI]
+tags: [Data Engineering, Partitioning, Performance, Spark]
 excerpt: "Spark의 실행 모델을 이해합니다. Job, Stage, Task 계층, Shuffle의 비용, 파티셔닝 전략, 그리고 Spark UI를 읽는 법까지."
 ---
 

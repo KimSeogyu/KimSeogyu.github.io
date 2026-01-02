@@ -4,7 +4,7 @@ title: "데이터 엔지니어링 시리즈 #6: Airflow 핵심 개념 - DAG, Ope
 date: '2026-01-02'
 category: Data Engineering
 series: data-engineering
-tags: [Airflow, DAG, Workflow, Orchestration, TaskFlow, ETL]
+tags: [Airflow, Data Engineering, Data Pipeline, Orchestration]
 excerpt: "왜 cron으로는 부족할까요? Airflow의 핵심 개념인 DAG, Operator, Task를 이해하고 TaskFlow API로 현대적인 워크플로우를 작성하는 법을 배웁니다."
 ---
 

@@ -3,7 +3,7 @@ public: true
 title: Namespaced Merkle Tree (NMT)란?
 date: '2025-12-27'
 category: Blockchain
-tags: []
+tags: [Blockchain]
 excerpt: >-
   Namespaced Merkle Tree (NMT)란?
 

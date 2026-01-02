@@ -3,7 +3,7 @@ public: false
 title: OffchainBlock
 date: '2025-12-27'
 category: Research
-tags:
+tags: [AI/ML, excalidraw]
   - excalidraw
 excerpt: >-
   ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==

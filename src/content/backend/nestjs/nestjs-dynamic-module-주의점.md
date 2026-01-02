@@ -3,7 +3,7 @@ public: true
 title: NestJS Dynamic Module 주의점
 date: '2025-12-27'
 category: Backend_DevOps
-tags: []
+tags: [Backend, NestJS]
 excerpt: "NestJS Dynamic Module 주의점\n\n```typescript\nexport const databaseProviders = [\n\t{\n\t\tprovide: MysqlDatasourceKey,\n\t\tinject: [ConfigService, MysqlConfigS..."
 ---
 # NestJS Dynamic Module 주의점

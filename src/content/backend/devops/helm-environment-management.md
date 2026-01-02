@@ -3,7 +3,7 @@ public: true
 title: Helm 환경별 Values 오버라이드 전략
 date: '2025-12-30'
 category: Backend
-tags: [Kubernetes, Helm, DevOps, GitOps, ArgoCD]
+tags: [Backend, DevOps, Kubernetes]
 excerpt: "Helm Chart에서 공통 설정과 환경별 설정을 분리하여 GitOps 방식으로 관리하는 방법을 알아봅니다."
 ---
 # Helm 환경별 Values 오버라이드 전략
