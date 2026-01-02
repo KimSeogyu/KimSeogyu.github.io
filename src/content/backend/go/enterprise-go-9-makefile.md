@@ -3,6 +3,7 @@ public: true
 title: "Enterprise Go 시리즈 #9: Makefile로 개발 워크플로우 자동화"
 date: '2026-01-01'
 category: Backend
+series: enterprise-go
 tags: [Go, Makefile, Automation, Developer Experience, Monorepo, Enterprise]
 excerpt: "복잡한 Go 명령어들을 Makefile로 추상화하여 팀 전체의 개발 경험을 향상시킵니다. Façade 패턴의 CLI 버전입니다."
 ---

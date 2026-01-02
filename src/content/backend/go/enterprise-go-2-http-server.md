@@ -3,6 +3,7 @@ public: true
 title: "Enterprise Go 시리즈 #2: 견고한 HTTP 서버 구축"
 date: '2026-01-01'
 category: Backend
+series: enterprise-go
 tags: [Go, Echo, HTTP, Middleware, Graceful Shutdown, Enterprise]
 excerpt: "Spring MVC의 Filter/Interceptor, Express의 Middleware에 익숙한 개발자를 위한 Echo 미들웨어 설계 가이드입니다."
 ---

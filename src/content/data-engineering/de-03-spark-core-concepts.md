@@ -3,6 +3,7 @@ public: true
 title: "데이터 엔지니어링 시리즈 #3: Spark 핵심 개념 - RDD에서 DataFrame까지"
 date: '2026-01-02'
 category: Data Engineering
+series: data-engineering
 tags: [Spark, PySpark, RDD, DataFrame, Distributed Computing, Big Data]
 excerpt: "분산 처리의 핵심 개념과 Spark의 추상화 계층을 이해합니다. Goroutine, ThreadPoolExecutor와 비교하며 Spark가 해결하는 문제를 파악합니다."
 ---

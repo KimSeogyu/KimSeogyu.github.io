@@ -3,6 +3,7 @@ public: true
 title: "Enterprise Go 시리즈 #6: Resilient한 외부 통신"
 date: '2026-01-01'
 category: Backend
+series: enterprise-go
 tags: [Go, HTTP Client, Retry, Circuit Breaker, Rate Limiting, Enterprise]
 excerpt: "Resilience4j, Polly에 익숙한 개발자를 위한 Go Resilience 패턴 가이드. Circuit Breaker, Retry, Rate Limiting을 올바르게 조합합니다."
 ---

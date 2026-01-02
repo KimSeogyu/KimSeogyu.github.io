@@ -23,6 +23,7 @@ interface Post {
   wordCount: number
   isFeatured: boolean
   isPublic: boolean
+  series?: string
   date?: string
   image?: string
 }
@@ -211,6 +212,7 @@ function parseMarkdownFile(filePath: string, relativePath: string): Post | null 
       wordCount,
       isFeatured: frontmatter.isFeatured || false,
       isPublic: frontmatter.public === true,
+      series: frontmatter.series,
       date: String(frontmatter.date || new Date().toISOString().split('T')[0]),
       image: frontmatter.image
     }

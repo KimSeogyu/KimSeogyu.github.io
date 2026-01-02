@@ -3,6 +3,7 @@ public: true
 title: "데이터 엔지니어링 시리즈 #7: Airflow 실전 - 프로덕션급 파이프라인 구축"
 date: '2026-01-02'
 category: Data Engineering
+series: data-engineering
 tags: [Airflow, DAG, Production, Testing, Monitoring, Best Practices]
 excerpt: "프로덕션에서 Airflow를 운영하는 방법을 배웁니다. DAG 모듈화, 동적 Task 생성, 테스트, 에러 처리, 모니터링까지."
 ---

@@ -40,5 +40,52 @@ export function getCategories(): { category: string; count: number }[] {
     .sort((a, b) => b.count - a.count)
 }
 
+// 특정 태그를 가진 포스트 필터링
+export function getPostsByTag(tag: string): Post[] {
+  return posts.filter(post => post.tags.includes(tag))
+}
+
+// 특정 시리즈의 포스트 필터링 (날짜 순으로 정렬)
+export function getPostsBySeries(series: string): Post[] {
+  return posts
+    .filter(post => post.series === series)
+    .sort((a, b) => (a.date || '').localeCompare(b.date || ''))
+}
+
+// 모든 태그와 개수
+export function getAllTags(): { tag: string; count: number }[] {
+  const counts = posts.reduce((acc, post) => {
+    post.tags.forEach(tag => {
+      acc[tag] = (acc[tag] || 0) + 1
+    })
+    return acc
+  }, {} as Record<string, number>)
+  
+  return Object.entries(counts)
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count)
+}
+
+// 모든 시리즈와 포스트 목록
+export function getAllSeries(): { series: string; count: number; posts: Post[] }[] {
+  const seriesMap = new Map<string, Post[]>()
+  
+  posts.forEach(post => {
+    if (post.series) {
+      const existing = seriesMap.get(post.series) || []
+      existing.push(post)
+      seriesMap.set(post.series, existing)
+    }
+  })
+  
+  return Array.from(seriesMap.entries())
+    .map(([series, seriesPosts]) => ({
+      series,
+      count: seriesPosts.length,
+      posts: seriesPosts.sort((a, b) => (a.date || '').localeCompare(b.date || ''))
+    }))
+    .sort((a, b) => b.count - a.count)
+}
+
 // Re-export types for backward compatibility
 export type { Post, ContentNode } from '~/types'

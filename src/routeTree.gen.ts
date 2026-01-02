@@ -13,7 +13,11 @@ import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as BlogRouteRouteImport } from './routes/blog/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
+import { Route as BlogTagsRouteImport } from './routes/blog/tags'
+import { Route as BlogSeriesRouteImport } from './routes/blog/series'
 import { Route as BlogSplatRouteImport } from './routes/blog/$'
+import { Route as BlogTagsSplatRouteImport } from './routes/blog/tags.$'
+import { Route as BlogSeriesSplatRouteImport } from './routes/blog/series.$'
 
 const ResumeRoute = ResumeRouteImport.update({
   id: '/resume',
@@ -35,10 +39,30 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/',
   getParentRoute: () => BlogRouteRoute,
 } as any)
+const BlogTagsRoute = BlogTagsRouteImport.update({
+  id: '/tags',
+  path: '/tags',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
+const BlogSeriesRoute = BlogSeriesRouteImport.update({
+  id: '/series',
+  path: '/series',
+  getParentRoute: () => BlogRouteRoute,
+} as any)
 const BlogSplatRoute = BlogSplatRouteImport.update({
   id: '/$',
   path: '/$',
   getParentRoute: () => BlogRouteRoute,
+} as any)
+const BlogTagsSplatRoute = BlogTagsSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => BlogTagsRoute,
+} as any)
+const BlogSeriesSplatRoute = BlogSeriesSplatRouteImport.update({
+  id: '/$',
+  path: '/$',
+  getParentRoute: () => BlogSeriesRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -46,13 +70,21 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteRouteWithChildren
   '/resume': typeof ResumeRoute
   '/blog/$': typeof BlogSplatRoute
+  '/blog/series': typeof BlogSeriesRouteWithChildren
+  '/blog/tags': typeof BlogTagsRouteWithChildren
   '/blog/': typeof BlogIndexRoute
+  '/blog/series/$': typeof BlogSeriesSplatRoute
+  '/blog/tags/$': typeof BlogTagsSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/resume': typeof ResumeRoute
   '/blog/$': typeof BlogSplatRoute
+  '/blog/series': typeof BlogSeriesRouteWithChildren
+  '/blog/tags': typeof BlogTagsRouteWithChildren
   '/blog': typeof BlogIndexRoute
+  '/blog/series/$': typeof BlogSeriesSplatRoute
+  '/blog/tags/$': typeof BlogTagsSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -60,14 +92,45 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteRouteWithChildren
   '/resume': typeof ResumeRoute
   '/blog/$': typeof BlogSplatRoute
+  '/blog/series': typeof BlogSeriesRouteWithChildren
+  '/blog/tags': typeof BlogTagsRouteWithChildren
   '/blog/': typeof BlogIndexRoute
+  '/blog/series/$': typeof BlogSeriesSplatRoute
+  '/blog/tags/$': typeof BlogTagsSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/blog' | '/resume' | '/blog/$' | '/blog/'
+  fullPaths:
+    | '/'
+    | '/blog'
+    | '/resume'
+    | '/blog/$'
+    | '/blog/series'
+    | '/blog/tags'
+    | '/blog/'
+    | '/blog/series/$'
+    | '/blog/tags/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/resume' | '/blog/$' | '/blog'
-  id: '__root__' | '/' | '/blog' | '/resume' | '/blog/$' | '/blog/'
+  to:
+    | '/'
+    | '/resume'
+    | '/blog/$'
+    | '/blog/series'
+    | '/blog/tags'
+    | '/blog'
+    | '/blog/series/$'
+    | '/blog/tags/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/resume'
+    | '/blog/$'
+    | '/blog/series'
+    | '/blog/tags'
+    | '/blog/'
+    | '/blog/series/$'
+    | '/blog/tags/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +169,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof BlogRouteRoute
     }
+    '/blog/tags': {
+      id: '/blog/tags'
+      path: '/tags'
+      fullPath: '/blog/tags'
+      preLoaderRoute: typeof BlogTagsRouteImport
+      parentRoute: typeof BlogRouteRoute
+    }
+    '/blog/series': {
+      id: '/blog/series'
+      path: '/series'
+      fullPath: '/blog/series'
+      preLoaderRoute: typeof BlogSeriesRouteImport
+      parentRoute: typeof BlogRouteRoute
+    }
     '/blog/$': {
       id: '/blog/$'
       path: '/$'
@@ -113,16 +190,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSplatRouteImport
       parentRoute: typeof BlogRouteRoute
     }
+    '/blog/tags/$': {
+      id: '/blog/tags/$'
+      path: '/$'
+      fullPath: '/blog/tags/$'
+      preLoaderRoute: typeof BlogTagsSplatRouteImport
+      parentRoute: typeof BlogTagsRoute
+    }
+    '/blog/series/$': {
+      id: '/blog/series/$'
+      path: '/$'
+      fullPath: '/blog/series/$'
+      preLoaderRoute: typeof BlogSeriesSplatRouteImport
+      parentRoute: typeof BlogSeriesRoute
+    }
   }
 }
 
+interface BlogSeriesRouteChildren {
+  BlogSeriesSplatRoute: typeof BlogSeriesSplatRoute
+}
+
+const BlogSeriesRouteChildren: BlogSeriesRouteChildren = {
+  BlogSeriesSplatRoute: BlogSeriesSplatRoute,
+}
+
+const BlogSeriesRouteWithChildren = BlogSeriesRoute._addFileChildren(
+  BlogSeriesRouteChildren,
+)
+
+interface BlogTagsRouteChildren {
+  BlogTagsSplatRoute: typeof BlogTagsSplatRoute
+}
+
+const BlogTagsRouteChildren: BlogTagsRouteChildren = {
+  BlogTagsSplatRoute: BlogTagsSplatRoute,
+}
+
+const BlogTagsRouteWithChildren = BlogTagsRoute._addFileChildren(
+  BlogTagsRouteChildren,
+)
+
 interface BlogRouteRouteChildren {
   BlogSplatRoute: typeof BlogSplatRoute
+  BlogSeriesRoute: typeof BlogSeriesRouteWithChildren
+  BlogTagsRoute: typeof BlogTagsRouteWithChildren
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
 const BlogRouteRouteChildren: BlogRouteRouteChildren = {
   BlogSplatRoute: BlogSplatRoute,
+  BlogSeriesRoute: BlogSeriesRouteWithChildren,
+  BlogTagsRoute: BlogTagsRouteWithChildren,
   BlogIndexRoute: BlogIndexRoute,
 }
 

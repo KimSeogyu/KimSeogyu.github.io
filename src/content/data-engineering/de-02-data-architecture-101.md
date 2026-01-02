@@ -3,6 +3,7 @@ public: true
 title: "데이터 엔지니어링 시리즈 #2: 데이터 아키텍처 101 - 전체 그림 이해하기"
 date: '2026-01-02'
 category: Data Engineering
+series: data-engineering
 tags: [Data Engineering, ETL, ELT, Lambda Architecture, Kappa Architecture, Modern Data Stack]
 excerpt: "데이터 파이프라인의 전체 구조를 조망합니다. ETL vs ELT, 배치 vs 스트리밍, Lambda vs Kappa 아키텍처, 그리고 Modern Data Stack까지."
 ---

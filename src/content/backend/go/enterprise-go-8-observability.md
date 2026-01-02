@@ -3,6 +3,7 @@ public: true
 title: "Enterprise Go 시리즈 #8: Observability와 Debugging"
 date: '2026-01-01'
 category: Backend
+series: enterprise-go
 tags: [Go, Logging, Metrics, Tracing, pprof, Observability, Grafana, Enterprise]
 excerpt: "Micrometer, Winston에 익숙한 개발자를 위한 Go Observability 가이드. Grafana 대시보드와 Alert 연동까지 다룹니다."
 ---

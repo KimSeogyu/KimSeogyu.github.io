@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
-import { getPostByFullPath, getAllPosts } from '~/lib/posts'
+import { getPostByFullPath, getAllPosts, getPostsBySeries } from '~/lib/posts'
 import { siteConfig } from '~/config/site'
 import { Badge } from '~/components/ui/badge'
 import { ReadingProgressBar } from '~/components/ui/ReadingProgressBar'
@@ -14,7 +14,7 @@ import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
-import { ArrowLeft, Calendar, Clock, Tag, Share2, Twitter, Linkedin, Link as LinkIcon, MessageCircle } from 'lucide-react'
+import { ArrowLeft, Calendar, Clock, Tag, Share2, Twitter, Linkedin, Link as LinkIcon, MessageCircle, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Mermaid } from '~/components/blog/mermaid'
 import { Excalidraw } from '~/components/blog/excalidraw'
 import { RelatedPostCard } from '~/features/blog/components'
@@ -40,7 +40,21 @@ export const Route = createFileRoute('/blog/$')({
       .filter(p => p.category === post.category && p.id !== post.id)
       .slice(0, 3)
     
-    return { post, relatedPosts }
+    // 시리즈 정보
+    let seriesInfo = null
+    if (post.series) {
+      const seriesPosts = getPostsBySeries(post.series)
+      const currentIndex = seriesPosts.findIndex(p => p.id === post.id)
+      seriesInfo = {
+        name: post.series,
+        posts: seriesPosts,
+        currentIndex,
+        prev: currentIndex > 0 ? seriesPosts[currentIndex - 1] : null,
+        next: currentIndex < seriesPosts.length - 1 ? seriesPosts[currentIndex + 1] : null,
+      }
+    }
+    
+    return { post, relatedPosts, seriesInfo }
   },
   head: ({ loaderData }) => {
     if (!loaderData?.post) {
@@ -63,7 +77,7 @@ export const Route = createFileRoute('/blog/$')({
 })
 
 function PostDetail() {
-  const { post, relatedPosts } = Route.useLoaderData()
+  const { post, relatedPosts, seriesInfo } = Route.useLoaderData()
   const { addRecentPost, setRightSidebarTitle, setRightSidebarContent } = useLayout()
   const [isDark, setIsDark] = useState(false)
 
@@ -166,13 +180,67 @@ function PostDetail() {
                       <Tag className="w-4 h-4" />
                       <div className="flex gap-2">
                         {post.tags.slice(0, 3).map(tag => (
-                          <span key={tag} className="text-(--gradient-cyan)">#{tag}</span>
+                          <Link 
+                            key={tag} 
+                            to="/blog/tags/$"
+                            params={{ _splat: tag }}
+                            className="text-(--gradient-cyan) hover:underline"
+                          >
+                            #{tag}
+                          </Link>
                         ))}
                       </div>
                     </div>
                   )}
                 </div>
               </header>
+              
+              {/* 시리즈 네비게이션 */}
+              {seriesInfo && (
+                <div className="mb-8 p-4 rounded-xl border border-(--gradient-purple)/30 bg-(--gradient-purple)/5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <BookOpen className="w-5 h-5 text-(--gradient-purple)" />
+                    <Link 
+                      to="/blog/series/$" 
+                      params={{ _splat: seriesInfo.name }}
+                      className="font-semibold text-(--gradient-purple) hover:underline"
+                    >
+                      {seriesInfo.name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} Series
+                    </Link>
+                    <span className="text-sm text-muted-foreground">
+                      ({seriesInfo.currentIndex + 1} / {seriesInfo.posts.length})
+                    </span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center gap-4">
+                    {seriesInfo.prev ? (
+                      <Link
+                        to="/blog/$"
+                        params={{ _splat: seriesInfo.prev.fullPath }}
+                        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-(--gradient-purple) transition-colors group"
+                      >
+                        <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                        <span className="line-clamp-1">{seriesInfo.prev.title}</span>
+                      </Link>
+                    ) : (
+                      <div />
+                    )}
+                    
+                    {seriesInfo.next ? (
+                      <Link
+                        to="/blog/$"
+                        params={{ _splat: seriesInfo.next.fullPath }}
+                        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-(--gradient-purple) transition-colors group text-right"
+                      >
+                        <span className="line-clamp-1">{seriesInfo.next.title}</span>
+                        <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
+                </div>
+              )}
               
               {/* 마크다운 본문 - Medium 스타일 */}
               <div className="article-prose max-w-none">

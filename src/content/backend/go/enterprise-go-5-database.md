@@ -3,6 +3,7 @@ public: true
 title: "Enterprise Go 시리즈 #5: 데이터베이스 연동 패턴"
 date: '2026-01-01'
 category: Backend
+series: enterprise-go
 tags: [Go, GORM, Database, Transaction, Repository, Enterprise]
 excerpt: "Spring의 @Transactional처럼 편리하게 트랜잭션을 관리하는 Go 패턴을 다룹니다. 어노테이션 하나로 해결되던 것을 Go에서 어떻게 구현할까요?"
 ---
