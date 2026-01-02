@@ -19,6 +19,13 @@
         "title": "Faiss와 OpenSearch 벡터 검색 비교"
       },
       {
+        "name": "LangChain & LangGraph 실전 가이드 (2025)",
+        "type": "post",
+        "path": "ai-ml/langchain-langgraph-practical-guide",
+        "slug": "langchain-langgraph-practical-guide",
+        "title": "LangChain & LangGraph 실전 가이드 (2025)"
+      },
+      {
         "name": "RRF: 하이브리드 검색의 핵심 랭크 퓨전 알고리즘",
         "type": "post",
         "path": "ai-ml/rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum",
@@ -50,6 +57,13 @@
             "path": "backend/devops/seupaikeu-teuraepig-daeeung-jeonryag",
             "slug": "seupaikeu-teuraepig-daeeung-jeonryag",
             "title": "스파이크 트래픽 대응 전략"
+          },
+          {
+            "name": "Docker 멀티스테이지 빌드 최적화 가이드",
+            "type": "post",
+            "path": "backend/devops/docker-multistage-build-optimization",
+            "slug": "docker-multistage-build-optimization",
+            "title": "Docker 멀티스테이지 빌드 최적화 가이드"
           },
           {
             "name": "Helm 환경별 Values 오버라이드 전략",

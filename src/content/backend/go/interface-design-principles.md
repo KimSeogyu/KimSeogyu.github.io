@@ -316,31 +316,47 @@ func TestUserService_GetUser(t *testing.T) {
 }
 ```
 
-### testify/mock 사용
+### gomock 사용 (권장)
+
+[go.uber.org/mock](https://github.com/uber-go/mock)을 활용한 코드 생성 방식:
+
+```bash
+# mockgen 설치
+go install go.uber.org/mock/mockgen@latest
+
+# 인터페이스에서 Mock 생성
+mockgen -source=repository.go -destination=mocks/repository_mock.go -package=mocks
+```
 
 ```go
-import "github.com/stretchr/testify/mock"
+// 생성된 mocks/repository_mock.go 사용
+import (
+    "testing"
+    "go.uber.org/mock/gomock"
+    "myapp/mocks"
+)
 
-type MockUserRepository struct {
-    mock.Mock
-}
-
-func (m *MockUserRepository) FindByID(ctx context.Context, id string) (*User, error) {
-    args := m.Called(ctx, id)
-    return args.Get(0).(*User), args.Error(1)
-}
-
-func TestUserService(t *testing.T) {
-    mockRepo := new(MockUserRepository)
-    mockRepo.On("FindByID", mock.Anything, "123").Return(&User{Name: "Test"}, nil)
+func TestUserService_GetUser(t *testing.T) {
+    ctrl := gomock.NewController(t)
+    defer ctrl.Finish()
+    
+    mockRepo := mocks.NewMockUserRepository(ctrl)
+    
+    // 기대 동작 설정
+    mockRepo.EXPECT().
+        FindByID(gomock.Any(), "123").
+        Return(&User{ID: "123", Name: "Test User"}, nil)
     
     service := NewUserService(mockRepo)
-    user, _ := service.GetUser(context.Background(), "123")
+    user, err := service.GetUser(context.Background(), "123")
     
-    assert.Equal(t, "Test", user.Name)
-    mockRepo.AssertExpectations(t)
+    assert.NoError(t, err)
+    assert.Equal(t, "Test User", user.Name)
 }
 ```
+
+> [!TIP]
+> gomock은 컴파일 타임에 타입 안전성을 보장하며, IDE 자동완성도 지원됩니다.
 
 ## 체크리스트
 

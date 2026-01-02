@@ -38,6 +38,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://seogyukim.com/blog/docker-multistage-build-optimization</loc>
+    <lastmod>2026-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://seogyukim.com/blog/langchain-langgraph-practical-guide</loc>
+    <lastmod>2026-01-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://seogyukim.com/blog/enterprise-go-9-makefile</loc>
     <lastmod>2026-01-02</lastmod>
     <changefreq>weekly</changefreq>
