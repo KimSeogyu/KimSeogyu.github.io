@@ -161,6 +161,59 @@ graph_builder = StateGraph(AgentState)
 > [!NOTE]
 > `Annotated[list, add_messages]`는 리듀서 함수로, 새 메시지가 기존 리스트에 추가됩니다.
 
+### 노드 정의 단위: 함수 vs 에이전트
+
+노드를 어떤 단위로 정의할지는 프로젝트의 성격에 따라 달라집니다.
+
+#### 함수 단위 (Fine-grained) - 파이프라인 스타일
+
+[LangGraph 공식 README](https://github.com/langchain-ai/langgraph)의 기본 예시:
+
+```python
+from langgraph.graph import START, StateGraph
+from typing_extensions import TypedDict
+
+class State(TypedDict):
+    text: str
+
+def node_a(state: State) -> dict:
+    return {"text": state["text"] + "a"}
+
+def node_b(state: State) -> dict:
+    return {"text": state["text"] + "b"}
+
+graph = StateGraph(State)
+graph.add_node("node_a", node_a)
+graph.add_node("node_b", node_b)
+graph.add_edge(START, "node_a")
+graph.add_edge("node_a", "node_b")
+
+print(graph.compile().invoke({"text": ""}))
+# {'text': 'ab'}
+```
+
+**적합한 상황**: ETL 파이프라인, 데이터 처리 워크플로우, DAG 스타일 작업
+
+#### 에이전트 단위 (Coarse-grained) - 역할 기반 스타일
+
+```python
+def researcher(state): ...  # 리서치 담당
+def writer(state): ...      # 글쓰기 담당
+def reviewer(state): ...    # 검토 담당
+```
+
+**적합한 상황**: 멀티 에이전트 협업, 역할 분리가 명확한 경우
+
+#### 선택 가이드
+
+| 접근법 | 노드 단위 | 장점 | 체크포인트 |
+|-------|---------|-----|----------|
+| **함수 단위** | fetch, transform, validate 등 | 재사용성 ↑, 테스트 용이 | 세밀한 복구 가능 |
+| **에이전트 단위** | researcher, writer 등 | 직관적, 역할 분리 | 큰 단위로 복구 |
+
+> [!IMPORTANT]
+> 체크포인트는 **노드 단위**로 저장됩니다. 실패 시 해당 노드부터 재실행되므로, 노드 크기를 "상태 변경의 원자성"으로 결정하세요.
+
 ### 노드와 엣지 정의
 
 ```python
