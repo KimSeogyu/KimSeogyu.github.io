@@ -94,6 +94,69 @@
             "title": "Buf v2 기반 Proto 관리 및 코드 자동 생성"
           },
           {
+            "name": "Enterprise Go 시리즈 #1: 프로젝트 설계와 구조화",
+            "type": "post",
+            "path": "backend/go/enterprise-go-1-project-structure",
+            "slug": "enterprise-go-1-project-structure",
+            "title": "Enterprise Go 시리즈 #1: 프로젝트 설계와 구조화"
+          },
+          {
+            "name": "Enterprise Go 시리즈 #2: 견고한 HTTP 서버 구축",
+            "type": "post",
+            "path": "backend/go/enterprise-go-2-http-server",
+            "slug": "enterprise-go-2-http-server",
+            "title": "Enterprise Go 시리즈 #2: 견고한 HTTP 서버 구축"
+          },
+          {
+            "name": "Enterprise Go 시리즈 #3: Context로 요청 생명주기 관리",
+            "type": "post",
+            "path": "backend/go/enterprise-go-3-context",
+            "slug": "enterprise-go-3-context",
+            "title": "Enterprise Go 시리즈 #3: Context로 요청 생명주기 관리"
+          },
+          {
+            "name": "Enterprise Go 시리즈 #4: Goroutine과 Channel 실전 활용",
+            "type": "post",
+            "path": "backend/go/enterprise-go-4-goroutine-channel",
+            "slug": "enterprise-go-4-goroutine-channel",
+            "title": "Enterprise Go 시리즈 #4: Goroutine과 Channel 실전 활용"
+          },
+          {
+            "name": "Enterprise Go 시리즈 #5: 데이터베이스 연동 패턴",
+            "type": "post",
+            "path": "backend/go/enterprise-go-5-database",
+            "slug": "enterprise-go-5-database",
+            "title": "Enterprise Go 시리즈 #5: 데이터베이스 연동 패턴"
+          },
+          {
+            "name": "Enterprise Go 시리즈 #6: Resilient한 외부 통신",
+            "type": "post",
+            "path": "backend/go/enterprise-go-6-resilient-communication",
+            "slug": "enterprise-go-6-resilient-communication",
+            "title": "Enterprise Go 시리즈 #6: Resilient한 외부 통신"
+          },
+          {
+            "name": "Enterprise Go 시리즈 #7: 테스트 전략과 실전",
+            "type": "post",
+            "path": "backend/go/enterprise-go-7-testing",
+            "slug": "enterprise-go-7-testing",
+            "title": "Enterprise Go 시리즈 #7: 테스트 전략과 실전"
+          },
+          {
+            "name": "Enterprise Go 시리즈 #8: Observability와 Debugging",
+            "type": "post",
+            "path": "backend/go/enterprise-go-8-observability",
+            "slug": "enterprise-go-8-observability",
+            "title": "Enterprise Go 시리즈 #8: Observability와 Debugging"
+          },
+          {
+            "name": "Enterprise Go 시리즈 #9: Makefile로 개발 워크플로우 자동화",
+            "type": "post",
+            "path": "backend/go/enterprise-go-9-makefile",
+            "slug": "enterprise-go-9-makefile",
+            "title": "Enterprise Go 시리즈 #9: Makefile로 개발 워크플로우 자동화"
+          },
+          {
             "name": "Ginkgo와 Testcontainers를 활용한 통합 테스트 전략",
             "type": "post",
             "path": "backend/go/ginkgo-bdd-testing",
@@ -631,6 +694,13 @@
             "path": "database/postgresql/postgis-geojson-guide",
             "slug": "postgis-geojson-guide",
             "title": "PostGIS와 GeoJSON을 활용한 공간 데이터 관리"
+          },
+          {
+            "name": "PostgreSQL 쿼리 성능 튜닝 완벽 가이드",
+            "type": "post",
+            "path": "database/postgresql/postgresql-query-tuning-guide",
+            "slug": "postgresql-query-tuning-guide",
+            "title": "PostgreSQL 쿼리 성능 튜닝 완벽 가이드"
           }
         ]
       },
@@ -859,6 +929,20 @@
         ]
       },
       {
+        "name": "Python",
+        "type": "folder",
+        "path": "languages/python",
+        "children": [
+          {
+            "name": "Python asyncio 비동기 프로그래밍 완벽 가이드",
+            "type": "post",
+            "path": "languages/python/asyncio-concurrency-guide",
+            "slug": "asyncio-concurrency-guide",
+            "title": "Python asyncio 비동기 프로그래밍 완벽 가이드"
+          }
+        ]
+      },
+      {
         "name": "Rust",
         "type": "folder",
         "path": "languages/rust",
@@ -908,32 +992,11 @@
     "path": "misc",
     "children": [
       {
-        "name": "김서규의 노트 Seogyu's notes",
-        "type": "post",
-        "path": "misc/gimseogyuyi-noteu-seogyu-s-notes",
-        "slug": "gimseogyuyi-noteu-seogyu-s-notes",
-        "title": "김서규의 노트 Seogyu's notes"
-      },
-      {
-        "name": "FreeCodeCamp",
-        "type": "post",
-        "path": "misc/freecodecamp",
-        "slug": "freecodecamp",
-        "title": "FreeCodeCamp"
-      },
-      {
         "name": "Mac OS Finder에서 사용자 루트 디렉토리로 이동하는 법",
         "type": "post",
         "path": "misc/mac-os-findereseo-sayongja-ruteu-diregtoriro-idonghaneun-beob",
         "slug": "mac-os-findereseo-sayongja-ruteu-diregtoriro-idonghaneun-beob",
         "title": "Mac OS Finder에서 사용자 루트 디렉토리로 이동하는 법"
-      },
-      {
-        "name": "Useful Links",
-        "type": "post",
-        "path": "misc/useful-links",
-        "slug": "useful-links",
-        "title": "Useful Links"
       }
     ]
   }
