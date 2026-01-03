@@ -14,6 +14,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://seogyukim.com/blog/k8s-06-security</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://seogyukim.com/blog/k8s-05-autoscaling</loc>
+    <lastmod>2026-01-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://seogyukim.com/blog/k8s-04-istio-service-mesh</loc>
     <lastmod>2026-01-03</lastmod>
     <changefreq>weekly</changefreq>

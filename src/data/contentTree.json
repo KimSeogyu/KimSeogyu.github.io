@@ -260,6 +260,20 @@
             "path": "backend/kubernetes/k8s-04-istio-service-mesh",
             "slug": "k8s-04-istio-service-mesh",
             "title": "Kubernetes 심화 시리즈 #4: Istio 서비스 메시 완전 가이드"
+          },
+          {
+            "name": "Kubernetes 심화 시리즈 #5: 오토스케일링 완전 가이드",
+            "type": "post",
+            "path": "backend/kubernetes/k8s-05-autoscaling",
+            "slug": "k8s-05-autoscaling",
+            "title": "Kubernetes 심화 시리즈 #5: 오토스케일링 완전 가이드"
+          },
+          {
+            "name": "Kubernetes 심화 시리즈 #6: 보안 완전 가이드",
+            "type": "post",
+            "path": "backend/kubernetes/k8s-06-security",
+            "slug": "k8s-06-security",
+            "title": "Kubernetes 심화 시리즈 #6: 보안 완전 가이드"
           }
         ]
       },
