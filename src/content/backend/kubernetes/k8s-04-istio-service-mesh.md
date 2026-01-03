@@ -33,7 +33,7 @@ excerpt: "Istio의 VirtualService, DestinationRule, Gateway를 깊이 있게 다
 ❌ 분산 추적 연동 복잡
 ```
 
-**서비스 메시**는 이런 **횡단 관심사(Cross-cutting Concerns)**를 인프라 레이어로 내립니다.
+**서비스 메시**는 이러한 **횡단 관심사(Cross-cutting Concerns)**를 애플리케이션에서 분리하여 인프라 레이어에서 처리합니다.
 
 ```mermaid
 flowchart TB
@@ -171,7 +171,7 @@ spec:
 
 ## 와일드카드 서브도메인 라우팅 (실전 패턴)
 
-회사에서 여러 서비스를 `api.example.com`, `dashboard.example.com`, `admin.example.com` 형태로 쉽게 배포할 수 있었던 이유는 **Istio + AWS Route 53 + ACM 통합** 덕분입니다.
+여러 서비스를 `api.example.com`, `dashboard.example.com`, `admin.example.com` 형태로 쉽게 배포할 수 있는 이유는 **Istio + AWS Route 53 + ACM 통합** 덕분입니다. 이 패턴의 핵심 구조를 살펴보겠습니다.
 
 ### 전체 아키텍처
 
@@ -719,14 +719,16 @@ VirtualService: 각 서비스별 서브도메인 라우팅
 
 ---
 
-## 시리즈 완료
+## 시리즈 마무리
 
-이 시리즈에서 다룬 내용:
+이 시리즈에서 다룬 핵심 내용을 정리합니다:
 
-1. **워크로드 컨트롤러**: Deployment, StatefulSet, DaemonSet, CronJob의 내부 동작
-2. **서비스 네트워킹**: Service 타입, kube-proxy, AWS ALB/NLB 통합
-3. **설정/시크릿 관리**: ConfigMap, Secrets, AWS Secrets Manager CSI Driver
-4. **Istio 서비스 메시**: VirtualService, DestinationRule, 와일드카드 서브도메인
+| 편 | 주제 | 핵심 키워드 |
+|---|------|----------|
+| 1편 | 워크로드 컨트롤러 | Reconciliation Loop, Rolling Update, StatefulSet 순서 보장 |
+| 2편 | 서비스 네트워킹 | ClusterIP/NodePort/LoadBalancer, kube-proxy, AWS ALB/NLB |
+| 3편 | 설정/시크릿 관리 | ConfigMap, Secrets at Rest, AWS Secrets Manager CSI Driver |
+| 4편 | Istio 서비스 메시 | VirtualService, DestinationRule, 와일드카드 서브도메인 |
 
 ---
 

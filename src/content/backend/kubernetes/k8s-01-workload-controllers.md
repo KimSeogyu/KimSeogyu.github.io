@@ -61,10 +61,10 @@ flowchart LR
 
 ### Reconciliation Loop (조정 루프)
 
-모든 컨트롤러는 동일한 패턴을 따릅니다:
+모든 컨트롤러는 동일한 패턴으로 동작합니다:
 
 ```
-무한 반복:
+무한 루프:
   1. 현재 상태(Current State) 관찰
   2. 원하는 상태(Desired State)와 비교
   3. 차이가 있으면 조정(Reconcile)
@@ -100,7 +100,7 @@ func (c *Controller) Run(ctx context.Context) {
 ```
 
 > [!IMPORTANT]
-> **Level-triggered vs Edge-triggered**: Kubernetes 컨트롤러는 **Level-triggered** 방식입니다. "상태가 이렇게 변했다"가 아니라 "현재 상태가 이것이다"를 기준으로 동작합니다. 이 덕분에 컨트롤러가 재시작되어도 현재 상태를 다시 읽어서 조정할 수 있습니다.
+> **Level-triggered vs Edge-triggered**: Kubernetes 컨트롤러는 **Level-triggered** 방식입니다. "상태가 변했다"(Edge)가 아니라 "현재 상태가 이것이다"(Level)를 기준으로 동작합니다. 덕분에 컨트롤러가 재시작되어도 현재 상태를 다시 읽어서 정상적으로 조정할 수 있습니다.
 
 ---
 
@@ -192,7 +192,7 @@ kubectl rollout history deployment/my-app
 kubectl rollout undo deployment/my-app --to-revision=2
 ```
 
-롤백은 새로운 ReplicaSet을 만드는 게 아닙니다. **기존 ReplicaSet을 다시 scale up**합니다.
+롤백은 새 ReplicaSet을 생성하는 것이 아닙니다. **기존 ReplicaSet을 다시 Scale Up**합니다.
 
 ```mermaid
 flowchart LR
@@ -383,8 +383,8 @@ flowchart TB
     classDef new fill:#90EE90
 ```
 
-**노드 추가 시**: 자동으로 해당 노드에 Pod 생성  
-**노드 삭제 시**: 해당 Pod도 함께 삭제
+- **노드 추가 시**: 자동으로 해당 노드에 Pod 생성
+- **노드 삭제 시**: 해당 노드의 Pod도 함께 삭제
 
 ### nodeSelector와 tolerations
 

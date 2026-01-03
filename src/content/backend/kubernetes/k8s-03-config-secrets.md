@@ -162,7 +162,7 @@ data:
 | kubectl 출력 | 그대로 표시 | 기본적으로 숨김 |
 
 > [!CAUTION]
-> Base64는 **인코딩**이지 **암호화**가 아닙니다! 누구나 디코딩할 수 있습니다. 반드시 **Secrets at Rest Encryption**을 활성화하세요.
+> Base64는 **인코딩**이지 **암호화**가 아닙니다! 누구나 쉽게 디코딩할 수 있으므로, 반드시 **Secrets at Rest Encryption**을 활성화하세요.
 
 ### Secret 타입
 
@@ -477,13 +477,13 @@ sequenceDiagram
 ```
 
 > [!TIP]
-> 애플리케이션이 파일 변경을 감지하도록 구현하거나, 주기적으로 파일을 다시 읽도록 해야 합니다. 환경변수 동기화 시에는 Pod 재시작이 필요합니다.
+> 애플리케이션이 파일 변경을 감지하거나 주기적으로 파일을 다시 읽도록 구현해야 합니다. 환경변수로 동기화하는 경우에는 Pod 재시작이 필요합니다.
 
 ---
 
 ## External Secrets Operator (대안)
 
-CSI Driver의 대안으로, **Kubernetes Secret을 직접 생성**하는 방식입니다.
+CSI Driver의 대안으로, 외부 시크릿 저장소의 값을 **Kubernetes Secret으로 직접 동기화**하는 방식입니다.
 
 ```mermaid
 flowchart TB

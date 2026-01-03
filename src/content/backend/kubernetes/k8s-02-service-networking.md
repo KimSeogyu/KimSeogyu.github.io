@@ -12,12 +12,12 @@ excerpt: "ClusterIP, NodePort, LoadBalancer의 내부 동작 원리를 kube-prox
 
 ## 시리즈 개요
 
-| #     | 주제              | 핵심 내용                                              |
-| ----- | --------------- | -------------------------------------------------- |
-| 1     | 워크로드 컨트롤러 심화    | Deployment, StatefulSet, DaemonSet, CronJob        |
-| **2** | **서비스 네트워킹 심화** | Service 타입, kube-proxy, AWS ALB/NLB                |
-| 3     | 설정 및 시크릿 관리     | ConfigMap, Secrets, AWS Secrets Manager CSI Driver |
-| 4     | Istio 서비스 메시    | VirtualService, DestinationRule, 와일드카드 서브도메인       |
+| # | 주제 | 핵심 내용 |
+|---|------|----------|
+| 1 | 워크로드 컨트롤러 심화 | Deployment, StatefulSet, DaemonSet, CronJob |
+| **2** | **서비스 네트워킹 심화** | Service 타입, kube-proxy, AWS ALB/NLB |
+| 3 | 설정 및 시크릿 관리 | ConfigMap, Secrets, AWS Secrets Manager CSI Driver |
+| 4 | Istio 서비스 메시 | VirtualService, DestinationRule, 와일드카드 서브도메인 |
 
 ---
 
@@ -235,7 +235,7 @@ nslookup external-db.default.svc.cluster.local
 
 ## kube-proxy: Service 구현체
 
-### 모드 비교: iptables vs IPVS
+### 모드 비교: iptables vs IPVS vs nftables
 
 ```mermaid
 flowchart TB
@@ -253,20 +253,41 @@ flowchart TB
         Target2["Pod"]
         IV --> Target2
     end
+    
+    subgraph NftablesMode ["nftables 모드 (권장)"]
+        NFT["nftables 규칙"]
+        Target3["Pod"]
+        NFT --> Target3
+    end
 ```
 
-| 특성 | iptables | IPVS |
-|------|---------|------|
-| **조회 시간** | O(n) - 규칙 수에 비례 | O(1) - 해시 테이블 |
-| **Service 5,000개** | 수백ms 지연 가능 | 일정한 성능 |
-| **로드밸런싱 알고리즘** | 랜덤 | rr, lc, dh, sh, sed, nq |
-| **설정 난이도** | 기본값, 간단 | 추가 커널 모듈 필요 |
-| **권장 환경** | 소규모 클러스터 | Service 1,000개 이상 |
+| 특성 | iptables | IPVS | **nftables** |
+|------|---------|------|-------------|
+| **조회 시간** | O(n) | O(1) | O(1) |
+| **권장 여부** | 안정적 | ⚠️ Deprecated 예정 | ✅ **권장** |
+| **로드밸런싱** | 랜덤 | rr, lc, dh 등 | 다양 |
+| **성능** | 개선됨 | 양호 | **최고** |
+| **최소 버전** | 모든 버전 | - | K8s 1.31+ |
 
-### IPVS 활성화 (EKS)
+> [!WARNING]
+> **IPVS 모드 Deprecated 예정**: Kubernetes 공식 문서에 따르면 IPVS 모드는 Kubernetes Services API와의 불일치로 인해 향후 deprecated될 예정입니다. 새로운 클러스터에서는 **nftables 모드**(K8s 1.31+) 또는 **iptables 모드**를 권장합니다.
+
+### kube-proxy 모드 설정
 
 ```yaml
-# kube-proxy ConfigMap 수정
+# nftables 모드 (K8s 1.31+, 권장)
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-proxy
+  namespace: kube-system
+data:
+  config.conf: |
+    mode: "nftables"
+```
+
+```yaml
+# IPVS 모드 (⚠️ deprecated 예정)
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -387,7 +408,7 @@ spec:
 
 ## Headless Service 심화
 
-selector가 있지만 ClusterIP가 없는 Service입니다.
+Selector가 있지만 ClusterIP가 없는 Service입니다. DNS 조회 시 Service IP가 아닌 Pod IP 목록을 직접 반환합니다.
 
 ```yaml
 apiVersion: v1
