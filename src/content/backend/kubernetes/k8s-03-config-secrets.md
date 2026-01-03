@@ -324,17 +324,17 @@ aws eks associate-encryption-config \
 ```mermaid
 flowchart TB
     subgraph AWS [AWS]
-        SM[Secrets Manager]
+        SM["Secrets Manager"]
     end
     
-    subgraph K8s [Kubernetes 클러스터]
-        CSI[Secrets Store CSI Driver]
-        ASCP[AWS Secrets & Config Provider]
-        Pod[Application Pod]
+    subgraph K8s ["Kubernetes 클러스터"]
+        CSI["Secrets Store CSI Driver"]
+        ASCP["AWS Secrets & Config Provider"]
+        Pod["Application Pod"]
         
-        subgraph Mount [Pod 내부]
-            File[/mnt/secrets/db-password]
-            Env[ENV: DB_PASSWORD]
+        subgraph Mount ["Pod 내부"]
+            File["파일: db-password"]
+            Env["ENV: DB_PASSWORD"]
         end
     end
     
