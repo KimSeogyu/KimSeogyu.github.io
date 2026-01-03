@@ -229,6 +229,41 @@
         ]
       },
       {
+        "name": "Kubernetes",
+        "type": "folder",
+        "path": "backend/kubernetes",
+        "children": [
+          {
+            "name": "Kubernetes 심화 시리즈 #1: 워크로드 컨트롤러의 내부 동작 원리",
+            "type": "post",
+            "path": "backend/kubernetes/k8s-01-workload-controllers",
+            "slug": "k8s-01-workload-controllers",
+            "title": "Kubernetes 심화 시리즈 #1: 워크로드 컨트롤러의 내부 동작 원리"
+          },
+          {
+            "name": "Kubernetes 심화 시리즈 #2: 서비스 네트워킹의 내부 동작 원리",
+            "type": "post",
+            "path": "backend/kubernetes/k8s-02-service-networking",
+            "slug": "k8s-02-service-networking",
+            "title": "Kubernetes 심화 시리즈 #2: 서비스 네트워킹의 내부 동작 원리"
+          },
+          {
+            "name": "Kubernetes 심화 시리즈 #3: 설정 및 시크릿 관리 완전 가이드",
+            "type": "post",
+            "path": "backend/kubernetes/k8s-03-config-secrets",
+            "slug": "k8s-03-config-secrets",
+            "title": "Kubernetes 심화 시리즈 #3: 설정 및 시크릿 관리 완전 가이드"
+          },
+          {
+            "name": "Kubernetes 심화 시리즈 #4: Istio 서비스 메시 완전 가이드",
+            "type": "post",
+            "path": "backend/kubernetes/k8s-04-istio-service-mesh",
+            "slug": "k8s-04-istio-service-mesh",
+            "title": "Kubernetes 심화 시리즈 #4: Istio 서비스 메시 완전 가이드"
+          }
+        ]
+      },
+      {
         "name": "Nestjs",
         "type": "folder",
         "path": "backend/nestjs",
