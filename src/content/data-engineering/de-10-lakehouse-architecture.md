@@ -162,6 +162,97 @@ flowchart TB
 
 ---
 
+## Medallion Architecture (Bronze/Silver/Gold)
+
+레이크하우스에서 데이터를 **계층화하여 관리하는 표준 패턴**입니다. Databricks가 제안하고 현재 업계 표준으로 자리잡았습니다.
+
+> **출처**: [Databricks - Medallion Architecture](https://docs.databricks.com/en/lakehouse/medallion.html), Armbrust et al., "Delta Lake: High-Performance ACID Table Storage over Cloud Object Stores" (VLDB 2020)
+
+### 세 레이어 구조
+
+```mermaid
+flowchart LR
+    subgraph Bronze ["🥉 Bronze Layer"]
+        B1["원본 그대로 저장"]
+        B2["스키마 변경 보호"]
+        B3["감사/재처리 가능"]
+    end
+    
+    subgraph Silver ["🥈 Silver Layer"]
+        S1["정제/검증"]
+        S2["조인/통합"]
+        S3["비즈니스 엔티티"]
+    end
+    
+    subgraph Gold ["🥇 Gold Layer"]
+        G1["집계/요약"]
+        G2["비즈니스 리포트"]
+        G3["ML Features"]
+    end
+    
+    Bronze -->|"정제"| Silver -->|"집계"| Gold
+```
+
+### 각 레이어의 역할
+
+| Layer | 목적 | 데이터 특성 | 소비자 |
+|-------|------|------------|--------|
+| **Bronze** | 원본 보존 | Raw, 스키마 유연 | 데이터 엔지니어 |
+| **Silver** | 정제/통합 | Cleaned, 조인됨 | 데이터 분석가, DS |
+| **Gold** | 비즈니스 집계 | Aggregated, 최적화 | BI, 경영진 |
+
+### 코드 예시
+
+```python
+# Bronze: 원본 그대로 저장
+raw_events = spark.readStream \
+    .format("kafka") \
+    .option("kafka.bootstrap.servers", "kafka:9092") \
+    .option("subscribe", "user_events") \
+    .load()
+
+raw_events.writeStream \
+    .format("delta") \
+    .option("checkpointLocation", "/checkpoints/bronze") \
+    .start("/delta/bronze/events")
+
+# Silver: 정제 및 스키마 적용
+bronze_df = spark.read.format("delta").load("/delta/bronze/events")
+
+silver_df = bronze_df \
+    .select(from_json(col("value"), schema).alias("data")) \
+    .select("data.*") \
+    .filter(col("user_id").isNotNull()) \
+    .dropDuplicates(["event_id"])
+
+silver_df.write.format("delta").mode("overwrite") \
+    .save("/delta/silver/events")
+
+# Gold: 비즈니스 집계
+silver_df = spark.read.format("delta").load("/delta/silver/events")
+
+gold_df = silver_df \
+    .groupBy("date", "event_type") \
+    .agg(
+        count("*").alias("event_count"),
+        countDistinct("user_id").alias("unique_users")
+    )
+
+gold_df.write.format("delta").mode("overwrite") \
+    .save("/delta/gold/daily_metrics")
+```
+
+### 왜 이 패턴인가?
+
+| 문제 | Medallion 해결책 |
+|------|-----------------|
+| 원본 데이터 유실 | Bronze에 원본 보존 |
+| 스키마 변경 대응 | Bronze는 스키마 유연, Silver에서 검증 |
+| 재처리 필요 | Bronze → Silver → Gold 순서대로 재실행 |
+| 다양한 소비자 니즈 | 레이어별 최적화된 데이터 제공 |
+
+---
+
 ## Delta Lake 심층 분석
 
 ### ACID 트랜잭션
@@ -416,6 +507,10 @@ mindmap
       Delta Lake
       Iceberg
       최신 트렌드
+    Medallion
+      Bronze: 원본
+      Silver: 정제
+      Gold: 집계
     Delta Lake
       트랜잭션 로그
       Time Travel
@@ -438,6 +533,8 @@ mindmap
 ## 참고 자료
 
 - [Delta Lake Documentation](https://docs.delta.io/)
+- [Databricks Medallion Architecture](https://docs.databricks.com/en/lakehouse/medallion.html)
 - [Apache Iceberg Documentation](https://iceberg.apache.org/docs/latest/)
+- Armbrust et al., "Delta Lake: High-Performance ACID Table Storage" (VLDB 2020)
 - Databricks, "The Data Lakehouse" White Paper
 - Martin Kleppmann, "Designing Data-Intensive Applications" - Chapter 3

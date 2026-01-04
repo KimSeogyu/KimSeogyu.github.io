@@ -503,6 +503,111 @@ flowchart TB
 
 ---
 
+## Schema Registry: 스키마 버전 관리
+
+프로덕션 Kafka에서 **스키마 진화(Schema Evolution)**를 안전하게 관리하기 위한 필수 컴포넌트입니다.
+
+> **출처**: [Confluent Schema Registry Documentation](https://docs.confluent.io/platform/current/schema-registry/), Kleppmann, "Designing Data-Intensive Applications" Chapter 4
+
+### 왜 필요한가?
+
+```mermaid
+flowchart TB
+    subgraph Problem ["스키마 없이 운영"]
+        P1["Producer: {name, age}"]
+        P2["Consumer: {name, age, email} 기대"]
+        P3["💥 파싱 실패"]
+        
+        P1 --> P3
+        P2 --> P3
+    end
+    
+    subgraph Solution ["Schema Registry 사용"]
+        S1["스키마 중앙 저장"]
+        S2["버전 관리"]
+        S3["호환성 검증"]
+        S4["✅ 안전한 진화"]
+        
+        S1 --> S2 --> S3 --> S4
+    end
+```
+
+### 지원 포맷
+
+| 포맷 | 특징 | 사용 사례 |
+|------|------|----------|
+| **Avro** | 스키마 진화 우수, 압축 효율 | 가장 널리 사용 |
+| **Protobuf** | gRPC 호환, 강타입 | 마이크로서비스 |
+| **JSON Schema** | 읽기 쉬움 | 디버깅, 호환성 |
+
+### 호환성 모드
+
+```mermaid
+flowchart TB
+    subgraph Modes ["호환성 모드"]
+        BACKWARD["BACKWARD<br/>새 스키마가 이전 데이터 읽기 가능"]
+        FORWARD["FORWARD<br/>이전 스키마가 새 데이터 읽기 가능"]
+        FULL["FULL<br/>양방향 호환"]
+        NONE["NONE<br/>검증 없음 (비권장)"]
+    end
+    
+    Recommend["권장: BACKWARD 또는 FULL"]
+```
+
+| 모드 | 허용 변경 | 예시 |
+|------|----------|------|
+| **BACKWARD** | 필드 삭제, 기본값 있는 필드 추가 | 새 Consumer가 이전 데이터 읽음 |
+| **FORWARD** | 필드 추가, 기본값 있는 필드 삭제 | 이전 Consumer가 새 데이터 읽음 |
+| **FULL** | 기본값 있는 필드만 추가/삭제 | 가장 안전 |
+
+### Python 사용 예시
+
+```python
+from confluent_kafka import SerializingProducer
+from confluent_kafka.schema_registry import SchemaRegistryClient
+from confluent_kafka.schema_registry.avro import AvroSerializer
+
+# Schema Registry 연결
+schema_registry = SchemaRegistryClient({
+    'url': 'http://schema-registry:8081'
+})
+
+# Avro 스키마 정의
+user_schema = """
+{
+    "type": "record",
+    "name": "User",
+    "fields": [
+        {"name": "name", "type": "string"},
+        {"name": "age", "type": "int"},
+        {"name": "email", "type": ["null", "string"], "default": null}
+    ]
+}
+"""
+
+# Serializer 생성 (스키마 자동 등록)
+avro_serializer = AvroSerializer(
+    schema_registry,
+    user_schema,
+    to_dict=lambda user, ctx: user
+)
+
+# Producer 설정
+producer = SerializingProducer({
+    'bootstrap.servers': 'localhost:9092',
+    'value.serializer': avro_serializer
+})
+
+# 메시지 전송
+producer.produce(
+    topic='users',
+    value={'name': 'Kim', 'age': 30, 'email': 'kim@example.com'}
+)
+producer.flush()
+```
+
+---
+
 ## 사용 사례
 
 ```mermaid
@@ -572,6 +677,10 @@ mindmap
       Zookeeper 제거
       단순한 운영
       빠른 메타데이터
+    Schema Registry
+      스키마 버전 관리
+      호환성 검증
+      Avro/Protobuf
 ```
 
 ---
@@ -590,6 +699,8 @@ mindmap
 ## 참고 자료
 
 - [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
+- [Confluent Schema Registry](https://docs.confluent.io/platform/current/schema-registry/)
 - [Confluent Developer](https://developer.confluent.io/)
 - "Kafka: The Definitive Guide" (O'Reilly)
+- Martin Kleppmann, "Designing Data-Intensive Applications" - Chapter 4
 - [KRaft Overview](https://kafka.apache.org/documentation/#kraft)
