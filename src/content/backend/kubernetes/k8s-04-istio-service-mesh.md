@@ -18,6 +18,8 @@ excerpt: "Istio의 VirtualService, DestinationRule, Gateway를 깊이 있게 다
 | 2 | 서비스 네트워킹 심화 | Service 타입, kube-proxy, AWS ALB/NLB |
 | 3 | 설정 및 시크릿 관리 | ConfigMap, Secrets, AWS Secrets Manager CSI Driver |
 | **4** | **Istio 서비스 메시** | VirtualService, DestinationRule, 와일드카드 서브도메인 |
+| 5 | 오토스케일링 심화 | HPA, VPA, Cluster Autoscaler, Karpenter, KEDA |
+| 6 | 보안 심화 | RBAC, NetworkPolicy, Pod Security Standards |
 
 ---
 
@@ -719,16 +721,14 @@ VirtualService: 각 서비스별 서브도메인 라우팅
 
 ---
 
-## 시리즈 마무리
+## 다음 편 예고
 
-이 시리즈에서 다룬 핵심 내용을 정리합니다:
+**5편: 오토스케일링 심화**에서는 다음을 다룹니다:
 
-| 편 | 주제 | 핵심 키워드 |
-|---|------|----------|
-| 1편 | 워크로드 컨트롤러 | Reconciliation Loop, Rolling Update, StatefulSet 순서 보장 |
-| 2편 | 서비스 네트워킹 | ClusterIP/NodePort/LoadBalancer, kube-proxy, AWS ALB/NLB |
-| 3편 | 설정/시크릿 관리 | ConfigMap, Secrets at Rest, AWS Secrets Manager CSI Driver |
-| 4편 | Istio 서비스 메시 | VirtualService, DestinationRule, 와일드카드 서브도메인 |
+- HPA v2: 다중 메트릭과 Scaling Behavior
+- VPA: 수직 스케일링과 In-place Resizing
+- Cluster Autoscaler vs Karpenter
+- KEDA: 이벤트 기반 오토스케일링
 
 ---
 

@@ -324,7 +324,7 @@ kubectl describe vpa api-vpa
 ### In-place Pod Resizing (K8s 1.33+)
 
 > [!TIP]
-> Kubernetes 1.33부터 **In-place Pod Resizing**이 beta로 지원됩니다. Pod를 재생성하지 않고 리소스를 변경할 수 있습니다. 단, VPA는 아직 이 기능을 지원하지 않습니다.
+> Kubernetes 1.33부터 **In-place Pod Resizing**이 beta로 기본 활성화됩니다. Pod를 재생성하지 않고 리소스를 변경할 수 있습니다. 단, 2024년 기준 VPA는 아직 In-place Resizing을 지원하지 않으며, 통합이 진행 중입니다.
 
 ```yaml
 # 수동 In-place Resizing 예시

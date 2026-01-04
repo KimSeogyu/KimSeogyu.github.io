@@ -10,7 +10,7 @@ excerpt: "왜 cron으로는 부족할까요? Airflow의 핵심 개념인 DAG, Op
 
 # 데이터 엔지니어링 시리즈 #6: Airflow 핵심 개념 - DAG, Operator, Task
 
-> **대상 독자**: 충분한 가진 백엔드/풀스택 엔지니어로, CI/CD 파이프라인이나 cron job에 익숙하지만 Airflow는 처음인 분
+> **대상 독자**: 충분한 경험을 가진 백엔드/풀스택 엔지니어로, CI/CD 파이프라인이나 cron job에 익숙하지만 Airflow는 처음인 분
 
 ## 이 편에서 다루는 것
 

@@ -18,6 +18,8 @@ excerpt: "Deployment, StatefulSet, DaemonSet, CronJob의 내부 동작 원리를
 | 2 | 서비스 네트워킹 심화 | Service 타입, kube-proxy, AWS ALB/NLB |
 | 3 | 설정 및 시크릿 관리 | ConfigMap, Secrets, AWS Secrets Manager CSI Driver |
 | 4 | Istio 서비스 메시 | VirtualService, DestinationRule, 와일드카드 서브도메인 |
+| 5 | 오토스케일링 심화 | HPA, VPA, Cluster Autoscaler, Karpenter, KEDA |
+| 6 | 보안 심화 | RBAC, NetworkPolicy, Pod Security Standards |
 
 ---
 
