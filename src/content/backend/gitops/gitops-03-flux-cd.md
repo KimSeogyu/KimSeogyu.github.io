@@ -31,11 +31,14 @@ ArgoCD가 단일 애플리케이션이라면, Flux는 **GitOps Toolkit**이라�
 
 ### 핵심 특징
 
-- **CNCF Graduated 프로젝트**: 프로덕션 검증
-- **모듈러 아키텍처**: 필요한 컨트롤러만 선택 가능
-- **Kubernetes Native**: 모든 것이 CRD
-- **Image Automation 내장**: 이미지 업데이트 자동화
-- **Multi-tenancy 지원**: 네임스페이스 격리
+- **CNCF Graduated 프로젝트**: 프로덕션 검증 완료
+- **모듈러 아키텍처**: 필요한 컨트롤러만 선택적으로 설치 가능
+- **Kubernetes Native**: 모든 설정이 CRD로 관리됨
+- **Image Automation 내장**: 컨테이너 이미지 자동 업데이트 지원
+- **Multi-tenancy 지원**: 네임스페이스 기반의 팀 격리
+
+> [!NOTE]
+> Weaveworks가 2024년 폐업했지만, Flux는 CNCF Graduated 프로젝트로서 커뮤니티와 CNCF의 지원 하에 활발히 개발되고 있습니다.
 
 ---
 

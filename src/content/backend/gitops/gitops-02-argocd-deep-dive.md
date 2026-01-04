@@ -29,11 +29,11 @@ ArgoCD는 Kubernetes를 위한 **선언적(Declarative) GitOps 지속 배포(Con
 
 ### 핵심 특징
 
-- **CNCF Graduated 프로젝트**: 2022년 12월 CNCF 졸업, 프로덕션 검증됨
+- **CNCF Graduated 프로젝트**: 2022년 CNCF 졸업, 프로덕션 검증 완료
 - **다양한 매니페스트 지원**: Plain YAML, Helm, Kustomize, Jsonnet
 - **강력한 Web UI**: 실시간 애플리케이션 상태 시각화
-- **멀티 클러스터**: 단일 ArgoCD로 여러 클러스터 관리
-- **SSO 통합**: OIDC, SAML, LDAP, GitHub, GitLab
+- **멀티 클러스터 관리**: 단일 ArgoCD 인스턴스로 여러 클러스터 관리 가능
+- **SSO 통합**: OIDC, SAML, LDAP, GitHub, GitLab 등 다양한 인증 지원
 
 ---
 

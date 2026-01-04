@@ -51,7 +51,7 @@ sequenceDiagram
 | **롤백의 복잡성** | 이전 상태로 돌아가려면 "어떤 버전이 배포되어 있었는지" 찾아야 함 |
 
 > [!WARNING]
-> **실제 사고 사례**: CI 서버가 해킹당하면 공격자가 프로덕션 클러스터에 임의 코드를 배포할 수 있습니다. 2021년 Codecov 사태에서 CI 파이프라인이 공격 벡터가 되었습니다.
+> **실제 사고 사례**: CI 서버가 해킹당하면 공격자가 프로덕션 클러스터에 임의 코드를 배포할 수 있습니다. 2021년 Codecov 사태에서 CI 파이프라인이 공격 벡터가 되어 수천 개 기업의 credential이 유출되었습니다.
 
 ---
 
@@ -86,8 +86,8 @@ spec:
         image: nginx:1.25
 ```
 
-명령형(Imperative) 접근: "nginx Pod를 3개 만들어라" (`kubectl scale`)
-선언형(Declarative) 접근: "nginx Pod가 3개인 상태가 되어야 한다" (YAML manifest)
+- **명령형(Imperative)** 접근: "nginx Pod를 3개 만들어라" (`kubectl scale`)
+- **선언형(Declarative)** 접근: "nginx Pod가 3개인 상태가 되어야 한다" (YAML manifest)
 
 > [!TIP]
 > Kubernetes 자체가 선언적 시스템입니다. GitOps는 이 철학을 Git과 결합한 것입니다.
