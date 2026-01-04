@@ -14,6 +14,42 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://seogyukim.com/blog/gitops-06-ci-integration</loc>
+    <lastmod>2026-01-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://seogyukim.com/blog/gitops-05-secrets-management</loc>
+    <lastmod>2026-01-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://seogyukim.com/blog/gitops-04-config-management</loc>
+    <lastmod>2026-01-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://seogyukim.com/blog/gitops-03-flux-cd</loc>
+    <lastmod>2026-01-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://seogyukim.com/blog/gitops-02-argocd-deep-dive</loc>
+    <lastmod>2026-01-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://seogyukim.com/blog/gitops-01-introduction</loc>
+    <lastmod>2026-01-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://seogyukim.com/blog/k8s-06-security</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>

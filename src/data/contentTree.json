@@ -68,6 +68,55 @@
         ]
       },
       {
+        "name": "Gitops",
+        "type": "folder",
+        "path": "backend/gitops",
+        "children": [
+          {
+            "name": "GitOps 심화 시리즈 #1: GitOps란 무엇인가 - 철학과 원칙",
+            "type": "post",
+            "path": "backend/gitops/gitops-01-introduction",
+            "slug": "gitops-01-introduction",
+            "title": "GitOps 심화 시리즈 #1: GitOps란 무엇인가 - 철학과 원칙"
+          },
+          {
+            "name": "GitOps 심화 시리즈 #2: ArgoCD Deep Dive - 아키텍처와 동작 원리",
+            "type": "post",
+            "path": "backend/gitops/gitops-02-argocd-deep-dive",
+            "slug": "gitops-02-argocd-deep-dive",
+            "title": "GitOps 심화 시리즈 #2: ArgoCD Deep Dive - 아키텍처와 동작 원리"
+          },
+          {
+            "name": "GitOps 심화 시리즈 #3: Flux CD - GitOps Toolkit과 컨트롤러 아키텍처",
+            "type": "post",
+            "path": "backend/gitops/gitops-03-flux-cd",
+            "slug": "gitops-03-flux-cd",
+            "title": "GitOps 심화 시리즈 #3: Flux CD - GitOps Toolkit과 컨트롤러 아키텍처"
+          },
+          {
+            "name": "GitOps 심화 시리즈 #4: 환경별 설정 관리 - Kustomize vs Helm",
+            "type": "post",
+            "path": "backend/gitops/gitops-04-config-management",
+            "slug": "gitops-04-config-management",
+            "title": "GitOps 심화 시리즈 #4: 환경별 설정 관리 - Kustomize vs Helm"
+          },
+          {
+            "name": "GitOps 심화 시리즈 #5: Secrets Management - Git에 비밀을 안전하게 저장하기",
+            "type": "post",
+            "path": "backend/gitops/gitops-05-secrets-management",
+            "slug": "gitops-05-secrets-management",
+            "title": "GitOps 심화 시리즈 #5: Secrets Management - Git에 비밀을 안전하게 저장하기"
+          },
+          {
+            "name": "GitOps 심화 시리즈 #6: CI/CD 파이프라인 통합과 Progressive Delivery",
+            "type": "post",
+            "path": "backend/gitops/gitops-06-ci-integration",
+            "slug": "gitops-06-ci-integration",
+            "title": "GitOps 심화 시리즈 #6: CI/CD 파이프라인 통합과 Progressive Delivery"
+          }
+        ]
+      },
+      {
         "name": "Go",
         "type": "folder",
         "path": "backend/go",
