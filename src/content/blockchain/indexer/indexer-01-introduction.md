@@ -11,11 +11,11 @@ public: true
 ## 시리즈 목차
 
 1. **블록체인 인덱서란?** (현재 글)
-2. [인덱서 아키텍처 Deep Dive](/blog/blockchain/indexer-02-architecture)
-3. [이력 테이블 vs 스냅샷 테이블](/blog/blockchain/indexer-03-database-design)
-4. [Rust로 인덱서 SDK 만들기](/blog/blockchain/indexer-04-rust-sdk)
-5. [Diesel ORM 실전 활용](/blog/blockchain/indexer-05-diesel-orm)
-6. [멱등성 있는 인덱서 핸들러 설계](/blog/blockchain/indexer-06-idempotency)
+2. [인덱서 아키텍처 Deep Dive](/blog/blockchain/indexer/indexer-02-architecture)
+3. [이력 테이블 vs 스냅샷 테이블](/blog/blockchain/indexer/indexer-03-database-design)
+4. [Rust로 인덱서 SDK 만들기](/blog/blockchain/indexer/indexer-04-rust-sdk)
+5. [Diesel ORM 실전 활용](/blog/blockchain/indexer/indexer-05-diesel-orm)
+6. [멱등성 있는 인덱서 핸들러 설계](/blog/blockchain/indexer/indexer-06-idempotency)
 
 ---
 
@@ -173,7 +173,7 @@ flowchart TB
 
 ## 다음 편 예고
 
-**[2편: 인덱서 아키텍처 Deep Dive - ETL 파이프라인으로 이해하기](/blog/blockchain/indexer-02-architecture)**
+**[2편: 인덱서 아키텍처 Deep Dive - ETL 파이프라인으로 이해하기](/blog/blockchain/indexer/indexer-02-architecture)**
 
 - gRPC 트랜잭션 스트림 상세 분석
 - 파싱 파이프라인 설계

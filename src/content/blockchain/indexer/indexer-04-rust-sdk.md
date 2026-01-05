@@ -10,12 +10,12 @@ public: true
 
 ## 시리즈 목차
 
-1. [블록체인 인덱서란?](/blog/blockchain/indexer-01-introduction)
-2. [인덱서 아키텍처 Deep Dive](/blog/blockchain/indexer-02-architecture)
-3. [이력 테이블 vs 스냅샷 테이블](/blog/blockchain/indexer-03-database-design)
+1. [블록체인 인덱서란?](/blog/blockchain/indexer/indexer-01-introduction)
+2. [인덱서 아키텍처 Deep Dive](/blog/blockchain/indexer/indexer-02-architecture)
+3. [이력 테이블 vs 스냅샷 테이블](/blog/blockchain/indexer/indexer-03-database-design)
 4. **Rust로 인덱서 SDK 만들기** (현재 글)
-5. [Diesel ORM 실전 활용](/blog/blockchain/indexer-05-diesel-orm)
-6. [멱등성 있는 인덱서 핸들러 설계](/blog/blockchain/indexer-06-idempotency)
+5. [Diesel ORM 실전 활용](/blog/blockchain/indexer/indexer-05-diesel-orm)
+6. [멱등성 있는 인덱서 핸들러 설계](/blog/blockchain/indexer/indexer-06-idempotency)
 
 ---
 
@@ -369,7 +369,7 @@ flowchart TB
 
 ## 다음 편 예고
 
-**[5편: Diesel ORM 실전 활용 - 비동기 DB 처리와 배치 최적화](/blog/blockchain/indexer-05-diesel-orm)**
+**[5편: Diesel ORM 실전 활용 - 비동기 DB 처리와 배치 최적화](/blog/blockchain/indexer/indexer-05-diesel-orm)**
 
 - `diesel-async` 소개
 - 파라미터 수 제한과 청크 처리

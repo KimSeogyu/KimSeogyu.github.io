@@ -10,12 +10,12 @@ public: true
 
 ## 시리즈 목차
 
-1. [블록체인 인덱서란?](/blog/blockchain/indexer-01-introduction)
-2. [인덱서 아키텍처 Deep Dive](/blog/blockchain/indexer-02-architecture)
-3. [이력 테이블 vs 스냅샷 테이블](/blog/blockchain/indexer-03-database-design)
-4. [Rust로 인덱서 SDK 만들기](/blog/blockchain/indexer-04-rust-sdk)
+1. [블록체인 인덱서란?](/blog/blockchain/indexer/indexer-01-introduction)
+2. [인덱서 아키텍처 Deep Dive](/blog/blockchain/indexer/indexer-02-architecture)
+3. [이력 테이블 vs 스냅샷 테이블](/blog/blockchain/indexer/indexer-03-database-design)
+4. [Rust로 인덱서 SDK 만들기](/blog/blockchain/indexer/indexer-04-rust-sdk)
 5. **Diesel ORM 실전 활용** (현재 글)
-6. [멱등성 있는 인덱서 핸들러 설계](/blog/blockchain/indexer-06-idempotency)
+6. [멱등성 있는 인덱서 핸들러 설계](/blog/blockchain/indexer/indexer-06-idempotency)
 
 ---
 
@@ -339,7 +339,7 @@ let pool = Pool::builder()
 
 ## 다음 편 예고
 
-**[6편: 멱등성 있는 인덱서 핸들러 설계 - 재처리 안전성 확보](/blog/blockchain/indexer-06-idempotency)**
+**[6편: 멱등성 있는 인덱서 핸들러 설계 - 재처리 안전성 확보](/blog/blockchain/indexer/indexer-06-idempotency)**
 
 - 멱등성(Idempotency)이란?
 - 왜 인덱서에서 중요한가?

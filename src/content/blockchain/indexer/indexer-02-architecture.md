@@ -10,12 +10,12 @@ public: true
 
 ## 시리즈 목차
 
-1. [블록체인 인덱서란?](/blog/blockchain/indexer-01-introduction)
+1. [블록체인 인덱서란?](/blog/blockchain/indexer/indexer-01-introduction)
 2. **인덱서 아키텍처 Deep Dive** (현재 글)
-3. [이력 테이블 vs 스냅샷 테이블](/blog/blockchain/indexer-03-database-design)
-4. [Rust로 인덱서 SDK 만들기](/blog/blockchain/indexer-04-rust-sdk)
-5. [Diesel ORM 실전 활용](/blog/blockchain/indexer-05-diesel-orm)
-6. [멱등성 있는 인덱서 핸들러 설계](/blog/blockchain/indexer-06-idempotency)
+3. [이력 테이블 vs 스냅샷 테이블](/blog/blockchain/indexer/indexer-03-database-design)
+4. [Rust로 인덱서 SDK 만들기](/blog/blockchain/indexer/indexer-04-rust-sdk)
+5. [Diesel ORM 실전 활용](/blog/blockchain/indexer/indexer-05-diesel-orm)
+6. [멱등성 있는 인덱서 핸들러 설계](/blog/blockchain/indexer/indexer-06-idempotency)
 
 ---
 
@@ -256,7 +256,7 @@ flowchart TB
 
 ## 다음 편 예고
 
-**[3편: 이력 테이블 vs 스냅샷 테이블 - 인덱서 DB 설계 전략](/blog/blockchain/indexer-03-database-design)**
+**[3편: 이력 테이블 vs 스냅샷 테이블 - 인덱서 DB 설계 전략](/blog/blockchain/indexer/indexer-03-database-design)**
 
 - 변경 이력 추적의 필요성
 - 현재 상태 조회 최적화

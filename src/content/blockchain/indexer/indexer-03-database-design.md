@@ -10,12 +10,12 @@ public: true
 
 ## 시리즈 목차
 
-1. [블록체인 인덱서란?](/blog/blockchain/indexer-01-introduction)
-2. [인덱서 아키텍처 Deep Dive](/blog/blockchain/indexer-02-architecture)
+1. [블록체인 인덱서란?](/blog/blockchain/indexer/indexer-01-introduction)
+2. [인덱서 아키텍처 Deep Dive](/blog/blockchain/indexer/indexer-02-architecture)
 3. **이력 테이블 vs 스냅샷 테이블** (현재 글)
-4. [Rust로 인덱서 SDK 만들기](/blog/blockchain/indexer-04-rust-sdk)
-5. [Diesel ORM 실전 활용](/blog/blockchain/indexer-05-diesel-orm)
-6. [멱등성 있는 인덱서 핸들러 설계](/blog/blockchain/indexer-06-idempotency)
+4. [Rust로 인덱서 SDK 만들기](/blog/blockchain/indexer/indexer-04-rust-sdk)
+5. [Diesel ORM 실전 활용](/blog/blockchain/indexer/indexer-05-diesel-orm)
+6. [멱등성 있는 인덱서 핸들러 설계](/blog/blockchain/indexer/indexer-06-idempotency)
 
 ---
 
@@ -287,7 +287,7 @@ WHERE status = 'ACTIVE';  -- 부분 인덱스
 
 ## 다음 편 예고
 
-**[4편: Rust로 인덱서 SDK 만들기 - 파이프라인 오케스트레이터 설계](/blog/blockchain/indexer-04-rust-sdk)**
+**[4편: Rust로 인덱서 SDK 만들기 - 파이프라인 오케스트레이터 설계](/blog/blockchain/indexer/indexer-04-rust-sdk)**
 
 - SDK가 필요한 이유
 - 핵심 컴포넌트 설계
