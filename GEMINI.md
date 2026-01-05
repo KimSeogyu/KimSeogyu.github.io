@@ -150,7 +150,7 @@ private: false  # true면 빌드에서 제외
 ---
 ```
 
-3. 빌드: `pnpm build` → `src/data/posts.json` 자동 갱신
+1. 빌드: `pnpm build` → `src/data/posts.json` 자동 갱신
 
 ### Content Categories
 
@@ -159,6 +159,33 @@ private: false  # true면 빌드에서 제외
 - `ai-ml/` - LLM, RAG, ML Ops
 - `distributed-systems/` - System Design
 - `database/` - PostgreSQL, Redis
+
+### ✍️ Writing Principles (블로그 작성 원칙)
+
+> 42dot 프로젝트 경험을 블로그로 작성할 때 적용하는 원칙
+
+#### 1. 내부 플랫폼명 노출 금지
+
+| 내부 이름 | 일반화된 표현 |
+|-----------|---------------|
+| Stellar | 엔터프라이즈 블록체인, Move 기반 체인 |
+| AstraKey | PKI (Certificate & Key Management) |
+| Aptos Fork | Move 기반 체인, 엔터프라이즈 블록체인 |
+
+#### 2. SDK 구조체/Trait 이름 추상화
+
+| 구체적 SDK 이름 | 블로그에서 쓸 일반화된 표현 |
+|-----------------|---------------------------|
+| `ProcessorFramework` | 파이프라인 오케스트레이터 |
+| `TransactionHandler` | 비즈니스 로직 핸들러 Trait |
+| `ProcessableWrapper` | 어댑터 패턴 |
+| `Step-Channel` | Producer-Consumer / mpsc 채널 패턴 |
+
+#### 3. 표현 주의사항
+
+- ❌ "Aptos Fork에서 개발한..." → ✅ "Move 기반 체인에서 개발한..."
+- ❌ "Stellar 인덱서 SDK" → ✅ "엔터프라이즈 인덱서 SDK"
+- ❌ "AstraKey 관리 시스템" → ✅ "PKI/인증서 관리 시스템"
 
 ---
 

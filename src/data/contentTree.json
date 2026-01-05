@@ -19,6 +19,55 @@
     "path": "backend",
     "children": [
       {
+        "name": "Blockchain",
+        "type": "folder",
+        "path": "backend/blockchain",
+        "children": [
+          {
+            "name": "멱등성 있는 인덱서 핸들러 설계 - 재처리 안전성 확보",
+            "type": "post",
+            "path": "backend/blockchain/indexer-06-idempotency",
+            "slug": "indexer-06-idempotency",
+            "title": "멱등성 있는 인덱서 핸들러 설계 - 재처리 안전성 확보"
+          },
+          {
+            "name": "블록체인 인덱서란? - 왜 필요하고 어떻게 동작하는가",
+            "type": "post",
+            "path": "backend/blockchain/indexer-01-introduction",
+            "slug": "indexer-01-introduction",
+            "title": "블록체인 인덱서란? - 왜 필요하고 어떻게 동작하는가"
+          },
+          {
+            "name": "이력 테이블 vs 스냅샷 테이블 - 인덱서 DB 설계 전략",
+            "type": "post",
+            "path": "backend/blockchain/indexer-03-database-design",
+            "slug": "indexer-03-database-design",
+            "title": "이력 테이블 vs 스냅샷 테이블 - 인덱서 DB 설계 전략"
+          },
+          {
+            "name": "인덱서 아키텍처 Deep Dive - ETL 파이프라인으로 이해하기",
+            "type": "post",
+            "path": "backend/blockchain/indexer-02-architecture",
+            "slug": "indexer-02-architecture",
+            "title": "인덱서 아키텍처 Deep Dive - ETL 파이프라인으로 이해하기"
+          },
+          {
+            "name": "Diesel ORM 실전 활용 - 비동기 DB 처리와 배치 최적화",
+            "type": "post",
+            "path": "backend/blockchain/indexer-05-diesel-orm",
+            "slug": "indexer-05-diesel-orm",
+            "title": "Diesel ORM 실전 활용 - 비동기 DB 처리와 배치 최적화"
+          },
+          {
+            "name": "Rust로 인덱서 SDK 만들기 - 파이프라인 오케스트레이터 설계",
+            "type": "post",
+            "path": "backend/blockchain/indexer-04-rust-sdk",
+            "slug": "indexer-04-rust-sdk",
+            "title": "Rust로 인덱서 SDK 만들기 - 파이프라인 오케스트레이터 설계"
+          }
+        ]
+      },
+      {
         "name": "Devops",
         "type": "folder",
         "path": "backend/devops",
