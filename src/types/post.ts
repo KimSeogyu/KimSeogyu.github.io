@@ -17,6 +17,7 @@ export interface Post {
   wordCount: number;
   isFeatured: boolean;
   series?: string;
+  seriesOrder?: number;
   date?: string;
   image?: string;
 }

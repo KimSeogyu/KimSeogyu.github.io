@@ -213,6 +213,7 @@ function parseMarkdownFile(filePath: string, relativePath: string): Post | null 
       isFeatured: frontmatter.isFeatured || false,
       isPublic: frontmatter.public === true,
       series: frontmatter.series,
+      seriesOrder: frontmatter.seriesOrder,
       date: String(frontmatter.date || new Date().toISOString().split('T')[0]),
       image: frontmatter.image
     }
