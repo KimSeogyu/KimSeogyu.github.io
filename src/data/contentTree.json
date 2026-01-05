@@ -38,6 +38,48 @@
             "title": "Docker 멀티스테이지 빌드 최적화 가이드"
           },
           {
+            "name": "GitLab CI/CD 시리즈 #1: 기초 - .gitlab-ci.yml의 구조와 Pipeline 이해",
+            "type": "post",
+            "path": "backend/devops/gitlab-ci-01-fundamentals",
+            "slug": "gitlab-ci-01-fundamentals",
+            "title": "GitLab CI/CD 시리즈 #1: 기초 - .gitlab-ci.yml의 구조와 Pipeline 이해"
+          },
+          {
+            "name": "GitLab CI/CD 시리즈 #2: Variables와 Secrets 관리",
+            "type": "post",
+            "path": "backend/devops/gitlab-ci-02-variables-secrets",
+            "slug": "gitlab-ci-02-variables-secrets",
+            "title": "GitLab CI/CD 시리즈 #2: Variables와 Secrets 관리"
+          },
+          {
+            "name": "GitLab CI/CD 시리즈 #3: Runners와 Executors - Docker-in-Docker 심화",
+            "type": "post",
+            "path": "backend/devops/gitlab-ci-03-runners-executors",
+            "slug": "gitlab-ci-03-runners-executors",
+            "title": "GitLab CI/CD 시리즈 #3: Runners와 Executors - Docker-in-Docker 심화"
+          },
+          {
+            "name": "GitLab CI/CD 시리즈 #4: Pipeline 아키텍처 - Parent-Child와 Multi-Project",
+            "type": "post",
+            "path": "backend/devops/gitlab-ci-04-pipeline-architectures",
+            "slug": "gitlab-ci-04-pipeline-architectures",
+            "title": "GitLab CI/CD 시리즈 #4: Pipeline 아키텍처 - Parent-Child와 Multi-Project"
+          },
+          {
+            "name": "GitLab CI/CD 시리즈 #5: 고급 Job 제어 - rules, needs, DAG",
+            "type": "post",
+            "path": "backend/devops/gitlab-ci-05-advanced-job-control",
+            "slug": "gitlab-ci-05-advanced-job-control",
+            "title": "GitLab CI/CD 시리즈 #5: 고급 Job 제어 - rules, needs, DAG"
+          },
+          {
+            "name": "GitLab CI/CD 시리즈 #6: 외부 통합 - Triggers, Webhooks, API",
+            "type": "post",
+            "path": "backend/devops/gitlab-ci-06-external-integrations",
+            "slug": "gitlab-ci-06-external-integrations",
+            "title": "GitLab CI/CD 시리즈 #6: 외부 통합 - Triggers, Webhooks, API"
+          },
+          {
             "name": "Helm 환경별 Values 오버라이드 전략",
             "type": "post",
             "path": "backend/devops/helm-environment-management",
