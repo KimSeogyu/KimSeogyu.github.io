@@ -185,13 +185,13 @@ variables:
 
 ```mermaid
 flowchart TB
-    subgraph Variables [Protected Variable: PROD_API_KEY]
-        V[PROD_API_KEY = "secret"]
+    subgraph Variables ["Protected Variable: PROD_API_KEY"]
+        V["PROD_API_KEY = secret"]
     end
     
     subgraph Branches
-        Main[main - Protected ✓]
-        Feature[feature/* - 일반]
+        Main["main - Protected ✓"]
+        Feature["feature/* - 일반"]
     end
     
     V -->|접근 가능| Main
