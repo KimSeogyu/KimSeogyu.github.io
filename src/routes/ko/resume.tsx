@@ -187,7 +187,7 @@ function ResumePage() {
             {/* KB Securities */}
             <ExperienceItem
               company="KB증권 (KB Securities)"
-              role="Senior AI Solution Architect | AI Tech Team"
+              role="과장 (Manager) | AI 디지털본부 AI Tech"
               period="2025.09 - Present"
               location="Seoul, South Korea"
               projects={[
