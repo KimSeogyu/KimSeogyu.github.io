@@ -100,8 +100,8 @@ function ResumePage() {
                   text="Hybrid RAG 아키텍처로 리스크 검출 신뢰도 95% 달성 (Kiwi + BM25 + FAISS)."
                 />
                 <SummaryItem
-                  label="SRE & Stability"
-                  text="금융 입출금 실패율 10% → 0.1% 미만으로 개선하여 운영 효율성 극대화."
+                  label="Transaction Reliability"
+                  text="멱등성 보장 설계와 원장 대사 자동화로 금융 입출금 실패율 10% → 0.1% 미만 달성."
                 />
               </div>
             </CardContent>
@@ -328,7 +328,7 @@ function ResumePage() {
                   outcome: "런칭 후 오픈 기간 동안 장애 횟수 0회 달성",
                 },
                 {
-                  title: "금융 입출금 플랫폼 안정화",
+                  title: "금융 입출금 플랫폼 트랜잭션 신뢰성 개선",
                   techStack: [
                     "Node.js",
                     "TypeScript (NestJS)",
@@ -337,14 +337,14 @@ function ResumePage() {
                   ],
                   details: [
                     {
-                      label: "다단계 장애 감지",
+                      label: "Idempotency 설계",
                       content:
-                        "자동 재처리 로직 개선 및 이벤트 기반 상태 추적으로 운영 효율화.",
+                        "중복 트랜잭션 방지를 위한 멱등성 키 체계 도입 및 재시도 로직 안정화.",
                     },
                     {
-                      label: "레거시 현대화",
+                      label: "Reconciliation 자동화",
                       content:
-                        "Pure JS → TypeScript (NestJS) 점진적 마이그레이션. AOP/Interceptor 기반 로깅 체계 도입.",
+                        "블록체인 온체인 데이터와 내부 원장 간 대사 검증 파이프라인 구축.",
                     },
                     {
                       label: "블록체인 노드 운영",
