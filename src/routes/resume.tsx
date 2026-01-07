@@ -87,7 +87,8 @@ function ResumePage() {
             <CardContent className="pt-6 relative print:pt-4 print:pb-4">
               <div className="absolute top-0 left-0 w-1 h-full bg-linear-to-b from-blue-500 to-purple-500 rounded-l-md opacity-70 print:w-[2px]" />
               <p className="text-lg leading-relaxed text-muted-foreground italic pl-2 mb-6 print:text-base print:mb-3">
-                "새로운 도전을 즐기고 의미 있는 일을 열망하는 개발자 입니다."
+                "복잡한 시스템을 끝까지 이해하고, 실전에서 증명하며, 얻은 지식을
+                체계적으로 공유하는 엔지니어입니다."
               </p>
               <div className="space-y-3 print:space-y-2">
                 <SummaryItem
@@ -205,7 +206,8 @@ function ResumePage() {
                         "비동기 스케줄링 및 DB 캐싱으로 LLM 호출 지연 해결 및 실시간 응답 환경 구축.",
                     },
                   ],
-                  outcome: "리스크 검출 신뢰도 95% 달성 (평가 데이터셋 기준)",
+                  outcome:
+                    "리스크 검출 신뢰도 95% 달성 (실제 심사 보고서 기반 운영 성과)",
                 },
                 {
                   title: "AI 평가 에이전트 및 통계 모니터링",
@@ -302,6 +304,30 @@ function ResumePage() {
               location="Seoul, South Korea"
               projects={[
                 {
+                  title: "스테이킹 서비스 '플러스 2.0' 아키텍처 리뷰",
+                  description:
+                    "런칭 직전 긴급 투입하여 시스템 전반 테크 리뷰 수행",
+                  techStack: [
+                    "Node.js",
+                    "TypeScript (NestJS)",
+                    "PostgreSQL",
+                    "Redis",
+                  ],
+                  details: [
+                    {
+                      label: "아키텍처 리뷰",
+                      content:
+                        "기존 설계의 중대한 문제점 식별 및 시스템 아키텍처 전면 재설계.",
+                    },
+                    {
+                      label: "직접 구현",
+                      content:
+                        "재설계된 아키텍처를 바탕으로 핵심 모듈 직접 수정 및 안정화.",
+                    },
+                  ],
+                  outcome: "런칭 후 오픈 기간 동안 장애 횟수 0회 달성",
+                },
+                {
                   title: "금융 입출금 플랫폼 안정화",
                   techStack: [
                     "Node.js",
@@ -318,16 +344,29 @@ function ResumePage() {
                     {
                       label: "레거시 현대화",
                       content:
-                        "Pure JS → TypeScript (NestJS) 점진적 마이그레이션. AOP/Interceptor 도입으로 로깅 표준화 (커버리지 50% 확보).",
+                        "Pure JS → TypeScript (NestJS) 점진적 마이그레이션. AOP/Interceptor 기반 로깅 체계 도입.",
                     },
                     {
-                      label: "블록체인 노드 연동",
+                      label: "블록체인 노드 운영",
                       content:
-                        "Bitcoin, Ethereum 등 주요 체인 지갑 서비스 개발 및 운영.",
+                        "Bitcoin, Ethereum 등 10개 이상 체인의 노드 인프라 관리 및 지갑 서비스 개발.",
                     },
                   ],
                   outcome:
                     "입출금 실패율 10% → 0.1% 미만 개선, 수동 운영 공수 90% 절감.",
+                },
+                {
+                  title: "사내 공통 서비스 템플릿 개발",
+                  techStack: ["TypeScript", "NestJS"],
+                  details: [
+                    {
+                      label: "템플릿 설계",
+                      content:
+                        "서비스 레이어만 구현하면 되도록 NestJS 기반 표준 템플릿 제작. 인증, 로깅, 에러처리 등 공통 관심사 사전 구현.",
+                    },
+                  ],
+                  outcome:
+                    "신규 서비스 개발 시간 단축 및 팀 간 코드 일관성 확보.",
                 },
               ]}
             />
@@ -399,6 +438,45 @@ function ResumePage() {
                 },
               ]}
             />
+          </div>
+        </section>
+
+        {/* Education */}
+        <section className="space-y-6 print:space-y-4 print:break-inside-avoid">
+          <h2 className="text-2xl font-bold text-primary print:text-xl print:mb-2">
+            Education
+          </h2>
+          <div className="space-y-2">
+            <Card className="print:shadow-none">
+              <CardContent className="py-4 print:py-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <div>
+                    <h3 className="text-lg font-bold">42 Seoul</h3>
+                    <p className="text-muted-foreground text-sm">
+                      Software Engineering | Peer-to-Peer Learning
+                    </p>
+                  </div>
+                  <span className="text-sm text-muted-foreground bg-muted/60 px-2 py-0.5 rounded whitespace-nowrap print:bg-transparent print:p-0">
+                    2020.01 - 2021.01
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="print:shadow-none">
+              <CardContent className="py-4 print:py-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <div>
+                    <h3 className="text-lg font-bold">경기대학교</h3>
+                    <p className="text-muted-foreground text-sm">
+                      국어국문학과 / 경영학과 (복수전공) | 학사
+                    </p>
+                  </div>
+                  <span className="text-sm text-muted-foreground bg-muted/60 px-2 py-0.5 rounded whitespace-nowrap print:bg-transparent print:p-0">
+                    2013.03 - 2020.02
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
