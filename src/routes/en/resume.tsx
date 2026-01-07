@@ -2,13 +2,24 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Separator } from "~/components/ui/separator";
-import { Github, Linkedin, Mail, Phone, ExternalLink, Globe } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Phone,
+  ExternalLink,
+  Globe,
+} from "lucide-react";
 
 export const Route = createFileRoute("/en/resume")({
   head: () => ({
     meta: [
       { title: "SeogyuKim_Resume_Backend" },
-      { name: "description", content: "Senior Software Engineer specializing in Distributed Systems and Financial Transaction Reliability" },
+      {
+        name: "description",
+        content:
+          "Senior Software Engineer specializing in Distributed Systems and Financial Transaction Reliability",
+      },
     ],
   }),
   component: ResumePageEN,
@@ -103,9 +114,11 @@ function ResumePageEN() {
             <CardContent className="pt-6 relative print:pt-4 print:pb-4">
               <div className="absolute top-0 left-0 w-1 h-full bg-linear-to-b from-blue-500 to-purple-500 rounded-l-md opacity-70 print:w-[2px]" />
               <p className="text-lg leading-relaxed text-muted-foreground italic pl-2 mb-6 print:text-base print:mb-3">
-                "Senior Software Engineer specializing in Distributed Systems and Financial Transaction Reliability. 
-                Proven track record of designing high-throughput storage (1,500 TPS) and ensuring 99.999% data integrity. 
-                Experienced in bridging Blockchain technology with Enterprise Finance."
+                "Senior Software Engineer specializing in Distributed Systems
+                and Financial Transaction Reliability. Proven track record of
+                designing high-throughput storage (1,500 TPS) and ensuring
+                99.999% data integrity. Experienced in bridging Blockchain
+                technology with Enterprise Finance."
               </p>
               <div className="space-y-3 print:space-y-2">
                 <SummaryItem
@@ -179,40 +192,51 @@ function ResumePageEN() {
             {/* KB Securities */}
             <ExperienceItem
               company="KB Securities"
-              role="Manager | AI Tech Team"
+              role="Senior AI Solution Architect | AI Tech Team"
               period="Sep 2025 – Present"
               location="Seoul, South Korea"
               projects={[
                 {
-                  title: "AI Risk Review Agent",
+                  title: "KB AI Agent Platform",
                   description:
-                    "Automated risk detection system for unstructured financial documents",
+                    "Spearheaded the development of an Enterprise RAG Core Engine and Agent Workflow for automated risk review of complex financial documents.",
                   techStack: [
                     "Python",
-                    "LangChain",
-                    "FAISS",
-                    "Kiwi",
+                    "LangGraph",
+                    "FastAPI",
                     "PostgreSQL",
+                    "FAISS",
+                    "pymupdf",
                   ],
                   details: [
                     {
-                      label: "Engineered Hybrid RAG pipeline",
+                      label: "Advanced Document Parsing",
                       content:
-                        "combining keyword search (Kiwi/BM25) and semantic search (FAISS) with RRF reranking.",
+                        "Engineered 2-Pass Hierarchy Strategy (Candidate Extraction + Global Context) and Index Snapping algorithm to resolve complex nested structures in financial agreements.",
                     },
                     {
-                      label: "Built Paragraph Tree structure",
+                      label: "Smart Table Stitching",
                       content:
-                        "using rule-based parser to restore PDF/DOCX hierarchy, enhancing context retention.",
+                        "Implemented PDF Table Stitching pipeline using pymupdf-layout to merge page-spanning tables and correct deeply nested HTML parsing errors.",
                     },
                     {
-                      label: "Optimized system latency",
+                      label: "Robust Agent Workflow",
                       content:
-                        "by implementing async scheduling and DB caching, resolving LLM timeouts.",
+                        "Designed Adaptive Filtering Logic and Dynamic Batch Query Generation (Batch Size=10) to minimize hallucination and optimize token usage.",
+                    },
+                    {
+                      label: "Self-Correction Pipeline",
+                      content:
+                        "Built an automated OCR Fallback mechanism to handle text extraction failures (FileEmptyException) by switching to vision-based processing/cleaning.",
+                    },
+                    {
+                      label: "Backend Engineering",
+                      content:
+                        "Developed Secure Stream Processing for efficient large-file handling (bypassing memory limits) and a high-concurrency Async API architecture.",
                     },
                   ],
                   outcome:
-                    "Achieved 95% risk detection reliability in production, verified against actual audit reports.",
+                    "Achieved significant improvement in parsing accuracy for structured financial data and ensured 99.9% system stability during large-scale batch processing.",
                 },
               ]}
             />
@@ -242,7 +266,8 @@ function ResumePageEN() {
                         "using Reed-Solomon Erasure Coding (based on Celestia/Ceph research).",
                     },
                     {
-                      label: "Implemented custom in-memory Merkle Patricia Trie",
+                      label:
+                        "Implemented custom in-memory Merkle Patricia Trie",
                       content:
                         "(based on Go-Ethereum) to verify batch audit log integrity with single root hash.",
                     },
@@ -418,7 +443,8 @@ function ResumePageEN() {
                   <div>
                     <h3 className="text-lg font-bold">Kyonggi University</h3>
                     <p className="text-muted-foreground text-sm">
-                      B.A. in Korean Language & Literature / Business Administration (Double Major)
+                      B.A. in Korean Language & Literature / Business
+                      Administration (Double Major)
                     </p>
                   </div>
                   <span className="text-sm text-muted-foreground bg-muted/60 px-2 py-0.5 rounded whitespace-nowrap print:bg-transparent print:p-0">
@@ -586,9 +612,7 @@ function ExperienceItem({
 
               {project.outcome && (
                 <div className="mt-4 pt-3 border-t border-border/40 text-sm print:mt-2 print:pt-2 print:text-xs">
-                  <span className="font-bold text-primary mr-2">
-                    Impact:
-                  </span>
+                  <span className="font-bold text-primary mr-2">Impact:</span>
                   <span className="text-foreground/90 font-medium">
                     {project.outcome}
                   </span>

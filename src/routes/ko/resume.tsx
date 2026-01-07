@@ -187,40 +187,51 @@ function ResumePage() {
             {/* KB Securities */}
             <ExperienceItem
               company="KB증권 (KB Securities)"
-              role="과장 (Manager) | AI 디지털본부 AI Tech팀"
+              role="Senior AI Solution Architect | AI Tech Team"
               period="2025.09 - Present"
               location="Seoul, South Korea"
               projects={[
                 {
-                  title: "AI 위험검토 에이전트 개발",
+                  title: "KB AI Agent 플랫폼",
                   description:
-                    "비정형 금융 문서에서 리스크 항목을 자동 검출하는 AI 에이전트 시스템",
+                    "복잡한 금융 약정서의 자동 리스크 검토를 위한 엔터프라이즈 RAG 코어 엔진 및 에이전트 워크플로우 주도 개발",
                   techStack: [
                     "Python",
-                    "LangChain",
-                    "FAISS",
-                    "Kiwi",
+                    "LangGraph",
+                    "FastAPI",
                     "PostgreSQL",
+                    "FAISS",
+                    "pymupdf",
                   ],
                   details: [
                     {
-                      label: "Paragraph Tree 문서 구조화",
+                      label: "Advanced Document Parser",
                       content:
-                        "Rule-based Parser로 PDF/DOCX 표 구조 복원 및 계층적 메타데이터화. 검색 시 문서 위치 컨텍스트 유지로 정확도 향상.",
+                        "2-Pass Hierarchy Strategy(후보 추출+전역 컨텍스트)와 Index Snapping 알고리즘을 고안하여 복잡한 중첩 구조 문서를 정확히 구조화.",
                     },
                     {
-                      label: "Hybrid RAG 파이프라인",
+                      label: "Smart Table Stitching",
                       content:
-                        "Kiwi 기반 BM25 + FAISS EnsembleRetriever. Multi-Query + RRF 재순위화 + LLM Reasoning Loop 구현.",
+                        "pymupdf-layout 기반의 Table Stitching 파이프라인을 구축하여 페이지 경계에 걸친 표 병합 및 HTML 파싱 오류 해결.",
                     },
                     {
-                      label: "시스템 최적화",
+                      label: "Robust Agent Workflow",
                       content:
-                        "비동기 스케줄링 및 DB 캐싱으로 LLM 호출 지연 해결 및 실시간 응답 환경 구축.",
+                        "적응형 필터링(Adaptive Filtering)과 동적 배치 쿼리 생성(Dynamic Batching, Size=10)으로 환각 최소화 및 토큰 효율 최적화.",
+                    },
+                    {
+                      label: "Self-Correction (OCR)",
+                      content:
+                        "텍스트 추출 실패(FileEmptyException) 시 즉시 트랜잭션을 롤백하고 Page-by-Page OCR로 전환하는 자동 복구 메커니즘 구현.",
+                    },
+                    {
+                      label: "Backend Engineering",
+                      content:
+                        "대용량 파일의 Secure Stream Processing(메모리 우회) 및 고성능 비동기(Async) API 아키텍처 설계.",
                     },
                   ],
                   outcome:
-                    "리스크 검출 신뢰도 95% 달성 (실제 심사 보고서 기반 운영 성과)",
+                    "정형 금융 데이터 파싱 정확도 획기적 개선 및 대규모 배치 처리 시 99.9% 시스템 안정성 확보.",
                 },
                 {
                   title: "AI 평가 에이전트 및 통계 모니터링",
