@@ -8,7 +8,7 @@ export const siteConfig = {
   name: 'Kim Seogyu',
   title: 'Kim Seogyu | Software Engineer',
   description: 'Software Engineer leveraging deep backend expertise to build scalable systems and tackle complex challenges in AI.',
-  url: 'https://kimseogyu.github.io',
+  url: 'https://sayu.day',
   author: {
     name: 'Kim Seogyu',
     email: 'asap0208@gmail.com',

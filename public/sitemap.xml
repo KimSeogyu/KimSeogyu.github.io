@@ -2,871 +2,895 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://seogyukim.com/</loc>
+    <loc>https://sayu.day/ko</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog</loc>
+    <loc>https://sayu.day/ko/resume</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://sayu.day/ko/blog</loc>
+    <lastmod>2026-01-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sayu.day/ko/blog/tags</loc>
+    <lastmod>2026-01-07</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sayu.day/ko/blog/series</loc>
+    <lastmod>2026-01-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sayu.day/en/resume</loc>
+    <lastmod>2026-01-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitlab-ci-02-variables-secrets</loc>
+    <loc>https://sayu.day/ko/blog/gitlab-ci-02-variables-secrets</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/indexer-06-idempotency</loc>
+    <loc>https://sayu.day/ko/blog/indexer-06-idempotency</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/indexer-05-diesel-orm</loc>
+    <loc>https://sayu.day/ko/blog/indexer-05-diesel-orm</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/indexer-04-rust-sdk</loc>
+    <loc>https://sayu.day/ko/blog/indexer-04-rust-sdk</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/indexer-03-database-design</loc>
+    <loc>https://sayu.day/ko/blog/indexer-03-database-design</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/indexer-02-architecture</loc>
+    <loc>https://sayu.day/ko/blog/indexer-02-architecture</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/indexer-01-introduction</loc>
+    <loc>https://sayu.day/ko/blog/indexer-01-introduction</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitops-06-ci-integration</loc>
+    <loc>https://sayu.day/ko/blog/gitops-06-ci-integration</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitops-05-secrets-management</loc>
+    <loc>https://sayu.day/ko/blog/gitops-05-secrets-management</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitops-04-config-management</loc>
+    <loc>https://sayu.day/ko/blog/gitops-04-config-management</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitops-03-flux-cd</loc>
+    <loc>https://sayu.day/ko/blog/gitops-03-flux-cd</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitops-02-argocd-deep-dive</loc>
+    <loc>https://sayu.day/ko/blog/gitops-02-argocd-deep-dive</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitops-01-introduction</loc>
+    <loc>https://sayu.day/ko/blog/gitops-01-introduction</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitlab-ci-06-external-integrations</loc>
+    <loc>https://sayu.day/ko/blog/gitlab-ci-06-external-integrations</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitlab-ci-05-advanced-job-control</loc>
+    <loc>https://sayu.day/ko/blog/gitlab-ci-05-advanced-job-control</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitlab-ci-04-pipeline-architectures</loc>
+    <loc>https://sayu.day/ko/blog/gitlab-ci-04-pipeline-architectures</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitlab-ci-03-runners-executors</loc>
+    <loc>https://sayu.day/ko/blog/gitlab-ci-03-runners-executors</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gitlab-ci-01-fundamentals</loc>
+    <loc>https://sayu.day/ko/blog/gitlab-ci-01-fundamentals</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/k8s-06-security</loc>
+    <loc>https://sayu.day/ko/blog/k8s-06-security</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/k8s-05-autoscaling</loc>
+    <loc>https://sayu.day/ko/blog/k8s-05-autoscaling</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/k8s-04-istio-service-mesh</loc>
+    <loc>https://sayu.day/ko/blog/k8s-04-istio-service-mesh</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/k8s-03-config-secrets</loc>
+    <loc>https://sayu.day/ko/blog/k8s-03-config-secrets</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/k8s-02-service-networking</loc>
+    <loc>https://sayu.day/ko/blog/k8s-02-service-networking</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/k8s-01-workload-controllers</loc>
+    <loc>https://sayu.day/ko/blog/k8s-01-workload-controllers</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/asyncio-concurrency-guide</loc>
+    <loc>https://sayu.day/ko/blog/asyncio-concurrency-guide</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/postgresql-query-tuning-guide</loc>
+    <loc>https://sayu.day/ko/blog/postgresql-query-tuning-guide</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-12-data-quality</loc>
+    <loc>https://sayu.day/ko/blog/de-12-data-quality</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-11-dimensional-modeling</loc>
+    <loc>https://sayu.day/ko/blog/de-11-dimensional-modeling</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-10-lakehouse-architecture</loc>
+    <loc>https://sayu.day/ko/blog/de-10-lakehouse-architecture</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-09-spark-structured-streaming</loc>
+    <loc>https://sayu.day/ko/blog/de-09-spark-structured-streaming</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-08-kafka-fundamentals</loc>
+    <loc>https://sayu.day/ko/blog/de-08-kafka-fundamentals</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-07-airflow-production</loc>
+    <loc>https://sayu.day/ko/blog/de-07-airflow-production</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-06-airflow-core-concepts</loc>
+    <loc>https://sayu.day/ko/blog/de-06-airflow-core-concepts</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-05-pyspark-patterns</loc>
+    <loc>https://sayu.day/ko/blog/de-05-pyspark-patterns</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-04-spark-internals</loc>
+    <loc>https://sayu.day/ko/blog/de-04-spark-internals</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-03-spark-core-concepts</loc>
+    <loc>https://sayu.day/ko/blog/de-03-spark-core-concepts</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-02-data-architecture-101</loc>
+    <loc>https://sayu.day/ko/blog/de-02-data-architecture-101</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/de-01-why-data-engineering</loc>
+    <loc>https://sayu.day/ko/blog/de-01-why-data-engineering</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/interface-design-principles</loc>
+    <loc>https://sayu.day/ko/blog/interface-design-principles</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/error-handling-strategy</loc>
+    <loc>https://sayu.day/ko/blog/error-handling-strategy</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/docker-multistage-build-optimization</loc>
+    <loc>https://sayu.day/ko/blog/docker-multistage-build-optimization</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/langchain-langgraph-practical-guide</loc>
+    <loc>https://sayu.day/ko/blog/langchain-langgraph-practical-guide</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/enterprise-go-9-makefile</loc>
+    <loc>https://sayu.day/ko/blog/enterprise-go-9-makefile</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/enterprise-go-8-observability</loc>
+    <loc>https://sayu.day/ko/blog/enterprise-go-8-observability</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/enterprise-go-7-testing</loc>
+    <loc>https://sayu.day/ko/blog/enterprise-go-7-testing</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/enterprise-go-6-resilient-communication</loc>
+    <loc>https://sayu.day/ko/blog/enterprise-go-6-resilient-communication</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/enterprise-go-5-database</loc>
+    <loc>https://sayu.day/ko/blog/enterprise-go-5-database</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/enterprise-go-4-goroutine-channel</loc>
+    <loc>https://sayu.day/ko/blog/enterprise-go-4-goroutine-channel</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/enterprise-go-3-context</loc>
+    <loc>https://sayu.day/ko/blog/enterprise-go-3-context</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/enterprise-go-2-http-server</loc>
+    <loc>https://sayu.day/ko/blog/enterprise-go-2-http-server</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/enterprise-go-1-project-structure</loc>
+    <loc>https://sayu.day/ko/blog/enterprise-go-1-project-structure</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/turf-polygon-operations</loc>
+    <loc>https://sayu.day/ko/blog/turf-polygon-operations</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/mapbox-gl-guide</loc>
+    <loc>https://sayu.day/ko/blog/mapbox-gl-guide</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/streams-audit-pipeline</loc>
+    <loc>https://sayu.day/ko/blog/streams-audit-pipeline</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/postgis-geojson-guide</loc>
+    <loc>https://sayu.day/ko/blog/postgis-geojson-guide</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/wiredtiger-storage-engine</loc>
+    <loc>https://sayu.day/ko/blog/wiredtiger-storage-engine</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/sharding-guide</loc>
+    <loc>https://sayu.day/ko/blog/sharding-guide</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/merkle-trie-integrity</loc>
+    <loc>https://sayu.day/ko/blog/merkle-trie-integrity</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/functional-options-pattern</loc>
+    <loc>https://sayu.day/ko/blog/functional-options-pattern</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/append-only-versioning</loc>
+    <loc>https://sayu.day/ko/blog/append-only-versioning</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/grpc-gateway-dual-protocol</loc>
+    <loc>https://sayu.day/ko/blog/grpc-gateway-dual-protocol</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/wire-dependency-injection</loc>
+    <loc>https://sayu.day/ko/blog/wire-dependency-injection</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/pprof-profiling-guide</loc>
+    <loc>https://sayu.day/ko/blog/pprof-profiling-guide</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/ginkgo-bdd-testing</loc>
+    <loc>https://sayu.day/ko/blog/ginkgo-bdd-testing</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gc-tuning-experience</loc>
+    <loc>https://sayu.day/ko/blog/gc-tuning-experience</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/buf-protobuf-management</loc>
+    <loc>https://sayu.day/ko/blog/buf-protobuf-management</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/seupaikeu-teuraepig-daeeung-jeonryag</loc>
+    <loc>https://sayu.day/ko/blog/seupaikeu-teuraepig-daeeung-jeonryag</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/locust-e2e-testing</loc>
+    <loc>https://sayu.day/ko/blog/locust-e2e-testing</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/linux-ulimit-guide</loc>
+    <loc>https://sayu.day/ko/blog/linux-ulimit-guide</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/helm-environment-management</loc>
+    <loc>https://sayu.day/ko/blog/helm-environment-management</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/mac-os-findereseo-sayongja-ruteu-diregtoriro-idonghaneun-beob</loc>
+    <loc>https://sayu.day/ko/blog/mac-os-findereseo-sayongja-ruteu-diregtoriro-idonghaneun-beob</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/typescript-5-0-rc-balpyoeseo-dekoreiteo-bubun-yoyag</loc>
+    <loc>https://sayu.day/ko/blog/typescript-5-0-rc-balpyoeseo-dekoreiteo-bubun-yoyag</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/mochayi-node-envneun</loc>
+    <loc>https://sayu.day/ko/blog/mochayi-node-envneun</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/enum-daesin-sayonghal-su-issneun-as-const</loc>
+    <loc>https://sayu.day/ko/blog/enum-daesin-sayonghal-su-issneun-as-const</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/rusteseo-os-cpu-gaessu-cajgi</loc>
+    <loc>https://sayu.day/ko/blog/rusteseo-os-cpu-gaessu-cajgi</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/biteu-yeonsan-hwalyong</loc>
+    <loc>https://sayu.day/ko/blog/biteu-yeonsan-hwalyong</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/c-overview</loc>
+    <loc>https://sayu.day/ko/blog/c-overview</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/dart-programming-language</loc>
+    <loc>https://sayu.day/ko/blog/dart-programming-language</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/minioyi-hilring-healing-mekeonijeum</loc>
+    <loc>https://sayu.day/ko/blog/minioyi-hilring-healing-mekeonijeum</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/minioyi-ireijeo-koding-guhyeon</loc>
+    <loc>https://sayu.day/ko/blog/minioyi-ireijeo-koding-guhyeon</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/minioyi-sonsang-gamji-algorijeum</loc>
+    <loc>https://sayu.day/ko/blog/minioyi-sonsang-gamji-algorijeum</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/juyo-guhyeon-naeyong</loc>
+    <loc>https://sayu.day/ko/blog/juyo-guhyeon-naeyong</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/yongeo-jeongri</loc>
+    <loc>https://sayu.day/ko/blog/yongeo-jeongri</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/rideu-solromon-kodeuyi-suhagjeog-weonri</loc>
+    <loc>https://sayu.day/ko/blog/rideu-solromon-kodeuyi-suhagjeog-weonri</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/deiteo-weonboneul-jeoncejeogeuro-rideusolromon-inkoding-hu-syadeu-bunbae-vs-2-seuteuraiping-hu-gaebyeol-beulrog-danwiro-rideusolromon-inkoding-hu-syadeu-bunbae-bigyo</loc>
+    <loc>https://sayu.day/ko/blog/deiteo-weonboneul-jeoncejeogeuro-rideusolromon-inkoding-hu-syadeu-bunbae-vs-2-seuteuraiping-hu-gaebyeol-beulrog-danwiro-rideusolromon-inkoding-hu-syadeu-bunbae-bigyo</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/succinct-proofs-of-random-access-spora-beonyeog</loc>
+    <loc>https://sayu.day/ko/blog/succinct-proofs-of-random-access-spora-beonyeog</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/2024-data-replication-design-spectrum-yoyag</loc>
+    <loc>https://sayu.day/ko/blog/2024-data-replication-design-spectrum-yoyag</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/crush-controlled-replication-under-scalable-hashing</loc>
+    <loc>https://sayu.day/ko/blog/crush-controlled-replication-under-scalable-hashing</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/ceph-erasure-coding-metadeiteo-gwanri</loc>
+    <loc>https://sayu.day/ko/blog/ceph-erasure-coding-metadeiteo-gwanri</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/ceph-erasure-coding-deiteo-johoe-heureum</loc>
+    <loc>https://sayu.day/ko/blog/ceph-erasure-coding-deiteo-johoe-heureum</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/ceph-erasure-coding-deiteo-jeojang-heureum</loc>
+    <loc>https://sayu.day/ko/blog/ceph-erasure-coding-deiteo-jeojang-heureum</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/redis-giban-bunsan-rag-gaideu</loc>
+    <loc>https://sayu.day/ko/blog/redis-giban-bunsan-rag-gaideu</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/aws-elasticache-for-redis-oss-syadinggwa-maseuteo-failover-jeongri</loc>
+    <loc>https://sayu.day/ko/blog/aws-elasticache-for-redis-oss-syadinggwa-maseuteo-failover-jeongri</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/which-is-best-isolation-level-for-a-common-situation</loc>
+    <loc>https://sayu.day/ko/blog/which-is-best-isolation-level-for-a-common-situation</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/mysql-teuraenjaegsyeon-kweori-yesi</loc>
+    <loc>https://sayu.day/ko/blog/mysql-teuraenjaegsyeon-kweori-yesi</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/upsert-vs-unique-key-constraint</loc>
+    <loc>https://sayu.day/ko/blog/upsert-vs-unique-key-constraint</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/acid</loc>
+    <loc>https://sayu.day/ko/blog/acid</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/solana-sol</loc>
+    <loc>https://sayu.day/ko/blog/solana-sol</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/tezos-xtz</loc>
+    <loc>https://sayu.day/ko/blog/tezos-xtz</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/stellar-lumens-xlm</loc>
+    <loc>https://sayu.day/ko/blog/stellar-lumens-xlm</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/ripple-xrp</loc>
+    <loc>https://sayu.day/ko/blog/ripple-xrp</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/istanbul-byzantine-fault</loc>
+    <loc>https://sayu.day/ko/blog/istanbul-byzantine-fault</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/hd-hierachy-deterministic-wallet</loc>
+    <loc>https://sayu.day/ko/blog/hd-hierachy-deterministic-wallet</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/harmony-one</loc>
+    <loc>https://sayu.day/ko/blog/harmony-one</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/filecoin-fil</loc>
+    <loc>https://sayu.day/ko/blog/filecoin-fil</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/biance-smart-chain-bnb</loc>
+    <loc>https://sayu.day/ko/blog/biance-smart-chain-bnb</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/beulrogceinyi-ihae</loc>
+    <loc>https://sayu.day/ko/blog/beulrogceinyi-ihae</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/roleobiran</loc>
+    <loc>https://sayu.day/ko/blog/roleobiran</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/dansun-haesi-geomjeung-yi-hangyewa-deiteo-gayongseong-munje</loc>
+    <loc>https://sayu.day/ko/blog/dansun-haesi-geomjeung-yi-hangyewa-deiteo-gayongseong-munje</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/checksum</loc>
+    <loc>https://sayu.day/ko/blog/checksum</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/how-base-gas-works</loc>
+    <loc>https://sayu.day/ko/blog/how-base-gas-works</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/ethereum-eth</loc>
+    <loc>https://sayu.day/ko/blog/ethereum-eth</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/namespaced-merkle-tree-nmt-ran</loc>
+    <loc>https://sayu.day/ko/blog/namespaced-merkle-tree-nmt-ran</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/celestiayi-deiteo-jeojang-gonggan-sayongryang</loc>
+    <loc>https://sayu.day/ko/blog/celestiayi-deiteo-jeojang-gonggan-sayongryang</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/celestiayi-deiteo-gayongseong-jeungmyeong-data-availability-proof-mekeonijeum</loc>
+    <loc>https://sayu.day/ko/blog/celestiayi-deiteo-gayongseong-jeungmyeong-data-availability-proof-mekeonijeum</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/celestiayi-eds-extended-data-square</loc>
+    <loc>https://sayu.day/ko/blog/celestiayi-eds-extended-data-square</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/celestiaga-teuraenjaegsyeon-baeyeoleul-odsro-byeonhwanhaneun-bangbeob</loc>
+    <loc>https://sayu.day/ko/blog/celestiaga-teuraenjaegsyeon-baeyeoleul-odsro-byeonhwanhaneun-bangbeob</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/celestia-deiteo-gayongseong-saempeulring-das-bunseog</loc>
+    <loc>https://sayu.day/ko/blog/celestia-deiteo-gayongseong-saempeulring-das-bunseog</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/celestia-node-file-paekiji-bunseog</loc>
+    <loc>https://sayu.day/ko/blog/celestia-node-file-paekiji-bunseog</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/biteukoin-nftwa-brc-20-ft</loc>
+    <loc>https://sayu.day/ko/blog/biteukoin-nftwa-brc-20-ft</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/spv-simplified-payment-verification</loc>
+    <loc>https://sayu.day/ko/blog/spv-simplified-payment-verification</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/bitcoin-segwit</loc>
+    <loc>https://sayu.day/ko/blog/bitcoin-segwit</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/bitcoin-script</loc>
+    <loc>https://sayu.day/ko/blog/bitcoin-script</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/address</loc>
+    <loc>https://sayu.day/ko/blog/address</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/upgrade-move-code</loc>
+    <loc>https://sayu.day/ko/blog/upgrade-move-code</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/move-on-aptos</loc>
+    <loc>https://sayu.day/ko/blog/move-on-aptos</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/interact-with-the-move-vm</loc>
+    <loc>https://sayu.day/ko/blog/interact-with-the-move-vm</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/aptos-whitepaper</loc>
+    <loc>https://sayu.day/ko/blog/aptos-whitepaper</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/aptos-move-structure</loc>
+    <loc>https://sayu.day/ko/blog/aptos-move-structure</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/aptos-integration-guide</loc>
+    <loc>https://sayu.day/ko/blog/aptos-integration-guide</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/hwagjang-ganeunghan-silsigan-websocket-seobeo-akitegceo-seolgye</loc>
+    <loc>https://sayu.day/ko/blog/hwagjang-ganeunghan-silsigan-websocket-seobeo-akitegceo-seolgye</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/dekoreiteo-decorator</loc>
+    <loc>https://sayu.day/ko/blog/dekoreiteo-decorator</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gaece-jihyang-peurogeuraeming-object-oriented-programming</loc>
+    <loc>https://sayu.day/ko/blog/gaece-jihyang-peurogeuraeming-object-oriented-programming</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/gaece-vs-gaegce</loc>
+    <loc>https://sayu.day/ko/blog/gaece-vs-gaegce</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/solid-weoncig</loc>
+    <loc>https://sayu.day/ko/blog/solid-weoncig</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/dekoreiteoreul-iyonghan-nest-jseseoyi-aop-jeogyong</loc>
+    <loc>https://sayu.day/ko/blog/dekoreiteoreul-iyonghan-nest-jseseoyi-aop-jeogyong</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/nestjs-dynamic-module-juyijeom</loc>
+    <loc>https://sayu.day/ko/blog/nestjs-dynamic-module-juyijeom</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/nestjs-cache-manager-v5-sayongsi-munje-haegyeolbeob</loc>
+    <loc>https://sayu.day/ko/blog/nestjs-cache-manager-v5-sayongsi-munje-haegyeolbeob</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/http-kuki-boan-seoljeong</loc>
+    <loc>https://sayu.day/ko/blog/http-kuki-boan-seoljeong</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/http-yoceong-coesohwa-gibeob</loc>
+    <loc>https://sayu.day/ko/blog/http-yoceong-coesohwa-gibeob</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/http-transfer-keugireul-julineun-beob</loc>
+    <loc>https://sayu.day/ko/blog/http-transfer-keugireul-julineun-beob</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/eaddrnotavail</loc>
+    <loc>https://sayu.day/ko/blog/eaddrnotavail</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://seogyukim.com/blog/trunk-based-development</loc>
+    <loc>https://sayu.day/ko/blog/trunk-based-development</loc>
     <lastmod>2026-01-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
