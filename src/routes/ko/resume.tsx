@@ -5,6 +5,12 @@ import { Separator } from "~/components/ui/separator";
 import { Github, Linkedin, Mail, Phone, ExternalLink, Globe } from "lucide-react";
 
 export const Route = createFileRoute("/ko/resume")({
+  head: () => ({
+    meta: [
+      { title: "SeogyuKim_Resume_Backend" },
+      { name: "description", content: "Kim Seogyu - Senior Software Engineer | Financial Systems & Data Integrity Specialist" },
+    ],
+  }),
   component: ResumePage,
 });
 
