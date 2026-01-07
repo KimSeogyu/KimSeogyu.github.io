@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/blog/tags')({
+export const Route = createFileRoute('/ko/blog/tags')({
   component: TagsLayout,
 })
 

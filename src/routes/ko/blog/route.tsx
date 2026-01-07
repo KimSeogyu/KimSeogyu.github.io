@@ -3,7 +3,7 @@ import { PageTransition } from '~/components/shared/page-transition'
 import { getContentTree } from '~/lib/posts'
 import { SidebarLayout } from '~/components/layout/SidebarLayout'
 
-export const Route = createFileRoute('/blog')({
+export const Route = createFileRoute('/ko/blog')({
   component: BlogLayout,
   loader: () => {
     return {

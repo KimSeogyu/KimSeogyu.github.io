@@ -10,25 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResumeRouteImport } from './routes/resume'
-import { Route as BlogRouteRouteImport } from './routes/blog/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as BlogIndexRouteImport } from './routes/blog/index'
-import { Route as BlogSplatRouteImport } from './routes/blog/$'
-import { Route as BlogTagsRouteRouteImport } from './routes/blog/tags/route'
-import { Route as BlogSeriesRouteRouteImport } from './routes/blog/series/route'
-import { Route as BlogTagsIndexRouteImport } from './routes/blog/tags/index'
-import { Route as BlogSeriesIndexRouteImport } from './routes/blog/series/index'
-import { Route as BlogTagsSplatRouteImport } from './routes/blog/tags/$'
-import { Route as BlogSeriesSplatRouteImport } from './routes/blog/series/$'
+import { Route as KoIndexRouteImport } from './routes/ko/index'
+import { Route as KoResumeRouteImport } from './routes/ko/resume'
+import { Route as EnResumeRouteImport } from './routes/en/resume'
+import { Route as KoBlogRouteRouteImport } from './routes/ko/blog/route'
+import { Route as KoBlogIndexRouteImport } from './routes/ko/blog/index'
+import { Route as KoBlogSplatRouteImport } from './routes/ko/blog/$'
+import { Route as KoBlogTagsRouteRouteImport } from './routes/ko/blog/tags/route'
+import { Route as KoBlogSeriesRouteRouteImport } from './routes/ko/blog/series/route'
+import { Route as KoBlogTagsIndexRouteImport } from './routes/ko/blog/tags/index'
+import { Route as KoBlogSeriesIndexRouteImport } from './routes/ko/blog/series/index'
+import { Route as KoBlogTagsSplatRouteImport } from './routes/ko/blog/tags/$'
+import { Route as KoBlogSeriesSplatRouteImport } from './routes/ko/blog/series/$'
 
 const ResumeRoute = ResumeRouteImport.update({
   id: '/resume',
   path: '/resume',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRouteRoute = BlogRouteRouteImport.update({
-  id: '/blog',
-  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -36,127 +34,168 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogIndexRoute = BlogIndexRouteImport.update({
+const KoIndexRoute = KoIndexRouteImport.update({
+  id: '/ko/',
+  path: '/ko/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KoResumeRoute = KoResumeRouteImport.update({
+  id: '/ko/resume',
+  path: '/ko/resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnResumeRoute = EnResumeRouteImport.update({
+  id: '/en/resume',
+  path: '/en/resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KoBlogRouteRoute = KoBlogRouteRouteImport.update({
+  id: '/ko/blog',
+  path: '/ko/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KoBlogIndexRoute = KoBlogIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => BlogRouteRoute,
+  getParentRoute: () => KoBlogRouteRoute,
 } as any)
-const BlogSplatRoute = BlogSplatRouteImport.update({
+const KoBlogSplatRoute = KoBlogSplatRouteImport.update({
   id: '/$',
   path: '/$',
-  getParentRoute: () => BlogRouteRoute,
+  getParentRoute: () => KoBlogRouteRoute,
 } as any)
-const BlogTagsRouteRoute = BlogTagsRouteRouteImport.update({
+const KoBlogTagsRouteRoute = KoBlogTagsRouteRouteImport.update({
   id: '/tags',
   path: '/tags',
-  getParentRoute: () => BlogRouteRoute,
+  getParentRoute: () => KoBlogRouteRoute,
 } as any)
-const BlogSeriesRouteRoute = BlogSeriesRouteRouteImport.update({
+const KoBlogSeriesRouteRoute = KoBlogSeriesRouteRouteImport.update({
   id: '/series',
   path: '/series',
-  getParentRoute: () => BlogRouteRoute,
+  getParentRoute: () => KoBlogRouteRoute,
 } as any)
-const BlogTagsIndexRoute = BlogTagsIndexRouteImport.update({
+const KoBlogTagsIndexRoute = KoBlogTagsIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => BlogTagsRouteRoute,
+  getParentRoute: () => KoBlogTagsRouteRoute,
 } as any)
-const BlogSeriesIndexRoute = BlogSeriesIndexRouteImport.update({
+const KoBlogSeriesIndexRoute = KoBlogSeriesIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => BlogSeriesRouteRoute,
+  getParentRoute: () => KoBlogSeriesRouteRoute,
 } as any)
-const BlogTagsSplatRoute = BlogTagsSplatRouteImport.update({
+const KoBlogTagsSplatRoute = KoBlogTagsSplatRouteImport.update({
   id: '/$',
   path: '/$',
-  getParentRoute: () => BlogTagsRouteRoute,
+  getParentRoute: () => KoBlogTagsRouteRoute,
 } as any)
-const BlogSeriesSplatRoute = BlogSeriesSplatRouteImport.update({
+const KoBlogSeriesSplatRoute = KoBlogSeriesSplatRouteImport.update({
   id: '/$',
   path: '/$',
-  getParentRoute: () => BlogSeriesRouteRoute,
+  getParentRoute: () => KoBlogSeriesRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRouteRouteWithChildren
   '/resume': typeof ResumeRoute
-  '/blog/series': typeof BlogSeriesRouteRouteWithChildren
-  '/blog/tags': typeof BlogTagsRouteRouteWithChildren
-  '/blog/$': typeof BlogSplatRoute
-  '/blog/': typeof BlogIndexRoute
-  '/blog/series/$': typeof BlogSeriesSplatRoute
-  '/blog/tags/$': typeof BlogTagsSplatRoute
-  '/blog/series/': typeof BlogSeriesIndexRoute
-  '/blog/tags/': typeof BlogTagsIndexRoute
+  '/ko/blog': typeof KoBlogRouteRouteWithChildren
+  '/en/resume': typeof EnResumeRoute
+  '/ko/resume': typeof KoResumeRoute
+  '/ko': typeof KoIndexRoute
+  '/ko/blog/series': typeof KoBlogSeriesRouteRouteWithChildren
+  '/ko/blog/tags': typeof KoBlogTagsRouteRouteWithChildren
+  '/ko/blog/$': typeof KoBlogSplatRoute
+  '/ko/blog/': typeof KoBlogIndexRoute
+  '/ko/blog/series/$': typeof KoBlogSeriesSplatRoute
+  '/ko/blog/tags/$': typeof KoBlogTagsSplatRoute
+  '/ko/blog/series/': typeof KoBlogSeriesIndexRoute
+  '/ko/blog/tags/': typeof KoBlogTagsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/resume': typeof ResumeRoute
-  '/blog/$': typeof BlogSplatRoute
-  '/blog': typeof BlogIndexRoute
-  '/blog/series/$': typeof BlogSeriesSplatRoute
-  '/blog/tags/$': typeof BlogTagsSplatRoute
-  '/blog/series': typeof BlogSeriesIndexRoute
-  '/blog/tags': typeof BlogTagsIndexRoute
+  '/en/resume': typeof EnResumeRoute
+  '/ko/resume': typeof KoResumeRoute
+  '/ko': typeof KoIndexRoute
+  '/ko/blog/$': typeof KoBlogSplatRoute
+  '/ko/blog': typeof KoBlogIndexRoute
+  '/ko/blog/series/$': typeof KoBlogSeriesSplatRoute
+  '/ko/blog/tags/$': typeof KoBlogTagsSplatRoute
+  '/ko/blog/series': typeof KoBlogSeriesIndexRoute
+  '/ko/blog/tags': typeof KoBlogTagsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/blog': typeof BlogRouteRouteWithChildren
   '/resume': typeof ResumeRoute
-  '/blog/series': typeof BlogSeriesRouteRouteWithChildren
-  '/blog/tags': typeof BlogTagsRouteRouteWithChildren
-  '/blog/$': typeof BlogSplatRoute
-  '/blog/': typeof BlogIndexRoute
-  '/blog/series/$': typeof BlogSeriesSplatRoute
-  '/blog/tags/$': typeof BlogTagsSplatRoute
-  '/blog/series/': typeof BlogSeriesIndexRoute
-  '/blog/tags/': typeof BlogTagsIndexRoute
+  '/ko/blog': typeof KoBlogRouteRouteWithChildren
+  '/en/resume': typeof EnResumeRoute
+  '/ko/resume': typeof KoResumeRoute
+  '/ko/': typeof KoIndexRoute
+  '/ko/blog/series': typeof KoBlogSeriesRouteRouteWithChildren
+  '/ko/blog/tags': typeof KoBlogTagsRouteRouteWithChildren
+  '/ko/blog/$': typeof KoBlogSplatRoute
+  '/ko/blog/': typeof KoBlogIndexRoute
+  '/ko/blog/series/$': typeof KoBlogSeriesSplatRoute
+  '/ko/blog/tags/$': typeof KoBlogTagsSplatRoute
+  '/ko/blog/series/': typeof KoBlogSeriesIndexRoute
+  '/ko/blog/tags/': typeof KoBlogTagsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/blog'
     | '/resume'
-    | '/blog/series'
-    | '/blog/tags'
-    | '/blog/$'
-    | '/blog/'
-    | '/blog/series/$'
-    | '/blog/tags/$'
-    | '/blog/series/'
-    | '/blog/tags/'
+    | '/ko/blog'
+    | '/en/resume'
+    | '/ko/resume'
+    | '/ko'
+    | '/ko/blog/series'
+    | '/ko/blog/tags'
+    | '/ko/blog/$'
+    | '/ko/blog/'
+    | '/ko/blog/series/$'
+    | '/ko/blog/tags/$'
+    | '/ko/blog/series/'
+    | '/ko/blog/tags/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/resume'
-    | '/blog/$'
-    | '/blog'
-    | '/blog/series/$'
-    | '/blog/tags/$'
-    | '/blog/series'
-    | '/blog/tags'
+    | '/en/resume'
+    | '/ko/resume'
+    | '/ko'
+    | '/ko/blog/$'
+    | '/ko/blog'
+    | '/ko/blog/series/$'
+    | '/ko/blog/tags/$'
+    | '/ko/blog/series'
+    | '/ko/blog/tags'
   id:
     | '__root__'
     | '/'
-    | '/blog'
     | '/resume'
-    | '/blog/series'
-    | '/blog/tags'
-    | '/blog/$'
-    | '/blog/'
-    | '/blog/series/$'
-    | '/blog/tags/$'
-    | '/blog/series/'
-    | '/blog/tags/'
+    | '/ko/blog'
+    | '/en/resume'
+    | '/ko/resume'
+    | '/ko/'
+    | '/ko/blog/series'
+    | '/ko/blog/tags'
+    | '/ko/blog/$'
+    | '/ko/blog/'
+    | '/ko/blog/series/$'
+    | '/ko/blog/tags/$'
+    | '/ko/blog/series/'
+    | '/ko/blog/tags/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BlogRouteRoute: typeof BlogRouteRouteWithChildren
   ResumeRoute: typeof ResumeRoute
+  KoBlogRouteRoute: typeof KoBlogRouteRouteWithChildren
+  EnResumeRoute: typeof EnResumeRoute
+  KoResumeRoute: typeof KoResumeRoute
+  KoIndexRoute: typeof KoIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -168,13 +207,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResumeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -182,115 +214,145 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog/': {
-      id: '/blog/'
+    '/ko/': {
+      id: '/ko/'
+      path: '/ko'
+      fullPath: '/ko'
+      preLoaderRoute: typeof KoIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ko/resume': {
+      id: '/ko/resume'
+      path: '/ko/resume'
+      fullPath: '/ko/resume'
+      preLoaderRoute: typeof KoResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/resume': {
+      id: '/en/resume'
+      path: '/en/resume'
+      fullPath: '/en/resume'
+      preLoaderRoute: typeof EnResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ko/blog': {
+      id: '/ko/blog'
+      path: '/ko/blog'
+      fullPath: '/ko/blog'
+      preLoaderRoute: typeof KoBlogRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ko/blog/': {
+      id: '/ko/blog/'
       path: '/'
-      fullPath: '/blog/'
-      preLoaderRoute: typeof BlogIndexRouteImport
-      parentRoute: typeof BlogRouteRoute
+      fullPath: '/ko/blog/'
+      preLoaderRoute: typeof KoBlogIndexRouteImport
+      parentRoute: typeof KoBlogRouteRoute
     }
-    '/blog/$': {
-      id: '/blog/$'
+    '/ko/blog/$': {
+      id: '/ko/blog/$'
       path: '/$'
-      fullPath: '/blog/$'
-      preLoaderRoute: typeof BlogSplatRouteImport
-      parentRoute: typeof BlogRouteRoute
+      fullPath: '/ko/blog/$'
+      preLoaderRoute: typeof KoBlogSplatRouteImport
+      parentRoute: typeof KoBlogRouteRoute
     }
-    '/blog/tags': {
-      id: '/blog/tags'
+    '/ko/blog/tags': {
+      id: '/ko/blog/tags'
       path: '/tags'
-      fullPath: '/blog/tags'
-      preLoaderRoute: typeof BlogTagsRouteRouteImport
-      parentRoute: typeof BlogRouteRoute
+      fullPath: '/ko/blog/tags'
+      preLoaderRoute: typeof KoBlogTagsRouteRouteImport
+      parentRoute: typeof KoBlogRouteRoute
     }
-    '/blog/series': {
-      id: '/blog/series'
+    '/ko/blog/series': {
+      id: '/ko/blog/series'
       path: '/series'
-      fullPath: '/blog/series'
-      preLoaderRoute: typeof BlogSeriesRouteRouteImport
-      parentRoute: typeof BlogRouteRoute
+      fullPath: '/ko/blog/series'
+      preLoaderRoute: typeof KoBlogSeriesRouteRouteImport
+      parentRoute: typeof KoBlogRouteRoute
     }
-    '/blog/tags/': {
-      id: '/blog/tags/'
+    '/ko/blog/tags/': {
+      id: '/ko/blog/tags/'
       path: '/'
-      fullPath: '/blog/tags/'
-      preLoaderRoute: typeof BlogTagsIndexRouteImport
-      parentRoute: typeof BlogTagsRouteRoute
+      fullPath: '/ko/blog/tags/'
+      preLoaderRoute: typeof KoBlogTagsIndexRouteImport
+      parentRoute: typeof KoBlogTagsRouteRoute
     }
-    '/blog/series/': {
-      id: '/blog/series/'
+    '/ko/blog/series/': {
+      id: '/ko/blog/series/'
       path: '/'
-      fullPath: '/blog/series/'
-      preLoaderRoute: typeof BlogSeriesIndexRouteImport
-      parentRoute: typeof BlogSeriesRouteRoute
+      fullPath: '/ko/blog/series/'
+      preLoaderRoute: typeof KoBlogSeriesIndexRouteImport
+      parentRoute: typeof KoBlogSeriesRouteRoute
     }
-    '/blog/tags/$': {
-      id: '/blog/tags/$'
+    '/ko/blog/tags/$': {
+      id: '/ko/blog/tags/$'
       path: '/$'
-      fullPath: '/blog/tags/$'
-      preLoaderRoute: typeof BlogTagsSplatRouteImport
-      parentRoute: typeof BlogTagsRouteRoute
+      fullPath: '/ko/blog/tags/$'
+      preLoaderRoute: typeof KoBlogTagsSplatRouteImport
+      parentRoute: typeof KoBlogTagsRouteRoute
     }
-    '/blog/series/$': {
-      id: '/blog/series/$'
+    '/ko/blog/series/$': {
+      id: '/ko/blog/series/$'
       path: '/$'
-      fullPath: '/blog/series/$'
-      preLoaderRoute: typeof BlogSeriesSplatRouteImport
-      parentRoute: typeof BlogSeriesRouteRoute
+      fullPath: '/ko/blog/series/$'
+      preLoaderRoute: typeof KoBlogSeriesSplatRouteImport
+      parentRoute: typeof KoBlogSeriesRouteRoute
     }
   }
 }
 
-interface BlogSeriesRouteRouteChildren {
-  BlogSeriesSplatRoute: typeof BlogSeriesSplatRoute
-  BlogSeriesIndexRoute: typeof BlogSeriesIndexRoute
+interface KoBlogSeriesRouteRouteChildren {
+  KoBlogSeriesSplatRoute: typeof KoBlogSeriesSplatRoute
+  KoBlogSeriesIndexRoute: typeof KoBlogSeriesIndexRoute
 }
 
-const BlogSeriesRouteRouteChildren: BlogSeriesRouteRouteChildren = {
-  BlogSeriesSplatRoute: BlogSeriesSplatRoute,
-  BlogSeriesIndexRoute: BlogSeriesIndexRoute,
+const KoBlogSeriesRouteRouteChildren: KoBlogSeriesRouteRouteChildren = {
+  KoBlogSeriesSplatRoute: KoBlogSeriesSplatRoute,
+  KoBlogSeriesIndexRoute: KoBlogSeriesIndexRoute,
 }
 
-const BlogSeriesRouteRouteWithChildren = BlogSeriesRouteRoute._addFileChildren(
-  BlogSeriesRouteRouteChildren,
+const KoBlogSeriesRouteRouteWithChildren =
+  KoBlogSeriesRouteRoute._addFileChildren(KoBlogSeriesRouteRouteChildren)
+
+interface KoBlogTagsRouteRouteChildren {
+  KoBlogTagsSplatRoute: typeof KoBlogTagsSplatRoute
+  KoBlogTagsIndexRoute: typeof KoBlogTagsIndexRoute
+}
+
+const KoBlogTagsRouteRouteChildren: KoBlogTagsRouteRouteChildren = {
+  KoBlogTagsSplatRoute: KoBlogTagsSplatRoute,
+  KoBlogTagsIndexRoute: KoBlogTagsIndexRoute,
+}
+
+const KoBlogTagsRouteRouteWithChildren = KoBlogTagsRouteRoute._addFileChildren(
+  KoBlogTagsRouteRouteChildren,
 )
 
-interface BlogTagsRouteRouteChildren {
-  BlogTagsSplatRoute: typeof BlogTagsSplatRoute
-  BlogTagsIndexRoute: typeof BlogTagsIndexRoute
+interface KoBlogRouteRouteChildren {
+  KoBlogSeriesRouteRoute: typeof KoBlogSeriesRouteRouteWithChildren
+  KoBlogTagsRouteRoute: typeof KoBlogTagsRouteRouteWithChildren
+  KoBlogSplatRoute: typeof KoBlogSplatRoute
+  KoBlogIndexRoute: typeof KoBlogIndexRoute
 }
 
-const BlogTagsRouteRouteChildren: BlogTagsRouteRouteChildren = {
-  BlogTagsSplatRoute: BlogTagsSplatRoute,
-  BlogTagsIndexRoute: BlogTagsIndexRoute,
+const KoBlogRouteRouteChildren: KoBlogRouteRouteChildren = {
+  KoBlogSeriesRouteRoute: KoBlogSeriesRouteRouteWithChildren,
+  KoBlogTagsRouteRoute: KoBlogTagsRouteRouteWithChildren,
+  KoBlogSplatRoute: KoBlogSplatRoute,
+  KoBlogIndexRoute: KoBlogIndexRoute,
 }
 
-const BlogTagsRouteRouteWithChildren = BlogTagsRouteRoute._addFileChildren(
-  BlogTagsRouteRouteChildren,
-)
-
-interface BlogRouteRouteChildren {
-  BlogSeriesRouteRoute: typeof BlogSeriesRouteRouteWithChildren
-  BlogTagsRouteRoute: typeof BlogTagsRouteRouteWithChildren
-  BlogSplatRoute: typeof BlogSplatRoute
-  BlogIndexRoute: typeof BlogIndexRoute
-}
-
-const BlogRouteRouteChildren: BlogRouteRouteChildren = {
-  BlogSeriesRouteRoute: BlogSeriesRouteRouteWithChildren,
-  BlogTagsRouteRoute: BlogTagsRouteRouteWithChildren,
-  BlogSplatRoute: BlogSplatRoute,
-  BlogIndexRoute: BlogIndexRoute,
-}
-
-const BlogRouteRouteWithChildren = BlogRouteRoute._addFileChildren(
-  BlogRouteRouteChildren,
+const KoBlogRouteRouteWithChildren = KoBlogRouteRoute._addFileChildren(
+  KoBlogRouteRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BlogRouteRoute: BlogRouteRouteWithChildren,
   ResumeRoute: ResumeRoute,
+  KoBlogRouteRoute: KoBlogRouteRouteWithChildren,
+  EnResumeRoute: EnResumeRoute,
+  KoResumeRoute: KoResumeRoute,
+  KoIndexRoute: KoIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

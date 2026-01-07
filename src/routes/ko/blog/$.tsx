@@ -20,7 +20,7 @@ import { Excalidraw } from '~/components/blog/excalidraw'
 import { RelatedPostCard } from '~/features/blog/components'
 import { useLayout } from '~/contexts/LayoutContext'
 
-export const Route = createFileRoute('/blog/$')({
+export const Route = createFileRoute('/ko/blog/$')({
   loader: async ({ params }) => {
     // params._splat contains the catch-all path
     const splat = params._splat
@@ -128,7 +128,6 @@ function PostDetail() {
   return (
     <>
       <ReadingProgressBar />
-      
       <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8 max-w-[1600px]">
           <div className="flex gap-8 relative opacity-100 dark:opacity-100">
@@ -140,7 +139,7 @@ function PostDetail() {
               {/* Top Toolbar (Back button + Open TOC button) */}
               <div className="flex justify-between items-center mb-8">
                 <Link
-                  to="/blog"
+                  to="/ko/blog"
                   className="inline-flex items-center gap-2 text-muted-foreground hover:text-(--gradient-purple) transition-colors text-sm font-medium group"
                 >
                   <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
@@ -182,7 +181,7 @@ function PostDetail() {
                         {post.tags.slice(0, 3).map(tag => (
                           <Link 
                             key={tag} 
-                            to="/blog/tags/$"
+                            to="/ko/blog/tags/$"
                             params={{ _splat: tag }}
                             className="text-(--gradient-cyan) hover:underline"
                           >
@@ -201,7 +200,7 @@ function PostDetail() {
                   <div className="flex items-center gap-2 mb-3">
                     <BookOpen className="w-5 h-5 text-(--gradient-purple)" />
                     <Link 
-                      to="/blog/series/$" 
+                      to="/ko/blog/series/$" 
                       params={{ _splat: seriesInfo.name }}
                       className="font-semibold text-(--gradient-purple) hover:underline"
                     >
@@ -215,7 +214,7 @@ function PostDetail() {
                   <div className="flex justify-between items-center gap-4">
                     {seriesInfo.prev ? (
                       <Link
-                        to="/blog/$"
+                        to="/ko/blog/$"
                         params={{ _splat: seriesInfo.prev.fullPath }}
                         className="flex items-center gap-2 text-sm text-muted-foreground hover:text-(--gradient-purple) transition-colors group"
                       >
@@ -228,7 +227,7 @@ function PostDetail() {
                     
                     {seriesInfo.next ? (
                       <Link
-                        to="/blog/$"
+                        to="/ko/blog/$"
                         params={{ _splat: seriesInfo.next.fullPath }}
                         className="flex items-center gap-2 text-sm text-muted-foreground hover:text-(--gradient-purple) transition-colors group text-right"
                       >

@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { getAllSeries } from '~/lib/posts'
 import { ArrowLeft, BookOpen, ChevronRight } from 'lucide-react'
 
-export const Route = createFileRoute('/blog/series/')({
+export const Route = createFileRoute('/ko/blog/series/')({
   loader: () => {
     const series = getAllSeries()
     return { series }
@@ -33,7 +33,7 @@ function SeriesPage() {
         {/* 헤더 */}
         <div className="mb-8">
           <Link
-            to="/blog"
+            to="/ko/blog"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-(--gradient-purple) transition-colors text-sm font-medium group mb-4"
           >
             <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
@@ -54,7 +54,7 @@ function SeriesPage() {
           {series.map(({ series: seriesSlug, count, posts }) => (
             <Link
               key={seriesSlug}
-              to="/blog/series/$"
+              to="/ko/blog/series/$"
               params={{ _splat: seriesSlug }}
               className="block p-6 rounded-xl border border-border bg-card hover:border-(--gradient-purple)/50 hover:bg-muted/30 transition-all duration-200 group"
             >

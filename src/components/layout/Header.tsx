@@ -36,14 +36,14 @@ export default function Header() {
             <div className="flex items-center gap-4">
               <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
                 <Link 
-                  to="/resume" 
+                  to="/ko/resume" 
                   className="text-muted-foreground hover:text-foreground transition-colors"
                   activeProps={{ className: "text-foreground font-semibold" }}
                 >
                   Resume
                 </Link>
                 <Link 
-                  to="/blog" 
+                  to="/ko" 
                   className="text-muted-foreground hover:text-foreground transition-colors"
                   activeProps={{ className: "text-foreground font-semibold" }}
                 >

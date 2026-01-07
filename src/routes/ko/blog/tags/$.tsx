@@ -3,7 +3,7 @@ import { getPostsByTag } from '~/lib/posts'
 import { ArrowLeft, Tag } from 'lucide-react'
 import { PostCard } from '~/features/blog/components'
 
-export const Route = createFileRoute('/blog/tags/$')({
+export const Route = createFileRoute('/ko/blog/tags/$')({
   loader: ({ params }) => {
     const tag = decodeURIComponent(params._splat || '')
     const posts = getPostsByTag(tag)
@@ -27,7 +27,7 @@ function TagDetailPage() {
         {/* 헤더 */}
         <div className="mb-8">
           <Link
-            to="/blog/tags"
+            to="/ko/blog/tags"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-(--gradient-purple) transition-colors text-sm font-medium group mb-4"
           >
             <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />

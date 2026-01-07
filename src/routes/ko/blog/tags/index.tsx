@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { getAllTags } from '~/lib/posts'
 import { ArrowLeft, Tag } from 'lucide-react'
 
-export const Route = createFileRoute('/blog/tags/')({
+export const Route = createFileRoute('/ko/blog/tags/')({
   loader: () => {
     const tags = getAllTags()
     return { tags }
@@ -35,7 +35,7 @@ function TagsPage() {
         {/* 헤더 */}
         <div className="mb-8">
           <Link
-            to="/blog"
+            to="/ko/blog"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-(--gradient-purple) transition-colors text-sm font-medium group mb-4"
           >
             <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
@@ -56,7 +56,7 @@ function TagsPage() {
           {tags.map(({ tag, count }) => (
             <Link
               key={tag}
-              to="/blog/tags/$"
+              to="/ko/blog/tags/$"
               params={{ _splat: tag }}
               className={`
                 px-4 py-2 rounded-full border border-border

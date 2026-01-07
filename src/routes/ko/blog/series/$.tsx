@@ -2,7 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { getPostsBySeries } from '~/lib/posts'
 import { ArrowLeft, BookOpen, Check, ChevronLeft, ChevronRight } from 'lucide-react'
 
-export const Route = createFileRoute('/blog/series/$')({
+export const Route = createFileRoute('/ko/blog/series/$')({
   loader: ({ params }) => {
     const seriesSlug = decodeURIComponent(params._splat || '')
     const posts = getPostsBySeries(seriesSlug)
@@ -41,7 +41,7 @@ function SeriesDetailPage() {
         {/* 헤더 */}
         <div className="mb-8">
           <Link
-            to="/blog/series"
+            to="/ko/blog/series"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-(--gradient-purple) transition-colors text-sm font-medium group mb-4"
           >
             <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
@@ -78,7 +78,7 @@ function SeriesDetailPage() {
           {posts.map((post, idx) => (
             <Link
               key={post.id}
-              to="/blog/$"
+              to="/ko/blog/$"
               params={{ _splat: post.fullPath }}
               className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card hover:border-(--gradient-purple)/50 hover:bg-muted/30 transition-all duration-200 group"
             >
