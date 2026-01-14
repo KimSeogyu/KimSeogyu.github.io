@@ -9,7 +9,7 @@ interface PostCardProps {
 export function PostCard({ post }: PostCardProps) {
   return (
     <Link 
-      to="/blog/$"
+      to="/ko/blog/$"
       params={{ _splat: post.fullPath }}
       className="group block"
     >

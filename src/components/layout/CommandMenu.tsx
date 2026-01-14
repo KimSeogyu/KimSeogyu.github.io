@@ -59,7 +59,7 @@ export function CommandMenu() {
                   key={post.id}
                   value={`${post.title} ${post.category}`}
                   onSelect={() => {
-                    runCommand(() => navigate({ to: `/blog/${post.fullPath}` }))
+                    runCommand(() => navigate({ to: `/ko/blog/${post.fullPath}` }))
                   }}
                 >
                   <FileText className="mr-2 h-4 w-4" />

@@ -29,7 +29,7 @@ function TreeNode({ node, level }: TreeNodeProps) {
   const location = useLocation()
   // Initialize open state from session storage or active path
   // Initialize open state (Server-Safe: Only depend on location)
-  const isInitiallyOpen = node.type === 'folder' && location.pathname.startsWith(`/blog/${node.path}`)
+  const isInitiallyOpen = node.type === 'folder' && location.pathname.startsWith(`/ko/blog/${node.path}`)
   const [isOpen, setIsOpen] = useState(isInitiallyOpen)
 
   // Restore from session storage on mount (Client Only)
@@ -49,7 +49,7 @@ function TreeNode({ node, level }: TreeNodeProps) {
 
   // Auto-expand if active path (sync with URL changes)
   useEffect(() => {
-    if (node.type === 'folder' && location.pathname.startsWith(`/blog/${node.path}`)) {
+    if (node.type === 'folder' && location.pathname.startsWith(`/ko/blog/${node.path}`)) {
        setIsOpen(true)
        // We don't necessarily enforce persistence here if the user deliberately closed it? 
        // Actually, for "Flicker" fix on navigation, we WANT to enforce it open.
@@ -57,7 +57,7 @@ function TreeNode({ node, level }: TreeNodeProps) {
     }
   }, [location.pathname, node.path, node.type])
 
-  const isActive = node.type === 'post' && location.pathname === `/blog/${node.path}`
+  const isActive = node.type === 'post' && location.pathname === `/ko/blog/${node.path}`
 
   const paddingLeft = `${level * 12 + 12}px`
 
@@ -95,7 +95,7 @@ function TreeNode({ node, level }: TreeNodeProps) {
 
   return (
     <Link
-      to="/blog/$"
+      to="/ko/blog/$"
       params={{ _splat: node.path }}
       className={cn(
         "flex items-start gap-2 py-1.5 px-2 rounded-md text-sm transition-colors",

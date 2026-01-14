@@ -9,7 +9,7 @@ interface RelatedPostCardProps {
 export function RelatedPostCard({ post }: RelatedPostCardProps) {
   return (
     <Link
-      to="/blog/$"
+      to="/ko/blog/$"
       params={{ _splat: post.fullPath }}
       className="group block p-4 rounded-xl border border-border hover:border-(--gradient-purple)/30 hover:bg-muted/30 transition-all"
     >

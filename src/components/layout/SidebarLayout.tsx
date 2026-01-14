@@ -87,7 +87,7 @@ export function SidebarLayout({ children, tree, showRightSidebar = true }: Sideb
                          {recentPosts.slice(0, 5).map(post => (
                            <li key={post.id}>
                              <a 
-                               href={`/blog/${post.fullPath}`}
+                              href={`/ko/blog/${post.fullPath}`}
                                className="text-sm hover:text-primary transition-colors line-clamp-2"
                              >
                                {post.title}
@@ -193,7 +193,7 @@ export function SidebarLayout({ children, tree, showRightSidebar = true }: Sideb
                         {recentPosts.slice(0, 5).map(post => (
                           <li key={post.id}>
                             <a 
-                              href={`/blog/${post.fullPath}`}
+                              href={`/ko/blog/${post.fullPath}`}
                               className="text-sm hover:text-primary transition-colors line-clamp-2"
                             >
                               {post.title}
