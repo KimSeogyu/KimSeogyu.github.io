@@ -1,6 +1,7 @@
 ---
 title: "Rust 기반 HFT 시스템의 극한 최적화: 자료구조와 하드웨어의 대화"
 date: "2026-01-14"
+category: Quant
 description: "이론적인 Big-O 표기법이 실전 HFT(High-Frequency Trading) 시스템에서는 어떻게 무너지는가? Rust와 Computer Architecture를 활용해 146배의 성능 향상을 이뤄낸 기술적 여정을 공유합니다."
 tags: ["rust", "hft", "performance", "systems-programming", "architecture"]
 ---
