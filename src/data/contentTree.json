@@ -5,6 +5,13 @@
     "path": "ai-ml",
     "children": [
       {
+        "name": "로컬 LLM 구축을 위한 하드웨어 가이드: RTX 6000/5090 vs Mac Studio",
+        "type": "post",
+        "path": "ai-ml/gpu-serving-comparison-2026",
+        "slug": "gpu-serving-comparison-2026",
+        "title": "로컬 LLM 구축을 위한 하드웨어 가이드: RTX 6000/5090 vs Mac Studio"
+      },
+      {
         "name": "LangChain & LangGraph 실전 가이드 (2025)",
         "type": "post",
         "path": "ai-ml/langchain-langgraph-practical-guide",

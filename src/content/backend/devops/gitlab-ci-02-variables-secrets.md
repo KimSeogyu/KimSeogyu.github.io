@@ -1,7 +1,7 @@
 ---
 public: true
 title: "GitLab CI/CD 시리즈 #2: Variables와 Secrets 관리"
-date: 2026-01-05
+date: '2026-01-05'
 category: Backend
 series: gitlab-ci
 tags:
