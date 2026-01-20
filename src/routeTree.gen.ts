@@ -9,11 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ResumeRouteImport } from './routes/resume'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as KoIndexRouteImport } from './routes/ko/index'
-import { Route as KoResumeRouteImport } from './routes/ko/resume'
-import { Route as EnResumeRouteImport } from './routes/en/resume'
 import { Route as KoBlogRouteRouteImport } from './routes/ko/blog/route'
 import { Route as KoBlogIndexRouteImport } from './routes/ko/blog/index'
 import { Route as KoBlogSplatRouteImport } from './routes/ko/blog/$'
@@ -24,11 +21,6 @@ import { Route as KoBlogSeriesIndexRouteImport } from './routes/ko/blog/series/i
 import { Route as KoBlogTagsSplatRouteImport } from './routes/ko/blog/tags/$'
 import { Route as KoBlogSeriesSplatRouteImport } from './routes/ko/blog/series/$'
 
-const ResumeRoute = ResumeRouteImport.update({
-  id: '/resume',
-  path: '/resume',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,16 +29,6 @@ const IndexRoute = IndexRouteImport.update({
 const KoIndexRoute = KoIndexRouteImport.update({
   id: '/ko/',
   path: '/ko/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KoResumeRoute = KoResumeRouteImport.update({
-  id: '/ko/resume',
-  path: '/ko/resume',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EnResumeRoute = EnResumeRouteImport.update({
-  id: '/en/resume',
-  path: '/en/resume',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KoBlogRouteRoute = KoBlogRouteRouteImport.update({
@@ -97,10 +79,7 @@ const KoBlogSeriesSplatRoute = KoBlogSeriesSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/resume': typeof ResumeRoute
   '/ko/blog': typeof KoBlogRouteRouteWithChildren
-  '/en/resume': typeof EnResumeRoute
-  '/ko/resume': typeof KoResumeRoute
   '/ko': typeof KoIndexRoute
   '/ko/blog/series': typeof KoBlogSeriesRouteRouteWithChildren
   '/ko/blog/tags': typeof KoBlogTagsRouteRouteWithChildren
@@ -113,9 +92,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/resume': typeof ResumeRoute
-  '/en/resume': typeof EnResumeRoute
-  '/ko/resume': typeof KoResumeRoute
   '/ko': typeof KoIndexRoute
   '/ko/blog/$': typeof KoBlogSplatRoute
   '/ko/blog': typeof KoBlogIndexRoute
@@ -127,10 +103,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/resume': typeof ResumeRoute
   '/ko/blog': typeof KoBlogRouteRouteWithChildren
-  '/en/resume': typeof EnResumeRoute
-  '/ko/resume': typeof KoResumeRoute
   '/ko/': typeof KoIndexRoute
   '/ko/blog/series': typeof KoBlogSeriesRouteRouteWithChildren
   '/ko/blog/tags': typeof KoBlogTagsRouteRouteWithChildren
@@ -145,10 +118,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/resume'
     | '/ko/blog'
-    | '/en/resume'
-    | '/ko/resume'
     | '/ko'
     | '/ko/blog/series'
     | '/ko/blog/tags'
@@ -161,9 +131,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/resume'
-    | '/en/resume'
-    | '/ko/resume'
     | '/ko'
     | '/ko/blog/$'
     | '/ko/blog'
@@ -174,10 +141,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/resume'
     | '/ko/blog'
-    | '/en/resume'
-    | '/ko/resume'
     | '/ko/'
     | '/ko/blog/series'
     | '/ko/blog/tags'
@@ -191,22 +155,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ResumeRoute: typeof ResumeRoute
   KoBlogRouteRoute: typeof KoBlogRouteRouteWithChildren
-  EnResumeRoute: typeof EnResumeRoute
-  KoResumeRoute: typeof KoResumeRoute
   KoIndexRoute: typeof KoIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/resume': {
-      id: '/resume'
-      path: '/resume'
-      fullPath: '/resume'
-      preLoaderRoute: typeof ResumeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -219,20 +173,6 @@ declare module '@tanstack/react-router' {
       path: '/ko'
       fullPath: '/ko'
       preLoaderRoute: typeof KoIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ko/resume': {
-      id: '/ko/resume'
-      path: '/ko/resume'
-      fullPath: '/ko/resume'
-      preLoaderRoute: typeof KoResumeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/en/resume': {
-      id: '/en/resume'
-      path: '/en/resume'
-      fullPath: '/en/resume'
-      preLoaderRoute: typeof EnResumeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ko/blog': {
@@ -348,10 +288,7 @@ const KoBlogRouteRouteWithChildren = KoBlogRouteRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ResumeRoute: ResumeRoute,
   KoBlogRouteRoute: KoBlogRouteRouteWithChildren,
-  EnResumeRoute: EnResumeRoute,
-  KoResumeRoute: KoResumeRoute,
   KoIndexRoute: KoIndexRoute,
 }
 export const routeTree = rootRouteImport
