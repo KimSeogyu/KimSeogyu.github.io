@@ -4,7 +4,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { getAllPosts, getCategories, getContentTree } from '~/lib/posts'
 import { PostCard } from '~/features/blog/components'
 import { SidebarLayout } from '~/components/layout/SidebarLayout'
-import { Tag, BookOpen } from 'lucide-react'
+import { Tag, BookOpen, Info } from 'lucide-react'
 
 export const Route = createFileRoute('/ko/')(  {
   loader: async () => {
@@ -40,6 +40,27 @@ function BlogIndex() {
   return (
     <SidebarLayout tree={tree} showRightSidebar={true}>
       <div className="container mx-auto max-w-6xl">
+        {/* 블로그 안내 배너 */}
+        <div className="mb-8 gradient-border rounded-xl overflow-hidden">
+          <div className="flex items-start gap-4 p-5 bg-linear-to-r from-(--gradient-purple)/5 via-transparent to-(--gradient-cyan)/5">
+            <div className="shrink-0 mt-0.5">
+              <div className="p-2 rounded-lg bg-linear-to-br from-(--gradient-purple) to-(--gradient-cyan)">
+                <Info className="w-4 h-4 text-white" />
+              </div>
+            </div>
+            <div className="space-y-1 text-sm text-muted-foreground leading-relaxed">
+              <p>
+                이 블로그는 제가 알고 있는 것들을 잊지 않기 위해 기록하는 공간입니다.
+              </p>
+              <p>
+                직접 작성한 글도 있고, AI의 도움을 받아 정리한 글도 있습니다.
+                <br />
+                정확하지 않은 내용이 있을 수 있으니 참고용으로 봐주세요.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* 카테고리 필터 (콤팩트) */}
         <div className="flex flex-wrap gap-2 mb-8">
           <button 
