@@ -7,98 +7,111 @@
 /* Pretendard Variable Font */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 
-
 body {
   @apply m-0;
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
-    Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
-    "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue",
+    "Segoe UI",
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Malgun Gothic",
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas,
-    "Courier New", monospace;
+  font-family:
+    "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 :root {
-  /* 기본 색상 */
-  --background: oklch(0.985 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
+  /* 기본 색상 - Medium 스타일 모노톤 */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.15 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
+  --card-foreground: oklch(0.15 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
+  --popover-foreground: oklch(0.15 0 0);
+  --primary: oklch(0.15 0 0);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.15 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.15 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.871 0.006 286.286);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.871 0.006 286.286);
+  --border: oklch(0.92 0 0);
+  --input: oklch(0.92 0 0);
+  --ring: oklch(0.85 0 0);
+  --chart-1: oklch(0.45 0 0);
+  --chart-2: oklch(0.55 0 0);
+  --chart-3: oklch(0.35 0 0);
+  --chart-4: oklch(0.65 0 0);
+  --chart-5: oklch(0.75 0 0);
+  --radius: 0.25rem;
+  --sidebar: oklch(0.99 0 0);
+  --sidebar-foreground: oklch(0.15 0 0);
+  --sidebar-primary: oklch(0.15 0 0);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.15 0 0);
+  --sidebar-border: oklch(0.92 0 0);
+  --sidebar-ring: oklch(0.85 0 0);
 
-  /* 그라디언트 색상 (보라색 → 시안) */
-  --gradient-purple: #8b5cf6;
-  --gradient-cyan: #06b6d4;
-  --gradient-purple-light: #a78bfa;
-  --gradient-cyan-light: #22d3ee;
+  /* Medium 스타일 - 모노톤 + 그린 강조 */
+  --gradient-purple: #1a8917;
+  --gradient-cyan: #1a8917;
+  --gradient-purple-light: #2eb82b;
+  --gradient-cyan-light: #2eb82b;
 }
 
 .dark {
-  /* 다크 모드 - 딥 차콜 배경 */
-  --background: oklch(0.13 0.004 285.823);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.16 0.005 285.823);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.16 0.005 285.823);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.95 0 0);
-  --primary-foreground: oklch(0.16 0.006 285.885);
-  --secondary: oklch(0.22 0.006 286.033);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.22 0.006 286.033);
-  --muted-foreground: oklch(0.65 0.015 286.067);
-  --accent: oklch(0.22 0.006 286.033);
-  --accent-foreground: oklch(0.95 0 0);
+  /* 다크 모드 - Medium 스타일 모노톤 */
+  --background: oklch(0.12 0 0);
+  --foreground: oklch(0.92 0 0);
+  --card: oklch(0.15 0 0);
+  --card-foreground: oklch(0.92 0 0);
+  --popover: oklch(0.15 0 0);
+  --popover-foreground: oklch(0.92 0 0);
+  --primary: oklch(0.92 0 0);
+  --primary-foreground: oklch(0.12 0 0);
+  --secondary: oklch(0.2 0 0);
+  --secondary-foreground: oklch(0.92 0 0);
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.2 0 0);
+  --accent-foreground: oklch(0.92 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.25 0.006 286.033);
-  --input: oklch(0.25 0.006 286.033);
-  --ring: oklch(0.442 0.017 285.786);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.16 0.006 285.885);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.95 0 0);
-  --sidebar-accent: oklch(0.22 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.25 0.006 286.033);
-  --sidebar-ring: oklch(0.442 0.017 285.786);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.25 0 0);
+  --ring: oklch(0.4 0 0);
+  --chart-1: oklch(0.5 0 0);
+  --chart-2: oklch(0.6 0 0);
+  --chart-3: oklch(0.7 0 0);
+  --chart-4: oklch(0.55 0 0);
+  --chart-5: oklch(0.65 0 0);
+  --sidebar: oklch(0.14 0 0);
+  --sidebar-foreground: oklch(0.92 0 0);
+  --sidebar-primary: oklch(0.92 0 0);
+  --sidebar-primary-foreground: oklch(0.12 0 0);
+  --sidebar-accent: oklch(0.2 0 0);
+  --sidebar-accent-foreground: oklch(0.92 0 0);
+  --sidebar-border: oklch(0.25 0 0);
+  --sidebar-ring: oklch(0.4 0 0);
 }
 
 @theme inline {
@@ -187,84 +200,55 @@ section {
   scroll-margin-top: 4rem;
 }
 
-/* 그라디언트 텍스트 */
+/* 강조 텍스트 - Medium 스타일 (단색) */
 .gradient-text {
-  background: linear-gradient(135deg, var(--gradient-purple) 0%, var(--gradient-cyan) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--foreground);
+  font-weight: 700;
 }
 
 .gradient-text-reverse {
-  background: linear-gradient(135deg, var(--gradient-cyan) 0%, var(--gradient-purple) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--foreground);
+  font-weight: 700;
 }
 
-/* 글라스모피즘 카드 - 다크모드 */
+/* 카드 - Medium 스타일 (심플한 보더) */
 .dark .glass-card {
-  background: rgba(30, 30, 40, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease;
 }
 
 .dark .glass-card:hover {
-  background: rgba(40, 40, 55, 0.9);
-  border-color: rgba(139, 92, 246, 0.4);
-  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
-  transform: translateY(-4px);
+  border-color: var(--muted-foreground);
 }
 
-/* 라이트 모드 글라스모피즘 */
+/* 라이트 모드 카드 */
 .glass-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(139, 92, 246, 0.15);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease;
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 1);
-  border-color: rgba(139, 92, 246, 0.3);
-  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.1);
-  transform: translateY(-4px);
+  border-color: var(--muted-foreground);
 }
 
-/* 읽기 진행률 바 */
+/* 읽기 진행률 바 - Medium 스타일 */
 .reading-progress-bar {
   position: fixed;
   top: 0;
   left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--gradient-purple) 0%, var(--gradient-cyan) 100%);
+  height: 2px;
+  background: var(--foreground);
   z-index: 9999;
   transition: width 0.1s ease-out;
 }
 
-/* 그라디언트 보더 */
+/* 심플 보더 */
 .gradient-border {
   position: relative;
   background: var(--background);
-}
-
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--gradient-purple) 0%, var(--gradient-cyan) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  border-radius: inherit;
-  pointer-events: none;
+  border: 1px solid var(--border);
 }
 
 /* 헤더 블러 효과 */
@@ -274,9 +258,9 @@ section {
   background: rgba(var(--background), 0.8);
 }
 
-/* 스크롤바 스타일링 */
+/* 스크롤바 스타일링 - Medium 스타일 */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -284,35 +268,35 @@ section {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.3);
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(139, 92, 246, 0.5);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 /* TOC 활성 상태 */
 .toc-active {
-  color: var(--gradient-purple);
-  border-left-color: var(--gradient-purple);
+  color: var(--foreground);
+  border-left-color: var(--foreground);
 }
 
-/* 카테고리 pill */
+/* 카테고리 pill - Medium 스타일 */
 .category-pill {
   transition: all 0.2s ease;
 }
 
 .category-pill:hover {
-  background: linear-gradient(135deg, var(--gradient-purple) 0%, var(--gradient-cyan) 100%);
-  color: white;
-  border-color: transparent;
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
 }
 
 .category-pill.active {
-  background: linear-gradient(135deg, var(--gradient-purple) 0%, var(--gradient-cyan) 100%);
-  color: white;
-  border-color: transparent;
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
 }
 
 /* ============================================
@@ -320,7 +304,13 @@ section {
    ============================================ */
 
 .article-prose {
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   font-size: 1.125rem;
   line-height: 1.85;
   color: var(--foreground);
@@ -332,7 +322,12 @@ section {
 .article-prose h2,
 .article-prose h3,
 .article-prose h4 {
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-top: 2.5rem;
@@ -356,7 +351,7 @@ section {
 
 .article-prose h3 {
   font-size: 1.5rem;
-  color: var(--gradient-purple);
+  color: var(--foreground);
 }
 
 .article-prose h4 {
@@ -370,7 +365,7 @@ section {
 
 /* 링크 */
 .article-prose a {
-  color: var(--gradient-purple);
+  color: var(--foreground);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
@@ -378,7 +373,7 @@ section {
 }
 
 .article-prose a:hover {
-  color: var(--gradient-cyan);
+  color: var(--muted-foreground);
   text-decoration-thickness: 2px;
 }
 
@@ -395,37 +390,36 @@ section {
 }
 
 .article-prose ul li::marker {
-  color: var(--gradient-purple);
+  color: var(--muted-foreground);
 }
 
 .article-prose ol li::marker {
-  color: var(--gradient-purple);
+  color: var(--muted-foreground);
   font-weight: 600;
 }
 
-/* 인라인 코드 */
+/* 인라인 코드 - Medium 스타일 */
 .article-prose code:not(pre code) {
-  font-family: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  font-family: "JetBrains Mono", "Fira Code", Menlo, monospace;
   font-size: 0.9em;
-  background: rgba(139, 92, 246, 0.1);
-  color: var(--gradient-purple);
+  background: var(--muted);
+  color: var(--foreground);
   padding: 0.2em 0.4em;
-  border-radius: 4px;
+  border-radius: 3px;
   font-weight: 500;
 }
 
-/* 코드 블록 */
+/* 코드 블록 - Medium 스타일 */
 .article-prose pre {
-  font-family: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  font-family: "JetBrains Mono", "Fira Code", Menlo, monospace;
   font-size: 0.9rem;
   line-height: 1.6;
-  background: #1a1a2e;
-  border-radius: 12px;
+  background: #1a1a1a;
+  border-radius: 4px;
   padding: 1.5rem;
   margin: 2rem 0;
   overflow-x: auto;
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border);
 }
 
 .article-prose pre code {
@@ -444,30 +438,29 @@ section {
   font-size: 1.3rem;
   line-height: 1.8;
   color: var(--muted-foreground);
-  border-left: 4px solid var(--gradient-cyan);
-  background: linear-gradient(to right, rgba(6, 182, 212, 0.05), transparent);
-  border-radius: 0 12px 12px 0;
+  border-left: 3px solid var(--foreground);
+  background: transparent;
+  border-radius: 0;
 }
 
 .article-prose blockquote p {
   margin: 0;
 }
 
-/* 이미지 */
+/* 이미지 - Medium 스타일 */
 .article-prose img {
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: 0;
   margin: 2rem auto;
   display: block;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* 구분선 */
 .article-prose hr {
   border: none;
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--border), transparent);
+  background: var(--border);
   margin: 3rem 0;
 }
 
@@ -503,26 +496,14 @@ section {
   background: var(--muted);
 }
 
-/* 첫 번째 문단 드롭캡 (선택적) */
-.article-prose > p:first-of-type::first-letter {
-  font-size: 3.5rem;
-  font-weight: 700;
-  float: left;
-  line-height: 1;
-  margin-right: 0.5rem;
-  margin-top: 0.1rem;
-  color: var(--gradient-purple);
-  font-family: "Pretendard Variable", Pretendard, sans-serif;
-}
-
 /* 다크모드 조정 */
 .dark .article-prose pre {
   background: #0d1117;
-  border-color: rgba(139, 92, 246, 0.3);
+  border-color: var(--border);
 }
 
 .dark .article-prose blockquote {
-  background: linear-gradient(to right, rgba(6, 182, 212, 0.08), transparent);
+  background: transparent;
 }
 
 /* ============================================
@@ -549,18 +530,21 @@ section {
 .mermaid-container tspan,
 .mermaid-container foreignObject div,
 .mermaid-container foreignObject span {
-  font-family: "Pretendard Variable", Pretendard, system-ui, sans-serif !important;
+  font-family:
+    "Pretendard Variable", Pretendard, system-ui, sans-serif !important;
 }
 
 /* ============================================
    Global Print Styles
    ============================================ */
 @media print {
-  @page { margin: 20mm; }
+  @page {
+    margin: 20mm;
+  }
 
   /* Respect current theme & force background graphics */
-  body { 
-    -webkit-print-color-adjust: exact !important; 
+  body {
+    -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     background-color: var(--background) !important;
     color: var(--foreground) !important;
@@ -571,25 +555,14 @@ section {
     border-color: var(--border) !important;
   }
 
-  /* Force Gradient Text for Print */
+  /* 프린트 스타일 - Medium 모노톤 */
   .gradient-text {
-    background: linear-gradient(135deg, var(--gradient-purple) 0%, var(--gradient-cyan) 100%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    color: transparent !important;
-    -webkit-print-color-adjust: exact !important; 
-    print-color-adjust: exact !important;
+    color: var(--foreground) !important;
+    font-weight: 700;
   }
-  
-  .gradient-text-reverse { 
-    background: linear-gradient(135deg, var(--gradient-cyan) 0%, var(--gradient-purple) 100%) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    color: transparent !important;
-    -webkit-print-color-adjust: exact !important; 
-    print-color-adjust: exact !important;
+
+  .gradient-text-reverse {
+    color: var(--foreground) !important;
+    font-weight: 700;
   }
 }
-
