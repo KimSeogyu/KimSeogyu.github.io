@@ -43,6 +43,11 @@ jobs:
 
       - name: Build
         run: pnpm run build
+        env:
+          VITE_GISCUS_REPO: ${{ vars.VITE_GISCUS_REPO }}
+          VITE_GISCUS_REPO_ID: ${{ vars.VITE_GISCUS_REPO_ID }}
+          VITE_GISCUS_CATEGORY: ${{ vars.VITE_GISCUS_CATEGORY }}
+          VITE_GISCUS_CATEGORY_ID: ${{ vars.VITE_GISCUS_CATEGORY_ID }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
