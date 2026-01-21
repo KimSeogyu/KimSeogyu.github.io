@@ -983,6 +983,13 @@
             "title": "PostGIS와 GeoJSON을 활용한 공간 데이터 관리"
           },
           {
+            "name": "PostgreSQL 인덱스 Deep Dive: B-Tree부터 GiST까지",
+            "type": "post",
+            "path": "database/postgresql/postgresql-index-deep-dive",
+            "slug": "postgresql-index-deep-dive",
+            "title": "PostgreSQL 인덱스 Deep Dive: B-Tree부터 GiST까지"
+          },
+          {
             "name": "PostgreSQL 쿼리 성능 튜닝 완벽 가이드",
             "type": "post",
             "path": "database/postgresql/postgresql-query-tuning-guide",
