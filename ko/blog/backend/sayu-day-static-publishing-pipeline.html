@@ -126,7 +126,7 @@ pre:hover > .expand-button {
 <li>서버와 데이터베이스는 운영하고 싶지 않다.</li>
 <li>빌드 결과와 원고의 불일치를 만들고 싶지 않다.</li>
 </ul>
-<p>sayu.day는 이 문제를 <strong>Markdown을 유일한 원본으로 유지하는 정적 컴파일 파이프라인</strong>으로 풀었습니다.</p>
+<p>이 위키는 이 문제를 <strong>Markdown을 유일한 원본으로 유지하는 정적 컴파일 파이프라인</strong>으로 풀었습니다.</p>
 <h2 id="네-개의-경계를-먼저-나눈다">네 개의 경계를 먼저 나눈다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#네-개의-경계를-먼저-나눈다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
 <p>저장소는 다음 네 층으로 구분합니다.</p>
 
@@ -182,7 +182,7 @@ pre:hover > .expand-button {
 <li>Markdown과 JSON 중 무엇이 진짜 원본인지 경계가 흐려집니다.</li>
 <li>생성 스크립트와 애플리케이션의 해석 규칙이 달라질 수 있습니다.</li>
 </ol>
-<p>sayu.day에서는 앱이 <code>/content/**/*.md</code>를 직접 정적 import합니다. 별도의 글 데이터베이스나 중간 JSON을 만들지 않습니다.</p>
+<p>이 위키에서는 앱이 <code>/content/**/*.md</code>를 직접 정적 import합니다. 별도의 글 데이터베이스나 중간 JSON을 만들지 않습니다.</p>
 <p>이 선택의 장점은 명확합니다.</p>
 <ul>
 <li>원고의 SSOT가 유지됩니다.</li>
@@ -193,7 +193,7 @@ pre:hover > .expand-button {
 <p>물론 Markdown 전체가 번들 입력이 되므로 글 수와 렌더러가 커질수록 빌드 시간과 bundle size를 관찰해야 합니다. 하지만 현재 규모에서는 단순성과 일관성이 더 큰 가치였습니다.</p>
 <h2 id="공개는-opt-in이어야-한다">공개는 opt-in이어야 한다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#공개는-opt-in이어야-한다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
 <p>개인 vault에는 공개 글과 비공개 메모가 함께 존재할 수 있습니다. 따라서 “비공개라고 표시한 글만 제외”하는 방식은 위험합니다. 표시를 빠뜨리면 그대로 공개되기 때문입니다.</p>
-<p>sayu.day는 반대로 동작합니다.</p>
+<p>이 위키는 반대로 동작합니다.</p>
 <figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="yaml" data-theme="github-light github-dark"><code data-language="yaml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">---</span></span>
 <span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">title</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">공개할 글</span></span>
 <span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">date</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">2026-07-24</span></span>
@@ -217,7 +217,7 @@ pre:hover > .expand-button {
 <p>원고 검증과 <strong>최종 산출물 누출 검사</strong>는 다른 문제입니다.</p>
 <h2 id="외부-상태를-정적으로-캡처한다">외부 상태를 정적으로 캡처한다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#외부-상태를-정적으로-캡처한다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
 <p>댓글은 Giscus를 통해 브라우저에서 동적으로 표시할 수 있습니다. 하지만 트렌딩 정렬에 댓글과 반응을 사용하려면 빌드 시점에도 해당 상태가 필요합니다.</p>
-<p>sayu.day는 GitHub Discussions API의 결과를 <code>generated/postMetrics.json</code>에 저장합니다. 정적 사이트는 이 캐시를 읽어 최근 댓글, 반응, 활동 시점 등을 기준으로 정렬합니다.</p>
+<p>이 위키는 GitHub Discussions API의 결과를 <code>generated/postMetrics.json</code>에 저장합니다. 정적 사이트는 이 캐시를 읽어 최근 댓글, 반응, 활동 시점 등을 기준으로 정렬합니다.</p>
 <p>여기서 중요한 설계 판단은 외부 API를 런타임 의존성으로 만들지 않는 것입니다.</p>
 <ul>
 <li>API가 정상이라면 최신 지표를 정적 산출물에 반영합니다.</li>
@@ -302,7 +302,7 @@ pre:hover > .expand-button {
 <p>정적 사이트는 운영할 서버를 없애줍니다. 대신 빌드 파이프라인 자체가 출판 서버가 됩니다.</p>
 <h2 id="참고">참고<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#참고" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
 <ul>
-<li><a href="https://github.com/KimSeogyu/kimseogyu.github.io" class="external">sayu.day GitHub 저장소<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/KimSeogyu/kimseogyu.github.io" class="external">GitHub 저장소<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
 <li><a href="https://tanstack.com/start" class="external">TanStack Start<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
 <li><a href="https://pages.github.com/" class="external">GitHub Pages<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
 <li><a href="https://giscus.app/" class="external">Giscus<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
