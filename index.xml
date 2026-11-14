@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>sayu.day</title>
+      <link>https://kimseogyu.github.io</link>
+      <description>최근 10 건 on sayu.day</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>LLM 지식베이스는 왜 작아야 하는가: Recall-First Wiki 설계</title>
+    <link>https://kimseogyu.github.io/ko/blog/ai-ml/llm-wiki-recall-first-design</link>
+    <guid>https://kimseogyu.github.io/ko/blog/ai-ml/llm-wiki-recall-first-design</guid>
+    <description><![CDATA[ LLM 지식베이스는 왜 작아야 하는가: Recall-First Wiki 설계 LLM용 지식베이스를 만들 때 흔히 두 방향으로 갑니다. 첫 번째는 모든 문서를 chunk로 나눠 벡터 데이터베이스에 넣는 것입니다. ]]></description>
+    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>DOCX를 Markdown으로 바꾸는 일은 왜 단순 XML 변환이 아닌가</title>
+    <link>https://kimseogyu.github.io/ko/blog/backend/rust/undocx-document-conversion-architecture</link>
+    <guid>https://kimseogyu.github.io/ko/blog/backend/rust/undocx-document-conversion-architecture</guid>
+    <description><![CDATA[ DOCX를 Markdown으로 바꾸는 일은 왜 단순 XML 변환이 아닌가 DOCX 파일을 열어 문단 텍스트를 순서대로 꺼낸 뒤 Markdown 기호를 붙이면 변환기가 완성될 것처럼 보입니다. 실제 문서를 다루기 시작하면 이 접근은 빠르게 한계에 도달합니다. ]]></description>
+    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Markdown을 SSOT로 유지하는 정적 지식 출판 파이프라인</title>
+    <link>https://kimseogyu.github.io/ko/blog/backend/sayu-day-static-publishing-pipeline</link>
+    <guid>https://kimseogyu.github.io/ko/blog/backend/sayu-day-static-publishing-pipeline</guid>
+    <description><![CDATA[ Markdown을 SSOT로 유지하는 정적 지식 출판 파이프라인 개인 기술 블로그는 처음에는 Markdown 몇 개와 정적 사이트 생성기로 충분합니다. 하지만 글이 쌓이면 다음 요구가 동시에 생깁니다. Obsidian에서 편하게 작성하고 싶다. ]]></description>
+    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>AA 지갑 설계 노트: Solidity 패턴과 가스 최적화</title>
+    <link>https://kimseogyu.github.io/ko/blog/blockchain/ethereum/aa-jigabeul-seolgyehamyeo-baeun-solidity-paeteongwa-gaseu-coejeoghwa</link>
+    <guid>https://kimseogyu.github.io/ko/blog/blockchain/ethereum/aa-jigabeul-seolgyehamyeo-baeun-solidity-paeteongwa-gaseu-coejeoghwa</guid>
+    <description><![CDATA[ Passkey 기반 AA 지갑 설계를 기준으로 Solidity 프록시, 팩토리, 권한 경계, 자동결제 정책, ERC-4337 검증 경로, 가스 최적화를 정리합니다. ]]></description>
+    <pubDate>Wed, 13 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>FROST, MuSig2, Threshold ECDSA 차이와 라이브러리 선택</title>
+    <link>https://kimseogyu.github.io/ko/blog/blockchain/fundamentals/frost-musig2-threshold-ecdsa-caiwa-raibeureori-seontaeg</link>
+    <guid>https://kimseogyu.github.io/ko/blog/blockchain/fundamentals/frost-musig2-threshold-ecdsa-caiwa-raibeureori-seontaeg</guid>
+    <description><![CDATA[ FROST, MuSig2, threshold ECDSA/TSS를 t-of-n, n-of-n, ECDSA 호환성 기준으로 구분하고 Rust와 Go 라이브러리 선택지를 정리합니다. ]]></description>
+    <pubDate>Wed, 13 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>오라클 Push/Pull은 누가 실패를 감당하는가의 문제다</title>
+    <link>https://kimseogyu.github.io/ko/blog/blockchain/fundamentals/oracle-push-pull-risk-model</link>
+    <guid>https://kimseogyu.github.io/ko/blog/blockchain/fundamentals/oracle-push-pull-risk-model</guid>
+    <description><![CDATA[ Push와 Pull 오라클을 데이터 전달 방식이 아니라 stale price, replay, signer, mark price, liquidation guard를 포함한 실패 책임의 배치로 정리합니다. ]]></description>
+    <pubDate>Thu, 07 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Hyperliquid가 다시 정의한 금융 실행 앱체인</title>
+    <link>https://kimseogyu.github.io/ko/blog/blockchain/fundamentals/hyperliquid-core-execution-appchain</link>
+    <guid>https://kimseogyu.github.io/ko/blog/blockchain/fundamentals/hyperliquid-core-execution-appchain</guid>
+    <description><![CDATA[ Hyperliquid를 빠른 perp DEX로 소개하기보다, 거래소의 주문·체결·마진·청산이 HyperCore에서 실행되는 사례로 읽습니다. ]]></description>
+    <pubDate>Wed, 06 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Non-Custodial 지갑 UX의 본질은 키 위치가 아니라 권한 경계다</title>
+    <link>https://kimseogyu.github.io/ko/blog/blockchain/ethereum/non-custodial-wallet-ux-aa-passkey</link>
+    <guid>https://kimseogyu.github.io/ko/blog/blockchain/ethereum/non-custodial-wallet-ux-aa-passkey</guid>
+    <description><![CDATA[ account abstraction, passkey, MPC, zkLogin을 살펴보며 non-custodial 지갑 UX에서 무엇을 분리해야 하는지 정리합니다. ]]></description>
+    <pubDate>Tue, 05 May 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>퀀트 파이낸스 학습 노트: 전략, 레짐, 그리고 진짜 엣지</title>
+    <link>https://kimseogyu.github.io/ko/blog/quant/quant-finance-study-notes</link>
+    <guid>https://kimseogyu.github.io/ko/blog/quant/quant-finance-study-notes</guid>
+    <description><![CDATA[ 기술적 분석부터 모멘텀, 평균회귀, 추세추종, 롱숏 전략, HMM 레짐 감지, 올웨더 포트폴리오, 환율 방어 패턴까지 — 퀀트 파이낸스의 핵심 개념을 정리한 학습 노트. ]]></description>
+    <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>지금까지 써본 키보드 중 가장 좋았던 선택, 독거미 저소음 바다축</title>
+    <link>https://kimseogyu.github.io/ko/blog/misc/dokgeomi-silent-bada-switch-review</link>
+    <guid>https://kimseogyu.github.io/ko/blog/misc/dokgeomi-silent-bada-switch-review</guid>
+    <description><![CDATA[ 지금까지 써본 키보드 중 가장 좋았던 선택, 독거미 저소음 바다축 지금까지 레오폴드, 리얼포스, 키크론, 로지텍 MX Keys, 한성 무접점, 레이저 기계식, 독거미 경해축, SPM 목새축 등 다양한 키보드를 사용해봤다. ]]></description>
+    <pubDate>Sat, 21 Feb 2026 00:00:00 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>

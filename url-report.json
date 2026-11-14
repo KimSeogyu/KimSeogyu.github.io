@@ -1,0 +1,1172 @@
+{
+  "requestedSource": "docs/sitemap.xml",
+  "source": "public/sitemap.xml",
+  "committed": true,
+  "sha256": "d84aff65cf9451e6887113fb8413f15ec23016677d72b54b7ffa9ffbcc789c13",
+  "counts": {
+    "matched": 112,
+    "missing": 4,
+    "redirected": 139
+  },
+  "routes": [
+    {
+      "url": "/ko",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/ai-ml/bm25-geomsaeg-enjinyi-haegsim-raengking-algorijeum",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/ai-ml/faiss-wa-opensearch-begteo-geomsaeg-bigyo",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/ai-ml/gpu-serving-comparison-2026",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/ai-ml/langchain-langgraph-practical-guide",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/ai-ml/llm-wiki-recall-first-design",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/ai-ml/rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/docker-multistage-build-optimization",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/gitlab-ci-01-fundamentals",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/gitlab-ci-02-variables-secrets",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/gitlab-ci-03-runners-executors",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/gitlab-ci-04-pipeline-architectures",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/gitlab-ci-05-advanced-job-control",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/gitlab-ci-06-external-integrations",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/helm-environment-management",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/linux-ulimit-guide",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/locust-e2e-testing",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/seobiseu-gyumoe-ddareun-seukeilring-jeonryag",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/seupaikeu-teuraepig-daeeung-jeonryag",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/devops/trunk-based-development",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/gitops/gitops-01-introduction",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/gitops/gitops-02-argocd-deep-dive",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/gitops/gitops-03-flux-cd",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/gitops/gitops-04-config-management",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/gitops/gitops-05-secrets-management",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/gitops/gitops-06-ci-integration",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/buf-protobuf-management",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/enterprise-go-1-project-structure",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/enterprise-go-2-http-server",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/enterprise-go-3-context",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/enterprise-go-4-goroutine-channel",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/enterprise-go-5-database",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/enterprise-go-6-resilient-communication",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/enterprise-go-7-testing",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/enterprise-go-8-observability",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/enterprise-go-9-makefile",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/error-handling-strategy",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/gc-tuning-experience",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/ginkgo-bdd-testing",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/interface-design-principles",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/pprof-profiling-guide",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/go/wire-dependency-injection",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/http/eaddrnotavail",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/http/grpc-gateway-dual-protocol",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/kubernetes/k8s-01-workload-controllers",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/kubernetes/k8s-02-service-networking",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/kubernetes/k8s-03-config-secrets",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/kubernetes/k8s-04-istio-service-mesh",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/kubernetes/k8s-05-autoscaling",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/kubernetes/k8s-06-security",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/patterns/append-only-versioning",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/patterns/dekoreiteo-decorator",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/patterns/functional-options-pattern",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/patterns/gaece-jihyang-peurogeuraeming-object-oriented-programming",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/rust/undocx-document-conversion-architecture",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/sayu-day-static-publishing-pipeline",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/backend/websocket/hwagjang-ganeunghan-silsigan-websocket-seobeo-akitegceo-seolgye",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/aptos/aptos-move-structure",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/aptos/interact-with-the-move-vm",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/aptos/move-on-aptos",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/aptos/upgrade-move-code",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/bitcoin/bitcoin-script",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/bitcoin/biteukoin-nftwa-brc-20-ft",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/celestia/celestia-deiteo-gayongseong-saempeulring-das-bunseog",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/celestia/celestia-node-file-paekiji-bunseog",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/celestia/celestiaga-teuraenjaegsyeon-baeyeoleul-odsro-byeonhwanhaneun-bangbeob",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/celestia/celestiayi-deiteo-gayongseong-jeungmyeong-data-availability-proof-mekeonijeum",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/celestia/celestiayi-eds-extended-data-square",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/ethereum/aa-jigabeul-seolgyehamyeo-baeun-solidity-paeteongwa-gaseu-coejeoghwa",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/ethereum/how-base-gas-works",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/ethereum/merkle-trie-integrity",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/ethereum/non-custodial-wallet-ux-aa-passkey",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/fundamentals/beulrogceinyi-ihae",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/fundamentals/dansun-haesi-geomjeung-yi-hangyewa-deiteo-gayongseong-munje",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/fundamentals/frost-musig2-threshold-ecdsa-caiwa-raibeureori-seontaeg",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/fundamentals/hyperliquid-core-execution-appchain",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/fundamentals/oracle-push-pull-risk-model",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/indexer/indexer-01-introduction",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/indexer/indexer-02-architecture",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/indexer/indexer-03-database-design",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/indexer/indexer-04-rust-sdk",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/indexer/indexer-05-diesel-orm",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/indexer/indexer-06-idempotency",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/others/hd-hierachy-deterministic-wallet",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/blockchain/others/istanbul-byzantine-fault",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/database/concepts/acid",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/database/concepts/upsert-vs-unique-key-constraint",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/database/mongodb/sharding-guide",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/database/mongodb/wiredtiger-storage-engine",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/database/mysql/which-is-best-isolation-level-for-a-common-situation",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/database/postgresql/postgis-geojson-guide",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/database/postgresql/postgresql-index-deep-dive",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/database/postgresql/postgresql-query-tuning-guide",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/database/redis/redis-giban-bunsan-rag-gaideu",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/database/redis/streams-audit-pipeline",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/distributed-systems/ceph/ceph-erasure-coding-deiteo-jeojang-heureum",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/distributed-systems/ceph/ceph-erasure-coding-deiteo-johoe-heureum",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/distributed-systems/ceph/ceph-erasure-coding-metadeiteo-gwanri",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/distributed-systems/ceph/crush-controlled-replication-under-scalable-hashing",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/distributed-systems/erasure-coding/rideu-solromon-kodeuyi-suhagjeog-weonri",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/distributed-systems/minio/minioyi-hilring-healing-mekeonijeum",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/distributed-systems/minio/minioyi-ireijeo-koding-guhyeon",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/distributed-systems/minio/minioyi-sonsang-gamji-algorijeum",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/frontend/maps/mapbox-gl-guide",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/frontend/maps/turf-polygon-operations",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/languages/dart/dart-programming-language",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/languages/others/biteu-yeonsan-hwalyong",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/languages/python/asyncio-concurrency-guide",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/languages/typescript/typescript-5-0-rc-balpyoeseo-dekoreiteo-bubun-yoyag",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/misc/dokgeomi-silent-bada-switch-review",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/quant/quant-finance-study-notes",
+      "status": "matched"
+    },
+    {
+      "url": "/ko/blog/series",
+      "status": "redirected",
+      "target": "/series"
+    },
+    {
+      "url": "/ko/blog/series/blockchain-indexer",
+      "status": "redirected",
+      "target": "/series/blockchain-indexer"
+    },
+    {
+      "url": "/ko/blog/series/enterprise-go",
+      "status": "redirected",
+      "target": "/series/enterprise-go"
+    },
+    {
+      "url": "/ko/blog/series/gitlab-ci",
+      "status": "redirected",
+      "target": "/series/gitlab-ci"
+    },
+    {
+      "url": "/ko/blog/series/gitops",
+      "status": "redirected",
+      "target": "/series/gitops"
+    },
+    {
+      "url": "/ko/blog/series/kubernetes",
+      "status": "redirected",
+      "target": "/series/kubernetes"
+    },
+    {
+      "url": "/ko/blog/tags",
+      "status": "redirected",
+      "target": "/tags"
+    },
+    {
+      "url": "/ko/blog/tags/AI/ML",
+      "status": "redirected",
+      "target": "/tags/AI/ML"
+    },
+    {
+      "url": "/ko/blog/tags/API",
+      "status": "redirected",
+      "target": "/tags/API"
+    },
+    {
+      "url": "/ko/blog/tags/AST",
+      "status": "redirected",
+      "target": "/tags/AST"
+    },
+    {
+      "url": "/ko/blog/tags/AWS",
+      "status": "redirected",
+      "target": "/tags/AWS"
+    },
+    {
+      "url": "/ko/blog/tags/Account Abstraction",
+      "status": "redirected",
+      "target": "/tags/Account-Abstraction"
+    },
+    {
+      "url": "/ko/blog/tags/Appchain",
+      "status": "redirected",
+      "target": "/tags/Appchain"
+    },
+    {
+      "url": "/ko/blog/tags/Architecture",
+      "status": "redirected",
+      "target": "/tags/Architecture"
+    },
+    {
+      "url": "/ko/blog/tags/ArgoCD",
+      "status": "redirected",
+      "target": "/tags/ArgoCD"
+    },
+    {
+      "url": "/ko/blog/tags/Audit",
+      "status": "redirected",
+      "target": "/tags/Audit"
+    },
+    {
+      "url": "/ko/blog/tags/Autoscaling",
+      "status": "redirected",
+      "target": "/tags/Autoscaling"
+    },
+    {
+      "url": "/ko/blog/tags/Backend",
+      "status": "redirected",
+      "target": "/tags/Backend"
+    },
+    {
+      "url": "/ko/blog/tags/Backend_DevOps",
+      "status": "redirected",
+      "target": "/tags/Backend_DevOps"
+    },
+    {
+      "url": "/ko/blog/tags/Backend_Websocket",
+      "status": "redirected",
+      "target": "/tags/Backend_Websocket"
+    },
+    {
+      "url": "/ko/blog/tags/Blockchain",
+      "status": "redirected",
+      "target": "/tags/Blockchain"
+    },
+    {
+      "url": "/ko/blog/tags/CI/CD",
+      "status": "redirected",
+      "target": "/tags/CI/CD"
+    },
+    {
+      "url": "/ko/blog/tags/CNCF",
+      "status": "redirected",
+      "target": "/tags/CNCF"
+    },
+    {
+      "url": "/ko/blog/tags/Cancellation",
+      "status": "redirected",
+      "target": "/tags/Cancellation"
+    },
+    {
+      "url": "/ko/blog/tags/Concurrency",
+      "status": "redirected",
+      "target": "/tags/Concurrency"
+    },
+    {
+      "url": "/ko/blog/tags/Controller",
+      "status": "redirected",
+      "target": "/tags/Controller"
+    },
+    {
+      "url": "/ko/blog/tags/Cryptography",
+      "status": "redirected",
+      "target": "/tags/Cryptography"
+    },
+    {
+      "url": "/ko/blog/tags/DAG",
+      "status": "redirected",
+      "target": "/tags/DAG"
+    },
+    {
+      "url": "/ko/blog/tags/DI",
+      "status": "redirected",
+      "target": "/tags/DI"
+    },
+    {
+      "url": "/ko/blog/tags/DOCX",
+      "status": "redirected",
+      "target": "/tags/DOCX"
+    },
+    {
+      "url": "/ko/blog/tags/Dart",
+      "status": "redirected",
+      "target": "/tags/Dart"
+    },
+    {
+      "url": "/ko/blog/tags/Database",
+      "status": "redirected",
+      "target": "/tags/Database"
+    },
+    {
+      "url": "/ko/blog/tags/DeFi",
+      "status": "redirected",
+      "target": "/tags/DeFi"
+    },
+    {
+      "url": "/ko/blog/tags/Design Patterns",
+      "status": "redirected",
+      "target": "/tags/Design-Patterns"
+    },
+    {
+      "url": "/ko/blog/tags/Desk Setup",
+      "status": "redirected",
+      "target": "/tags/Desk-Setup"
+    },
+    {
+      "url": "/ko/blog/tags/DevOps",
+      "status": "redirected",
+      "target": "/tags/DevOps"
+    },
+    {
+      "url": "/ko/blog/tags/Diesel",
+      "status": "missing"
+    },
+    {
+      "url": "/ko/blog/tags/Distributed Systems",
+      "status": "redirected",
+      "target": "/tags/Distributed-Systems"
+    },
+    {
+      "url": "/ko/blog/tags/Docker",
+      "status": "redirected",
+      "target": "/tags/Docker"
+    },
+    {
+      "url": "/ko/blog/tags/ETL",
+      "status": "missing"
+    },
+    {
+      "url": "/ko/blog/tags/Echo",
+      "status": "redirected",
+      "target": "/tags/Echo"
+    },
+    {
+      "url": "/ko/blog/tags/Enterprise",
+      "status": "redirected",
+      "target": "/tags/Enterprise"
+    },
+    {
+      "url": "/ko/blog/tags/Error Handling",
+      "status": "redirected",
+      "target": "/tags/Error-Handling"
+    },
+    {
+      "url": "/ko/blog/tags/Ethereum",
+      "status": "redirected",
+      "target": "/tags/Ethereum"
+    },
+    {
+      "url": "/ko/blog/tags/Exchange",
+      "status": "redirected",
+      "target": "/tags/Exchange"
+    },
+    {
+      "url": "/ko/blog/tags/FROST",
+      "status": "redirected",
+      "target": "/tags/FROST"
+    },
+    {
+      "url": "/ko/blog/tags/Flux",
+      "status": "redirected",
+      "target": "/tags/Flux"
+    },
+    {
+      "url": "/ko/blog/tags/GORM",
+      "status": "redirected",
+      "target": "/tags/GORM"
+    },
+    {
+      "url": "/ko/blog/tags/GPU",
+      "status": "redirected",
+      "target": "/tags/GPU"
+    },
+    {
+      "url": "/ko/blog/tags/Gas Optimization",
+      "status": "redirected",
+      "target": "/tags/Gas-Optimization"
+    },
+    {
+      "url": "/ko/blog/tags/Geospatial",
+      "status": "redirected",
+      "target": "/tags/Geospatial"
+    },
+    {
+      "url": "/ko/blog/tags/GiST",
+      "status": "redirected",
+      "target": "/tags/GiST"
+    },
+    {
+      "url": "/ko/blog/tags/Git",
+      "status": "redirected",
+      "target": "/tags/Git"
+    },
+    {
+      "url": "/ko/blog/tags/GitHub Pages",
+      "status": "redirected",
+      "target": "/tags/GitHub-Pages"
+    },
+    {
+      "url": "/ko/blog/tags/GitLab",
+      "status": "redirected",
+      "target": "/tags/GitLab"
+    },
+    {
+      "url": "/ko/blog/tags/GitOps",
+      "status": "redirected",
+      "target": "/tags/GitOps"
+    },
+    {
+      "url": "/ko/blog/tags/Go",
+      "status": "redirected",
+      "target": "/tags/Go"
+    },
+    {
+      "url": "/ko/blog/tags/HTTP",
+      "status": "redirected",
+      "target": "/tags/HTTP"
+    },
+    {
+      "url": "/ko/blog/tags/Hardware",
+      "status": "redirected",
+      "target": "/tags/Hardware"
+    },
+    {
+      "url": "/ko/blog/tags/Helm",
+      "status": "redirected",
+      "target": "/tags/Helm"
+    },
+    {
+      "url": "/ko/blog/tags/Hyperliquid",
+      "status": "redirected",
+      "target": "/tags/Hyperliquid"
+    },
+    {
+      "url": "/ko/blog/tags/Idempotency",
+      "status": "missing"
+    },
+    {
+      "url": "/ko/blog/tags/Index",
+      "status": "redirected",
+      "target": "/tags/Index"
+    },
+    {
+      "url": "/ko/blog/tags/Infrastructure",
+      "status": "redirected",
+      "target": "/tags/Infrastructure"
+    },
+    {
+      "url": "/ko/blog/tags/Interface",
+      "status": "redirected",
+      "target": "/tags/Interface"
+    },
+    {
+      "url": "/ko/blog/tags/Istio",
+      "status": "redirected",
+      "target": "/tags/Istio"
+    },
+    {
+      "url": "/ko/blog/tags/JavaScript",
+      "status": "redirected",
+      "target": "/tags/JavaScript"
+    },
+    {
+      "url": "/ko/blog/tags/Kafka",
+      "status": "redirected",
+      "target": "/tags/Kafka"
+    },
+    {
+      "url": "/ko/blog/tags/Keyboard",
+      "status": "redirected",
+      "target": "/tags/Keyboard"
+    },
+    {
+      "url": "/ko/blog/tags/Knowledge Management",
+      "status": "redirected",
+      "target": "/tags/Knowledge-Management"
+    },
+    {
+      "url": "/ko/blog/tags/Kubernetes",
+      "status": "redirected",
+      "target": "/tags/Kubernetes"
+    },
+    {
+      "url": "/ko/blog/tags/Kustomize",
+      "status": "redirected",
+      "target": "/tags/Kustomize"
+    },
+    {
+      "url": "/ko/blog/tags/LLM",
+      "status": "redirected",
+      "target": "/tags/LLM"
+    },
+    {
+      "url": "/ko/blog/tags/Languages",
+      "status": "redirected",
+      "target": "/tags/Languages"
+    },
+    {
+      "url": "/ko/blog/tags/Linux",
+      "status": "redirected",
+      "target": "/tags/Linux"
+    },
+    {
+      "url": "/ko/blog/tags/Local LLM",
+      "status": "redirected",
+      "target": "/tags/Local-LLM"
+    },
+    {
+      "url": "/ko/blog/tags/Mac Studio",
+      "status": "redirected",
+      "target": "/tags/Mac-Studio"
+    },
+    {
+      "url": "/ko/blog/tags/Markdown",
+      "status": "redirected",
+      "target": "/tags/Markdown"
+    },
+    {
+      "url": "/ko/blog/tags/MerkleTrie",
+      "status": "redirected",
+      "target": "/tags/MerkleTrie"
+    },
+    {
+      "url": "/ko/blog/tags/MongoDB",
+      "status": "redirected",
+      "target": "/tags/MongoDB"
+    },
+    {
+      "url": "/ko/blog/tags/MuSig2",
+      "status": "redirected",
+      "target": "/tags/MuSig2"
+    },
+    {
+      "url": "/ko/blog/tags/MySQL",
+      "status": "redirected",
+      "target": "/tags/MySQL"
+    },
+    {
+      "url": "/ko/blog/tags/Network",
+      "status": "redirected",
+      "target": "/tags/Network"
+    },
+    {
+      "url": "/ko/blog/tags/Networking",
+      "status": "redirected",
+      "target": "/tags/Networking"
+    },
+    {
+      "url": "/ko/blog/tags/Node.js",
+      "status": "redirected",
+      "target": "/tags/Node.js"
+    },
+    {
+      "url": "/ko/blog/tags/Observability",
+      "status": "redirected",
+      "target": "/tags/Observability"
+    },
+    {
+      "url": "/ko/blog/tags/Obsidian",
+      "status": "redirected",
+      "target": "/tags/Obsidian"
+    },
+    {
+      "url": "/ko/blog/tags/On-Premise",
+      "status": "redirected",
+      "target": "/tags/On-Premise"
+    },
+    {
+      "url": "/ko/blog/tags/OpenAPI",
+      "status": "redirected",
+      "target": "/tags/OpenAPI"
+    },
+    {
+      "url": "/ko/blog/tags/Oracle",
+      "status": "redirected",
+      "target": "/tags/Oracle"
+    },
+    {
+      "url": "/ko/blog/tags/Parser",
+      "status": "redirected",
+      "target": "/tags/Parser"
+    },
+    {
+      "url": "/ko/blog/tags/Passkey",
+      "status": "redirected",
+      "target": "/tags/Passkey"
+    },
+    {
+      "url": "/ko/blog/tags/Performance",
+      "status": "redirected",
+      "target": "/tags/Performance"
+    },
+    {
+      "url": "/ko/blog/tags/Perpetuals",
+      "status": "redirected",
+      "target": "/tags/Perpetuals"
+    },
+    {
+      "url": "/ko/blog/tags/Pipeline",
+      "status": "redirected",
+      "target": "/tags/Pipeline"
+    },
+    {
+      "url": "/ko/blog/tags/PostgreSQL",
+      "status": "redirected",
+      "target": "/tags/PostgreSQL"
+    },
+    {
+      "url": "/ko/blog/tags/Privacy",
+      "status": "redirected",
+      "target": "/tags/Privacy"
+    },
+    {
+      "url": "/ko/blog/tags/Python",
+      "status": "redirected",
+      "target": "/tags/Python"
+    },
+    {
+      "url": "/ko/blog/tags/RAG",
+      "status": "redirected",
+      "target": "/tags/RAG"
+    },
+    {
+      "url": "/ko/blog/tags/RTX 5090",
+      "status": "redirected",
+      "target": "/tags/RTX-5090"
+    },
+    {
+      "url": "/ko/blog/tags/RTX 6000 Ada",
+      "status": "redirected",
+      "target": "/tags/RTX-6000-Ada"
+    },
+    {
+      "url": "/ko/blog/tags/Redis",
+      "status": "redirected",
+      "target": "/tags/Redis"
+    },
+    {
+      "url": "/ko/blog/tags/Repository",
+      "status": "redirected",
+      "target": "/tags/Repository"
+    },
+    {
+      "url": "/ko/blog/tags/Research",
+      "status": "redirected",
+      "target": "/tags/Research"
+    },
+    {
+      "url": "/ko/blog/tags/Resilience",
+      "status": "redirected",
+      "target": "/tags/Resilience"
+    },
+    {
+      "url": "/ko/blog/tags/Runner",
+      "status": "redirected",
+      "target": "/tags/Runner"
+    },
+    {
+      "url": "/ko/blog/tags/Rust",
+      "status": "redirected",
+      "target": "/tags/Rust"
+    },
+    {
+      "url": "/ko/blog/tags/SDK",
+      "status": "missing"
+    },
+    {
+      "url": "/ko/blog/tags/SSOT",
+      "status": "redirected",
+      "target": "/tags/SSOT"
+    },
+    {
+      "url": "/ko/blog/tags/Scaling",
+      "status": "redirected",
+      "target": "/tags/Scaling"
+    },
+    {
+      "url": "/ko/blog/tags/Search",
+      "status": "redirected",
+      "target": "/tags/Search"
+    },
+    {
+      "url": "/ko/blog/tags/Secrets",
+      "status": "redirected",
+      "target": "/tags/Secrets"
+    },
+    {
+      "url": "/ko/blog/tags/Security",
+      "status": "redirected",
+      "target": "/tags/Security"
+    },
+    {
+      "url": "/ko/blog/tags/Silent Switch",
+      "status": "redirected",
+      "target": "/tags/Silent-Switch"
+    },
+    {
+      "url": "/ko/blog/tags/Smart Contract",
+      "status": "redirected",
+      "target": "/tags/Smart-Contract"
+    },
+    {
+      "url": "/ko/blog/tags/Solidity",
+      "status": "redirected",
+      "target": "/tags/Solidity"
+    },
+    {
+      "url": "/ko/blog/tags/Static Site",
+      "status": "redirected",
+      "target": "/tags/Static-Site"
+    },
+    {
+      "url": "/ko/blog/tags/Streaming",
+      "status": "redirected",
+      "target": "/tags/Streaming"
+    },
+    {
+      "url": "/ko/blog/tags/TSS",
+      "status": "redirected",
+      "target": "/tags/TSS"
+    },
+    {
+      "url": "/ko/blog/tags/TanStack Start",
+      "status": "redirected",
+      "target": "/tags/TanStack-Start"
+    },
+    {
+      "url": "/ko/blog/tags/Testing",
+      "status": "redirected",
+      "target": "/tags/Testing"
+    },
+    {
+      "url": "/ko/blog/tags/Threshold Signature",
+      "status": "redirected",
+      "target": "/tags/Threshold-Signature"
+    },
+    {
+      "url": "/ko/blog/tags/Timeout",
+      "status": "redirected",
+      "target": "/tags/Timeout"
+    },
+    {
+      "url": "/ko/blog/tags/Tooling",
+      "status": "redirected",
+      "target": "/tags/Tooling"
+    },
+    {
+      "url": "/ko/blog/tags/Transaction",
+      "status": "redirected",
+      "target": "/tags/Transaction"
+    },
+    {
+      "url": "/ko/blog/tags/TypeScript",
+      "status": "redirected",
+      "target": "/tags/TypeScript"
+    },
+    {
+      "url": "/ko/blog/tags/Typing",
+      "status": "redirected",
+      "target": "/tags/Typing"
+    },
+    {
+      "url": "/ko/blog/tags/Vector Search",
+      "status": "redirected",
+      "target": "/tags/Vector-Search"
+    },
+    {
+      "url": "/ko/blog/tags/Visualization",
+      "status": "redirected",
+      "target": "/tags/Visualization"
+    },
+    {
+      "url": "/ko/blog/tags/WebSocket",
+      "status": "redirected",
+      "target": "/tags/WebSocket"
+    },
+    {
+      "url": "/ko/blog/tags/Webhook",
+      "status": "redirected",
+      "target": "/tags/Webhook"
+    },
+    {
+      "url": "/ko/blog/tags/WiredTiger",
+      "status": "redirected",
+      "target": "/tags/WiredTiger"
+    },
+    {
+      "url": "/ko/blog/tags/async",
+      "status": "redirected",
+      "target": "/tags/async"
+    },
+    {
+      "url": "/ko/blog/tags/buf",
+      "status": "redirected",
+      "target": "/tags/buf"
+    },
+    {
+      "url": "/ko/blog/tags/finance",
+      "status": "redirected",
+      "target": "/tags/finance"
+    },
+    {
+      "url": "/ko/blog/tags/gRPC",
+      "status": "redirected",
+      "target": "/tags/gRPC"
+    },
+    {
+      "url": "/ko/blog/tags/indexer",
+      "status": "redirected",
+      "target": "/tags/indexer"
+    },
+    {
+      "url": "/ko/blog/tags/portfolio",
+      "status": "redirected",
+      "target": "/tags/portfolio"
+    },
+    {
+      "url": "/ko/blog/tags/quant",
+      "status": "redirected",
+      "target": "/tags/quant"
+    },
+    {
+      "url": "/ko/blog/tags/queue",
+      "status": "redirected",
+      "target": "/tags/queue"
+    },
+    {
+      "url": "/ko/blog/tags/regime",
+      "status": "redirected",
+      "target": "/tags/regime"
+    },
+    {
+      "url": "/ko/blog/tags/schema-design",
+      "status": "redirected",
+      "target": "/tags/schema-design"
+    },
+    {
+      "url": "/ko/blog/tags/trading",
+      "status": "redirected",
+      "target": "/tags/trading"
+    }
+  ]
+}
