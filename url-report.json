@@ -5,8 +5,8 @@
   "sha256": "d84aff65cf9451e6887113fb8413f15ec23016677d72b54b7ffa9ffbcc789c13",
   "counts": {
     "matched": 0,
-    "missing": 105,
-    "redirected": 150
+    "missing": 4,
+    "redirected": 251
   },
   "routes": [
     {
@@ -51,195 +51,243 @@
     },
     {
       "url": "/ko/blog/backend/devops/docker-multistage-build-optimization",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/docker-multistage-build-optimization"
     },
     {
       "url": "/ko/blog/backend/devops/gitlab-ci-01-fundamentals",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitlab-ci-01-fundamentals"
     },
     {
       "url": "/ko/blog/backend/devops/gitlab-ci-02-variables-secrets",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitlab-ci-02-variables-secrets"
     },
     {
       "url": "/ko/blog/backend/devops/gitlab-ci-03-runners-executors",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitlab-ci-03-runners-executors"
     },
     {
       "url": "/ko/blog/backend/devops/gitlab-ci-04-pipeline-architectures",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitlab-ci-04-pipeline-architectures"
     },
     {
       "url": "/ko/blog/backend/devops/gitlab-ci-05-advanced-job-control",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitlab-ci-05-advanced-job-control"
     },
     {
       "url": "/ko/blog/backend/devops/gitlab-ci-06-external-integrations",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitlab-ci-06-external-integrations"
     },
     {
       "url": "/ko/blog/backend/devops/helm-environment-management",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/helm-environment-management"
     },
     {
       "url": "/ko/blog/backend/devops/linux-ulimit-guide",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/linux-ulimit-guide"
     },
     {
       "url": "/ko/blog/backend/devops/locust-e2e-testing",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/locust-e2e-testing"
     },
     {
       "url": "/ko/blog/backend/devops/seobiseu-gyumoe-ddareun-seukeilring-jeonryag",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/seobiseu-gyumoe-ddareun-seukeilring-jeonryag"
     },
     {
       "url": "/ko/blog/backend/devops/seupaikeu-teuraepig-daeeung-jeonryag",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/seupaikeu-teuraepig-daeeung-jeonryag"
     },
     {
       "url": "/ko/blog/backend/devops/trunk-based-development",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/trunk-based-development"
     },
     {
       "url": "/ko/blog/backend/gitops/gitops-01-introduction",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitops-01-introduction"
     },
     {
       "url": "/ko/blog/backend/gitops/gitops-02-argocd-deep-dive",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitops-02-argocd-deep-dive"
     },
     {
       "url": "/ko/blog/backend/gitops/gitops-03-flux-cd",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitops-03-flux-cd"
     },
     {
       "url": "/ko/blog/backend/gitops/gitops-04-config-management",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitops-04-config-management"
     },
     {
       "url": "/ko/blog/backend/gitops/gitops-05-secrets-management",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitops-05-secrets-management"
     },
     {
       "url": "/ko/blog/backend/gitops/gitops-06-ci-integration",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gitops-06-ci-integration"
     },
     {
       "url": "/ko/blog/backend/go/buf-protobuf-management",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/buf-protobuf-management"
     },
     {
       "url": "/ko/blog/backend/go/enterprise-go-1-project-structure",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go-1-project-structure"
     },
     {
       "url": "/ko/blog/backend/go/enterprise-go-2-http-server",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go-2-http-server"
     },
     {
       "url": "/ko/blog/backend/go/enterprise-go-3-context",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go-3-context"
     },
     {
       "url": "/ko/blog/backend/go/enterprise-go-4-goroutine-channel",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go-4-goroutine-channel"
     },
     {
       "url": "/ko/blog/backend/go/enterprise-go-5-database",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go-5-database"
     },
     {
       "url": "/ko/blog/backend/go/enterprise-go-6-resilient-communication",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go-6-resilient-communication"
     },
     {
       "url": "/ko/blog/backend/go/enterprise-go-7-testing",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go-7-testing"
     },
     {
       "url": "/ko/blog/backend/go/enterprise-go-8-observability",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go-8-observability"
     },
     {
       "url": "/ko/blog/backend/go/enterprise-go-9-makefile",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go-9-makefile"
     },
     {
       "url": "/ko/blog/backend/go/error-handling-strategy",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/error-handling-strategy"
     },
     {
       "url": "/ko/blog/backend/go/gc-tuning-experience",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gc-tuning-experience"
     },
     {
       "url": "/ko/blog/backend/go/ginkgo-bdd-testing",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/ginkgo-bdd-testing"
     },
     {
       "url": "/ko/blog/backend/go/interface-design-principles",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/interface-design-principles"
     },
     {
       "url": "/ko/blog/backend/go/pprof-profiling-guide",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/pprof-profiling-guide"
     },
     {
       "url": "/ko/blog/backend/go/wire-dependency-injection",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/wire-dependency-injection"
     },
     {
       "url": "/ko/blog/backend/http/eaddrnotavail",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/eaddrnotavail"
     },
     {
       "url": "/ko/blog/backend/http/grpc-gateway-dual-protocol",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/grpc-gateway-dual-protocol"
     },
     {
       "url": "/ko/blog/backend/kubernetes/k8s-01-workload-controllers",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/k8s-01-workload-controllers"
     },
     {
       "url": "/ko/blog/backend/kubernetes/k8s-02-service-networking",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/k8s-02-service-networking"
     },
     {
       "url": "/ko/blog/backend/kubernetes/k8s-03-config-secrets",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/k8s-03-config-secrets"
     },
     {
       "url": "/ko/blog/backend/kubernetes/k8s-04-istio-service-mesh",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/k8s-04-istio-service-mesh"
     },
     {
       "url": "/ko/blog/backend/kubernetes/k8s-05-autoscaling",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/k8s-05-autoscaling"
     },
     {
       "url": "/ko/blog/backend/kubernetes/k8s-06-security",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/k8s-06-security"
     },
     {
       "url": "/ko/blog/backend/patterns/append-only-versioning",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/append-only-versioning"
     },
     {
       "url": "/ko/blog/backend/patterns/dekoreiteo-decorator",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/dekoreiteo-decorator"
     },
     {
       "url": "/ko/blog/backend/patterns/functional-options-pattern",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/functional-options-pattern"
     },
     {
       "url": "/ko/blog/backend/patterns/gaece-jihyang-peurogeuraeming-object-oriented-programming",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/gaece-jihyang-peurogeuraeming-object-oriented-programming"
     },
     {
       "url": "/ko/blog/backend/rust/undocx-document-conversion-architecture",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/undocx-document-conversion-architecture"
     },
     {
       "url": "/ko/blog/backend/sayu-day-static-publishing-pipeline",
@@ -248,215 +296,268 @@
     },
     {
       "url": "/ko/blog/backend/websocket/hwagjang-ganeunghan-silsigan-websocket-seobeo-akitegceo-seolgye",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/hwagjang-ganeunghan-silsigan-websocket-seobeo-akitegceo-seolgye"
     },
     {
       "url": "/ko/blog/blockchain/aptos/aptos-move-structure",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/aptos-move-structure"
     },
     {
       "url": "/ko/blog/blockchain/aptos/interact-with-the-move-vm",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/interact-with-the-move-vm"
     },
     {
       "url": "/ko/blog/blockchain/aptos/move-on-aptos",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/move-on-aptos"
     },
     {
       "url": "/ko/blog/blockchain/aptos/upgrade-move-code",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/upgrade-move-code"
     },
     {
       "url": "/ko/blog/blockchain/bitcoin/bitcoin-script",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/bitcoin-script"
     },
     {
       "url": "/ko/blog/blockchain/bitcoin/biteukoin-nftwa-brc-20-ft",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/biteukoin-nftwa-brc-20-ft"
     },
     {
       "url": "/ko/blog/blockchain/celestia/celestia-deiteo-gayongseong-saempeulring-das-bunseog",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/celestia-deiteo-gayongseong-saempeulring-das-bunseog"
     },
     {
       "url": "/ko/blog/blockchain/celestia/celestia-node-file-paekiji-bunseog",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/celestia-node-file-paekiji-bunseog"
     },
     {
       "url": "/ko/blog/blockchain/celestia/celestiaga-teuraenjaegsyeon-baeyeoleul-odsro-byeonhwanhaneun-bangbeob",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/celestiaga-teuraenjaegsyeon-baeyeoleul-odsro-byeonhwanhaneun-bangbeob"
     },
     {
       "url": "/ko/blog/blockchain/celestia/celestiayi-deiteo-gayongseong-jeungmyeong-data-availability-proof-mekeonijeum",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/celestiayi-deiteo-gayongseong-jeungmyeong-data-availability-proof-mekeonijeum"
     },
     {
       "url": "/ko/blog/blockchain/celestia/celestiayi-eds-extended-data-square",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/celestiayi-eds-extended-data-square"
     },
     {
       "url": "/ko/blog/blockchain/ethereum/aa-jigabeul-seolgyehamyeo-baeun-solidity-paeteongwa-gaseu-coejeoghwa",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/aa-jigabeul-seolgyehamyeo-baeun-solidity-paeteongwa-gaseu-coejeoghwa"
     },
     {
       "url": "/ko/blog/blockchain/ethereum/how-base-gas-works",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/how-base-gas-works"
     },
     {
       "url": "/ko/blog/blockchain/ethereum/merkle-trie-integrity",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/merkle-trie-integrity"
     },
     {
       "url": "/ko/blog/blockchain/ethereum/non-custodial-wallet-ux-aa-passkey",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/non-custodial-wallet-ux-aa-passkey"
     },
     {
       "url": "/ko/blog/blockchain/fundamentals/beulrogceinyi-ihae",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/beulrogceinyi-ihae"
     },
     {
       "url": "/ko/blog/blockchain/fundamentals/dansun-haesi-geomjeung-yi-hangyewa-deiteo-gayongseong-munje",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/dansun-haesi-geomjeung-yi-hangyewa-deiteo-gayongseong-munje"
     },
     {
       "url": "/ko/blog/blockchain/fundamentals/frost-musig2-threshold-ecdsa-caiwa-raibeureori-seontaeg",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/frost-musig2-threshold-ecdsa-caiwa-raibeureori-seontaeg"
     },
     {
       "url": "/ko/blog/blockchain/fundamentals/hyperliquid-core-execution-appchain",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/hyperliquid-core-execution-appchain"
     },
     {
       "url": "/ko/blog/blockchain/fundamentals/oracle-push-pull-risk-model",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/oracle-push-pull-risk-model"
     },
     {
       "url": "/ko/blog/blockchain/indexer/indexer-01-introduction",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/indexer-01-introduction"
     },
     {
       "url": "/ko/blog/blockchain/indexer/indexer-02-architecture",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/indexer-02-architecture"
     },
     {
       "url": "/ko/blog/blockchain/indexer/indexer-03-database-design",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/indexer-03-database-design"
     },
     {
       "url": "/ko/blog/blockchain/indexer/indexer-04-rust-sdk",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/indexer-04-rust-sdk"
     },
     {
       "url": "/ko/blog/blockchain/indexer/indexer-05-diesel-orm",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/indexer-05-diesel-orm"
     },
     {
       "url": "/ko/blog/blockchain/indexer/indexer-06-idempotency",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/indexer-06-idempotency"
     },
     {
       "url": "/ko/blog/blockchain/others/hd-hierachy-deterministic-wallet",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/hd-hierachy-deterministic-wallet"
     },
     {
       "url": "/ko/blog/blockchain/others/istanbul-byzantine-fault",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/istanbul-byzantine-fault"
     },
     {
       "url": "/ko/blog/database/concepts/acid",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/acid"
     },
     {
       "url": "/ko/blog/database/concepts/upsert-vs-unique-key-constraint",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/upsert-vs-unique-key-constraint"
     },
     {
       "url": "/ko/blog/database/mongodb/sharding-guide",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/sharding-guide"
     },
     {
       "url": "/ko/blog/database/mongodb/wiredtiger-storage-engine",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/wiredtiger-storage-engine"
     },
     {
       "url": "/ko/blog/database/mysql/which-is-best-isolation-level-for-a-common-situation",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/which-is-best-isolation-level-for-a-common-situation"
     },
     {
       "url": "/ko/blog/database/postgresql/postgis-geojson-guide",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/postgis-geojson-guide"
     },
     {
       "url": "/ko/blog/database/postgresql/postgresql-index-deep-dive",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/postgresql-index-deep-dive"
     },
     {
       "url": "/ko/blog/database/postgresql/postgresql-query-tuning-guide",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/postgresql-query-tuning-guide"
     },
     {
       "url": "/ko/blog/database/redis/redis-giban-bunsan-rag-gaideu",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/redis-giban-bunsan-rag-gaideu"
     },
     {
       "url": "/ko/blog/database/redis/streams-audit-pipeline",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/streams-audit-pipeline"
     },
     {
       "url": "/ko/blog/distributed-systems/ceph/ceph-erasure-coding-deiteo-jeojang-heureum",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/distributed-systems/ceph-erasure-coding-deiteo-jeojang-heureum"
     },
     {
       "url": "/ko/blog/distributed-systems/ceph/ceph-erasure-coding-deiteo-johoe-heureum",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/distributed-systems/ceph-erasure-coding-deiteo-johoe-heureum"
     },
     {
       "url": "/ko/blog/distributed-systems/ceph/ceph-erasure-coding-metadeiteo-gwanri",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/distributed-systems/ceph-erasure-coding-metadeiteo-gwanri"
     },
     {
       "url": "/ko/blog/distributed-systems/ceph/crush-controlled-replication-under-scalable-hashing",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/distributed-systems/crush-controlled-replication-under-scalable-hashing"
     },
     {
       "url": "/ko/blog/distributed-systems/erasure-coding/rideu-solromon-kodeuyi-suhagjeog-weonri",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/distributed-systems/rideu-solromon-kodeuyi-suhagjeog-weonri"
     },
     {
       "url": "/ko/blog/distributed-systems/minio/minioyi-hilring-healing-mekeonijeum",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/distributed-systems/minioyi-hilring-healing-mekeonijeum"
     },
     {
       "url": "/ko/blog/distributed-systems/minio/minioyi-ireijeo-koding-guhyeon",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/distributed-systems/minioyi-ireijeo-koding-guhyeon"
     },
     {
       "url": "/ko/blog/distributed-systems/minio/minioyi-sonsang-gamji-algorijeum",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/distributed-systems/minioyi-sonsang-gamji-algorijeum"
     },
     {
       "url": "/ko/blog/frontend/maps/mapbox-gl-guide",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/frontend/mapbox-gl-guide"
     },
     {
       "url": "/ko/blog/frontend/maps/turf-polygon-operations",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/frontend/turf-polygon-operations"
     },
     {
       "url": "/ko/blog/languages/dart/dart-programming-language",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/languages/dart-programming-language"
     },
     {
       "url": "/ko/blog/languages/others/biteu-yeonsan-hwalyong",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/languages/biteu-yeonsan-hwalyong"
     },
     {
       "url": "/ko/blog/languages/python/asyncio-concurrency-guide",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/languages/asyncio-concurrency-guide"
     },
     {
       "url": "/ko/blog/languages/typescript/typescript-5-0-rc-balpyoeseo-dekoreiteo-bubun-yoyag",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/languages/typescript-5-0-rc-balpyoeseo-dekoreiteo-bubun-yoyag"
     },
     {
       "url": "/ko/blog/misc/dokgeomi-silent-bada-switch-review",
