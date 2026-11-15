@@ -9,55 +9,55 @@
     <title>타입과 상태 설계</title>
     <link>https://kimseogyu.github.io/backend/type-and-state-design</link>
     <guid>https://kimseogyu.github.io/backend/type-and-state-design</guid>
-    <description><![CDATA[ 아래 절은 같은 주제의 연구 메모를 이어 붙인 것이다. 잘못된 연산은 검사기를 추가하기보다 API에서 없앤다 배운 것 금지된 연산을 검사하는 코드를 하나 더 붙이는 것보다, 그 연산을 호출할 수 없게 API에서 제거하는 편이 낫다. ]]></description>
+    <description><![CDATA[ 잘못된 연산은 검사기보다 API에서 없애고, 한 변수로 투영한 전이 목록은 가드를 보존하지 않으므로 실행 통제의 근거로 쓰지 않는다. ]]></description>
     <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>외부 데이터 수집과 시점 정합성</title>
     <link>https://kimseogyu.github.io/data-engineering/external-data-point-in-time</link>
     <guid>https://kimseogyu.github.io/data-engineering/external-data-point-in-time</guid>
-    <description><![CDATA[ 아래 절은 같은 주제의 연구 메모를 이어 붙인 것이다. 지금 내려받은 과거 데이터는 당시 관측 가능했던 데이터가 아니다 배운 것 공개 통계도 봇 재분류 같은 이유로 과거 값이 소급 정정되고, 일부 기간은 원자료 삭제로 정정조차 불가능하다. ]]></description>
+    <description><![CDATA[ 지금 받은 과거 데이터는 당시 관측 가능했던 값이 아니고, 사건·이용 가능·수신 시각과 빈 값은 서로 다른 의미로 남겨야 하며, 같은 키의 다른 값은 덮어쓰지 않고 충돌로 기록한다. ]]></description>
     <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>백테스트 연구 위생</title>
     <link>https://kimseogyu.github.io/quant/backtest-research-hygiene</link>
     <guid>https://kimseogyu.github.io/quant/backtest-research-hygiene</guid>
-    <description><![CDATA[ 아래 절은 같은 주제의 연구 메모를 이어 붙인 것이다. 백테스트 숫자에는 분모와 고정 조건을 함께 적는다 배운 것 백테스트나 지연 시간 수치를 보고할 때는 표본 수, 무엇을 고정했는지, 비용(수수료·펀딩·슬리피지)과 룩어헤드를 빼지 않았다는 점을 함께 적는다. ]]></description>
+    <description><![CDATA[ 백테스트 숫자는 분모와 고정 조건과 함께 적고, 모든 시도를 시행으로 세며, 모두 지면 무포지션을 고르고, 작은 엣지는 회전율 비용에 잠식되며, 룩어헤드는 타입으로 막는다. ]]></description>
     <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>LLM 지식베이스는 왜 작아야 하는가: Recall-First Wiki 설계</title>
     <link>https://kimseogyu.github.io/ai-ml/llm-wiki-recall-first-design</link>
     <guid>https://kimseogyu.github.io/ai-ml/llm-wiki-recall-first-design</guid>
-    <description><![CDATA[ LLM용 지식베이스를 만들 때 흔히 두 방향으로 갑니다. 첫 번째는 모든 문서를 chunk로 나눠 벡터 데이터베이스에 넣는 것입니다. 검색은 가능하지만 오래된 자료와 최신 자료가 함께 나오고, 같은 개념의 설명이 여러 문서에 중복됩니다. ]]></description>
+    <description><![CDATA[ RAG만으로는 부족하고 복잡한 거버넌스도 해답이 아니었습니다. 실제 질의 평가를 거쳐 만든 recall-first LLM Wiki의 설계 원칙을 정리합니다. ]]></description>
     <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>Markdown을 SSOT로 유지하는 정적 지식 출판 파이프라인</title>
     <link>https://kimseogyu.github.io/backend/sayu-day-static-publishing-pipeline</link>
     <guid>https://kimseogyu.github.io/backend/sayu-day-static-publishing-pipeline</guid>
-    <description><![CDATA[ 개인 기술 블로그는 처음에는 Markdown 몇 개와 정적 사이트 생성기로 충분합니다. 하지만 글이 쌓이면 다음 요구가 동시에 생깁니다. Obsidian에서 편하게 작성하고 싶다. 공개 여부를 원고마다 안전하게 통제하고 싶다. ]]></description>
+    <description><![CDATA[ Obsidian 원고를 복제하지 않고 Markdown 정본에서 검증, 피드, 검색 데이터, prerender 결과를 만드는 이 위키의 출판 구조를 설명합니다. ]]></description>
     <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>DOCX를 Markdown으로 바꾸는 일은 왜 단순 XML 변환이 아닌가</title>
     <link>https://kimseogyu.github.io/backend/undocx-document-conversion-architecture</link>
     <guid>https://kimseogyu.github.io/backend/undocx-document-conversion-architecture</guid>
-    <description><![CDATA[ DOCX 파일을 열어 문단 텍스트를 순서대로 꺼낸 뒤 Markdown 기호를 붙이면 변환기가 완성될 것처럼 보입니다. 실제 문서를 다루기 시작하면 이 접근은 빠르게 한계에 도달합니다. ]]></description>
+    <description><![CDATA[ DOCX의 구조와 상태를 Document AST로 분리하고 Markdown으로 렌더링하는 undocx의 설계와 테스트 전략을 설명합니다. ]]></description>
     <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>Architecture Evaluation — 2026-07-15</title>
     <link>https://kimseogyu.github.io/ai-ml/personal-llm-memory-architecture-evaluation-2026-07-15</link>
     <guid>https://kimseogyu.github.io/ai-ml/personal-llm-memory-architecture-evaluation-2026-07-15</guid>
-    <description><![CDATA[ 부모 노트: Personal LLM Memory Lab Executive decision Formal coupled outcome: no eligible winner. ]]></description>
+    <description><![CDATA[ Personal LLM Memory의 K × Q 결합 평가 결과. 배포 가능한 승자는 없고, K3 × Q2를 다음 아키텍처 목표로 둡니다. ]]></description>
     <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>Personal LLM Memory Lab</title>
     <link>https://kimseogyu.github.io/ai-ml/personal-llm-memory-lab</link>
     <guid>https://kimseogyu.github.io/ai-ml/personal-llm-memory-lab</guid>
-    <description><![CDATA[ Decision snapshot Status: No deployable K × Q winner as of 2026-07-15. ]]></description>
+    <description><![CDATA[ 2026-07-15 기준 Personal LLM Memory 실험의 결정 스냅샷과 하위 보고서 목록입니다. ]]></description>
     <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>Next Goal Research — Typed Compiler + Persistent Index — 2026-07-15</title>
     <link>https://kimseogyu.github.io/ai-ml/personal-memory-next-goal-2026-07-15</link>
     <guid>https://kimseogyu.github.io/ai-ml/personal-memory-next-goal-2026-07-15</guid>
-    <description><![CDATA[ 부모 노트: Personal LLM Memory Lab. ]]></description>
+    <description><![CDATA[ 다음 Personal LLM Memory Goal을 단계적으로 정합니다. Phase A는 typed compiler, Phase B는 persistent index입니다. ]]></description>
     <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>AA 지갑 설계 노트: Solidity 패턴과 가스 최적화</title>
