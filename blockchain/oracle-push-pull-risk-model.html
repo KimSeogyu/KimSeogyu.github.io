@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr"><head><title>오라클 Push/Pull은 누가 실패를 감당하는가의 문제다</title><meta charset="utf-8"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Seogyu Kim"/><meta property="og:title" content="오라클 Push/Pull은 누가 실패를 감당하는가의 문제다"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="오라클 Push/Pull은 누가 실패를 감당하는가의 문제다"/><meta name="twitter:description" content="Push와 Pull 오라클을 데이터 전달 방식이 아니라 stale price, replay, signer, mark price, liquidation guard를 포함한 실패 책임의 배치로 정리합니다."/><meta property="og:description" content="Push와 Pull 오라클을 데이터 전달 방식이 아니라 stale price, replay, signer, mark price, liquidation guard를 포함한 실패 책임의 배치로 정리합니다."/><meta property="og:image:alt" content="Push와 Pull 오라클을 데이터 전달 방식이 아니라 stale price, replay, signer, mark price, liquidation guard를 포함한 실패 책임의 배치로 정리합니다."/><meta property="og:image" content="https://kimseogyu.github.io/static/og-image.png"/><meta property="og:image:url" content="https://kimseogyu.github.io/static/og-image.png"/><meta name="twitter:image" content="https://kimseogyu.github.io/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="kimseogyu.github.io"/><meta property="og:url" content="https://kimseogyu.github.io/blockchain/oracle-push-pull-risk-model"/><meta property="twitter:url" content="https://kimseogyu.github.io/blockchain/oracle-push-pull-risk-model"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="Push와 Pull 오라클을 데이터 전달 방식이 아니라 stale price, replay, signer, mark price, liquidation guard를 포함한 실패 책임의 배치로 정리합니다."/><meta name="generator" content="Quartz"/><link href="../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvc2F5dS5kYXkvc2F5dS5kYXkvcXVhcnR6L3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://kimseogyu.github.io/index.xml"/></head><body data-slug="blockchain/oracle-push-pull-risk-model"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">Seogyu Kim</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>검색</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="검색어를 입력하세요" placeholder="검색어를 입력하세요"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="다크 모드"><title>다크 모드</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="라이트 모드"><title>라이트 모드</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="리더 모드"><title>리더 모드</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-174"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>탐색기</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-174" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../blockchain/">blockchain</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>오라클 Push/Pull은 누가 실패를 감당하는가의 문제다</a></div></nav><h1 class="article-title">오라클 Push/Pull은 누가 실패를 감당하는가의 문제다</h1><p show-comma="true" class="content-meta"><time datetime="2026-05-07T00:00:00.000Z">2026년 5월 07일</time><span>27 min read</span></p><ul class="tags"><li><a href="../tags/Blockchain" class="internal tag-link">Blockchain</a></li><li><a href="../tags/Oracle" class="internal tag-link">Oracle</a></li><li><a href="../tags/DeFi" class="internal tag-link">DeFi</a></li><li><a href="../tags/Security" class="internal tag-link">Security</a></li><li><a href="../tags/Perpetuals" class="internal tag-link">Perpetuals</a></li></ul></div></div><article class="popover-hint"><p>처음엔 오라클을 외부 가격을 체인에 옮기는 장치로 보기 쉽다. 블록체인은 외부 API를 직접 호출할 수 없으니 누군가 ETH 가격이나 BTC 가격을 가져다줘야 한다는 설명이다.</p>
+<p>틀린 말은 아니다. 하지만 DeFi에서 오라클 사고는 보통 “가격을 못 가져와서”만 생기지 않는다. 오래된 가격을 너무 오래 믿거나, 잘못된 feed를 읽거나, 특정 action용 가격을 다른 문맥에 재사용하거나, 이상 가격을 청산 로직에 그대로 연결할 때 생긴다.</p>
+<p>그래서 가격 오라클에서 더 중요한 질문은 이것이다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>이 가격이 틀렸거나 오래됐을 때 어디서 멈추는가?</span></span></code></pre></figure>
+<p>Push와 Pull도 이 질문으로 다시 봐야 한다. 둘은 단순히 “오라클이 먼저 올리느냐, 사용자가 들고 오느냐”의 차이가 아니다. 누가 업데이트 책임을 지는지, 누가 비용을 내는지, 누가 freshness를 검증하는지, 장애가 났을 때 어떤 기능을 멈추는지의 차이다.</p>
+<h2 id="한눈에-보는-논지">한눈에 보는 논지<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#한눈에-보는-논지" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>질문</th><th>Push</th><th>Pull</th><th>하이브리드</th></tr></thead><tbody><tr><td>무엇을 맡나</td><td>기준 가격을 온체인에 유지한다.</td><td>실행 시점 가격을 transaction에 싣는다.</td><td>기준 가격과 실행 가격을 분리한다.</td></tr><tr><td>누가 움직이나</td><td>oracle updater가 feed를 갱신한다.</td><td>caller, keeper, dApp이 payload를 가져온다.</td><td>updater와 caller가 각자 다른 책임을 진다.</td></tr><tr><td>주된 실패</td><td>stale price를 계속 읽는다.</td><td>오래되었거나 다른 문맥의 payload를 재사용한다.</td><td>두 입력값이 어긋났을 때 정책이 없으면 멈추지 못한다.</td></tr><tr><td>필수 guard</td><td><code>updatedAt</code>, max staleness, pause</td><td>expiry, nonce, purpose/context binding</td><td>deviation check, circuit breaker, fallback policy</td></tr><tr><td>잘 맞는 곳</td><td>렌딩, 담보 평가, RWA/NAV</td><td>스왑, perp, 빠른 정산</td><td>레버리지, 청산, 큰 금액이 걸린 실서비스</td></tr></tbody></table></div>
+<h2 id="가격은-상태-전이를-바꾼다">가격은 상태 전이를 바꾼다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#가격은-상태-전이를-바꾼다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>스마트 컨트랙트가 오라클 값을 읽기만 한다면 큰 문제가 아닐 수 있다. 문제는 그 값을 근거로 돈을 움직일 때 시작된다.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n  Price[Oracle price] --> State[Protocol state transition]\n  State --> Borrow[Borrow limit]\n  State --> Margin[Margin / PnL]\n  State --> Liquidation[Liquidation]\n  State --> Settlement[Settlement]&quot;">flowchart LR
+  Price[Oracle price] --> State[Protocol state transition]
+  State --> Borrow[Borrow limit]
+  State --> Margin[Margin / PnL]
+  State --> Liquidation[Liquidation]
+  State --> Settlement[Settlement]
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>렌딩 프로토콜에서 ETH 가격이 실제보다 높게 들어오면 사용자는 과도하게 빌릴 수 있다. 반대로 실제보다 낮게 들어오면 정상 포지션이 청산될 수 있다. Perp에서는 mark price, margin, liquidation, funding이 모두 가격 입력과 연결된다.</p>
+<p>이 순간 오라클은 API가 아니라 리스크 관리 시스템이 된다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Oracle = data delivery + verification + freshness + fallback + risk guard</span></span></code></pre></figure>
+<p>verification은 누가 만든 가격인지 묻는다. freshness는 아직 쓸 수 있는 가격인지 묻는다. fallback은 기본 경로가 깨졌을 때 무엇을 할지 묻는다. risk guard는 가격이 이상할 때 어떤 상태 전이를 막을지 정한다.</p>
+<h2 id="push는-기준-가격판이다">Push는 기준 가격판이다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#push는-기준-가격판이다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Push 모델은 오라클이 가격을 미리 온체인에 써두는 방식이다. dApp은 가격이 필요할 때 feed contract를 읽는다.</p>
+<p>Chainlink Data Feeds가 대표적인 예다. Chainlink 문서는 Data Feeds가 여러 데이터 소스를 집계하고, onchain aggregator에 값을 publish하며, consumer contract가 proxy/aggregator를 통해 값을 읽는 구조를 설명한다. 업데이트는 streaming처럼 매 순간 일어나는 것이 아니라, 보통 deviation threshold를 넘거나 heartbeat 시간이 지나면 새 round가 시작된다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="solidity" data-theme="github-light github-dark"><code data-language="solidity" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">int256</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> answer, , </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">uint256</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> updatedAt, ) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> feed.</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">latestRoundData</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">();</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">require</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(answer </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">></span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;invalid price&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">);</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">require</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">block</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">.timestamp </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> updatedAt </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">&lt;=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> MAX_STALENESS, </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;stale price&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">);</span></span></code></pre></figure>
+<p>Push에서 가장 많이 놓치는 부분은 <code>latestRoundData()</code>가 “항상 최신 시장 가격”을 뜻하지 않는다는 점이다. 온체인에 값이 있다는 말과 지금 바로 써도 된다는 말은 다르다. Chainlink 문서도 <code>latestRoundData()</code>의 <code>updatedAt</code>을 확인하고, 앱이 정한 허용 시간 안에 업데이트되지 않으면 pause 또는 alternate mode로 전환하라고 안내한다.</p>
+<p>Push 모델에서 봐야 할 변수는 heartbeat, deviation threshold, max staleness, fallback이다. 질문은 하나다. 이 자산은 얼마나 오래된 가격까지 허용할 수 있고, 이상할 때는 어디까지 멈출 것인가.</p>
+<p>Push는 렌딩, 담보 평가, 기준 가격, RWA NAV처럼 여러 곳에서 반복적으로 읽는 값에 잘 맞는다. 컨트랙트 인터페이스도 단순하다. 대신 자산 수가 많아질수록 모든 feed를 계속 온체인에 업데이트하는 비용이 커지고, 업데이트가 멈췄을 때 stale price를 쓰는 위험이 남는다.</p>
+<h2 id="pull은-실행-시점-가격이다">Pull은 실행 시점 가격이다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pull은-실행-시점-가격이다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Pull 모델은 가격을 미리 모든 체인에 계속 써두지 않는다. 가격이 필요한 순간 caller가 최신 price payload를 가져와 transaction에 포함하거나, 같은 transaction 안에서 price update를 먼저 실행한다.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n  User[User / dApp / keeper] --> Fetch[Fetch price payload]\n  Fetch --> Tx[Transaction with update&lt;br/>or signed payload]\n  Tx --> Verify[Onchain verification]\n  Verify --> Logic[Swap / perp / settlement]&quot;">flowchart TD
+  User[User / dApp / keeper] --> Fetch[Fetch price payload]
+  Fetch --> Tx[Transaction with update&lt;br/>or signed payload]
+  Tx --> Verify[Onchain verification]
+  Verify --> Logic[Swap / perp / settlement]
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>Pull이라고 해서 모두 같은 구조는 아니다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Pull 계열</th><th>가격이 들어오는 방식</th><th>예시</th><th>주의할 점</th></tr></thead><tbody><tr><td>Onchain update first</td><td>caller가 update payload를 제출하고 같은 transaction에서 읽는다.</td><td>Pyth <code>updatePriceFeeds()</code></td><td>update fee, stale threshold, 사용자가 과거 payload를 선택하는 문제</td></tr><tr><td>Signed report verification</td><td>offchain report를 가져와 onchain verifier가 검증한다.</td><td>Chainlink Data Streams</td><td>report schema, verifier, timestamp, feed ID 검증</td></tr><tr><td>Calldata injection</td><td>user transaction calldata에 oracle payload가 붙는다.</td><td>RedStone Pull</td><td>authorized signer, timestamp, payload extraction, signer threshold</td></tr><tr><td>Centralized signed quote</td><td>중앙화 서버가 특정 action용 가격에 서명한다.</td><td>자체 MVP/사내 시스템</td><td>replay, execution-context binding, signer key 보안</td></tr></tbody></table></div>
+<p>Pyth는 현재 push feed도 제공하지만, Pyth를 설명할 때 자주 언급되는 강한 특징은 pull integration pattern이다. 이 경로에서는 누구나 Hermes 같은 offchain service에서 최신 <code>priceUpdate</code>를 가져와 onchain Pyth contract에 제출할 수 있다. 일반적인 흐름은 transaction 안에서 <code>updatePriceFeeds()</code>로 가격을 갱신한 뒤 <code>getPriceNoOlderThan()</code> 같은 freshness check가 있는 메서드로 가격을 읽는 방식이다.</p>
+<p>Chainlink Data Streams도 pull-based design을 쓴다. dApp은 필요할 때 report를 가져오고 onchain에서 검증한다. RedStone Pull은 user transaction에 데이터 payload를 붙이고, 컨트랙트가 authorized signer, timestamp, aggregation rule을 검증하는 쪽에 가깝다.</p>
+<p>Pull의 장점은 실행 시점 가격에 가깝게 갈 수 있다는 점이다. 특히 perp, 스왑, 레버리지, 빠른 정산처럼 몇 초 차이가 손익으로 이어지는 곳에서는 이 장점이 크다. Pyth 문서도 pull oracle이 더 높은 update frequency와 낮은 latency를 제공할 수 있고, push feed는 각 chain/feed마다 지속적인 gas expenditure가 필요해 확장성에 제약이 있다고 설명한다.</p>
+<p>하지만 Pull이 자동으로 안전한 것은 아니다. Pyth 문서는 사용자가 어떤 price update를 transaction에 사용할지 선택할 수 있다는 점을 “adversarial selection”으로 설명한다. onchain price는 시간상 앞으로만 움직이고 너무 오래된 값은 쓸 수 없지만, 사용자가 허용 범위 안의 과거 update를 고르는 것은 여전히 latency와 비슷한 효과를 낼 수 있다. 그래서 Pull에서도 staleness threshold는 필수다.</p>
+<h2 id="signed-quote는-가격만-서명하면-부족하다">Signed quote는 가격만 서명하면 부족하다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#signed-quote는-가격만-서명하면-부족하다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>자체 중앙화 Pull 모델을 만들 때 가장 쉬운 착각은 “서명만 맞으면 된다”는 것이다. signer가 맞아도 그 서명이 어느 체인, 어느 컨트랙트, 어느 feed, 어느 action, 어느 만료 시간에 묶였는지 확인하지 않으면 재사용 공격이 가능하다.</p>
+<p>중앙화 signed quote라면 가격만 서명하면 부족하다. 최소한 feedId, price, decimals, timestamp, validUntil, purpose, nonce, 그리고 실행 문맥이 함께 묶여야 한다.</p>
+<p>여기서 실행 문맥은 항상 <code>msg.sender</code>일 필요는 없다. keeper, relayer, solver, permissionless liquidation을 허용하는 구조라면 account, positionId, beneficiary, executor, allowlisted executor class처럼 실제 권한 경계에 맞는 필드를 써야 한다. <code>msg.sender</code>만 기계적으로 묶으면 합법적인 제3자 실행을 막거나, 나중에 우회 필드를 덧붙이는 식으로 더 위험한 구조가 될 수 있다.</p>
+<p>중앙화 signed quote에서 EIP-712 typed data를 쓰는 이유도 여기 있다. 단순 문자열 서명은 사람이 읽기도 어렵고, 구조화된 필드가 어떤 domain에 묶이는지도 약하다. EIP-712는 typed structured data와 domain separator를 제공하고, domain에는 <code>chainId</code>, <code>verifyingContract</code>, <code>name</code>, <code>version</code> 같은 필드를 넣을 수 있다.</p>
+<p>다만 EIP-712 자체가 replay protection을 완성해주지는 않는다. EIP-712 명세도 replay protection을 포함하지 않는다고 명시한다. 그래서 <code>validUntil</code>, <code>nonce</code>, 실행 문맥, <code>purpose</code>, <code>chainId</code>, <code>verifyingContract</code> 같은 필드를 설계자가 직접 의미 있게 묶어야 한다.</p>
+<p>프로토콜형 Pull oracle은 이와 다르게 각자의 report/update 검증 방식을 갖는다. Pyth update, Chainlink Data Streams report, RedStone payload는 각각 해당 프로토콜의 verifier와 schema를 따라야 한다. 그래도 끝까지 남는 질문은 비슷하다. 누가 만든 가격인지, 어떤 feed인지, 아직 유효한지, 그리고 이 payload가 다른 실행 문맥으로 재사용될 수 없는지다.</p>
+<h2 id="실패-방식으로-보면-차이가-선명하다">실패 방식으로 보면 차이가 선명하다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#실패-방식으로-보면-차이가-선명하다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Push와 Pull의 차이를 실제 장애 상황으로 바꿔보면 더 잘 보인다. Push는 이미 온체인에 올라온 값을 계속 읽기 때문에 “그 값이 아직 살아 있는가”가 중요하다. Pull은 transaction 시점에 값을 가져오므로 “그 payload가 이 action에 맞는가”가 중요하다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>실패 상황</th><th>Push에서 생기는 문제</th><th>Pull에서 생기는 문제</th><th>필요한 guard</th></tr></thead><tbody><tr><td>업데이트 중단</td><td>feed에 예전 가격이 남아 있는데 컨트랙트가 계속 읽는다.</td><td>새 payload/report를 가져오지 못해 실행이 막힌다.</td><td>max staleness, pause, read-only mode</td></tr><tr><td>가격 급변</td><td>heartbeat 전까지 늦은 가격을 쓸 수 있다.</td><td>허용 범위 안에서 과거 payload를 골라 쓸 수 있다.</td><td>deviation check, short validity window</td></tr><tr><td>feed 혼동</td><td>잘못된 feed address, quote currency, decimals를 읽는다.</td><td>다른 feed/action용 payload를 재사용한다.</td><td>feedId, decimals, quote currency 고정</td></tr><tr><td>signer/verifier 문제</td><td>updater key가 잘못된 가격을 publish할 수 있다.</td><td>signer 검증 실패나 key compromise가 곧 가짜 가격으로 이어진다.</td><td>signer set, verifier, key rotation, emergency revoke</td></tr><tr><td>실행 문맥 혼동</td><td>같은 feed를 너무 넓은 용도에 쓴다.</td><td>borrow용 quote를 liquidation이나 swap에 재사용한다.</td><td>purpose binding, account/position/executor binding, verifying contract binding</td></tr></tbody></table></div>
+<p>둘 중 하나가 항상 우월하지는 않다. Push는 느리지만 안전하고 Pull은 빠르지만 위험하다는 식의 단순 구도도 맞지 않는다. Push도 stale check가 없으면 위험하고, Pull도 verifier와 freshness check가 잘 되어 있으면 강한 구조가 될 수 있다.</p>
+<p>결국 선택 기준은 이 질문이다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>이 가격은 기준선인가, 실행 가격인가?</span></span></code></pre></figure>
+<p>담보 평가처럼 여러 transaction에서 계속 참조되는 기준선이라면 Push가 자연스럽다. 스왑이나 perp 체결처럼 바로 그 transaction의 실행 결과를 결정하는 가격이라면 Pull이 자연스럽다.</p>
+<h2 id="실서비스에서는-기준-가격과-실행-가격을-나눈다">실서비스에서는 기준 가격과 실행 가격을 나눈다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#실서비스에서는-기준-가격과-실행-가격을-나눈다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>금전 리스크가 크고 실행 가격의 민감도가 높은 서비스라면 Push와 Pull을 역할별로 나누는 구조를 검토할 만하다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Push = 기준 가격판</span></span>
+<span data-line><span>Pull = 실행 시점 가격</span></span>
+<span data-line><span>RiskGuard = 둘 사이의 괴리와 freshness를 검사하는 장치</span></span></code></pre></figure>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n  Sources[Multiple price sources] --> Aggregation[Median / filtering / anomaly checks]\n  Aggregation --> Push[Push oracle&lt;br/>baseline price]\n  Aggregation --> Pull[Pull report or signed quote&lt;br/>execution price]\n  Push --> Guard[RiskGuard]\n  Pull --> Guard\n  Guard --> App[dApp logic]\n  Guard --> Pause[Pause / fallback&lt;br/>if abnormal]&quot;">flowchart TD
+  Sources[Multiple price sources] --> Aggregation[Median / filtering / anomaly checks]
+  Aggregation --> Push[Push oracle&lt;br/>baseline price]
+  Aggregation --> Pull[Pull report or signed quote&lt;br/>execution price]
+  Push --> Guard[RiskGuard]
+  Pull --> Guard
+  Guard --> App[dApp logic]
+  Guard --> Pause[Pause / fallback&lt;br/>if abnormal]
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>예를 들어 스왑이나 perp 실행에서는 Pull 가격을 쓰되, Push baseline과 너무 벌어지면 revert할 수 있다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="solidity" data-theme="github-light github-dark"><code data-language="solidity" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">require</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">!</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">isStale</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(pushUpdatedAt), </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;stale baseline&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">);</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">require</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">!</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">isExpired</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(pullValidUntil), </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">&quot;expired execution price&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">);</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">require</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">    absDiffBps</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">(pullPrice, pushPrice) </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">&lt;=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> maxDiffBps,</span></span>
+<span data-line><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">    &quot;price deviation too high&quot;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">);</span></span></code></pre></figure>
+<p>이때 Push 가격은 정답이 아니다. Pull 가격도 정답이 아니다. 둘은 서로 다른 실패 방식을 가진 입력값이다. RiskGuard는 두 입력값의 괴리, 업데이트 시각, 자산별 변동성, 거래 규모, 레버리지, 시장 상태를 보고 실행을 허용할지 결정한다.</p>
+<p>여기서 특히 중요한 것은 raw oracle price를 어떤 상태 전이에 곧바로 연결할지 명시적으로 정하는 것이다. 일부 시스템은 oracle 또는 index-derived price를 settlement나 primary risk input으로 쓸 수 있다. 문제는 직접 사용 자체가 아니라, 지연에 민감한 레버리지 상품에서 freshness, deviation, circuit breaker, liquidation guard 없이 그 값을 청산이나 정산에 그대로 연결하는 것이다.</p>
+<p>fallback oracle도 백업 피드 하나를 더 붙이는 문제가 아니다. 장애가 나면 신규 포지션을 막을지, 청산만 완화할지, read-only로 돌릴지, TWAP이나 EMA 같은 임시 모드로 갈지를 상태 기계처럼 정해야 한다.</p>
+<p>Perp에서는 이 구분이 더 중요하다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>oracle price</span></span>
+<span data-line><span>   ↓</span></span>
+<span data-line><span>mark price / index price calculation</span></span>
+<span data-line><span>   ↓</span></span>
+<span data-line><span>risk engine</span></span>
+<span data-line><span>   ↓</span></span>
+<span data-line><span>margin / liquidation / funding / PnL</span></span></code></pre></figure>
+<p>mark price는 오라클 가격의 다른 이름이 아니다. 외부 시장 가격, 내부 mid price, liquidity, funding, fallback, smoothing, protection rule을 어떻게 섞을지에 대한 리스크 설계다. 고배율 시장에서는 몇 초의 latency도 공격면이 될 수 있으므로, liquidation guard와 circuit breaker 없이 raw price만 믿으면 위험하다.</p>
+<h2 id="중앙화-구현은-data-plane과-control-plane을-나눠야-한다">중앙화 구현은 data plane과 control plane을 나눠야 한다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#중앙화-구현은-data-plane과-control-plane을-나눠야-한다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>중앙화 오라클은 무조건 안 된다고 말할 필요는 없다. 테스트넷, PoC, MVP, 내부 서비스, 금전 리스크가 작은 앱, 게임 아이템, 포인트 시스템, 원천 데이터 자체가 중앙화된 RWA/NAV에서는 충분히 쓸 수 있다.</p>
+<p>다만 중앙화 구현에서는 가격 서버보다 운영 권한의 집중이 더 큰 문제가 되기도 한다. signer, feed mapping, pause/resume, fallback 전환, settlement policy가 한 손에 있으면 가격 리스크는 곧 운영 리스크가 된다.</p>
+<p>여기서 data plane과 control plane을 섞으면 안 된다. 3초마다 가격을 올리거나 저지연 quote를 발급하는 live signer는 사람이 누르는 multisig로 운영하기 어렵다. 이 경로에는 HSM, KMS, TEE, threshold signing, key rotation, signer health check 같은 data-plane 보호가 필요하다. 반대로 signer set 변경, feed 설정, pause/fallback 권한, 긴급 폐기 절차는 multisig, timelock, guardian 같은 control-plane 장치로 다루는 편이 맞다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>경계</th><th>맡는 것</th><th>보호 방식</th></tr></thead><tbody><tr><td>Data plane</td><td>실시간 price update, signed quote 발급</td><td>HSM/KMS/TEE, threshold signer, key rotation, monitoring</td></tr><tr><td>Control plane</td><td>signer set, feed mapping, pause/resume, fallback 전환</td><td>multisig, timelock, guardian, emergency revoke</td></tr><tr><td>App risk logic</td><td>stale check, deviation check, mark price, liquidation guard</td><td>onchain rule, conservative mode, event log, alerting</td></tr></tbody></table></div>
+<h2 id="hypercore는-pull이-아니라-consensus-native-push에-가깝다">HyperCore는 Pull이 아니라 consensus-native Push에 가깝다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#hypercore는-pull이-아니라-consensus-native-push에-가깝다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Hyperliquid의 HyperCore oracle은 이 논의에서 좋은 비교점이다. 결론부터 말하면 HyperCore는 전형적인 Pull oracle이 아니다. 사용자가 signed price를 transaction calldata에 싣고, 컨트랙트가 그 서명을 검증하는 구조가 아니기 때문이다.</p>
+<p>HyperCore는 validator들이 가격을 계속 publish하고, 그 값이 consensus-native state와 risk engine으로 이어지는 구조에 가깝다. 공식 문서에 따르면 validator들은 각 perp asset의 spot oracle price를 약 3초마다 publish한다. 최종 oracle price는 validator들이 제출한 값의 stake-weighted median으로 정해진다.</p>
+<p>다만 venue basket은 자산별로 달라질 수 있다. HYPE처럼 주요 spot liquidity가 Hyperliquid에 있는 자산은 충분한 유동성이 생기기 전까지 외부 소스를 제외할 수 있고, BTC처럼 주요 spot liquidity가 외부에 있는 자산은 Hyperliquid spot price를 제외할 수 있다. 이 구조는 단일 가격 소스보다 조작 비용을 높일 수 있지만, 그 자체로 완전한 안전을 보장하지는 않는다. oracle price는 funding rate 계산에 쓰이고, margining, liquidations, TP/SL trigger에 쓰이는 mark price의 구성요소가 된다.</p>
+<p>중요한 것은 3초라는 숫자 자체가 아니다. validator set이 값을 만들고, stake-weighted median이 집계하고, mark price와 clearinghouse risk engine이 그 값을 받아 청산과 펀딩으로 연결한다는 점이다. 그래서 HyperCore의 3초 Push를 중앙화 서버 하나가 3초마다 <code>updatePrice()</code>를 호출하는 구조와 같은 것으로 보면 안 된다.</p>
+<p>특히 HyperCore와 HyperEVM을 혼동하면 안 된다. HyperEVM contract가 precompile로 HyperCore 가격이나 상태를 읽는 것은 기존 HyperCore state를 조회하는 것이다. Pull oracle처럼 사용자가 signed price payload를 제출하고 컨트랙트가 그 서명을 검증하는 구조가 아니다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>HyperEVM precompile read = HyperCore state 조회</span></span>
+<span data-line><span>Pull oracle = price payload 제출 + onchain 검증</span></span></code></pre></figure>
+<p>중앙화로 짧은 heartbeat를 만들 수는 있다. 하지만 그러려면 여러 거래소 가격 수집, median 또는 liquidity-aware aggregation, per-update deviation check, updatedAt 기반 stale check, mark/index price 분리, pause/fallback, live signer 보호를 직접 설계해야 한다. 이때도 파라미터는 자산마다 달라야 한다. BTC/ETH처럼 유동성이 깊은 자산과 저유동성 알트는 같은 threshold를 쓸 수 없고, 2x 레버리지와 100x 레버리지도 같은 max staleness를 쓸 수 없다.</p>
+<h2 id="용도별로-모델을-다르게-골라야-한다">용도별로 모델을 다르게 골라야 한다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#용도별로-모델을-다르게-골라야-한다" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>오라클 선택은 취향이 아니라 사용처의 리스크 모양에 따라 달라진다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>용도</th><th>추천 모델</th><th>필수 장치</th><th>이유</th></tr></thead><tbody><tr><td>렌딩 / 담보 평가</td><td>Push 중심</td><td>stale check, conservative pricing, max deviation, pause</td><td>담보 가치는 자주 읽히고, 컨트랙트 인터페이스가 단순해야 한다.</td></tr><tr><td>청산</td><td>Push + guard 또는 하이브리드</td><td>stale check, mark price, liquidation delay/guard, circuit breaker</td><td>잘못된 가격은 사용자 손실과 프로토콜 손실로 바로 이어진다.</td></tr><tr><td>Perp / 레버리지</td><td>Pull 또는 Push + Pull</td><td>짧은 expiry, mark price 분리, push-pull deviation check, funding/liquidation guard</td><td>실행 시점 가격과 latency가 중요하다.</td></tr><tr><td>스왑</td><td>Pull 또는 하이브리드</td><td>signed/report price, slippage check, expiry, feedId 검증</td><td>거래 시점의 가격과 사용자가 허용한 slippage가 핵심이다.</td></tr><tr><td>RWA / NAV</td><td>Push</td><td>업데이트 이력, 운영자 권한 관리, 수동 정정, pause</td><td>원천 데이터 자체가 중앙화되어 있고 초단위 최신성이 덜 중요할 수 있다.</td></tr><tr><td>게임 / 포인트 / 내부 시스템</td><td>중앙화 Push 가능</td><td>updater 권한, event log, stale check</td><td>금전 리스크가 작거나 시스템 경계가 명확하면 단순 구조가 실용적이다.</td></tr></tbody></table></div>
+<p>렌딩에서는 “늘 최신”보다 “이상 가격을 쓰지 않는 것”이 더 중요할 때가 많다. Perp에서는 최신성도 중요하지만, 최신 가격 하나를 그대로 청산 가격으로 쓰면 또 다른 문제가 생긴다. 스왑에서는 oracle price와 사용자 slippage가 함께 있어야 한다. RWA/NAV에서는 원천 데이터 제공자와 정정 권한이 핵심이다.</p>
+<p>즉, 오라클 모델은 프로토콜의 risk engine과 같이 설계해야 한다.</p>
+<h2 id="결론">결론<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#결론" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>오라클 설계는 데이터를 어떻게 가져올지보다 어떤 가격을 언제까지 믿을지 정하는 일이다. 더 정확히는 언제 멈출지 정하는 일이다.</p>
+<p>Push는 기준선을 만들기 좋다. Pull은 실행 시점 가격에 가깝게 갈 수 있다. 하지만 둘 다 stale check, replay 방어, execution-context binding, deviation guard 없이 쓰면 위험하다.</p>
+<p>중앙화 오라클은 가능하다. 다만 그 순간 보안은 블록체인이 아니라 오라클 서버, signer key, 운영 절차에 의존한다. data plane signer와 control plane 권한을 나누지 않으면 가격 장애가 운영 장애로 번진다.</p>
+<p>실서비스에서 가장 현실적인 구조는 대체로 아래 조합이다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Push baseline</span></span>
+<span data-line><span>+ Pull execution price</span></span>
+<span data-line><span>+ deviation check</span></span>
+<span data-line><span>+ stale check</span></span>
+<span data-line><span>+ mark price / risk engine</span></span>
+<span data-line><span>+ emergency pause</span></span></code></pre></figure>
+<p>마지막으로 남는 문장은 하나다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>오라클을 잘 설계한다는 것은 더 빠른 가격을 가져오는 일이 아니라,</span></span>
+<span data-line><span>잘못된 가격을 믿지 않는 경계를 만드는 일이다.</span></span></code></pre></figure>
+<h2 id="참고한-문서">참고한 문서<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#참고한-문서" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://docs.chain.link/data-feeds" class="external">Chainlink Docs: Data Feeds<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://docs.chain.link/data-feeds/developer-responsibilities" class="external">Chainlink Docs: Developer Responsibilities<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://docs.chain.link/data-streams" class="external">Chainlink Docs: Data Streams<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://docs.pyth.network/price-feeds/core/pull-updates" class="external">Pyth Docs: What is a Pull Oracle?<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://docs.pyth.network/price-feeds/core/why-update-prices" class="external">Pyth Docs: Why Update Prices<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://docs.pyth.network/price-feeds/core/best-practices" class="external">Pyth Docs: Best Practices<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://docs.redstone.finance/docs/dapps/redstone-pull/" class="external">RedStone Docs: Pull model<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://docs.redstone.finance/docs/dapps/redstone-push/" class="external">RedStone Docs: Push model<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://docs.redstone.finance/docs/dapps/redstone-erc7412/" class="external">RedStone Docs: Hybrid push + pull<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://eips.ethereum.org/EIPS/eip-712" class="external">EIP-712: Typed structured data hashing and signing<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/oracle" class="external">Hyperliquid Docs: Oracle<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul></article><hr/><div class="page-footer"><div class="giscus" data-repo="KimSeogyu/KimSeogyu.github.io" data-repo-id="R_kgDOVucEjA" data-category="Announcements" data-category-id="DIC_kwDOVucEjM4DLKem" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-input-position="top" data-light-theme="light" data-dark-theme="dark" data-theme-url="https://kimseogyu.github.io/static/giscus" data-lang="ko"></div></div></div><div class="right sidebar"><div class="graph"><h3>그래프 뷰</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-82" aria-expanded="true"><h3>목차</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#한눈에-보는-논지" data-for="한눈에-보는-논지">한눈에 보는 논지</a></li><li class="depth-0"><a href="#가격은-상태-전이를-바꾼다" data-for="가격은-상태-전이를-바꾼다">가격은 상태 전이를 바꾼다</a></li><li class="depth-0"><a href="#push는-기준-가격판이다" data-for="push는-기준-가격판이다">Push는 기준 가격판이다</a></li><li class="depth-0"><a href="#pull은-실행-시점-가격이다" data-for="pull은-실행-시점-가격이다">Pull은 실행 시점 가격이다</a></li><li class="depth-0"><a href="#signed-quote는-가격만-서명하면-부족하다" data-for="signed-quote는-가격만-서명하면-부족하다">Signed quote는 가격만 서명하면 부족하다</a></li><li class="depth-0"><a href="#실패-방식으로-보면-차이가-선명하다" data-for="실패-방식으로-보면-차이가-선명하다">실패 방식으로 보면 차이가 선명하다</a></li><li class="depth-0"><a href="#실서비스에서는-기준-가격과-실행-가격을-나눈다" data-for="실서비스에서는-기준-가격과-실행-가격을-나눈다">실서비스에서는 기준 가격과 실행 가격을 나눈다</a></li><li class="depth-0"><a href="#중앙화-구현은-data-plane과-control-plane을-나눠야-한다" data-for="중앙화-구현은-data-plane과-control-plane을-나눠야-한다">중앙화 구현은 data plane과 control plane을 나눠야 한다</a></li><li class="depth-0"><a href="#hypercore는-pull이-아니라-consensus-native-push에-가깝다" data-for="hypercore는-pull이-아니라-consensus-native-push에-가깝다">HyperCore는 Pull이 아니라 consensus-native Push에 가깝다</a></li><li class="depth-0"><a href="#용도별로-모델을-다르게-골라야-한다" data-for="용도별로-모델을-다르게-골라야-한다">용도별로 모델을 다르게 골라야 한다</a></li><li class="depth-0"><a href="#결론" data-for="결론">결론</a></li><li class="depth-0"><a href="#참고한-문서" data-for="참고한-문서">참고한 문서</a></li><li class="overflow-end"></li></ul></div><div class="recent-notes"><h3>최근 게시글</h3><ul class="recent-ul"><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../ai-ml/llm-wiki-recall-first-design" class="internal">LLM 지식베이스는 왜 작아야 하는가: Recall-First Wiki 설계</a></h3></div><p class="meta"><time datetime="2026-07-24T00:00:00.000Z">2026년 7월 24일</time></p><ul class="tags"><li><a class="internal tag-link" href="../tags/LLM">LLM</a></li><li><a class="internal tag-link" href="../tags/Knowledge-Management">Knowledge-Management</a></li><li><a class="internal tag-link" href="../tags/Obsidian">Obsidian</a></li><li><a class="internal tag-link" href="../tags/RAG">RAG</a></li><li><a class="internal tag-link" href="../tags/Architecture">Architecture</a></li><li><a class="internal tag-link" href="../tags/Git">Git</a></li></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../backend/sayu-day-static-publishing-pipeline" class="internal">Markdown을 SSOT로 유지하는 정적 지식 출판 파이프라인</a></h3></div><p class="meta"><time datetime="2026-07-24T00:00:00.000Z">2026년 7월 24일</time></p><ul class="tags"><li><a class="internal tag-link" href="../tags/Markdown">Markdown</a></li><li><a class="internal tag-link" href="../tags/Static-Site">Static-Site</a></li><li><a class="internal tag-link" href="../tags/Obsidian">Obsidian</a></li><li><a class="internal tag-link" href="../tags/TanStack-Start">TanStack-Start</a></li><li><a class="internal tag-link" href="../tags/GitHub-Pages">GitHub-Pages</a></li><li><a class="internal tag-link" href="../tags/SSOT">SSOT</a></li><li><a class="internal tag-link" href="../tags/Privacy">Privacy</a></li></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../backend/undocx-document-conversion-architecture" class="internal">DOCX를 Markdown으로 바꾸는 일은 왜 단순 XML 변환이 아닌가</a></h3></div><p class="meta"><time datetime="2026-07-24T00:00:00.000Z">2026년 7월 24일</time></p><ul class="tags"><li><a class="internal tag-link" href="../tags/Rust">Rust</a></li><li><a class="internal tag-link" href="../tags/DOCX">DOCX</a></li><li><a class="internal tag-link" href="../tags/Markdown">Markdown</a></li><li><a class="internal tag-link" href="../tags/AST">AST</a></li><li><a class="internal tag-link" href="../tags/Parser">Parser</a></li><li><a class="internal tag-link" href="../tags/RAG">RAG</a></li><li><a class="internal tag-link" href="../tags/Testing">Testing</a></li></ul></div></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2026</p><ul><li><a href="https://github.com/KimSeogyu">GitHub</a></li></ul></footer></div></div></body><script type="application/javascript">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.js" type="module"></script></html>
