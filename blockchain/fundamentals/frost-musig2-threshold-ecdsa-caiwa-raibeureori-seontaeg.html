@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr"><head><title>FROST, MuSig2, Threshold ECDSA 차이와 라이브러리 선택</title><meta charset="utf-8"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Seogyu Kim"/><meta property="og:title" content="FROST, MuSig2, Threshold ECDSA 차이와 라이브러리 선택"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="FROST, MuSig2, Threshold ECDSA 차이와 라이브러리 선택"/><meta name="twitter:description" content="FROST, MuSig2, threshold ECDSA/TSS를 t-of-n, n-of-n, ECDSA 호환성 기준으로 구분하고 Rust와 Go 라이브러리 선택지를 정리합니다."/><meta property="og:description" content="FROST, MuSig2, threshold ECDSA/TSS를 t-of-n, n-of-n, ECDSA 호환성 기준으로 구분하고 Rust와 Go 라이브러리 선택지를 정리합니다."/><meta property="og:image:alt" content="FROST, MuSig2, threshold ECDSA/TSS를 t-of-n, n-of-n, ECDSA 호환성 기준으로 구분하고 Rust와 Go 라이브러리 선택지를 정리합니다."/><meta property="og:image" content="https://kimseogyu.github.io/static/og-image.png"/><meta property="og:image:url" content="https://kimseogyu.github.io/static/og-image.png"/><meta name="twitter:image" content="https://kimseogyu.github.io/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="kimseogyu.github.io"/><meta property="og:url" content="https://kimseogyu.github.io/blockchain/fundamentals/frost-musig2-threshold-ecdsa-caiwa-raibeureori-seontaeg"/><meta property="twitter:url" content="https://kimseogyu.github.io/blockchain/fundamentals/frost-musig2-threshold-ecdsa-caiwa-raibeureori-seontaeg"/><link rel="icon" href="../../static/icon.png"/><meta name="description" content="FROST, MuSig2, threshold ECDSA/TSS를 t-of-n, n-of-n, ECDSA 호환성 기준으로 구분하고 Rust와 Go 라이브러리 선택지를 정리합니다."/><meta name="generator" content="Quartz"/><link href="../../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvc2F5dS5kYXkvc2F5dS5kYXkvcXVhcnR6L3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../../static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://kimseogyu.github.io/index.xml"/></head><body data-slug="blockchain/fundamentals/frost-musig2-threshold-ecdsa-caiwa-raibeureori-seontaeg"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="../..">Seogyu Kim</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>검색</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="검색어를 입력하세요" placeholder="검색어를 입력하세요"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="다크 모드"><title>다크 모드</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="라이트 모드"><title>라이트 모드</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="리더 모드"><title>리더 모드</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-185"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>탐색기</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-185" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../blockchain/">blockchain</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../../blockchain/fundamentals/">fundamentals</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>FROST, MuSig2, Threshold ECDSA 차이와 라이브러리 선택</a></div></nav><h1 class="article-title">FROST, MuSig2, Threshold ECDSA 차이와 라이브러리 선택</h1><p show-comma="true" class="content-meta"><time datetime="2026-05-13T00:00:00.000Z">2026년 5월 13일</time><span>13 min read</span></p><ul class="tags"><li><a href="../../tags/Blockchain" class="internal tag-link">Blockchain</a></li><li><a href="../../tags/Cryptography" class="internal tag-link">Cryptography</a></li><li><a href="../../tags/FROST" class="internal tag-link">FROST</a></li><li><a href="../../tags/MuSig2" class="internal tag-link">MuSig2</a></li><li><a href="../../tags/TSS" class="internal tag-link">TSS</a></li><li><a href="../../tags/Threshold-Signature" class="internal tag-link">Threshold-Signature</a></li></ul></div></div><article class="popover-hint"><p>FROST, MuSig2, threshold ECDSA/TSS는 모두 여러 참여자가 서명에 관여하는 기술이다.</p>
+<p>하지만 같은 문제를 푸는 기술은 아니다.</p>
+<p>먼저 이렇게 나누는 것이 좋다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>구분</th><th>의미</th><th>주로 맞는 곳</th></tr></thead><tbody><tr><td>FROST</td><td>t-of-n threshold Schnorr</td><td>Schnorr 기반 threshold signature</td></tr><tr><td>MuSig2</td><td>n-of-n Schnorr multisig</td><td>Bitcoin Taproot, BIP340 Schnorr</td></tr><tr><td>Threshold ECDSA / TSS</td><td>t-of-n ECDSA</td><td>Bitcoin/Ethereum 등 ECDSA 주소 체계</td></tr></tbody></table></div>
+<p>핵심 차이는 <code>t-of-n</code>인지, <code>n-of-n</code>인지, 최종 서명이 Schnorr인지 ECDSA인지다.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n  Multi[\&quot;Multi-party signing\&quot;]\n\n  Multi --> Schnorr[\&quot;Schnorr 계열\&quot;]\n  Multi --> ECDSA[\&quot;ECDSA 계열\&quot;]\n\n  Schnorr --> FROST[\&quot;FROST&lt;br/>t-of-n threshold Schnorr\&quot;]\n  Schnorr --> MuSig2[\&quot;MuSig2&lt;br/>n-of-n Schnorr multisig\&quot;]\n\n  ECDSA --> TSS[\&quot;Threshold ECDSA / TSS&lt;br/>t-of-n ECDSA\&quot;]\n\n  FROST --> FrostUse[\&quot;일부 signer만 참여해도 서명 가능\&quot;]\n  MuSig2 --> MusigUse[\&quot;모든 signer 참여 필요\&quot;]\n  TSS --> TssUse[\&quot;기존 ECDSA 검증식과 주소 체계 유지\&quot;]&quot;">flowchart TD
+  Multi[&quot;Multi-party signing&quot;]
+
+  Multi --> Schnorr[&quot;Schnorr 계열&quot;]
+  Multi --> ECDSA[&quot;ECDSA 계열&quot;]
+
+  Schnorr --> FROST[&quot;FROST&lt;br/>t-of-n threshold Schnorr&quot;]
+  Schnorr --> MuSig2[&quot;MuSig2&lt;br/>n-of-n Schnorr multisig&quot;]
+
+  ECDSA --> TSS[&quot;Threshold ECDSA / TSS&lt;br/>t-of-n ECDSA&quot;]
+
+  FROST --> FrostUse[&quot;일부 signer만 참여해도 서명 가능&quot;]
+  MuSig2 --> MusigUse[&quot;모든 signer 참여 필요&quot;]
+  TSS --> TssUse[&quot;기존 ECDSA 검증식과 주소 체계 유지&quot;]
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>MuSig2는 threshold signature가 아니다. <a href="https://bips.dev/327/" class="external">BIP327<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>에도 MuSig2는 <code>n-of-n</code> multi-signature scheme이고 <code>t-of-n</code> threshold-signature scheme이 아니라고 설명되어 있다.</p>
+<h2 id="용어-정리">용어 정리<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#용어-정리" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="frost">FROST<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#frost" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>FROST는 Flexible Round-Optimized Schnorr Threshold Signatures다.</p>
+<p>여기서 중요한 단어는 threshold와 Schnorr다. 하나의 그룹 공개키가 있고, 개인키는 여러 share로 나뉜다. 전체 <code>n</code>명 중 threshold를 만족하는 <code>t</code>명이 참여하면 하나의 Schnorr signature를 만들 수 있다.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n  DKG[\&quot;DKG / Trusted dealer\&quot;]\n  DKG --> S1[\&quot;Signer 1&lt;br/>key share\&quot;]\n  DKG --> S2[\&quot;Signer 2&lt;br/>key share\&quot;]\n  DKG --> S3[\&quot;Signer 3&lt;br/>key share\&quot;]\n  DKG --> S4[\&quot;Signer 4&lt;br/>key share\&quot;]\n\n  S1 --> Sign[\&quot;FROST signing\&quot;]\n  S3 --> Sign\n  S4 --> Sign\n\n  Sign --> Sig[\&quot;Schnorr signature\&quot;]\n  Sign --> GroupKey[\&quot;Group public key\&quot;]&quot;">flowchart LR
+  DKG[&quot;DKG / Trusted dealer&quot;]
+  DKG --> S1[&quot;Signer 1&lt;br/>key share&quot;]
+  DKG --> S2[&quot;Signer 2&lt;br/>key share&quot;]
+  DKG --> S3[&quot;Signer 3&lt;br/>key share&quot;]
+  DKG --> S4[&quot;Signer 4&lt;br/>key share&quot;]
+
+  S1 --> Sign[&quot;FROST signing&quot;]
+  S3 --> Sign
+  S4 --> Sign
+
+  Sign --> Sig[&quot;Schnorr signature&quot;]
+  Sign --> GroupKey[&quot;Group public key&quot;]
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>FROST에서 중요한 구현 포인트는 다음이다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>항목</th><th>설명</th></tr></thead><tbody><tr><td>Key share 생성</td><td>trusted dealer 방식 또는 DKG 방식이 있다.</td></tr><tr><td>DKG</td><td>dealer 없이 참여자들이 key share를 만든다.</td></tr><tr><td>Broadcast</td><td>DKG에서는 public commitment에 대해 참여자들이 같은 view를 가져야 한다.</td></tr><tr><td>Signing round</td><td>FROST는 two-round threshold Schnorr signing을 목표로 한다.</td></tr><tr><td>Nonce 관리</td><td>multi-party Schnorr에서 nonce 재사용은 치명적이다.</td></tr></tbody></table></div>
+<p>FROST는 Schnorr 계열이다. ECDSA 주소 체계를 그대로 유지해야 하는 EVM custody 문제에 바로 끼워 넣는 기술은 아니다. Schnorr 검증을 쓰는 시스템이나, 컨트랙트가 별도 검증 로직을 둘 수 있는 구조에서 더 자연스럽다.</p>
+<h3 id="musig2">MuSig2<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#musig2" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>MuSig2는 여러 공개키를 하나의 aggregate public key로 묶고, 여러 참여자가 협력해 하나의 BIP340 Schnorr signature를 만드는 방식이다.</p>
+<p>하지만 threshold는 아니다.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n  P1[\&quot;Public key 1\&quot;]\n  P2[\&quot;Public key 2\&quot;]\n  P3[\&quot;Public key 3\&quot;]\n\n  P1 --> KeyAgg[\&quot;Key aggregation\&quot;]\n  P2 --> KeyAgg\n  P3 --> KeyAgg\n\n  KeyAgg --> AggKey[\&quot;Aggregate public key\&quot;]\n\n  P1S[\&quot;Signer 1\&quot;] --> Signing[\&quot;MuSig2 signing&lt;br/>all signers\&quot;]\n  P2S[\&quot;Signer 2\&quot;] --> Signing\n  P3S[\&quot;Signer 3\&quot;] --> Signing\n\n  Signing --> Sig[\&quot;BIP340 Schnorr signature\&quot;]\n  AggKey --> Verify[\&quot;BIP340 verification\&quot;]\n  Sig --> Verify&quot;">flowchart LR
+  P1[&quot;Public key 1&quot;]
+  P2[&quot;Public key 2&quot;]
+  P3[&quot;Public key 3&quot;]
+
+  P1 --> KeyAgg[&quot;Key aggregation&quot;]
+  P2 --> KeyAgg
+  P3 --> KeyAgg
+
+  KeyAgg --> AggKey[&quot;Aggregate public key&quot;]
+
+  P1S[&quot;Signer 1&quot;] --> Signing[&quot;MuSig2 signing&lt;br/>all signers&quot;]
+  P2S[&quot;Signer 2&quot;] --> Signing
+  P3S[&quot;Signer 3&quot;] --> Signing
+
+  Signing --> Sig[&quot;BIP340 Schnorr signature&quot;]
+  AggKey --> Verify[&quot;BIP340 verification&quot;]
+  Sig --> Verify
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>MuSig2는 <code>n-of-n</code>이다. 3명이 aggregate key를 만들었다면, 기본적으로 그 3명이 모두 signing에 참여해야 한다.</p>
+<p>그래서 MuSig2는 다음 문제에 맞다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>맞는 경우</th><th>이유</th></tr></thead><tbody><tr><td>Bitcoin Taproot key path</td><td>최종 on-chain footprint가 일반 Taproot key spend처럼 보일 수 있다.</td></tr><tr><td>모든 참여자 동의가 필요한 지갑</td><td>n-of-n 구조가 요구사항과 맞다.</td></tr><tr><td>BIP340 Schnorr 호환성</td><td>Bitcoin Schnorr 생태계와 맞다.</td></tr></tbody></table></div>
+<p>반대로 “5명 중 3명만 동의하면 된다” 같은 요구사항이면 MuSig2만으로는 맞지 않는다. 그 경우는 FROST 같은 threshold Schnorr나 threshold ECDSA/TSS를 봐야 한다.</p>
+<h3 id="threshold-ecdsa--tss">Threshold ECDSA / TSS<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#threshold-ecdsa--tss" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Threshold ECDSA/TSS는 여러 참여자가 ECDSA private key를 share로 나누고, threshold 참여자가 협력해 하나의 ECDSA signature를 만드는 방식이다.</p>
+<p>최종 결과가 일반 ECDSA signature라서 기존 Bitcoin, Ethereum, EVM 주소 체계와 잘 맞는다.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n  K1[\&quot;Party 1&lt;br/>ECDSA share\&quot;]\n  K2[\&quot;Party 2&lt;br/>ECDSA share\&quot;]\n  K3[\&quot;Party 3&lt;br/>ECDSA share\&quot;]\n  K4[\&quot;Party 4&lt;br/>ECDSA share\&quot;]\n\n  K1 --> Protocol[\&quot;Threshold ECDSA protocol\&quot;]\n  K2 --> Protocol\n  K4 --> Protocol\n\n  Protocol --> EcdsaSig[\&quot;ECDSA signature&lt;br/>r, s, v\&quot;]\n  EcdsaSig --> Chain[\&quot;Bitcoin / EVM&lt;br/>기존 검증식\&quot;]&quot;">flowchart LR
+  K1[&quot;Party 1&lt;br/>ECDSA share&quot;]
+  K2[&quot;Party 2&lt;br/>ECDSA share&quot;]
+  K3[&quot;Party 3&lt;br/>ECDSA share&quot;]
+  K4[&quot;Party 4&lt;br/>ECDSA share&quot;]
+
+  K1 --> Protocol[&quot;Threshold ECDSA protocol&quot;]
+  K2 --> Protocol
+  K4 --> Protocol
+
+  Protocol --> EcdsaSig[&quot;ECDSA signature&lt;br/>r, s, v&quot;]
+  EcdsaSig --> Chain[&quot;Bitcoin / EVM&lt;br/>기존 검증식&quot;]
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>이쪽은 FROST보다 프로토콜이 무겁다. ECDSA는 Schnorr보다 multi-party protocol이 복잡하고, Paillier, safe prime, zero-knowledge proof, auxiliary information 같은 구성요소가 같이 나온다.</p>
+<p>그래도 기존 ECDSA 주소를 유지해야 하는 custody 시스템에서는 threshold ECDSA가 현실적인 선택지가 된다.</p>
+<h2 id="선택-기준">선택 기준<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#선택-기준" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>먼저 체인과 검증식을 봐야 한다.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n  Start[\&quot;무엇을 서명해야 하나?\&quot;]\n\n  Start --> BitcoinTaproot{\&quot;Bitcoin Taproot&lt;br/>BIP340 Schnorr?\&quot;}\n  BitcoinTaproot -->|모든 signer 필요| MuSig2[\&quot;MuSig2\&quot;]\n  BitcoinTaproot -->|일부 signer만 필요| FrostTr[\&quot;FROST secp256k1 Taproot 계열 검토\&quot;]\n\n  Start --> EvmEoa{\&quot;기존 ECDSA 주소&lt;br/>유지 필요?\&quot;}\n  EvmEoa -->|예| Tss[\&quot;Threshold ECDSA / TSS\&quot;]\n  EvmEoa -->|아니오| Contract[\&quot;Contract account / AA&lt;br/>커스텀 검증 가능\&quot;]\n\n  Contract --> FrostOrP256[\&quot;FROST / P-256 / WebAuthn 등&lt;br/>검증 로직 선택\&quot;]&quot;">flowchart TD
+  Start[&quot;무엇을 서명해야 하나?&quot;]
+
+  Start --> BitcoinTaproot{&quot;Bitcoin Taproot&lt;br/>BIP340 Schnorr?&quot;}
+  BitcoinTaproot -->|모든 signer 필요| MuSig2[&quot;MuSig2&quot;]
+  BitcoinTaproot -->|일부 signer만 필요| FrostTr[&quot;FROST secp256k1 Taproot 계열 검토&quot;]
+
+  Start --> EvmEoa{&quot;기존 ECDSA 주소&lt;br/>유지 필요?&quot;}
+  EvmEoa -->|예| Tss[&quot;Threshold ECDSA / TSS&quot;]
+  EvmEoa -->|아니오| Contract[&quot;Contract account / AA&lt;br/>커스텀 검증 가능&quot;]
+
+  Contract --> FrostOrP256[&quot;FROST / P-256 / WebAuthn 등&lt;br/>검증 로직 선택&quot;]
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>질문 순서는 다음이 좋다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>질문</th><th>선택</th></tr></thead><tbody><tr><td>최종 signature가 ECDSA여야 하는가?</td><td>그렇다면 threshold ECDSA/TSS를 먼저 본다.</td></tr><tr><td>Bitcoin Taproot에서 n-of-n을 만들고 싶은가?</td><td>MuSig2가 자연스럽다.</td></tr><tr><td>t-of-n Schnorr가 필요한가?</td><td>FROST를 본다.</td></tr><tr><td>컨트랙트 계정에서 자체 검증할 수 있는가?</td><td>ECDSA에 묶이지 않아도 된다.</td></tr><tr><td>운영자가 signer를 식별하고 제외해야 하는가?</td><td>identifiable abort, key refresh, resharing 지원을 확인한다.</td></tr><tr><td>프로덕션에 넣을 것인가?</td><td>audit, maintenance, release, 보안 문서를 확인한다.</td></tr></tbody></table></div>
+<h2 id="rust-라이브러리">Rust 라이브러리<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#rust-라이브러리" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="frost-1">FROST<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#frost-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Rust에서는 <a href="https://github.com/ZcashFoundation/frost" class="external"><code>ZcashFoundation/frost</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>를 먼저 본다.</p>
+<p>이 저장소는 <a href="https://datatracker.ietf.org/doc/rfc9591/" class="external">RFC 9591<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 기반 FROST 구현이다. <code>frost-core</code>, <code>frost-ristretto255</code>, <code>frost-ed25519</code>, <code>frost-p256</code>, <code>frost-secp256k1</code>, <code>frost-secp256k1-tr</code> 같은 ciphersuite별 crate가 있다.</p>
+<p>README 기준으로 crates는 stable, feature complete로 설명되어 있고, 일부 crate는 NCC audit 대상에 포함되어 있다.</p>
+<p>FROST DKG는 <a href="https://docs.rs/frost-core/latest/frost_core/keys/dkg/index.html" class="external"><code>frost_core::keys::dkg</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>를 본다. 이 모듈은 trusted dealer 없이 FROST key share를 만들기 위한 DKG 구조를 제공한다. 단, secure broadcast requirement가 있다. DKG에서는 모든 참여자가 public commitment에 대해 같은 view를 가져야 한다.</p>
+<p>정리하면 다음과 같다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>목적</th><th>후보</th></tr></thead><tbody><tr><td>Rust FROST</td><td><a href="https://github.com/ZcashFoundation/frost" class="external"><code>ZcashFoundation/frost</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>Rust FROST DKG</td><td><a href="https://docs.rs/frost-core/latest/frost_core/keys/dkg/index.html" class="external"><code>frost_core::keys::dkg</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>secp256k1 FROST</td><td><code>frost-secp256k1</code></td></tr><tr><td>Taproot 계열 FROST</td><td><code>frost-secp256k1-tr</code></td></tr><tr><td>P-256 FROST</td><td><code>frost-p256</code></td></tr></tbody></table></div>
+<h3 id="threshold-ecdsa">Threshold ECDSA<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#threshold-ecdsa" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Rust threshold ECDSA는 <a href="https://github.com/LFDT-Lockness/cggmp21" class="external"><code>LFDT-Lockness/cggmp21</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>을 먼저 볼 수 있다.</p>
+<p>현재 저장소는 CGGMP24 기반 threshold ECDSA 구현을 제공한다. README 기준으로 다음 기능을 제공한다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>기능</th><th>상태</th></tr></thead><tbody><tr><td>t-of-n key generation</td><td>지원</td></tr><tr><td>n-of-n key generation</td><td>지원</td></tr><tr><td>threshold signing</td><td>지원</td></tr><tr><td>auxiliary info generation</td><td>지원</td></tr><tr><td>HD wallet support</td><td>feature 기반 지원</td></tr><tr><td>key refresh</td><td>현재 미지원</td></tr><tr><td>identifiable abort</td><td>현재 미지원</td></tr><tr><td>audit</td><td>Kudelski audit 언급</td></tr></tbody></table></div>
+<p>threshold ECDSA는 단순 signing 라이브러리처럼 보면 안 된다. 네트워크 레이어, party index, execution id, aux info, presignature 재사용 방지, key share 보관 정책까지 같이 설계해야 한다.</p>
+<h3 id="musig2-1">MuSig2<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#musig2-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Bitcoin 계열 Rust MuSig2는 <a href="https://github.com/rust-bitcoin/rust-secp256k1" class="external"><code>rust-bitcoin/rust-secp256k1</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>을 먼저 확인한다.</p>
+<p><code>rust-secp256k1</code> changelog 기준으로 0.32.0에서 MuSig2 support가 추가되었다. Bitcoin/Taproot/BIP340 흐름에 맞추는 경우 이 라인을 먼저 보는 것이 자연스럽다.</p>
+<p>고수준 API가 필요하면 <a href="https://github.com/conduition/musig2" class="external"><code>conduition/musig2</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> 같은 후보도 볼 수 있지만, 프로덕션 선택에서는 maintenance와 release 상태를 따로 확인해야 한다.</p>
+<h2 id="go-라이브러리">Go 라이브러리<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#go-라이브러리" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="frost-2">FROST<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#frost-2" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Go에서는 <a href="https://github.com/bytemare/frost" class="external"><code>bytemare/frost</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>를 먼저 볼 수 있다.</p>
+<p>README 기준으로 RFC9591 FROST 구현이고, Ristretto255, Edwards25519, Secp256k1, NIST curve 계열을 지원한다.</p>
+<p>FROST DKG는 <a href="https://github.com/bytemare/dkg" class="external"><code>bytemare/dkg</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>를 같이 본다. 이 라이브러리는 FROST-compatible DKG를 제공하고, 2-round Pedersen DKG에 rogue-key attack 방지를 위한 zero-knowledge proof를 붙인다.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n  BytemareFrost[\&quot;bytemare/frost\&quot;]\n  BytemareDkg[\&quot;bytemare/dkg\&quot;]\n\n  BytemareDkg --> Shares[\&quot;FROST-compatible key shares\&quot;]\n  Shares --> BytemareFrost\n  BytemareFrost --> Sig[\&quot;Threshold Schnorr signature\&quot;]&quot;">flowchart TD
+  BytemareFrost[&quot;bytemare/frost&quot;]
+  BytemareDkg[&quot;bytemare/dkg&quot;]
+
+  BytemareDkg --> Shares[&quot;FROST-compatible key shares&quot;]
+  Shares --> BytemareFrost
+  BytemareFrost --> Sig[&quot;Threshold Schnorr signature&quot;]
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="generic-dkg--pedersen-rabin">Generic DKG / Pedersen, Rabin<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#generic-dkg--pedersen-rabin" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Go에서 범용 crypto/DKG toolbox가 필요하면 <a href="https://pkg.go.dev/github.com/drand/kyber" class="external"><code>drand/kyber</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>를 볼 수 있다.</p>
+<p>Kyber는 DEDIS 계열 advanced crypto library이고, drand에서 fork해 쓰는 라인이다. FROST만 구현하려는 경우에는 전용 FROST/DKG 라이브러리를 먼저 보는 것이 단순하다. 하지만 Pedersen, Rabin DKG 같은 범용 DKG 구성요소를 살펴볼 때는 Go 쪽 기준점으로 볼 수 있다.</p>
+<h3 id="threshold-ecdsa-1">Threshold ECDSA<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#threshold-ecdsa-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Go threshold ECDSA는 <a href="https://github.com/bnb-chain/tss-lib" class="external"><code>bnb-chain/tss-lib</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>이 대표적인 후보 중 하나다.</p>
+<p>README 기준으로 Gennaro-Goldfeder 계열 multi-party <code>{t,n}</code> threshold ECDSA와 EdDSA를 구현한다. keygen, signing, resharing 프로토콜을 포함한다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>목적</th><th>후보</th></tr></thead><tbody><tr><td>Go threshold ECDSA</td><td><a href="https://github.com/bnb-chain/tss-lib" class="external"><code>bnb-chain/tss-lib</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>Go threshold EdDSA</td><td><a href="https://github.com/bnb-chain/tss-lib" class="external"><code>bnb-chain/tss-lib</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>Keygen</td><td>지원</td></tr><tr><td>Signing</td><td>지원</td></tr><tr><td>Resharing</td><td>지원</td></tr></tbody></table></div>
+<p>TSS 라이브러리는 API만 보고 고르면 안 된다. 운영에서는 party discovery, message transport, timeout, blame, key share backup, resharing, 장애 복구가 더 큰 문제가 된다.</p>
+<h3 id="musig2-2">MuSig2<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#musig2-2" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Go Bitcoin stack에서는 <a href="https://pkg.go.dev/github.com/btcsuite/btcd/btcec/v2/schnorr/musig2" class="external"><code>btcsuite/btcd/btcec/v2/schnorr/musig2</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>를 먼저 확인한다.</p>
+<p>btcd release note에도 <code>btcec/schnorr/musig2</code> 구현과 업데이트 이력이 나온다. Bitcoin/Taproot n-of-n multisig라면 이 라인이 자연스럽다.</p>
+<h2 id="한-번에-비교">한 번에 비교<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#한-번에-비교" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>영역</th><th>Rust</th><th>Go</th><th>판단</th></tr></thead><tbody><tr><td>FROST</td><td><a href="https://github.com/ZcashFoundation/frost" class="external"><code>ZcashFoundation/frost</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td><a href="https://github.com/bytemare/frost" class="external"><code>bytemare/frost</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>Rust는 ZF FROST가 가장 무난하다. Go는 bytemare 쪽을 먼저 본다.</td></tr><tr><td>FROST DKG</td><td><a href="https://docs.rs/frost-core/latest/frost_core/keys/dkg/index.html" class="external"><code>frost_core::keys::dkg</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td><a href="https://github.com/bytemare/dkg" class="external"><code>bytemare/dkg</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>둘 다 FROST key share 생성 흐름에 맞다.</td></tr><tr><td>Generic DKG</td><td>FROST면 ZF FROST DKG, ECDSA TSS면 CGGMP 계열</td><td><a href="https://pkg.go.dev/github.com/drand/kyber" class="external"><code>drand/kyber</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>Rust는 목적별 라이브러리를 고르는 편이 현실적이다. Go는 Kyber가 기준점이다.</td></tr><tr><td>Threshold ECDSA / TSS</td><td><a href="https://github.com/LFDT-Lockness/cggmp21" class="external"><code>LFDT-Lockness/cggmp21</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td><a href="https://github.com/bnb-chain/tss-lib" class="external"><code>bnb-chain/tss-lib</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>ECDSA 주소 체계를 유지해야 할 때 본다.</td></tr><tr><td>MuSig2</td><td><a href="https://github.com/rust-bitcoin/rust-secp256k1" class="external"><code>rust-bitcoin/rust-secp256k1</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td><a href="https://pkg.go.dev/github.com/btcsuite/btcd/btcec/v2/schnorr/musig2" class="external"><code>btcsuite/btcec/schnorr/musig2</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td><td>Bitcoin Taproot n-of-n이면 이 라인을 본다.</td></tr></tbody></table></div>
+<h2 id="내가-고른다면">내가 고른다면<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#내가-고른다면" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Rust는 다음 조합을 먼저 본다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>목적</th><th>선택</th></tr></thead><tbody><tr><td>FROST</td><td><code>ZcashFoundation/frost</code></td></tr><tr><td>FROST DKG</td><td><code>frost-core::keys::dkg</code></td></tr><tr><td>Threshold ECDSA</td><td><code>LFDT-Lockness/cggmp21</code> / <code>cggmp24</code></td></tr><tr><td>Bitcoin MuSig2</td><td><code>rust-bitcoin/rust-secp256k1</code></td></tr></tbody></table></div>
+<p>Go는 다음 조합을 먼저 본다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>목적</th><th>선택</th></tr></thead><tbody><tr><td>FROST</td><td><code>bytemare/frost</code></td></tr><tr><td>FROST DKG</td><td><code>bytemare/dkg</code></td></tr><tr><td>Generic DKG</td><td><code>drand/kyber</code></td></tr><tr><td>Threshold ECDSA</td><td><code>bnb-chain/tss-lib</code></td></tr><tr><td>Bitcoin MuSig2</td><td><code>btcsuite/btcec/schnorr/musig2</code></td></tr></tbody></table></div>
+<h2 id="피하거나-조심할-것">피하거나 조심할 것<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#피하거나-조심할-것" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><a href="https://github.com/coinbase/kryptology" class="external"><code>coinbase/kryptology</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>는 예전에는 자주 언급되던 라이브러리지만, 현재 README에서 archived, no longer supported, should not be used라고 명시되어 있다. 새 프로젝트의 1순위 후보로 두면 안 된다.</p>
+<p><a href="https://github.com/taurushq-io/multi-party-sig" class="external"><code>taurushq-io/multi-party-sig</code><svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>는 CGGMP, FROST, Taproot 계열까지 넓게 다루지만, README에 production-ready를 위해 추가 testing과 audit가 필요하다는 disclaimer가 있다. 연구나 PoC 검토 대상으로는 볼 수 있지만, 프로덕션 1순위로 두기에는 확인할 것이 많다.</p>
+<h2 id="정리">정리<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#정리" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>FROST, MuSig2, threshold ECDSA/TSS는 이름이 비슷하게 묶이지만 선택 기준이 다르다.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n  Req[\&quot;요구사항\&quot;]\n\n  Req --> NeedT[\&quot;t-of-n이 필요한가?\&quot;]\n  NeedT -->|예, Schnorr 가능| Frost[\&quot;FROST\&quot;]\n  NeedT -->|예, ECDSA 필요| Tss[\&quot;Threshold ECDSA / TSS\&quot;]\n  NeedT -->|아니오, n-of-n이면 충분| Musig[\&quot;MuSig2\&quot;]\n\n  Frost --> FrostLib[\&quot;Rust: ZcashFoundation/frost&lt;br/>Go: bytemare/frost\&quot;]\n  Tss --> TssLib[\&quot;Rust: cggmp24&lt;br/>Go: bnb-chain/tss-lib\&quot;]\n  Musig --> MusigLib[\&quot;Rust: rust-secp256k1&lt;br/>Go: btcsuite musig2\&quot;]&quot;">flowchart TD
+  Req[&quot;요구사항&quot;]
+
+  Req --> NeedT[&quot;t-of-n이 필요한가?&quot;]
+  NeedT -->|예, Schnorr 가능| Frost[&quot;FROST&quot;]
+  NeedT -->|예, ECDSA 필요| Tss[&quot;Threshold ECDSA / TSS&quot;]
+  NeedT -->|아니오, n-of-n이면 충분| Musig[&quot;MuSig2&quot;]
+
+  Frost --> FrostLib[&quot;Rust: ZcashFoundation/frost&lt;br/>Go: bytemare/frost&quot;]
+  Tss --> TssLib[&quot;Rust: cggmp24&lt;br/>Go: bnb-chain/tss-lib&quot;]
+  Musig --> MusigLib[&quot;Rust: rust-secp256k1&lt;br/>Go: btcsuite musig2&quot;]
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>짧게 말하면 다음과 같다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>상황</th><th>먼저 볼 것</th></tr></thead><tbody><tr><td>t-of-n Schnorr가 필요하다</td><td>FROST</td></tr><tr><td>Bitcoin Taproot n-of-n이 필요하다</td><td>MuSig2</td></tr><tr><td>EVM/Bitcoin ECDSA 주소를 유지해야 한다</td><td>Threshold ECDSA/TSS</td></tr><tr><td>컨트랙트 계정에서 자체 검증 가능하다</td><td>ECDSA 고정 요구사항부터 다시 확인</td></tr></tbody></table></div>
+<p>가장 흔한 실수는 MuSig2를 threshold signature로 착각하는 것이다. MuSig2는 n-of-n이다. threshold가 필요하면 FROST나 threshold ECDSA/TSS를 봐야 한다.</p>
+<h2 id="참고">참고<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#참고" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://bips.dev/327/" class="external">BIP327: MuSig2 for BIP340-compatible Multi-Signatures<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/ZcashFoundation/frost" class="external">ZcashFoundation/frost<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://docs.rs/frost-core/latest/frost_core/keys/dkg/index.html" class="external">frost_core::keys::dkg<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/bytemare/frost" class="external">bytemare/frost<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/bytemare/dkg" class="external">bytemare/dkg<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://pkg.go.dev/github.com/drand/kyber" class="external">drand/kyber<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/LFDT-Lockness/cggmp21" class="external">LFDT-Lockness/cggmp21<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/bnb-chain/tss-lib" class="external">bnb-chain/tss-lib<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/rust-bitcoin/rust-secp256k1/blob/master/CHANGELOG.md" class="external">rust-bitcoin/rust-secp256k1 changelog<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/btcsuite/btcd/releases" class="external">btcsuite/btcd releases<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/coinbase/kryptology" class="external">coinbase/kryptology<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://github.com/taurushq-io/multi-party-sig" class="external">taurushq-io/multi-party-sig<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul></article><hr/><div class="page-footer"><div class="giscus" data-repo="KimSeogyu/KimSeogyu.github.io" data-repo-id="R_kgDOVucEjA" data-category="Announcements" data-category-id="DIC_kwDOVucEjM4DLKem" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-input-position="top" data-light-theme="light" data-dark-theme="dark" data-theme-url="https://kimseogyu.github.io/static/giscus" data-lang="ko"></div></div></div><div class="right sidebar"><div class="graph"><h3>그래프 뷰</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-73" aria-expanded="true"><h3>목차</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#용어-정리" data-for="용어-정리">용어 정리</a></li><li class="depth-1"><a href="#frost" data-for="frost">FROST</a></li><li class="depth-1"><a href="#musig2" data-for="musig2">MuSig2</a></li><li class="depth-1"><a href="#threshold-ecdsa--tss" data-for="threshold-ecdsa--tss">Threshold ECDSA / TSS</a></li><li class="depth-0"><a href="#선택-기준" data-for="선택-기준">선택 기준</a></li><li class="depth-0"><a href="#rust-라이브러리" data-for="rust-라이브러리">Rust 라이브러리</a></li><li class="depth-1"><a href="#frost-1" data-for="frost-1">FROST</a></li><li class="depth-1"><a href="#threshold-ecdsa" data-for="threshold-ecdsa">Threshold ECDSA</a></li><li class="depth-1"><a href="#musig2-1" data-for="musig2-1">MuSig2</a></li><li class="depth-0"><a href="#go-라이브러리" data-for="go-라이브러리">Go 라이브러리</a></li><li class="depth-1"><a href="#frost-2" data-for="frost-2">FROST</a></li><li class="depth-1"><a href="#generic-dkg--pedersen-rabin" data-for="generic-dkg--pedersen-rabin">Generic DKG / Pedersen, Rabin</a></li><li class="depth-1"><a href="#threshold-ecdsa-1" data-for="threshold-ecdsa-1">Threshold ECDSA</a></li><li class="depth-1"><a href="#musig2-2" data-for="musig2-2">MuSig2</a></li><li class="depth-0"><a href="#한-번에-비교" data-for="한-번에-비교">한 번에 비교</a></li><li class="depth-0"><a href="#내가-고른다면" data-for="내가-고른다면">내가 고른다면</a></li><li class="depth-0"><a href="#피하거나-조심할-것" data-for="피하거나-조심할-것">피하거나 조심할 것</a></li><li class="depth-0"><a href="#정리" data-for="정리">정리</a></li><li class="depth-0"><a href="#참고" data-for="참고">참고</a></li><li class="overflow-end"></li></ul></div><div class="recent-notes"><h3>최근 게시글</h3><ul class="recent-ul"><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../ai-ml/llm-wiki-recall-first-design" class="internal">LLM 지식베이스는 왜 작아야 하는가: Recall-First Wiki 설계</a></h3></div><p class="meta"><time datetime="2026-07-24T00:00:00.000Z">2026년 7월 24일</time></p><ul class="tags"><li><a class="internal tag-link" href="../../tags/LLM">LLM</a></li><li><a class="internal tag-link" href="../../tags/Knowledge-Management">Knowledge-Management</a></li><li><a class="internal tag-link" href="../../tags/Obsidian">Obsidian</a></li><li><a class="internal tag-link" href="../../tags/RAG">RAG</a></li><li><a class="internal tag-link" href="../../tags/Architecture">Architecture</a></li><li><a class="internal tag-link" href="../../tags/Git">Git</a></li></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../backend/rust/undocx-document-conversion-architecture" class="internal">DOCX를 Markdown으로 바꾸는 일은 왜 단순 XML 변환이 아닌가</a></h3></div><p class="meta"><time datetime="2026-07-24T00:00:00.000Z">2026년 7월 24일</time></p><ul class="tags"><li><a class="internal tag-link" href="../../tags/Rust">Rust</a></li><li><a class="internal tag-link" href="../../tags/DOCX">DOCX</a></li><li><a class="internal tag-link" href="../../tags/Markdown">Markdown</a></li><li><a class="internal tag-link" href="../../tags/AST">AST</a></li><li><a class="internal tag-link" href="../../tags/Parser">Parser</a></li><li><a class="internal tag-link" href="../../tags/RAG">RAG</a></li><li><a class="internal tag-link" href="../../tags/Testing">Testing</a></li></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../../backend/sayu-day-static-publishing-pipeline" class="internal">Markdown을 SSOT로 유지하는 정적 지식 출판 파이프라인</a></h3></div><p class="meta"><time datetime="2026-07-24T00:00:00.000Z">2026년 7월 24일</time></p><ul class="tags"><li><a class="internal tag-link" href="../../tags/Markdown">Markdown</a></li><li><a class="internal tag-link" href="../../tags/Static-Site">Static-Site</a></li><li><a class="internal tag-link" href="../../tags/Obsidian">Obsidian</a></li><li><a class="internal tag-link" href="../../tags/TanStack-Start">TanStack-Start</a></li><li><a class="internal tag-link" href="../../tags/GitHub-Pages">GitHub-Pages</a></li><li><a class="internal tag-link" href="../../tags/SSOT">SSOT</a></li><li><a class="internal tag-link" href="../../tags/Privacy">Privacy</a></li></ul></div></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2026</p><ul><li><a href="https://github.com/KimSeogyu">GitHub</a></li></ul></footer></div></div></body><script type="application/javascript">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../../postscript.js" type="module"></script></html>

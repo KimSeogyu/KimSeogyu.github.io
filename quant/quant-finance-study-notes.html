@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr"><head><title>퀀트 파이낸스 학습 노트: 전략, 레짐, 그리고 진짜 엣지</title><meta charset="utf-8"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Seogyu Kim"/><meta property="og:title" content="퀀트 파이낸스 학습 노트: 전략, 레짐, 그리고 진짜 엣지"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="퀀트 파이낸스 학습 노트: 전략, 레짐, 그리고 진짜 엣지"/><meta name="twitter:description" content="기술적 분석부터 모멘텀, 평균회귀, 추세추종, 롱숏 전략, HMM 레짐 감지, 올웨더 포트폴리오, 환율 방어 패턴까지 — 퀀트 파이낸스의 핵심 개념을 정리한 학습 노트."/><meta property="og:description" content="기술적 분석부터 모멘텀, 평균회귀, 추세추종, 롱숏 전략, HMM 레짐 감지, 올웨더 포트폴리오, 환율 방어 패턴까지 — 퀀트 파이낸스의 핵심 개념을 정리한 학습 노트."/><meta property="og:image:alt" content="기술적 분석부터 모멘텀, 평균회귀, 추세추종, 롱숏 전략, HMM 레짐 감지, 올웨더 포트폴리오, 환율 방어 패턴까지 — 퀀트 파이낸스의 핵심 개념을 정리한 학습 노트."/><meta property="og:image" content="https://kimseogyu.github.io/static/og-image.png"/><meta property="og:image:url" content="https://kimseogyu.github.io/static/og-image.png"/><meta name="twitter:image" content="https://kimseogyu.github.io/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="kimseogyu.github.io"/><meta property="og:url" content="https://kimseogyu.github.io/quant/quant-finance-study-notes"/><meta property="twitter:url" content="https://kimseogyu.github.io/quant/quant-finance-study-notes"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="기술적 분석부터 모멘텀, 평균회귀, 추세추종, 롱숏 전략, HMM 레짐 감지, 올웨더 포트폴리오, 환율 방어 패턴까지 — 퀀트 파이낸스의 핵심 개념을 정리한 학습 노트."/><meta name="generator" content="Quartz"/><link href="../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvc2F5dS5kYXkvc2F5dS5kYXkvcXVhcnR6L3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://kimseogyu.github.io/index.xml"/></head><body data-slug="quant/quant-finance-study-notes"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">Seogyu Kim</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>검색</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="검색어를 입력하세요" placeholder="검색어를 입력하세요"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="다크 모드"><title>다크 모드</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="라이트 모드"><title>라이트 모드</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="리더 모드"><title>리더 모드</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-257"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>탐색기</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-257" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../quant/">quant</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>퀀트 파이낸스 학습 노트: 전략, 레짐, 그리고 진짜 엣지</a></div></nav><h1 class="article-title">퀀트 파이낸스 학습 노트: 전략, 레짐, 그리고 진짜 엣지</h1><p show-comma="true" class="content-meta"><time datetime="2026-03-20T00:00:00.000Z">2026년 3월 20일</time><span>13 min read</span></p><ul class="tags"><li><a href="../tags/quant" class="internal tag-link">quant</a></li><li><a href="../tags/finance" class="internal tag-link">finance</a></li><li><a href="../tags/trading" class="internal tag-link">trading</a></li><li><a href="../tags/regime" class="internal tag-link">regime</a></li><li><a href="../tags/portfolio" class="internal tag-link">portfolio</a></li></ul></div></div><article class="popover-hint"><h1 id="퀀트-파이낸스-학습-노트">퀀트 파이낸스 학습 노트<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#퀀트-파이낸스-학습-노트" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p><em>Quantitative Finance Study Notes</em></p>
+<hr/>
+<h2 id="1-기술적-분석-technical-analysis">1. 기술적 분석 (Technical Analysis)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-기술적-분석-technical-analysis" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>가격과 거래량 차트만으로 미래 가격을 예측하는 방법. 핵심 전제는 <strong>“시장 가격에 모든 정보가 이미 반영되어 있다”</strong> 는 것이다.</p>
+<h3 id="기본적-분석-vs-기술적-분석">기본적 분석 vs 기술적 분석<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#기본적-분석-vs-기술적-분석" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>구분</th><th>기본적 분석 (Fundamental)</th><th>기술적 분석 (Technical)</th></tr></thead><tbody><tr><td>방법</td><td>기업의 재무제표, 성장성, 적정가치 분석</td><td>가격 패턴, 거래량, 지표 기반 분석</td></tr><tr><td>대표</td><td>워런 버핏 스타일</td><td>퀀트/시스템 트레이더 스타일</td></tr></tbody></table></div>
+<h3 id="주요-도구">주요 도구<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#주요-도구" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>이동평균선(MA)</strong>: 최근 N일 평균 가격. 골든크로스(매수)/데드크로스(매도) 시그널</li>
+<li><strong>RSI</strong>: 과매수/과매도 판단 지표</li>
+<li><strong>MACD</strong>: 추세 전환 감지</li>
+<li><strong>볼린저 밴드</strong>: 변동성 범위 측정</li>
+</ul>
+<h3 id="기술적-분석에-대한-시각-차이">기술적 분석에 대한 시각 차이<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#기술적-분석에-대한-시각-차이" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>효율적 시장 가설(EMH)에 따르면 과거 차트로 초과수익을 낼 수 없다. 전통적인 차트 패턴(헤드앤숄더, 더블탑 등) 대부분은 통계적 유의미성이 낮다. <strong>하지만</strong> 통계적으로 검증된 정량적 기술적 분석(모멘텀 팩터, 변동성 모델 등)은 학계에서도 유효성이 인정됨.</p>
+<blockquote>
+<p><strong>핵심 인사이트</strong>: 퀀트 디벨로퍼가 하는 것은 눈으로 차트에 선을 긋는 것이 아니라, 통계적으로 검증 가능한 정량적 분석이다.</p>
+</blockquote>
+<hr/>
+<h2 id="2-핵심-투자-전략">2. 핵심 투자 전략<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-핵심-투자-전략" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="21-모멘텀-momentum">2.1 모멘텀 (Momentum)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#21-모멘텀-momentum" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>원리</strong>: “오르던 놈은 계속 오르고, 내리던 놈은 계속 내린다.” 사람들이 새로운 정보에 느리게 반응하기 때문에 작동한다.</p>
+<ul>
+<li>최근 3~12개월 수익률 기준으로 종목 선별</li>
+<li>유효 구간: 중기(3~12개월). 단기/장기에서는 오히려 반전(평균회귀) 발생</li>
+<li><strong>주의: 모멘텀 크래시</strong> - 바닥 급반등 시 숏 포지션에서 막대한 손실 가능</li>
+</ul>
+<h3 id="22-평균회귀-mean-reversion">2.2 평균회귀 (Mean Reversion)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#22-평균회귀-mean-reversion" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>원리</strong>: 가격이 평균에서 많이 벗어나면 결국 다시 평균 쪽으로 돌아온다. 고무줄처럼 늘릴수록 되돌아오는 힘이 세진다.</p>
+<ul>
+<li>모멘텀과 정반대 개념이지만, 작동하는 시간대가 다름</li>
+<li>단기(1주 이내)와 장기(3~5년)에서 강하게 나타남</li>
+<li>보합장에서 특히 유리. 환율 방어 패턴 전략이 이 범주</li>
+</ul>
+<h3 id="23-추세추종-trend-following">2.3 추세추종 (Trend Following)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#23-추세추종-trend-following" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>원리</strong>: 방향을 예측하지 않고, 방향이 확인된 후에 따라간다. “머리와 꼬리는 버리고 몸통만 먹는다.”</p>
+<ul>
+<li>승률 30~40%로 낮지만, 이길 때 크게 이겨서 전체 수익 양(+)</li>
+<li>심리적으로 연속 손실을 버티는 것이 핵심 난이도</li>
+<li>CTA(Managed Futures) 헤지펀드들의 핵심 전략</li>
+<li>모멘텀과 유사하나, 모멘텀은 종목 간 상대 비교, 추세추종은 개별 자산의 방향 자체에 초점</li>
+</ul>
+<h3 id="24-롱숏-long-short">2.4 롱숏 (Long-Short)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#24-롱숏-long-short" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>원리</strong>: “좋은 거 사고(롱), 나쁜 거 팔면(숏) 시장이 어디로 가든 돈을 번다.” 시장 방향 베팅을 제거하고 상대적 차이에만 베팅.</p>
+<ul>
+<li>시장중립(Market Neutral) 전략의 기반</li>
+<li>숏 실행의 현실적 제약: 공매도 비용, 대차 가용성, 한국 규제</li>
+<li>섹터 노출 관리 필수 (반도체 롱 + 음식료 숏 = 섹터 베팅이 됨)</li>
+<li>롱숏 + 모멘텀 조합이 학계에서 가장 검증된 팩터 전략 중 하나</li>
+</ul>
+<hr/>
+<h2 id="3-레짐-market-regime">3. 레짐 (Market Regime)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-레짐-market-regime" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>시장의 “상태” 또는 “국면”. 상승장/하락장/보합장이 각각 하나의 레짐이다. <strong>핵심은 레짐에 따라 유효한 전략이 완전히 달라진다는 것.</strong></p>
+<h3 id="레이-달리오의-4단계-경제-레짐">레이 달리오의 4단계 경제 레짐<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#레이-달리오의-4단계-경제-레짐" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>레짐</th><th>성장</th><th>인플레이션</th><th>유리한 자산</th></tr></thead><tbody><tr><td><strong>골디락스</strong></td><td>상승</td><td>하락</td><td>주식</td></tr><tr><td><strong>과열</strong></td><td>상승</td><td>상승</td><td>원자재, 물가연동채</td></tr><tr><td><strong>스태그플레이션</strong></td><td>하락</td><td>상승</td><td>금, 현금</td></tr><tr><td><strong>침체</strong></td><td>하락</td><td>하락</td><td>장기채권</td></tr></tbody></table></div>
+<h3 id="시장-국면별-유효-전략">시장 국면별 유효 전략<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#시장-국면별-유효-전략" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>국면</th><th>유효 전략</th><th>비유효 전략</th></tr></thead><tbody><tr><td><strong>상승장</strong></td><td>모멘텀, 추세추종, 롱 바이어스</td><td>평균회귀, 숏 전략</td></tr><tr><td><strong>하락장</strong></td><td>롱숏, 풋옵션, VIX 전략</td><td>단순 매수보유</td></tr><tr><td><strong>보합장</strong></td><td>평균회귀, 옵션매도, 롱숏</td><td>모멘텀, 방향성 베팅</td></tr></tbody></table></div>
+<h3 id="변동성-기반-레짐-분류">변동성 기반 레짐 분류<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#변동성-기반-레짐-분류" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>저변동성</strong> (VIX 15 이하): 캐리/옵션매도 전략 유리</li>
+<li><strong>중간 변동성</strong>: 모멘텀/추세추종 유효</li>
+<li><strong>고변동성</strong> (VIX 30 이상): 평균회귀/테일리스크 헷지 유리</li>
+</ul>
+<h3 id="31-레짐-감지-hidden-markov-model-hmm">3.1 레짐 감지: Hidden Markov Model (HMM)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#31-레짐-감지-hidden-markov-model-hmm" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>헤지펀드들이 실전에서 가장 많이 쓰는 레짐 감지 방법. 직접 관측할 수 없는 “숨겨진 상태”(레짐)가 관측 가능한 데이터(수익률, 변동성)를 생성한다고 가정하고, 데이터로부터 현재 레짐을 추론한다.</p>
+<ul>
+<li><strong>일반적 입력</strong>: 수익률, 변동성, VIX, 이동평균 스프레드(MA50-MA200), 금리</li>
+<li><strong>구현</strong>: Python <code>hmmlearn</code> 라이브러리. 주기적 재훈련 필요 (상태 전이 확률이 시간에 따라 변함)</li>
+<li><strong>실전 적용 방식</strong>:
+<ul>
+<li>레짐별 다른 팩터 포트폴리오 운용 (Bull → 모멘텀, Bear → 방어적 팩터)</li>
+<li>레짐별 전문 ML 모델 훈련 (HMM → 레짐 분류 → Random Forest 등 전문 모델이 시그널)</li>
+<li>메타모델로 전략 배분 동적 조절 (Mandatum 방식)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>핵심 인사이트</strong>: HMM + 레짐별 전략 스위칭은 이미 교과서 수준이라 그대로 돌리면 시장 평균에 수렴. 진짜 알파는 “남들이 정량화 안 한 시그널”(예: 환율 방어 패턴)을 피처로 넣을 때 발생.</p>
+</blockquote>
+<h3 id="32-레짐-전환의-수익-구조">3.2 레짐 전환의 수익 구조<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#32-레짐-전환의-수익-구조" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>레짐 전환 구간이 <strong>가장 큰 수익과 가장 큰 위험이 동시에 존재</strong>하는 구간이다.</p>
+<ul>
+<li>전환이 아니라 가짜 신호(휩소, Whipsaw)일 수 있음</li>
+<li>레짐 전환은 스위치처럼 딱 바뀌지 않고 며칠~몇 주에 걸쳐 서서히 전이</li>
+<li>1등이 100 먹으면 2등이 0이 아니라, 1등 80 / 2등 60 / 3등 40 구조</li>
+</ul>
+<blockquote>
+<p><strong>레짐 전환에서의 선착순은 속도가 아니라 “감지 능력”의 싸움이다.</strong> HFT의 밀리초 경쟁이 아니라, 누가 며칠 먼저 전환을 알아채느냐의 리서치 경쟁.</p>
+</blockquote>
+<hr/>
+<h2 id="4-올웨더-포트폴리오-all-weather">4. 올웨더 포트폴리오 (All Weather)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-올웨더-포트폴리오-all-weather" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>레이 달리오의 브리지워터가 설계. <strong>“어떤 레짐이 올지 모르니까 4가지 경제 환경에 리스크를 균등 배분한다.”</strong></p>
+<p>레짐 감지가 “지금 여름이니까 반팔”이라면, 올웨더는 “사계절 옷을 다 가방에 넣고 다니자”.</p>
+<h3 id="중립-배분-비율">중립 배분 비율<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#중립-배분-비율" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>자산군</th><th>비중</th><th>역할</th></tr></thead><tbody><tr><td>주식</td><td>30%</td><td>성장 상승 시 수익</td></tr><tr><td>장기국채</td><td>40%</td><td>침체 시 방어</td></tr><tr><td>중기국채</td><td>15%</td><td>안정성 보완</td></tr><tr><td>금</td><td>7.5%</td><td>스태그플레이션 헷지</td></tr><tr><td>원자재</td><td>7.5%</td><td>인플레이션 헷지</td></tr></tbody></table></div>
+<p><strong>핵심 원리 - 리스크 패리티(Risk Parity)</strong>: 금액이 아닌 리스크 기여도를 균등 배분. 주식(변동성 높음)은 30%만 넣어도 리스크 기여가 크고, 국채(변동성 낮음)는 40% 넣어야 비슷해진다.</p>
+<h3 id="성과와-한계">성과와 한계<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#성과와-한계" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>성과</strong>: 연평균 7~8%, MDD 작음, 샤프 비율 높음</li>
+<li><strong>약점</strong>: 2022년처럼 주식과 채권이 동시에 하락하면 깨짐. 채권 비중 55%인데 40년 채권 강세장(1981~2020) 백테스트에 의존</li>
+<li><strong>7~8%는 보장이 아니다</strong>: 과거 백테스트 평균이지 미래 보장 아님. 진짜 보장에 가까운 건 무위험 수익률(T-Bill, 현재 ~3%)뿐</li>
+</ul>
+<hr/>
+<h2 id="5-코어-새틀라이트-전략-core-satellite">5. 코어-새틀라이트 전략 (Core-Satellite)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-코어-새틀라이트-전략-core-satellite" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>코어(70~80%)</strong>: 올웨더 같은 분산 포트폴리오로 안정적 연 7~8% 추구</li>
+<li><strong>새틀라이트(20~30%)</strong>: 본인만의 엣지 전략(환율 방어 패턴, 종목 투자 등)으로 초과 수익 추구</li>
+<li><strong>전체 포트폴리오</strong>: 연 10~15% (화려하진 않지만 MDD 작고 꾸준)</li>
+</ul>
+<blockquote>
+<p><strong>수익률의 크기가 아니라 안정성이 장기 자산을 만든다.</strong> 연 50% 한 번보다 연 10%를 10년 꾸준히가 복리 효과로 더 부자가 되는 길. 올해 50% 벌고 내년 -30% 잃으면 2년 수익률 5%, 연평균 2.5%밖에 안 된다.</p>
+</blockquote>
+<h3 id="발전된-관점-코어를-능동-관리">발전된 관점: 코어를 능동 관리<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#발전된-관점-코어를-능동-관리" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>코어를 세팅 후 방치가 아니라, <strong>레짐 감지로 동적 조절</strong>하면 나쁜 해의 손실을 줄여 실현 평균 수익률을 끌어올릴 수 있다. 연 수익률 자체를 높이기보다 <strong>드로다운을 깎아서 복리 효과를 극대화</strong>하는 구조. 연 8% 벌고 -10% 잃는 것보다, 연 7% 벌고 -3%만 잃는 게 10년 뒤에 훨씬 큰 차이를 만든다.</p>
+<hr/>
+<h2 id="6-알파의-소멸과-진짜-엣지">6. 알파의 소멸과 진짜 엣지<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#6-알파의-소멸과-진짜-엣지" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>“모두가 아는 전략은 알파가 소멸한다.”</strong> 같은 모멘텀 전략을 모두가 쓰면 가격이 즉시 반영되어 늦게 들어온 사람은 수익이 안 남. 크라우딩 리스크로 빠질 때 손실 증폭.</p>
+<h3 id="진짜-엣지의-원천">진짜 엣지의 원천<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#진짜-엣지의-원천" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>전략의 이치를 아는 것은 출발점일 뿐. 진짜 엣지는:</p>
+<ol>
+<li><strong>남들이 정량화 안 한 시그널 발굴</strong> (환율 방어 패턴, 한국 시장 특유의 수급 패턴 등)</li>
+<li><strong>실행의 디테일</strong> (진입 타이밍, 거래비용 최소화, 손절 규칙, 포지션 사이징)</li>
+<li><strong>도메인 지식 + 엔지니어링 능력의 희소한 교집합</strong> (글로벌 퀀트는 한국 시장을 이만큼 모르고, 한국 금융 전문가는 이만큼 코딩을 못함)</li>
+</ol>
+<h3 id="트레이딩-빈도와-경쟁-구도">트레이딩 빈도와 경쟁 구도<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#트레이딩-빈도와-경쟁-구도" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>빈도</th><th>시간 단위</th><th>경쟁 요소</th><th>개인 적합도</th></tr></thead><tbody><tr><td>HFT</td><td>밀리초~초</td><td>인프라 속도 (자본 싸움)</td><td>불가</td></tr><tr><td>중빈도(MFT)</td><td>분~시간</td><td>단기 패턴, 통계적 차익</td><td>가능</td></tr><tr><td>저빈도(LFT)</td><td>일~월</td><td>시그널 질, 리서치 (아이디어 싸움)</td><td>유리</td></tr></tbody></table></div></article><hr/><div class="page-footer"><div class="giscus" data-repo="KimSeogyu/KimSeogyu.github.io" data-repo-id="R_kgDOVucEjA" data-category="Announcements" data-category-id="DIC_kwDOVucEjM4DLKem" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-input-position="top" data-light-theme="light" data-dark-theme="dark" data-theme-url="https://kimseogyu.github.io/static/giscus" data-lang="ko"></div></div></div><div class="right sidebar"><div class="graph"><h3>그래프 뷰</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-108" aria-expanded="true"><h3>목차</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#퀀트-파이낸스-학습-노트" data-for="퀀트-파이낸스-학습-노트">퀀트 파이낸스 학습 노트</a></li><li class="depth-1"><a href="#1-기술적-분석-technical-analysis" data-for="1-기술적-분석-technical-analysis">1. 기술적 분석 (Technical Analysis)</a></li><li class="depth-2"><a href="#기본적-분석-vs-기술적-분석" data-for="기본적-분석-vs-기술적-분석">기본적 분석 vs 기술적 분석</a></li><li class="depth-2"><a href="#주요-도구" data-for="주요-도구">주요 도구</a></li><li class="depth-2"><a href="#기술적-분석에-대한-시각-차이" data-for="기술적-분석에-대한-시각-차이">기술적 분석에 대한 시각 차이</a></li><li class="depth-1"><a href="#2-핵심-투자-전략" data-for="2-핵심-투자-전략">2. 핵심 투자 전략</a></li><li class="depth-2"><a href="#21-모멘텀-momentum" data-for="21-모멘텀-momentum">2.1 모멘텀 (Momentum)</a></li><li class="depth-2"><a href="#22-평균회귀-mean-reversion" data-for="22-평균회귀-mean-reversion">2.2 평균회귀 (Mean Reversion)</a></li><li class="depth-2"><a href="#23-추세추종-trend-following" data-for="23-추세추종-trend-following">2.3 추세추종 (Trend Following)</a></li><li class="depth-2"><a href="#24-롱숏-long-short" data-for="24-롱숏-long-short">2.4 롱숏 (Long-Short)</a></li><li class="depth-1"><a href="#3-레짐-market-regime" data-for="3-레짐-market-regime">3. 레짐 (Market Regime)</a></li><li class="depth-2"><a href="#레이-달리오의-4단계-경제-레짐" data-for="레이-달리오의-4단계-경제-레짐">레이 달리오의 4단계 경제 레짐</a></li><li class="depth-2"><a href="#시장-국면별-유효-전략" data-for="시장-국면별-유효-전략">시장 국면별 유효 전략</a></li><li class="depth-2"><a href="#변동성-기반-레짐-분류" data-for="변동성-기반-레짐-분류">변동성 기반 레짐 분류</a></li><li class="depth-2"><a href="#31-레짐-감지-hidden-markov-model-hmm" data-for="31-레짐-감지-hidden-markov-model-hmm">3.1 레짐 감지: Hidden Markov Model (HMM)</a></li><li class="depth-2"><a href="#32-레짐-전환의-수익-구조" data-for="32-레짐-전환의-수익-구조">3.2 레짐 전환의 수익 구조</a></li><li class="depth-1"><a href="#4-올웨더-포트폴리오-all-weather" data-for="4-올웨더-포트폴리오-all-weather">4. 올웨더 포트폴리오 (All Weather)</a></li><li class="depth-2"><a href="#중립-배분-비율" data-for="중립-배분-비율">중립 배분 비율</a></li><li class="depth-2"><a href="#성과와-한계" data-for="성과와-한계">성과와 한계</a></li><li class="depth-1"><a href="#5-코어-새틀라이트-전략-core-satellite" data-for="5-코어-새틀라이트-전략-core-satellite">5. 코어-새틀라이트 전략 (Core-Satellite)</a></li><li class="depth-2"><a href="#발전된-관점-코어를-능동-관리" data-for="발전된-관점-코어를-능동-관리">발전된 관점: 코어를 능동 관리</a></li><li class="depth-1"><a href="#6-알파의-소멸과-진짜-엣지" data-for="6-알파의-소멸과-진짜-엣지">6. 알파의 소멸과 진짜 엣지</a></li><li class="depth-2"><a href="#진짜-엣지의-원천" data-for="진짜-엣지의-원천">진짜 엣지의 원천</a></li><li class="depth-2"><a href="#트레이딩-빈도와-경쟁-구도" data-for="트레이딩-빈도와-경쟁-구도">트레이딩 빈도와 경쟁 구도</a></li><li class="overflow-end"></li></ul></div><div class="recent-notes"><h3>최근 게시글</h3><ul class="recent-ul"><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../ai-ml/llm-wiki-recall-first-design" class="internal">LLM 지식베이스는 왜 작아야 하는가: Recall-First Wiki 설계</a></h3></div><p class="meta"><time datetime="2026-07-24T00:00:00.000Z">2026년 7월 24일</time></p><ul class="tags"><li><a class="internal tag-link" href="../tags/LLM">LLM</a></li><li><a class="internal tag-link" href="../tags/Knowledge-Management">Knowledge-Management</a></li><li><a class="internal tag-link" href="../tags/Obsidian">Obsidian</a></li><li><a class="internal tag-link" href="../tags/RAG">RAG</a></li><li><a class="internal tag-link" href="../tags/Architecture">Architecture</a></li><li><a class="internal tag-link" href="../tags/Git">Git</a></li></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../backend/rust/undocx-document-conversion-architecture" class="internal">DOCX를 Markdown으로 바꾸는 일은 왜 단순 XML 변환이 아닌가</a></h3></div><p class="meta"><time datetime="2026-07-24T00:00:00.000Z">2026년 7월 24일</time></p><ul class="tags"><li><a class="internal tag-link" href="../tags/Rust">Rust</a></li><li><a class="internal tag-link" href="../tags/DOCX">DOCX</a></li><li><a class="internal tag-link" href="../tags/Markdown">Markdown</a></li><li><a class="internal tag-link" href="../tags/AST">AST</a></li><li><a class="internal tag-link" href="../tags/Parser">Parser</a></li><li><a class="internal tag-link" href="../tags/RAG">RAG</a></li><li><a class="internal tag-link" href="../tags/Testing">Testing</a></li></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../backend/sayu-day-static-publishing-pipeline" class="internal">Markdown을 SSOT로 유지하는 정적 지식 출판 파이프라인</a></h3></div><p class="meta"><time datetime="2026-07-24T00:00:00.000Z">2026년 7월 24일</time></p><ul class="tags"><li><a class="internal tag-link" href="../tags/Markdown">Markdown</a></li><li><a class="internal tag-link" href="../tags/Static-Site">Static-Site</a></li><li><a class="internal tag-link" href="../tags/Obsidian">Obsidian</a></li><li><a class="internal tag-link" href="../tags/TanStack-Start">TanStack-Start</a></li><li><a class="internal tag-link" href="../tags/GitHub-Pages">GitHub-Pages</a></li><li><a class="internal tag-link" href="../tags/SSOT">SSOT</a></li><li><a class="internal tag-link" href="../tags/Privacy">Privacy</a></li></ul></div></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2026</p><ul><li><a href="https://github.com/KimSeogyu">GitHub</a></li></ul></footer></div></div></body><script type="application/javascript">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.js" type="module"></script></html>
