@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr"><head><title>WaaS Non-Custodial 개선 설계 (1)</title><meta charset="utf-8"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="Seogyu Kim"/><meta property="og:title" content="WaaS Non-Custodial 개선 설계 (1)"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="WaaS Non-Custodial 개선 설계 (1)"/><meta name="twitter:description" content="이 글은 두 편으로 나뉩니다. 이어지는 실행 계획과 시나리오는 WaaS Non-Custodial 개선 설계 (2)에 있습니다. 0. 결론과 제출물 본 답안은 Track A — WaaS Non-Custodial 설계에 집중한다."/><meta property="og:description" content="이 글은 두 편으로 나뉩니다. 이어지는 실행 계획과 시나리오는 WaaS Non-Custodial 개선 설계 (2)에 있습니다. 0. 결론과 제출물 본 답안은 Track A — WaaS Non-Custodial 설계에 집중한다."/><meta property="og:image:alt" content="이 글은 두 편으로 나뉩니다. 이어지는 실행 계획과 시나리오는 WaaS Non-Custodial 개선 설계 (2)에 있습니다. 0. 결론과 제출물 본 답안은 Track A — WaaS Non-Custodial 설계에 집중한다."/><meta property="og:image" content="https://kimseogyu.github.io/static/og-image.png"/><meta property="og:image:url" content="https://kimseogyu.github.io/static/og-image.png"/><meta name="twitter:image" content="https://kimseogyu.github.io/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="kimseogyu.github.io"/><meta property="og:url" content="https://kimseogyu.github.io/blockchain/waas-non-custodial-design-1"/><meta property="twitter:url" content="https://kimseogyu.github.io/blockchain/waas-non-custodial-design-1"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="이 글은 두 편으로 나뉩니다. 이어지는 실행 계획과 시나리오는 WaaS Non-Custodial 개선 설계 (2)에 있습니다. 0. 결론과 제출물 본 답안은 Track A — WaaS Non-Custodial 설계에 집중한다."/><meta name="generator" content="Quartz"/><link href="../index.css" rel="stylesheet" type="text/css" spa-preserve/><link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" type="text/css" spa-preserve/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  padding: 2rem;
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiL2hvbWUvcnVubmVyL3dvcmsvc2F5dS5kYXkvc2F5dS5kYXkvcXVhcnR6L3F1YXJ0ei9jb21wb25lbnRzL3N0eWxlcyIsInNvdXJjZXMiOlsibWVybWFpZC5pbmxpbmUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTs7QUFHRjtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTs7O0FBS0Y7RUFDRTtFQUNBOzs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwYWRkaW5nOiAycmVtO1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgICAgdHJhbnNmb3JtLW9yaWdpbjogMCAwO1xuICAgICAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIDAuMXMgZWFzZTtcbiAgICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgICAgbWluLWhlaWdodDogMjAwcHg7XG4gICAgICBtaW4td2lkdGg6IDIwMHB4O1xuXG4gICAgICBwcmUge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgIH1cblxuICAgICAgc3ZnIHtcbiAgICAgICAgbWF4LXdpZHRoOiBub25lO1xuICAgICAgICBoZWlnaHQ6IGF1dG87XG4gICAgICB9XG4gICAgfVxuXG4gICAgJiA+IC5tZXJtYWlkLWNvbnRyb2xzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGJvdHRvbTogMjBweDtcbiAgICAgIHJpZ2h0OiAyMHB4O1xuICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgIGdhcDogOHB4O1xuICAgICAgcGFkZGluZzogOHB4O1xuICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgIGJvcmRlci1yYWRpdXM6IDZweDtcbiAgICAgIGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsIDAsIDAsIDAuMSk7XG4gICAgICB6LWluZGV4OiAyO1xuXG4gICAgICAubWVybWFpZC1jb250cm9sLWJ1dHRvbiB7XG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgICAgICB3aWR0aDogMzJweDtcbiAgICAgICAgaGVpZ2h0OiAzMnB4O1xuICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICAgIGNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4O1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIGZvbnQtc2l6ZTogMTZweDtcbiAgICAgICAgZm9udC1mYW1pbHk6IHZhcigtLWJvZHlGb250KTtcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnMgZWFzZTtcblxuICAgICAgICAmOmhvdmVyIHtcbiAgICAgICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgICB9XG5cbiAgICAgICAgJjphY3RpdmUge1xuICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxcHgpO1xuICAgICAgICB9XG5cbiAgICAgICAgLy8gU3R5bGUgdGhlIHJlc2V0IGJ1dHRvbiBkaWZmZXJlbnRseVxuICAgICAgICAmOm50aC1jaGlsZCgyKSB7XG4gICAgICAgICAgd2lkdGg6IGF1dG87XG4gICAgICAgICAgcGFkZGluZzogMCAxMnB4O1xuICAgICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgfVxuICAgICAgfVxuICAgIH1cbiAgfVxufVxuIl19 */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" spa-preserve/><script src="../prescript.js" type="application/javascript" spa-preserve></script><script type="application/javascript" spa-preserve>const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://kimseogyu.github.io/index.xml"/></head><body data-slug="blockchain/waas-non-custodial-design-1"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"><h2 class="page-title"><a href="..">Seogyu Kim</a></h2><div class="spacer mobile-only"></div><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 1rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>검색</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="검색어를 입력하세요" placeholder="검색어를 입력하세요"/><div class="search-layout" data-preview="true"></div></div></div></div></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="다크 모드"><title>다크 모드</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="라이트 모드"><title>라이트 모드</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></div><div style="flex-grow: 0; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><button class="readermode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="readerIcon" fill="currentColor" stroke="currentColor" stroke-width="0.2" stroke-linecap="round" stroke-linejoin="round" width="64px" height="64px" viewBox="0 0 24 24" aria-label="리더 모드"><title>리더 모드</title><g transform="translate(-1.8, -1.8) scale(1.15, 1.2)"><path d="M8.9891247,2.5 C10.1384702,2.5 11.2209868,2.96705384 12.0049645,3.76669482 C12.7883914,2.96705384 13.8709081,2.5 15.0202536,2.5 L18.7549359,2.5 C19.1691495,2.5 19.5049359,2.83578644 19.5049359,3.25 L19.5046891,4.004 L21.2546891,4.00457396 C21.6343849,4.00457396 21.9481801,4.28672784 21.9978425,4.6528034 L22.0046891,4.75457396 L22.0046891,20.25 C22.0046891,20.6296958 21.7225353,20.943491 21.3564597,20.9931534 L21.2546891,21 L2.75468914,21 C2.37499337,21 2.06119817,20.7178461 2.01153575,20.3517706 L2.00468914,20.25 L2.00468914,4.75457396 C2.00468914,4.37487819 2.28684302,4.061083 2.65291858,4.01142057 L2.75468914,4.00457396 L4.50368914,4.004 L4.50444233,3.25 C4.50444233,2.87030423 4.78659621,2.55650904 5.15267177,2.50684662 L5.25444233,2.5 L8.9891247,2.5 Z M4.50368914,5.504 L3.50468914,5.504 L3.50468914,19.5 L10.9478955,19.4998273 C10.4513189,18.9207296 9.73864328,18.5588115 8.96709342,18.5065584 L8.77307039,18.5 L5.25444233,18.5 C4.87474657,18.5 4.56095137,18.2178461 4.51128895,17.8517706 L4.50444233,17.75 L4.50368914,5.504 Z M19.5049359,17.75 C19.5049359,18.1642136 19.1691495,18.5 18.7549359,18.5 L15.2363079,18.5 C14.3910149,18.5 13.5994408,18.8724714 13.0614828,19.4998273 L20.5046891,19.5 L20.5046891,5.504 L19.5046891,5.504 L19.5049359,17.75 Z M18.0059359,3.999 L15.0202536,4 L14.8259077,4.00692283 C13.9889509,4.06666544 13.2254227,4.50975805 12.7549359,5.212 L12.7549359,17.777 L12.7782651,17.7601316 C13.4923805,17.2719483 14.3447024,17 15.2363079,17 L18.0059359,16.999 L18.0056891,4.798 L18.0033792,4.75457396 L18.0056891,4.71 L18.0059359,3.999 Z M8.9891247,4 L6.00368914,3.999 L6.00599909,4.75457396 L6.00599909,4.75457396 L6.00368914,4.783 L6.00368914,16.999 L8.77307039,17 C9.57551536,17 10.3461406,17.2202781 11.0128313,17.6202194 L11.2536891,17.776 L11.2536891,5.211 C10.8200889,4.56369974 10.1361548,4.13636104 9.37521067,4.02745763 L9.18347055,4.00692283 L8.9891247,4 Z"></path></g></svg></button></div></div><div class="explorer" data-behavior="link" data-collapsed="collapsed" data-savestate="true" data-data-fns="{&quot;order&quot;:[&quot;filter&quot;,&quot;map&quot;,&quot;sort&quot;],&quot;sortFn&quot;:&quot;(a,b)=>!a.isFolder&amp;&amp;!b.isFolder||a.isFolder&amp;&amp;b.isFolder?a.displayName.localeCompare(b.displayName,void 0,{numeric:!0,sensitivity:\&quot;base\&quot;}):!a.isFolder&amp;&amp;b.isFolder?1:-1&quot;,&quot;filterFn&quot;:&quot;node=>node.slugSegment!==\&quot;tags\&quot;&quot;,&quot;mapFn&quot;:&quot;node=>node&quot;}"><button type="button" class="explorer-toggle mobile-explorer hide-until-loaded" data-mobile="true" aria-controls="explorer-187"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-menu"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button><button type="button" class="title-button explorer-toggle desktop-explorer" data-mobile="false" aria-expanded="true"><h2>탐색기</h2><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div id="explorer-187" class="explorer-content" aria-expanded="false" role="group"><ul class="explorer-ul overflow" id="list-0"><li class="overflow-end"></li></ul></div><template id="template-file"><li><a href="#"></a></li></template><template id="template-folder"><li><div class="folder-container"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="5 8 14 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="folder-icon"><polyline points="6 9 12 15 18 9"></polyline></svg><div><button class="folder-button"><span class="folder-title"></span></button></div></div><div class="folder-outer"><ul class="content"></ul></div></li></template></div></div><div class="center"><div class="page-header"><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="../">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href="../blockchain/">blockchain</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>WaaS Non Custodial 개선 설계 (1)</a></div></nav><h1 class="article-title">WaaS Non-Custodial 개선 설계 (1)</h1><p show-comma="true" class="content-meta"><time datetime="2026-05-08T00:00:00.000Z">2026년 5월 08일</time><span>23 min read</span></p><ul class="tags"><li><a href="../tags/Blockchain" class="internal tag-link">Blockchain</a></li><li><a href="../tags/WaaS" class="internal tag-link">WaaS</a></li><li><a href="../tags/Architecture" class="internal tag-link">Architecture</a></li><li><a href="../tags/ethereum" class="internal tag-link">ethereum</a></li></ul></div></div><article class="popover-hint"><p>이 글은 두 편으로 나뉩니다. 이어지는 실행 계획과 시나리오는 <a href="../blockchain/waas-non-custodial-design-2" class="internal alias" data-slug="blockchain/waas-non-custodial-design-2">WaaS Non-Custodial 개선 설계 (2)</a>에 있습니다.</p>
+<h1 id="0-결론과-제출물">0. 결론과 제출물<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#0-결론과-제출물" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>본 답안은 <strong>Track A — WaaS Non-Custodial 설계</strong>에 집중한다. Track B의 ERC-4337 역할 분리와 Track D의 EIP-8141 대응은 핵심 설계가 장기적으로 깨지지 않도록 연결점만 짧게 다룬다.</p>
+<p>현재 WaaS가 custodial로 판정되는 이유는 서버가 <code>K_D</code>, <code>envelope</code> 같은 서버 보관 재료를 통해 유효한 wallet approval 또는 그에 준하는 서명 능력을 만들 수 있다는 점이다.</p>
+<p>목표 구조는 <strong>Passkey-first WaaS</strong>다. 이 설계에서는 PAKE를 wallet control에 사용하지 않는다. password-like 입력은 복구 백업을 암호화하기 위한 <strong>high-entropy recovery passphrase</strong>뿐이다.</p>
+<p><img src=".././../public/images/waas-non-custodial-overview.png" alt="목표 구조 개요"/></p>
+<hr/>
+<h2 id="1-문제-재진술과-설계-원칙">1. 문제 재진술과 설계 원칙<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-문제-재진술과-설계-원칙" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="11-현재-구조의-custody-문제">1.1 현재 구조의 custody 문제<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#11-현재-구조의-custody-문제" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>판정 축</th><th>현재 구조의 문제</th><th>개선 방향</th></tr></thead><tbody><tr><td>서명 통제권</td><td>서버가 <code>K_D</code> 또는 동등한 재료로 유효한 tx approval을 만들 수 있음</td><td>Smart Account가 인정하는 승인 근거를 사용자 기기 Passkey proof 또는 사전 등록된 온체인 policy로 제한</td></tr><tr><td>키 재현 가능성</td><td>서버 재료와 저엔트로피 패스워드 공간이 결합되면 서명 능력 복구 위험이 있음</td><td>PAKE-derived wallet key 경로 제거. 복구 백업 암호화에는 별도의 high-entropy recovery passphrase만 사용</td></tr><tr><td>키 저장·지속성</td><td>유저가 서버와 독립적으로 지갑 접근 권한을 증명하기 어려움</td><td>독립 challenge signing, EIP-1271 검증, registered public key 조회로 증명</td></tr></tbody></table></div>
+<p>현재 구조에서는 아래 조합이 한 운영 경계 안에 모이면 유저 서명을 재현하거나 그에 준하는 실행 권한을 만들 수 있다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>권한 조합</th><th>가능한 일</th><th>위험도</th></tr></thead><tbody><tr><td>WaaS DB 접근 + <code>K_D</code> 접근 + tx worker 접근</td><td>유저 개입 없이 UserOperation 또는 커스텀 실행 경로 생성</td><td>높음</td></tr><tr><td>서버 인증 재료 + per-user envelope + 저엔트로피 패스워드 공간</td><td><code>K_S</code> 또는 동등한 서명 능력 복구 시도</td><td>높음</td></tr><tr><td>Bundler / Paymaster / Signer가 같은 운영 경계</td><td>대납 정책, 제출, 서명 권한이 함께 오남용될 수 있음</td><td>중간~높음</td></tr><tr><td>Tenant backend + WaaS API 권한 + preview 불일치</td><td>유저에게 보인 내용과 실제 action이 달라질 수 있음</td><td>중간</td></tr></tbody></table></div>
+<p>이 설계의 목표는 위 조합을 끊는 것이다.</p>
+<h3 id="12-설계-원칙">1.2 설계 원칙<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#12-설계-원칙" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>원칙</th><th>설명</th></tr></thead><tbody><tr><td>Account Session ≠ Wallet Execution Authority ≠ Recovery Authority</td><td>같은 Passkey ceremony를 계정 세션 생성과 wallet approval에 함께 쓸 수 있다. 다만 계정 세션이 곧 wallet 실행 권한이 되면 안 된다.</td></tr><tr><td>Wallet approval은 사용자 기기에서만 생성</td><td>Passkey private key는 사용자 기기 밖으로 나가지 않는다.</td></tr><tr><td>WaaS는 approval 생성자가 아님</td><td>WaaS는 Action 생성, 검토, 수수료 처리, 제출 상태 관리를 오케스트레이션하지만 사용자 대신 approval을 만들지 않는다.</td></tr><tr><td>Smart Account가 최종 검증자</td><td>서버의 “승인됨” 상태를 믿지 않고 Passkey proof, recovery proof, policy를 직접 검증한다.</td></tr><tr><td>Action은 canonical object</td><td>유저가 본 preview와 서명 대상 hash를 강하게 묶는다.</td></tr><tr><td>반복 실행은 온체인 policy 기반</td><td>서버가 signed action을 보관해 임의로 재실행하지 않는다.</td></tr><tr><td>PAKE는 wallet control에서 제외</td><td>PAKE가 남더라도 인증 보조 수단일 뿐, wallet approval이나 recovery authority로 쓰지 않는다.</td></tr></tbody></table></div>
+<h3 id="13-권한-의미-분리">1.3 권한 의미 분리<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#13-권한-의미-분리" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>나누어야 하는 것은 credential의 종류가 아니라 권한의 의미다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>권한 문맥</th><th>책임</th><th>허용 수단</th><th>금지 사항</th></tr></thead><tbody><tr><td>Account Session</td><td>사용자가 누구인지 확인하고 flow 시작</td><td>Passkey ceremony, 앱 내부 세션</td><td>세션만으로 Action 실행, owner 변경, recovery policy 변경</td></tr><tr><td>Wallet Execution Authority</td><td>특정 Action, owner 변경, policy 등록 승인</td><td>등록된 Passkey의 action-bound P-256 proof, Smart Account verifier</td><td>account-session assertion 재사용, 서버 대리 서명, password-derived signing</td></tr><tr><td>Recovery Authority</td><td>승인 수단 분실 시 새 approval method 등록/교체</td><td>recovery proof, 기존 기기 승인, 선택적 guardian</td><td>평상시 결제 승인, 계정 세션만으로 owner 교체</td></tr><tr><td>Automation Scope</td><td>정기결제·반복 실행</td><td>온체인 policy module, allowedExecutor, cap, interval, expiry, nonce</td><td>범용 서버 서명, owner mutation</td></tr></tbody></table></div>
+<p>사용자 경험에서는 “Passkey로 계정 세션을 만들고 곧바로 wallet approval을 진행하는 흐름”처럼 보일 수 있다. 하지만 Smart Account 관점에서는 account session과 wallet approval이 분리되어야 한다. Wallet approval은 <code>wallet</code>, <code>chainId</code>, <code>actionHash</code>, <code>nonce</code>, <code>expiry</code>, <code>purpose</code>에 묶인 canonical challenge에 대한 proof여야 한다.</p>
+<hr/>
+<h2 id="2-목표-구조와-컴포넌트-경계">2. 목표 구조와 컴포넌트 경계<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-목표-구조와-컴포넌트-경계" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="21-컴포넌트-경계">2.1 컴포넌트 경계<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#21-컴포넌트-경계" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>영역</th><th>책임</th><th>금지 권한</th></tr></thead><tbody><tr><td>Tenant App / WaaS SDK</td><td>flow 시작, Action preview 표시, Passkey ceremony 호출, User Personal Cloud에 저장된 encrypted recovery backup 로컬 복호화, proof 제출</td><td>서버 재료로 approval 생성, recovery material 원문 전달</td></tr><tr><td>WaaS API Facade</td><td>SDK의 단일 진입점. flow 시작, proof 제출, 상태 조회</td><td>사용자 대신 approval 생성, recovery passphrase 수신</td></tr><tr><td>WaaS Flow Backend</td><td>wallet address 조회, Action 생성, 검토, 수수료 처리, Tx 변환, 제출, 감사 기록</td><td>owner 판정, 서버 단독 서명, Smart Account 검증 우회</td></tr><tr><td>Wallet Directory</td><td><code>tenantUserRef → wallet address</code>, deployment status 조회</td><td>wallet owner 판단, approval 유효성 판단, recovery 성공 판단</td></tr><tr><td>Smart Account</td><td>Passkey proof, recovery proof, policy 검증 후 실행</td><td>WaaS의 “승인됨” 상태만 믿고 실행</td></tr></tbody></table></div>
+<p>핵심은 Wallet Directory의 성격이다. Backend가 <code>tenantUserRef → wallet address</code>를 조회할 수는 있지만, 이 정보는 account discovery와 flow routing을 위한 directory일 뿐이다. 실제 owner approval, recovery authority, 자동결제 policy 실행 가능 여부는 Smart Account가 검증한다.</p>
+<h3 id="22-sdk-flow-runtime--waas-flow-backend">2.2 SDK Flow Runtime / WaaS Flow Backend<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#22-sdk-flow-runtime--waas-flow-backend" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>구조상 flow는 두 층으로 나뉜다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="txt" data-theme="github-light github-dark"><code data-language="txt" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>SDK Flow Runtime</span></span>
+<span data-line><span>- 사용자 기기에서 동작</span></span>
+<span data-line><span>- UX step, Action preview, Passkey ceremony, User Personal Cloud에 저장된 encrypted recovery backup 로컬 복호화를 담당</span></span>
+<span data-line> </span>
+<span data-line><span>WaaS Flow Backend</span></span>
+<span data-line><span>- 서버에서 동작</span></span>
+<span data-line><span>- wallet address 조회, Action 생성, 검토, 수수료 처리, Tx 변환, 제출, 상태 관리를 담당</span></span></code></pre></figure>
+<p>즉, SDK도 flow를 갖지만 실행 권한의 판단 주체는 아니다. WaaS도 실행을 오케스트레이션하지만 사용자 approval을 생성하지 않는다. 최종 권한 검증은 Smart Account가 직접 수행한다.</p>
+<h3 id="23-app-facing-api">2.3 App-facing API<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#23-app-facing-api" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Tenant App이 <code>Wallet Directory</code>, <code>Action Builder</code>, <code>Review</code>, <code>Tx Compiler</code>, <code>Submitter</code> 같은 내부 모듈을 직접 호출하면 안 된다. App-facing API는 SDK가 사용하는 고수준 flow API로 제한한다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>API</th><th>호출자</th><th>의미</th><th>금지되는 해석</th></tr></thead><tbody><tr><td><code>POST /flows</code></td><td>Tenant App / SDK</td><td>지갑 생성, 기기 추가, 복구, 결제, 자동결제 등록 같은 고수준 flow 시작</td><td>내부 Action/Review/Compiler를 App이 직접 제어하는 API가 아님</td></tr><tr><td><code>POST /flows/{flowId}/approvals</code></td><td>Tenant App / SDK</td><td>사용자 기기에서 생성된 Passkey approval proof 또는 recovery proof 제출</td><td>서버가 대신 approval을 만들어주는 API가 아님</td></tr><tr><td><code>GET /flows/{flowId}</code></td><td>Tenant App / SDK</td><td>pending approval, submitted, confirmed, failed 등 상태 조회</td><td>wallet owner 여부를 서버가 판정한다는 뜻이 아님</td></tr><tr><td><code>POST /policies/{policyId}/execute</code></td><td>WaaS scheduler 또는 authorized tenant backend</td><td>사전 승인된 자동결제 policy 실행 트리거</td><td>새로운 wallet approval을 생성하는 API가 아님</td></tr></tbody></table></div>
+<p>예시 입력은 아래 정도로 제한한다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="ts" data-theme="github-light github-dark"><code data-language="ts" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">type</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> FlowType</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;CREATE_WALLET&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;ADD_DEVICE&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;RECOVER_WALLET&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;PAYMENT&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;REGISTER_RECURRING_POLICY&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">type</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> CreateFlowRequest</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> {</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  tenantId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  tenantUserRef</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  type</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> FlowType</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  payload</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> unknown</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">};</span></span></code></pre></figure>
+<p><code>tenantUserRef</code>는 wallet address를 찾기 위한 directory key일 뿐이다. 이 값이 wallet owner임을 증명하지 않는다.</p>
+<hr/>
+<h2 id="3-action-실행-포맷-자동결제">3. Action, 실행 포맷, 자동결제<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-action-실행-포맷-자동결제" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="31-canonical-action">3.1 Canonical Action<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#31-canonical-action" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>사용자가 승인하는 의미 단위와 실제 실행 포맷을 분리한다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="txt" data-theme="github-light github-dark"><code data-language="txt" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Action → ERC-4337 UserOperation</span></span>
+<span data-line><span>Action → EIP-8141 FrameTx</span></span></code></pre></figure>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="ts" data-theme="github-light github-dark"><code data-language="ts" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">type</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> ActionType</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;CREATE_WALLET&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;ADD_DEVICE&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;RECOVER_WALLET&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;PAYMENT&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;POLICY_REGISTER&quot;</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">  |</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;POLICY_EXECUTE&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">type</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> Action</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> {</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  version</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;1&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  tenantId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  wallet</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  chainId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  actionType</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> ActionType</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  target</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  method</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  value</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  calldataHash</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  feePolicyHash</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  previewHash</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  policyId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">?:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  nonce</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  expiry</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">};</span></span></code></pre></figure>
+<p><code>previewHash</code>가 중요하다. 유저가 본 UI 문구, 금액, 대상, 수수료 정책, 만료 조건이 hash에 포함되어야 한다. preview 또는 payload가 바뀌면 Action Hash도 바뀌고, 기존 approval proof는 더 이상 유효하지 않아야 한다.</p>
+<h3 id="32-실행-포맷">3.2 실행 포맷<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#32-실행-포맷" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>구분</th><th>ERC-4337</th><th>EIP-8141</th></tr></thead><tbody><tr><td>사용자 검증</td><td><code>validateUserOp</code></td><td><code>VERIFY</code> frame</td></tr><tr><td>수수료 대납</td><td>Paymaster + <code>paymasterAndData</code></td><td><code>PAYMENT</code> frame</td></tr><tr><td>액션 실행</td><td>Smart Account <code>execute</code></td><td><code>EXECUTE</code> frame</td></tr><tr><td>제출 경로</td><td>Bundler → EntryPoint</td><td>protocol mempool / thin relayer</td></tr><tr><td>변환 결과</td><td><code>UserOperation</code></td><td><code>FrameTx = VERIFY + PAYMENT + EXECUTE</code></td></tr></tbody></table></div>
+<p>Smart Account의 검증 로직은 특정 제출 경로에 묶이면 안 된다. Passkey Verifier, Recovery Module, Policy Module은 4337과 8141 양쪽에서 재사용 가능한 형태로 둔다.</p>
+<h3 id="33-자동결제--반복-실행-원칙">3.3 자동결제 / 반복 실행 원칙<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#33-자동결제--반복-실행-원칙" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>자동결제는 서버가 signed action을 저장해두고 나중에 임의로 재해석해 실행하는 구조가 아니어야 한다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="txt" data-theme="github-light github-dark"><code data-language="txt" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>1. 사용자가 자동결제 policy 등록 Action을 확인하고 Passkey로 승인한다.</span></span>
+<span data-line><span>2. Smart Account의 Policy Module에 merchant, amountCap, interval, expiry, allowedExecutor, nonce가 저장된다.</span></span>
+<span data-line><span>3. 이후 WaaS scheduler 또는 authorized tenant backend가 실행을 트리거할 수 있다.</span></span>
+<span data-line><span>4. Smart Account가 매 실행마다 policy 조건을 검증한다.</span></span>
+<span data-line><span>5. 조건을 벗어나면 실행되지 않는다.</span></span></code></pre></figure>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="ts" data-theme="github-light github-dark"><code data-language="ts" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">type</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;"> RecurringPaymentPolicy</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> =</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> {</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  policyId</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  merchant</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  token</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  amountCap</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  interval</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  expiry</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> number</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  allowedExecutor</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#E36209;--shiki-dark:#FFAB70;">  nonce</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> string</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">;</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">};</span></span></code></pre></figure>
+<p>자동결제 실행은 매번 Passkey 재승인을 요구하지 않는다. 대신 최초 등록된 policy가 실행 범위를 제한한다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>항목</th><th>검증 위치</th><th>설명</th></tr></thead><tbody><tr><td>merchant</td><td>Smart Account / Policy Module</td><td>승인된 수취인인지 확인</td></tr><tr><td>amountCap</td><td>Smart Account / Policy Module</td><td>한도를 넘지 않는지 확인</td></tr><tr><td>interval</td><td>Smart Account / Policy Module</td><td>실행 주기를 만족하는지 확인</td></tr><tr><td>expiry</td><td>Smart Account / Policy Module</td><td>policy가 만료되지 않았는지 확인</td></tr><tr><td>allowedExecutor</td><td>Smart Account / Policy Module</td><td>실행 트리거 주체가 허용된 범위인지 확인</td></tr><tr><td>nonce / replay</td><td>Smart Account / Policy Module</td><td>중복 실행 또는 stale execution 차단</td></tr></tbody></table></div>
+<p>정리하면, 자동결제는 서버 자동 서명이 아니라 <strong>사전 승인된 온체인 policy의 반복 실행</strong>이다.</p>
+<h3 id="34-구현-불변조건">3.4 구현 불변조건<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#34-구현-불변조건" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Off-chain 준비 단계는 재시도 가능해야 하지만, 재시도가 새로운 사용자 권한을 만들면 안 된다.</li>
+<li>Action preview와 서명 대상 digest는 canonical hash로 묶여야 한다.</li>
+<li>사용자 approval proof 없이 생성된 일반 UserOperation은 실패해야 한다.</li>
+<li><code>POLICY_EXECUTE</code>는 owner proof 없이 제출될 수 있지만, 사전 등록된 on-chain policy 검증을 통과해야 한다.</li>
+<li>Wallet Directory는 권한 판단자가 아니다.</li>
+<li><code>nonce</code>, <code>expiry</code>, <code>policyId</code>로 replay와 stale approval을 막아야 한다.</li>
+<li>Paymaster 권한은 owner approval 권한과 분리한다.</li>
+<li>Audit log는 권한 근거가 아니라 사후 추적과 이상탐지 기록이다.</li>
+</ol>
+<hr/>
+<h2 id="4-요구사항-ux-blast-radius">4. 요구사항, UX, Blast Radius<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-요구사항-ux-blast-radius" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="41-track-a-요구사항-매핑">4.1 Track A 요구사항 매핑<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#41-track-a-요구사항-매핑" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>요구사항</th><th>대응 설계</th><th>상태</th></tr></thead><tbody><tr><td>R-A1 재현 차단</td><td>Passkey private key는 사용자 기기에 남고, WaaS는 action-bound approval proof만 받음</td><td>충족</td></tr><tr><td>R-A2 서버 대리 서명 제거</td><td><code>K_D</code> 기반 임의 서명 제거. 자동화는 on-chain policy 검증으로 제한</td><td>충족</td></tr><tr><td>R-A3 감사·이상탐지·로테이션</td><td>flow 생성, approval request, proof 제출, Tx 변환, 제출, 실행 결과를 append-only로 기록</td><td>부분 충족. 이상탐지와 로테이션 정책은 운영 정책으로 별도 상세화 필요</td></tr><tr><td>R-A4 패스워드 리셋 독립성</td><td>wallet owner를 password-derived key에 의존시키지 않음</td><td>충족</td></tr><tr><td>R-A5 멀티 디바이스 유지</td><td>새 기기 등록은 기존 기기 approval 또는 recovery proof가 필요. 계정 세션만으로 wallet authority가 복구되지는 않음</td><td>조건부 충족. §6.6에서 trade-off 상세</td></tr><tr><td>R-A6 Proof of Non-Custody</td><td>독립 challenge signing, EIP-1271 검증, registered Passkey public key 조회</td><td>충족</td></tr><tr><td>R-A7 AA 기능 유지</td><td>Paymaster gasless, UserOperation bundling, EIP-1271, policy-based automation 유지</td><td>충족</td></tr><tr><td>R-A8 PAKE 보안 가정 유지 또는 대체</td><td>목표 구조는 PAKE에 의존하지 않는 Passkey-first 구조. PAKE가 남더라도 auth-only 보조 수단으로 제한</td><td>충족 방향</td></tr></tbody></table></div>
+<h3 id="42-ux-유지--변경--포기">4.2 UX 유지 / 변경 / 포기<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#42-ux-유지--변경--포기" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>UX</th><th>유지 여부</th><th>설명</th></tr></thead><tbody><tr><td>Passkey 기반 온보딩</td><td>대부분 유지</td><td>사용자는 Passkey ceremony로 계정 세션과 첫 wallet approval을 자연스럽게 진행</td></tr><tr><td>즉시 월렛 생성</td><td>유지</td><td>Wallet Directory에서 기존 wallet 또는 counterfactual address를 확인하고, 첫 Passkey approval로 초기화</td></tr><tr><td>멀티 디바이스</td><td>유지하되 조건 추가</td><td>새 기기 등록은 기존 기기 approval 또는 recovery proof 필요</td></tr><tr><td>인증 수단 변경 후 지갑 유지</td><td>유지</td><td>wallet owner가 password-derived key에 의존하지 않음</td></tr><tr><td>가스리스 UX</td><td>유지</td><td>Paymaster 유지. 단 Paymaster signer는 owner approval signer와 분리</td></tr><tr><td>자동결제 / 반복 실행</td><td>범위 제한 후 유지</td><td>서버 대리 서명은 제거하고, 사전 승인된 on-chain policy 기반으로 실행</td></tr><tr><td>계정 세션만으로 복구</td><td>포기</td><td>서버 수탁 없이 제공하기 어렵기 때문에 recovery proof 또는 기존 기기 approval 필요</td></tr><tr><td>짧은 PIN만으로 wallet control</td><td>포기</td><td>저엔트로피 입력을 wallet signing material이나 recovery authority로 쓰지 않음</td></tr></tbody></table></div>
+<p>가장 크게 달라지는 부분은 복구와 멀티 디바이스다. 기존처럼 서버가 단독으로 지갑 접근을 복구해주면 UX는 좋지만, 그 구조가 custody risk의 원인이 된다.</p>
+<h3 id="43-blast-radius">4.3 Blast Radius<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#43-blast-radius" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>침해 시나리오</th><th>공격자가 할 수 있는 일</th><th>할 수 없어야 하는 일</th><th>방어 경계</th></tr></thead><tbody><tr><td>WaaS API Facade 탈취</td><td>flow 생성, approval request 위조 시도, 상태 조작 시도</td><td>유효한 사용자 approval proof 생성</td><td>Smart Account가 Passkey proof 직접 검증</td></tr><tr><td>WaaS Flow Backend 탈취</td><td>Action 생성, UserOp 조립, 제출 시도</td><td>사용자 승인 없는 자산 이동</td><td>action-bound proof, nonce, expiry, Smart Account validation</td></tr><tr><td>Wallet Directory 탈취</td><td>tenantUserRef, wallet address, deployment status 유출</td><td>wallet owner 판정, owner 변경, recovery 성공 처리</td><td>Directory는 source of truth가 아님</td></tr><tr><td>Tenant App 악성화</td><td>잘못된 UI 표시, 사용자를 오도하는 preview 시도</td><td>preview와 다른 payload를 조용히 실행</td><td>previewHash, canonical Action binding, 감사 로그</td></tr><tr><td>SDK supply chain 침해</td><td>악성 challenge 표시, approval ceremony 오남용</td><td>Passkey private key export</td><td>WebAuthn key non-exportability, 배포 무결성 관리</td></tr><tr><td>Bundler / Submitter key 탈취</td><td>UserOperation 제출 남용, 가스 비용 유발</td><td>owner approval 없는 자산 이동</td><td>Smart Account validation</td></tr><tr><td>Paymaster signer 탈취</td><td>sponsor 비용 손실, 대납 정책 오남용</td><td>사용자 지갑 서명 권한 획득</td><td>Paymaster signer와 owner approval signer 분리</td></tr><tr><td>User Personal Cloud encrypted backup 탈취</td><td>암호화된 backup 획득</td><td>단독 복구</td><td>high-entropy recovery passphrase, memory-hard KDF, AEAD</td></tr><tr><td>Recovery passphrase 유출</td><td>recovery material 복호화 가능</td><td>즉시 결제 실행 권한 획득</td><td>Recovery proof는 approval method 교체에만 사용</td></tr><tr><td>기존 기기 탈취</td><td>해당 기기에서 approval 시도</td><td>다른 기기나 recovery material까지 장악</td><td>로컬 사용자 검증, device revocation, risk monitoring</td></tr></tbody></table></div>
+<p>기준은 단순하다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="txt" data-theme="github-light github-dark"><code data-language="txt" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>하나의 서버 침해가 wallet execution authority로 번지면 안 된다.</span></span></code></pre></figure>
+<hr/>
+<h2 id="5-recovery-pake-proof-of-non-custody">5. Recovery, PAKE, Proof of Non-Custody<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-recovery-pake-proof-of-non-custody" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="51-recovery-passphrase-정책">5.1 Recovery Passphrase 정책<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#51-recovery-passphrase-정책" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Recovery passphrase는 이 설계에서 유일하게 password-like한 입력이다. 하지만 PAKE 입력도 아니고, 로그인 비밀번호도 아니며, wallet approval도 아니다. 목적은 User Personal Cloud에 암호문으로 저장된 encrypted recovery backup을 사용자 기기에서 복호화하는 것이다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="txt" data-theme="github-light github-dark"><code data-language="txt" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>- 일반 계정 비밀번호, 6자리 PIN, 생년월일, 전화번호 등 저엔트로피 입력 금지</span></span>
+<span data-line><span>- 최소 80-bit 이상 엔트로피 권장</span></span>
+<span data-line><span>- Diceware 7단어 이상 또는 password manager가 생성한 16자 이상 랜덤 문자열 권장</span></span>
+<span data-line><span>- passphrase는 서버에 저장하지 않음</span></span>
+<span data-line><span>- passphrase는 클라이언트 KDF 입력으로만 사용</span></span>
+<span data-line><span>- 백업 암호화는 salt + Argon2id/scrypt 같은 memory-hard KDF + AEAD 사용</span></span>
+<span data-line><span>- passphrase 분실 시 서버 단독 복구는 불가능하다는 UX 안내 필요</span></span></code></pre></figure>
+<p>Recovery Module은 recovery proof를 approval method 재등록 또는 교체에만 사용해야 한다. Recovery proof가 평상시 결제 승인권이 되면 안 된다.</p>
+<h3 id="52-pake-사용-여부">5.2 PAKE 사용 여부<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#52-pake-사용-여부" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>PAKE 자체가 문제라고 보지는 않는다. 문제는 PAKE 출력 또는 password-derived material이 wallet signing material과 연결되는 사용 방식이다.</p>
+<p>이 설계의 목표 구조는 Passkey-first다. PAKE를 wallet approval, account bootstrap, recovery authority의 필수 경로로 사용하지 않는다.</p>
+<p>기존 시스템에 PAKE를 남겨야 한다면 아래 범위로 제한한다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>항목</th><th>허용</th><th>금지</th></tr></thead><tbody><tr><td>Account discovery</td><td>사용자 식별, risk signal, Wallet Directory lookup 보조</td><td>wallet approval 생성</td></tr><tr><td>Session</td><td>Tenant App 또는 API 세션 생성 보조</td><td>owner signature, session grant, recovery proof 파생</td></tr><tr><td>Password reset</td><td>인증 record 교체</td><td>owner 변경, approval method 교체, recovery policy 변경</td></tr><tr><td>Recovery flow 진입</td><td>사용자가 recovery flow를 시작하도록 돕는 보조 인증</td><td>recovery material 복호화 대행, recovery proof 생성</td></tr></tbody></table></div>
+<p>따라서 PAKE를 유지하려면 auth-only layer로 제한해야 한다. PAKE를 wallet control에 연결하면 R-A1, R-A2, R-A4, R-A8을 동시에 만족하기 어렵다.</p>
+<h3 id="53-proof-of-non-custody">5.3 Proof of Non-Custody<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#53-proof-of-non-custody" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>사용자 또는 제3자가 아래 명제를 확인할 수 있어야 한다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="txt" data-theme="github-light github-dark"><code data-language="txt" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>내 키는 내가 통제한다.</span></span></code></pre></figure>
+<p>Passkey private key는 일반적으로 export가 어렵다. 그래서 이 설계에서 Proof of Non-Custody는 key export가 아니라 <strong>독립 서명 시연 + EIP-1271 검증</strong>으로 보여준다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>방식</th><th>설명</th><th>증명되는 것</th></tr></thead><tbody><tr><td>독립 challenge signing</td><td>제3자 verifier가 challenge를 만들고, 사용자가 SDK의 Passkey ceremony로 서명</td><td>사용자가 서버 없이 approval proof를 만들 수 있음</td></tr><tr><td>EIP-1271 검증</td><td>제3자가 Smart Account의 <code>isValidSignature</code>를 호출해 proof 유효성을 확인</td><td>Smart Account가 해당 approval method를 인정함</td></tr><tr><td>Registered public key 조회</td><td>Smart Account 또는 verifier registry에서 등록된 Passkey public key 조회</td><td>서버 DB가 아니라 온체인 검증 기준이 권한의 근거임</td></tr><tr><td>Negative test</td><td>서버 재료만으로 같은 challenge에 대한 valid proof 생성 실패</td><td>서버 재료만으로 wallet approval을 재현할 수 없음</td></tr></tbody></table></div>
+<p>PoC는 <code>poc.ts</code>로 분리한다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Node 18+ 권장</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">npx</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> ts-node</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> --transpile-only</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> --compiler-options</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> '{&quot;module&quot;:&quot;CommonJS&quot;,&quot;target&quot;:&quot;ES2020&quot;}'</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> poc.ts</span></span></code></pre></figure>
+<p>PoC가 증명하는 속성은 아래다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="txt" data-theme="github-light github-dark"><code data-language="txt" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>- R-A1: 서버 재료만으로 사용자 approval proof를 재현할 수 없음</span></span>
+<span data-line><span>- R-A2: proof 없는 UserOperation은 실패</span></span>
+<span data-line><span>- R-A6: Smart Account가 action-bound Passkey proof를 직접 검증</span></span>
+<span data-line><span>- R-A7: Paymaster / 자동결제 UX는 유지하되 권한은 policy로 제한</span></span>
+<span data-line><span>- preview binding, paymaster separation, recovery-passphrase boundary</span></span></code></pre></figure>
+<hr/></article><hr/><div class="page-footer"><div class="giscus" data-repo="KimSeogyu/KimSeogyu.github.io" data-repo-id="R_kgDOVucEjA" data-category="Announcements" data-category-id="DIC_kwDOVucEjM4DLKem" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-input-position="top" data-light-theme="light" data-dark-theme="dark" data-theme-url="https://kimseogyu.github.io/static/giscus" data-lang="ko"></div></div></div><div class="right sidebar"><div class="graph"><h3>그래프 뷰</h3><div class="graph-outer"><div class="graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:1,&quot;scale&quot;:1.1,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.3,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:false,&quot;enableRadial&quot;:false}"></div><button class="global-graph-icon" aria-label="Global Graph"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 55 55" fill="currentColor" xml:space="preserve"><path d="M49,0c-3.309,0-6,2.691-6,6c0,1.035,0.263,2.009,0.726,2.86l-9.829,9.829C32.542,17.634,30.846,17,29,17
+                s-3.542,0.634-4.898,1.688l-7.669-7.669C16.785,10.424,17,9.74,17,9c0-2.206-1.794-4-4-4S9,6.794,9,9s1.794,4,4,4
+                c0.74,0,1.424-0.215,2.019-0.567l7.669,7.669C21.634,21.458,21,23.154,21,25s0.634,3.542,1.688,4.897L10.024,42.562
+                C8.958,41.595,7.549,41,6,41c-3.309,0-6,2.691-6,6s2.691,6,6,6s6-2.691,6-6c0-1.035-0.263-2.009-0.726-2.86l12.829-12.829
+                c1.106,0.86,2.44,1.436,3.898,1.619v10.16c-2.833,0.478-5,2.942-5,5.91c0,3.309,2.691,6,6,6s6-2.691,6-6c0-2.967-2.167-5.431-5-5.91
+                v-10.16c1.458-0.183,2.792-0.759,3.898-1.619l7.669,7.669C41.215,39.576,41,40.26,41,41c0,2.206,1.794,4,4,4s4-1.794,4-4
+                s-1.794-4-4-4c-0.74,0-1.424,0.215-2.019,0.567l-7.669-7.669C36.366,28.542,37,26.846,37,25s-0.634-3.542-1.688-4.897l9.665-9.665
+                C46.042,11.405,47.451,12,49,12c3.309,0,6-2.691,6-6S52.309,0,49,0z M11,9c0-1.103,0.897-2,2-2s2,0.897,2,2s-0.897,2-2,2
+                S11,10.103,11,9z M6,51c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S8.206,51,6,51z M33,49c0,2.206-1.794,4-4,4s-4-1.794-4-4
+                s1.794-4,4-4S33,46.794,33,49z M29,31c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S32.309,31,29,31z M47,41c0,1.103-0.897,2-2,2
+                s-2-0.897-2-2s0.897-2,2-2S47,39.897,47,41z M49,10c-2.206,0-4-1.794-4-4s1.794-4,4-4s4,1.794,4,4S51.206,10,49,10z"></path></svg></button></div><div class="global-graph-outer"><div class="global-graph-container" data-cfg="{&quot;drag&quot;:true,&quot;zoom&quot;:true,&quot;depth&quot;:-1,&quot;scale&quot;:0.9,&quot;repelForce&quot;:0.5,&quot;centerForce&quot;:0.2,&quot;linkDistance&quot;:30,&quot;fontSize&quot;:0.6,&quot;opacityScale&quot;:1,&quot;showTags&quot;:true,&quot;removeTags&quot;:[],&quot;focusOnHover&quot;:true,&quot;enableRadial&quot;:true}"></div></div></div><div class="toc desktop-only"><button type="button" class="toc-header" aria-controls="toc-88" aria-expanded="true"><h3>목차</h3><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="fold"><polyline points="6 9 12 15 18 9"></polyline></svg></button><ul id="list-1" class="toc-content overflow"><li class="depth-0"><a href="#0-결론과-제출물" data-for="0-결론과-제출물">0. 결론과 제출물</a></li><li class="depth-1"><a href="#1-문제-재진술과-설계-원칙" data-for="1-문제-재진술과-설계-원칙">1. 문제 재진술과 설계 원칙</a></li><li class="depth-2"><a href="#11-현재-구조의-custody-문제" data-for="11-현재-구조의-custody-문제">1.1 현재 구조의 custody 문제</a></li><li class="depth-2"><a href="#12-설계-원칙" data-for="12-설계-원칙">1.2 설계 원칙</a></li><li class="depth-2"><a href="#13-권한-의미-분리" data-for="13-권한-의미-분리">1.3 권한 의미 분리</a></li><li class="depth-1"><a href="#2-목표-구조와-컴포넌트-경계" data-for="2-목표-구조와-컴포넌트-경계">2. 목표 구조와 컴포넌트 경계</a></li><li class="depth-2"><a href="#21-컴포넌트-경계" data-for="21-컴포넌트-경계">2.1 컴포넌트 경계</a></li><li class="depth-2"><a href="#22-sdk-flow-runtime--waas-flow-backend" data-for="22-sdk-flow-runtime--waas-flow-backend">2.2 SDK Flow Runtime / WaaS Flow Backend</a></li><li class="depth-2"><a href="#23-app-facing-api" data-for="23-app-facing-api">2.3 App-facing API</a></li><li class="depth-1"><a href="#3-action-실행-포맷-자동결제" data-for="3-action-실행-포맷-자동결제">3. Action, 실행 포맷, 자동결제</a></li><li class="depth-2"><a href="#31-canonical-action" data-for="31-canonical-action">3.1 Canonical Action</a></li><li class="depth-2"><a href="#32-실행-포맷" data-for="32-실행-포맷">3.2 실행 포맷</a></li><li class="depth-2"><a href="#33-자동결제--반복-실행-원칙" data-for="33-자동결제--반복-실행-원칙">3.3 자동결제 / 반복 실행 원칙</a></li><li class="depth-2"><a href="#34-구현-불변조건" data-for="34-구현-불변조건">3.4 구현 불변조건</a></li><li class="depth-1"><a href="#4-요구사항-ux-blast-radius" data-for="4-요구사항-ux-blast-radius">4. 요구사항, UX, Blast Radius</a></li><li class="depth-2"><a href="#41-track-a-요구사항-매핑" data-for="41-track-a-요구사항-매핑">4.1 Track A 요구사항 매핑</a></li><li class="depth-2"><a href="#42-ux-유지--변경--포기" data-for="42-ux-유지--변경--포기">4.2 UX 유지 / 변경 / 포기</a></li><li class="depth-2"><a href="#43-blast-radius" data-for="43-blast-radius">4.3 Blast Radius</a></li><li class="depth-1"><a href="#5-recovery-pake-proof-of-non-custody" data-for="5-recovery-pake-proof-of-non-custody">5. Recovery, PAKE, Proof of Non-Custody</a></li><li class="depth-2"><a href="#51-recovery-passphrase-정책" data-for="51-recovery-passphrase-정책">5.1 Recovery Passphrase 정책</a></li><li class="depth-2"><a href="#52-pake-사용-여부" data-for="52-pake-사용-여부">5.2 PAKE 사용 여부</a></li><li class="depth-2"><a href="#53-proof-of-non-custody" data-for="53-proof-of-non-custody">5.3 Proof of Non-Custody</a></li><li class="overflow-end"></li></ul></div><div class="backlinks"><h3>백링크</h3><ul id="list-2" class="overflow"><li><a href="../blockchain/waas-non-custodial-design-2" class="internal">WaaS Non-Custodial 개선 설계 (2)</a></li><li class="overflow-end"></li></ul></div><div class="recent-notes"><h3>최근 게시글</h3><ul class="recent-ul"><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../backend/type-and-state-design" class="internal">타입과 상태 설계</a></h3></div><p class="meta"><time datetime="2026-11-15T00:00:00.000Z">2026년 11월 15일</time></p><ul class="tags"><li><a class="internal tag-link" href="../tags/rust">rust</a></li><li><a class="internal tag-link" href="../tags/type-system">type-system</a></li><li><a class="internal tag-link" href="../tags/api-design">api-design</a></li><li><a class="internal tag-link" href="../tags/formal-methods">formal-methods</a></li><li><a class="internal tag-link" href="../tags/tla-plus">tla-plus</a></li><li><a class="internal tag-link" href="../tags/state-machine">state-machine</a></li><li><a class="internal tag-link" href="../tags/patterns">patterns</a></li></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../data-engineering/external-data-point-in-time" class="internal">외부 데이터 수집과 시점 정합성</a></h3></div><p class="meta"><time datetime="2026-11-15T00:00:00.000Z">2026년 11월 15일</time></p><ul class="tags"><li><a class="internal tag-link" href="../tags/research">research</a></li><li><a class="internal tag-link" href="../tags/point-in-time">point-in-time</a></li><li><a class="internal tag-link" href="../tags/data-quality">data-quality</a></li><li><a class="internal tag-link" href="../tags/backfill">backfill</a></li><li><a class="internal tag-link" href="../tags/data-engineering">data-engineering</a></li><li><a class="internal tag-link" href="../tags/timestamp">timestamp</a></li><li><a class="internal tag-link" href="../tags/missing-data">missing-data</a></li><li><a class="internal tag-link" href="../tags/idempotency">idempotency</a></li><li><a class="internal tag-link" href="../tags/ingestion">ingestion</a></li></ul></div></li><li class="recent-li"><div class="section"><div class="desc"><h3><a href="../quant/backtest-research-hygiene" class="internal">백테스트 연구 위생</a></h3></div><p class="meta"><time datetime="2026-11-15T00:00:00.000Z">2026년 11월 15일</time></p><ul class="tags"><li><a class="internal tag-link" href="../tags/quant">quant</a></li><li><a class="internal tag-link" href="../tags/backtest">backtest</a></li><li><a class="internal tag-link" href="../tags/reporting">reporting</a></li><li><a class="internal tag-link" href="../tags/multiple-testing">multiple-testing</a></li><li><a class="internal tag-link" href="../tags/deflated-sharpe">deflated-sharpe</a></li><li><a class="internal tag-link" href="../tags/research-process">research-process</a></li><li><a class="internal tag-link" href="../tags/walk-forward">walk-forward</a></li><li><a class="internal tag-link" href="../tags/model-selection">model-selection</a></li><li><a class="internal tag-link" href="../tags/trading-costs">trading-costs</a></li><li><a class="internal tag-link" href="../tags/turnover">turnover</a></li><li><a class="internal tag-link" href="../tags/crypto">crypto</a></li><li><a class="internal tag-link" href="../tags/rust">rust</a></li><li><a class="internal tag-link" href="../tags/type-system">type-system</a></li></ul></div></li></ul></div></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v4.5.2</a> © 2026</p><ul><li><a href="https://github.com/KimSeogyu">GitHub</a></li></ul></footer></div></div></body><script type="application/javascript">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module">function f(i,e){if(!i)return;function r(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function t(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}i?.addEventListener("click",r),window.addCleanup(()=>i?.removeEventListener("click",r)),document.addEventListener("keydown",t),window.addCleanup(()=>document.removeEventListener("keydown",t))}function y(i){for(;i.firstChild;)i.removeChild(i.firstChild)}var h=class{constructor(e,r){this.container=e;this.content=r;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),r=this.onMouseMove.bind(this),t=this.onMouseUp.bind(this),o=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",r),document.addEventListener("mouseup",t),window.addEventListener("resize",o),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",r),()=>document.removeEventListener("mouseup",t),()=>window.removeEventListener("resize",o))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let r=this.createButton("+",()=>this.zoom(.1)),t=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(t),e.appendChild(o),e.appendChild(r),this.container.appendChild(e)}createButton(e,r){let t=document.createElement("button");return t.textContent=e,t.className="mermaid-control-button",t.addEventListener("click",r),window.addCleanup(()=>t.removeEventListener("click",r)),t}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}zoom(e){let r=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),t=this.content.getBoundingClientRect(),o=t.width/2,n=t.height/2,c=r-this.scale;this.currentPan.x-=o*c,this.currentPan.y-=n*c,this.scale=r,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){this.scale=1;let e=this.content.querySelector("svg");this.currentPan={x:e.getBoundingClientRect().width/2,y:e.getBoundingClientRect().height/2},this.updateTransform()}},C=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],E;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;E||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let r=E.default,t=new WeakMap;for(let n of e)t.set(n,n.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let a=t.get(s);a&&(s.innerHTML=a)}let n=C.reduce((s,a)=>(s[a]=window.getComputedStyle(document.documentElement).getPropertyValue(a),s),{}),c=document.documentElement.getAttribute("saved-theme")==="dark";r.initialize({startOnLoad:!1,securityLevel:"loose",theme:c?"dark":"base",themeVariables:{fontFamily:n["--codeFont"],primaryColor:n["--light"],primaryTextColor:n["--darkgray"],primaryBorderColor:n["--tertiary"],lineColor:n["--darkgray"],secondaryColor:n["--secondary"],tertiaryColor:n["--tertiary"],clusterBkg:n["--light"],edgeLabelBackground:n["--highlight"]}}),await r.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let n=0;n<e.length;n++){let v=function(){let g=l.querySelector("#mermaid-space"),m=l.querySelector(".mermaid-content");if(!m)return;y(m);let w=c.querySelector("svg").cloneNode(!0);m.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new h(g,m)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},c=e[n],s=c.parentElement,a=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(a),L=a.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),f(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript"></script><script src="../postscript.js" type="module"></script></html>
