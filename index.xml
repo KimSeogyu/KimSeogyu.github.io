@@ -9,19 +9,19 @@
     <title>LLM 지식베이스는 왜 작아야 하는가: Recall-First Wiki 설계</title>
     <link>https://kimseogyu.github.io/ko/blog/ai-ml/llm-wiki-recall-first-design</link>
     <guid>https://kimseogyu.github.io/ko/blog/ai-ml/llm-wiki-recall-first-design</guid>
-    <description><![CDATA[ LLM 지식베이스는 왜 작아야 하는가: Recall-First Wiki 설계 LLM용 지식베이스를 만들 때 흔히 두 방향으로 갑니다. 첫 번째는 모든 문서를 chunk로 나눠 벡터 데이터베이스에 넣는 것입니다. ]]></description>
+    <description><![CDATA[ LLM용 지식베이스를 만들 때 흔히 두 방향으로 갑니다. 첫 번째는 모든 문서를 chunk로 나눠 벡터 데이터베이스에 넣는 것입니다. 검색은 가능하지만 오래된 자료와 최신 자료가 함께 나오고, 같은 개념의 설명이 여러 문서에 중복됩니다. ]]></description>
     <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>DOCX를 Markdown으로 바꾸는 일은 왜 단순 XML 변환이 아닌가</title>
     <link>https://kimseogyu.github.io/ko/blog/backend/rust/undocx-document-conversion-architecture</link>
     <guid>https://kimseogyu.github.io/ko/blog/backend/rust/undocx-document-conversion-architecture</guid>
-    <description><![CDATA[ DOCX를 Markdown으로 바꾸는 일은 왜 단순 XML 변환이 아닌가 DOCX 파일을 열어 문단 텍스트를 순서대로 꺼낸 뒤 Markdown 기호를 붙이면 변환기가 완성될 것처럼 보입니다. 실제 문서를 다루기 시작하면 이 접근은 빠르게 한계에 도달합니다. ]]></description>
+    <description><![CDATA[ DOCX 파일을 열어 문단 텍스트를 순서대로 꺼낸 뒤 Markdown 기호를 붙이면 변환기가 완성될 것처럼 보입니다. 실제 문서를 다루기 시작하면 이 접근은 빠르게 한계에 도달합니다. ]]></description>
     <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>Markdown을 SSOT로 유지하는 정적 지식 출판 파이프라인</title>
     <link>https://kimseogyu.github.io/ko/blog/backend/sayu-day-static-publishing-pipeline</link>
     <guid>https://kimseogyu.github.io/ko/blog/backend/sayu-day-static-publishing-pipeline</guid>
-    <description><![CDATA[ Markdown을 SSOT로 유지하는 정적 지식 출판 파이프라인 개인 기술 블로그는 처음에는 Markdown 몇 개와 정적 사이트 생성기로 충분합니다. 하지만 글이 쌓이면 다음 요구가 동시에 생깁니다. Obsidian에서 편하게 작성하고 싶다. ]]></description>
+    <description><![CDATA[ 개인 기술 블로그는 처음에는 Markdown 몇 개와 정적 사이트 생성기로 충분합니다. 하지만 글이 쌓이면 다음 요구가 동시에 생깁니다. Obsidian에서 편하게 작성하고 싶다. 공개 여부를 원고마다 안전하게 통제하고 싶다. ]]></description>
     <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>AA 지갑 설계 노트: Solidity 패턴과 가스 최적화</title>
@@ -63,7 +63,7 @@
     <title>지금까지 써본 키보드 중 가장 좋았던 선택, 독거미 저소음 바다축</title>
     <link>https://kimseogyu.github.io/ko/blog/misc/dokgeomi-silent-bada-switch-review</link>
     <guid>https://kimseogyu.github.io/ko/blog/misc/dokgeomi-silent-bada-switch-review</guid>
-    <description><![CDATA[ 지금까지 써본 키보드 중 가장 좋았던 선택, 독거미 저소음 바다축 지금까지 레오폴드, 리얼포스, 키크론, 로지텍 MX Keys, 한성 무접점, 레이저 기계식, 독거미 경해축, SPM 목새축 등 다양한 키보드를 사용해봤다. ]]></description>
+    <description><![CDATA[ 지금까지 레오폴드, 리얼포스, 키크론, 로지텍 MX Keys, 한성 무접점, 레이저 기계식, 독거미 경해축, SPM 목새축 등 다양한 키보드를 사용해봤다. 그중에서도 타건감, 정숙함, 편안함을 동시에 만족시킨 제품은 독거미 저소음 바다축이 유일했다. ]]></description>
     <pubDate>Sat, 21 Feb 2026 00:00:00 GMT</pubDate>
   </item>
     </channel>
