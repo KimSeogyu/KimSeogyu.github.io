@@ -5,8 +5,8 @@
   "sha256": "d84aff65cf9451e6887113fb8413f15ec23016677d72b54b7ffa9ffbcc789c13",
   "counts": {
     "matched": 0,
-    "missing": 35,
-    "redirected": 220
+    "missing": 0,
+    "redirected": 255
   },
   "routes": [
     {
@@ -576,7 +576,8 @@
     },
     {
       "url": "/ko/blog/series/blockchain-indexer",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/blockchain-indexer"
     },
     {
       "url": "/ko/blog/series/enterprise-go",
@@ -601,7 +602,7 @@
     {
       "url": "/ko/blog/tags",
       "status": "redirected",
-      "target": "/tags"
+      "target": "/tags/"
     },
     {
       "url": "/ko/blog/tags/AI/ML",
@@ -645,7 +646,8 @@
     },
     {
       "url": "/ko/blog/tags/Audit",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/domain-modeling"
     },
     {
       "url": "/ko/blog/tags/Autoscaling",
@@ -659,11 +661,13 @@
     },
     {
       "url": "/ko/blog/tags/Backend_DevOps",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/domain-modeling"
     },
     {
       "url": "/ko/blog/tags/Backend_Websocket",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/traffic-scaling-patterns"
     },
     {
       "url": "/ko/blog/tags/Blockchain",
@@ -682,7 +686,8 @@
     },
     {
       "url": "/ko/blog/tags/Cancellation",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go"
     },
     {
       "url": "/ko/blog/tags/Concurrency",
@@ -746,7 +751,8 @@
     },
     {
       "url": "/ko/blog/tags/Diesel",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/blockchain-indexer"
     },
     {
       "url": "/ko/blog/tags/Distributed Systems",
@@ -760,11 +766,13 @@
     },
     {
       "url": "/ko/blog/tags/ETL",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/blockchain-indexer"
     },
     {
       "url": "/ko/blog/tags/Echo",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go"
     },
     {
       "url": "/ko/blog/tags/Enterprise",
@@ -798,7 +806,8 @@
     },
     {
       "url": "/ko/blog/tags/GORM",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go"
     },
     {
       "url": "/ko/blog/tags/GPU",
@@ -852,7 +861,8 @@
     },
     {
       "url": "/ko/blog/tags/Hardware",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/ai-ml/llm-runtime-stack"
     },
     {
       "url": "/ko/blog/tags/Helm",
@@ -866,7 +876,8 @@
     },
     {
       "url": "/ko/blog/tags/Idempotency",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/tags/"
     },
     {
       "url": "/ko/blog/tags/Index",
@@ -875,7 +886,8 @@
     },
     {
       "url": "/ko/blog/tags/Infrastructure",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/tags/"
     },
     {
       "url": "/ko/blog/tags/Interface",
@@ -894,7 +906,8 @@
     },
     {
       "url": "/ko/blog/tags/Kafka",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/redis-patterns"
     },
     {
       "url": "/ko/blog/tags/Keyboard",
@@ -933,11 +946,13 @@
     },
     {
       "url": "/ko/blog/tags/Local LLM",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/ai-ml/llm-runtime-stack"
     },
     {
       "url": "/ko/blog/tags/Mac Studio",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/ai-ml/llm-runtime-stack"
     },
     {
       "url": "/ko/blog/tags/Markdown",
@@ -946,7 +961,8 @@
     },
     {
       "url": "/ko/blog/tags/MerkleTrie",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/blockchain-fundamentals"
     },
     {
       "url": "/ko/blog/tags/MongoDB",
@@ -975,7 +991,8 @@
     },
     {
       "url": "/ko/blog/tags/Node.js",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/connection-resource-limits"
     },
     {
       "url": "/ko/blog/tags/Observability",
@@ -989,11 +1006,13 @@
     },
     {
       "url": "/ko/blog/tags/On-Premise",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/ai-ml/llm-runtime-stack"
     },
     {
       "url": "/ko/blog/tags/OpenAPI",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/grpc-api-contracts"
     },
     {
       "url": "/ko/blog/tags/Oracle",
@@ -1047,11 +1066,13 @@
     },
     {
       "url": "/ko/blog/tags/RTX 5090",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/ai-ml/llm-runtime-stack"
     },
     {
       "url": "/ko/blog/tags/RTX 6000 Ada",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/ai-ml/llm-runtime-stack"
     },
     {
       "url": "/ko/blog/tags/Redis",
@@ -1060,7 +1081,8 @@
     },
     {
       "url": "/ko/blog/tags/Repository",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go"
     },
     {
       "url": "/ko/blog/tags/Research",
@@ -1084,7 +1106,8 @@
     },
     {
       "url": "/ko/blog/tags/SDK",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/blockchain-indexer"
     },
     {
       "url": "/ko/blog/tags/SSOT",
@@ -1113,7 +1136,8 @@
     },
     {
       "url": "/ko/blog/tags/Silent Switch",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/misc/keyboard-setup"
     },
     {
       "url": "/ko/blog/tags/Smart Contract",
@@ -1157,11 +1181,13 @@
     },
     {
       "url": "/ko/blog/tags/Timeout",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go"
     },
     {
       "url": "/ko/blog/tags/Tooling",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/enterprise-go"
     },
     {
       "url": "/ko/blog/tags/Transaction",
@@ -1175,7 +1201,8 @@
     },
     {
       "url": "/ko/blog/tags/Typing",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/misc/keyboard-setup"
     },
     {
       "url": "/ko/blog/tags/Vector Search",
@@ -1184,11 +1211,13 @@
     },
     {
       "url": "/ko/blog/tags/Visualization",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/frontend/web-maps"
     },
     {
       "url": "/ko/blog/tags/WebSocket",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/traffic-scaling-patterns"
     },
     {
       "url": "/ko/blog/tags/Webhook",
@@ -1197,15 +1226,18 @@
     },
     {
       "url": "/ko/blog/tags/WiredTiger",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/database/mongodb-operations"
     },
     {
       "url": "/ko/blog/tags/async",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/blockchain-indexer"
     },
     {
       "url": "/ko/blog/tags/buf",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/grpc-api-contracts"
     },
     {
       "url": "/ko/blog/tags/finance",
@@ -1219,7 +1251,8 @@
     },
     {
       "url": "/ko/blog/tags/indexer",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/tags/Indexer"
     },
     {
       "url": "/ko/blog/tags/portfolio",
@@ -1233,7 +1266,8 @@
     },
     {
       "url": "/ko/blog/tags/queue",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/backend/traffic-scaling-patterns"
     },
     {
       "url": "/ko/blog/tags/regime",
@@ -1242,7 +1276,8 @@
     },
     {
       "url": "/ko/blog/tags/schema-design",
-      "status": "missing"
+      "status": "redirected",
+      "target": "/blockchain/blockchain-indexer"
     },
     {
       "url": "/ko/blog/tags/trading",
