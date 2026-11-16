@@ -6,65 +6,65 @@
       <description>최근 10 건 on Seogyu Kim</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>타입과 상태 설계</title>
-    <link>https://kimseogyu.github.io/backend/type-and-state-design</link>
-    <guid>https://kimseogyu.github.io/backend/type-and-state-design</guid>
-    <description><![CDATA[ 잘못된 연산은 검사기보다 API에서 없애고, 한 변수로 투영한 전이 목록은 가드를 보존하지 않으므로 실행 통제의 근거로 쓰지 않는다. ]]></description>
-    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    <title>LLM 지식베이스와 메모리</title>
+    <link>https://kimseogyu.github.io/ai-ml/llm-memory</link>
+    <guid>https://kimseogyu.github.io/ai-ml/llm-memory</guid>
+    <description><![CDATA[ LLM이 오래 쓰는 지식베이스는 정교한 구조보다 싸게 기록하고 정확히 회수하는 것이 먼저이며, 실제로 막히는 지점은 검색보다 기록(컴파일) 단계였다. ]]></description>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>외부 데이터 수집과 시점 정합성</title>
-    <link>https://kimseogyu.github.io/data-engineering/external-data-point-in-time</link>
-    <guid>https://kimseogyu.github.io/data-engineering/external-data-point-in-time</guid>
-    <description><![CDATA[ 지금 받은 과거 데이터는 당시 관측 가능했던 값이 아니고, 사건·이용 가능·수신 시각과 빈 값은 서로 다른 의미로 남겨야 하며, 같은 키의 다른 값은 덮어쓰지 않고 충돌로 기록한다. ]]></description>
-    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    <title>로컬 LLM과 에이전트 프레임워크</title>
+    <link>https://kimseogyu.github.io/ai-ml/llm-runtime-stack</link>
+    <guid>https://kimseogyu.github.io/ai-ml/llm-runtime-stack</guid>
+    <description><![CDATA[ 로컬 LLM 장비는 목표 모델이 메모리에 안정적으로 올라가는지로 고르고, 에이전트 흐름은 호출 계층과 상태 제어 계층을 나눠 짠다. ]]></description>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>백테스트 연구 위생</title>
-    <link>https://kimseogyu.github.io/quant/backtest-research-hygiene</link>
-    <guid>https://kimseogyu.github.io/quant/backtest-research-hygiene</guid>
-    <description><![CDATA[ 백테스트 숫자는 분모와 고정 조건과 함께 적고, 모든 시도를 시행으로 세며, 모두 지면 무포지션을 고르고, 작은 엣지는 회전율 비용에 잠식되며, 룩어헤드는 타입으로 막는다. ]]></description>
-    <pubDate>Sun, 15 Nov 2026 00:00:00 GMT</pubDate>
+    <title>검색 랭킹과 하이브리드 검색</title>
+    <link>https://kimseogyu.github.io/ai-ml/search-ranking</link>
+    <guid>https://kimseogyu.github.io/ai-ml/search-ranking</guid>
+    <description><![CDATA[ 키워드 랭킹(BM25)과 벡터 검색은 서로 다른 곳에서 실패하므로 함께 돌리고, 두 결과는 점수가 아니라 순위로 합친다. ]]></description>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>LLM 지식베이스는 왜 작아야 하는가: Recall-First Wiki 설계</title>
-    <link>https://kimseogyu.github.io/ai-ml/llm-wiki-recall-first-design</link>
-    <guid>https://kimseogyu.github.io/ai-ml/llm-wiki-recall-first-design</guid>
-    <description><![CDATA[ RAG만으로는 부족하고 복잡한 거버넌스도 해답이 아니었습니다. 실제 질의 평가를 거쳐 만든 recall-first LLM Wiki의 설계 원칙을 정리합니다. ]]></description>
-    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+    <title>통합 테스트와 E2E 테스트</title>
+    <link>https://kimseogyu.github.io/backend/backend-testing-strategy</link>
+    <guid>https://kimseogyu.github.io/backend/backend-testing-strategy</guid>
+    <description><![CDATA[ mock으로 잡히지 않는 장애를 배포 전에 찾기 위해 실제 의존성을 띄운 통합 테스트와 환경별로 계층을 나눈 E2E 테스트를 함께 둔다. ]]></description>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>Markdown을 SSOT로 유지하는 정적 지식 출판 파이프라인</title>
-    <link>https://kimseogyu.github.io/backend/sayu-day-static-publishing-pipeline</link>
-    <guid>https://kimseogyu.github.io/backend/sayu-day-static-publishing-pipeline</guid>
-    <description><![CDATA[ Obsidian 원고를 복제하지 않고 Markdown 정본에서 검증, 피드, 검색 데이터, prerender 결과를 만드는 이 위키의 출판 구조를 설명합니다. ]]></description>
-    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+    <title>빌드와 릴리스 운영</title>
+    <link>https://kimseogyu.github.io/backend/build-and-release-practices</link>
+    <guid>https://kimseogyu.github.io/backend/build-and-release-practices</guid>
+    <description><![CDATA[ 작은 변경을 자주 통합하고, 이미지와 설정을 매번 같은 방식으로 만들어 배포 결과를 예측 가능하게 하는 운영 규칙이다. ]]></description>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>DOCX를 Markdown으로 바꾸는 일은 왜 단순 XML 변환이 아닌가</title>
-    <link>https://kimseogyu.github.io/backend/undocx-document-conversion-architecture</link>
-    <guid>https://kimseogyu.github.io/backend/undocx-document-conversion-architecture</guid>
-    <description><![CDATA[ DOCX의 구조와 상태를 Document AST로 분리하고 Markdown으로 렌더링하는 undocx의 설계와 테스트 전략을 설명합니다. ]]></description>
-    <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
+    <title>연결 자원 고갈</title>
+    <link>https://kimseogyu.github.io/backend/connection-resource-limits</link>
+    <guid>https://kimseogyu.github.io/backend/connection-resource-limits</guid>
+    <description><![CDATA[ 포트나 파일 디스크립터가 바닥나 연결이 실패하는 문제로, 커널 한도를 올리기 전에 애플리케이션의 연결 관리부터 고쳐야 재발하지 않는다. ]]></description>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>Architecture Evaluation — 2026-07-15</title>
-    <link>https://kimseogyu.github.io/ai-ml/personal-llm-memory-architecture-evaluation-2026-07-15</link>
-    <guid>https://kimseogyu.github.io/ai-ml/personal-llm-memory-architecture-evaluation-2026-07-15</guid>
-    <description><![CDATA[ Personal LLM Memory의 K × Q 결합 평가 결과. 배포 가능한 승자는 없고, K3 × Q2를 다음 아키텍처 목표로 둡니다. ]]></description>
-    <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
+    <title>도메인 모델링과 상태 설계</title>
+    <link>https://kimseogyu.github.io/backend/domain-modeling</link>
+    <guid>https://kimseogyu.github.io/backend/domain-modeling</guid>
+    <description><![CDATA[ 비즈니스 규칙이 깨지지 않도록 상태를 바꾸는 경로를 좁히는 설계로, 잘못된 연산은 검사하기보다 아예 표현할 수 없게 만든다. ]]></description>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>Personal LLM Memory Lab</title>
-    <link>https://kimseogyu.github.io/ai-ml/personal-llm-memory-lab</link>
-    <guid>https://kimseogyu.github.io/ai-ml/personal-llm-memory-lab</guid>
-    <description><![CDATA[ 2026-07-15 기준 Personal LLM Memory 실험의 결정 스냅샷과 하위 보고서 목록입니다. ]]></description>
-    <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
+    <title>Enterprise Go</title>
+    <link>https://kimseogyu.github.io/backend/enterprise-go</link>
+    <guid>https://kimseogyu.github.io/backend/enterprise-go</guid>
+    <description><![CDATA[ 운영 가능한 Go 서비스를 만드는 구조, 서버, 동시성, DB, 외부 통신, 테스트, 관측성, 빌드 표준을 묶은 실무 기준이다. ]]></description>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>Next Goal Research — Typed Compiler + Persistent Index — 2026-07-15</title>
-    <link>https://kimseogyu.github.io/ai-ml/personal-memory-next-goal-2026-07-15</link>
-    <guid>https://kimseogyu.github.io/ai-ml/personal-memory-next-goal-2026-07-15</guid>
-    <description><![CDATA[ 다음 Personal LLM Memory Goal을 단계적으로 정합니다. Phase A는 typed compiler, Phase B는 persistent index입니다. ]]></description>
-    <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
+    <title>GitLab CI/CD</title>
+    <link>https://kimseogyu.github.io/backend/gitlab-ci</link>
+    <guid>https://kimseogyu.github.io/backend/gitlab-ci</guid>
+    <description><![CDATA[ GitLab CI/CD는 저장소의 .gitlab-ci.yml에 Stage와 Job을 정의하고 Runner가 실행하는 GitLab 내장 파이프라인이다. ]]></description>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>AA 지갑 설계 노트: Solidity 패턴과 가스 최적화</title>
-    <link>https://kimseogyu.github.io/blockchain/aa-jigabeul-seolgyehamyeo-baeun-solidity-paeteongwa-gaseu-coejeoghwa</link>
-    <guid>https://kimseogyu.github.io/blockchain/aa-jigabeul-seolgyehamyeo-baeun-solidity-paeteongwa-gaseu-coejeoghwa</guid>
-    <description><![CDATA[ Passkey 기반 AA 지갑 설계를 기준으로 Solidity 프록시, 팩토리, 권한 경계, 자동결제 정책, ERC-4337 검증 경로, 가스 최적화를 정리합니다. ]]></description>
-    <pubDate>Wed, 13 May 2026 00:00:00 GMT</pubDate>
+    <title>GitOps</title>
+    <link>https://kimseogyu.github.io/backend/gitops</link>
+    <guid>https://kimseogyu.github.io/backend/gitops</guid>
+    <description><![CDATA[ GitOps는 Git을 유일한 원본으로 두고 클러스터 안의 에이전트가 그 상태를 끌어와 계속 맞추는 배포 방식이다. ]]></description>
+    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
   </item>
     </channel>
   </rss>
