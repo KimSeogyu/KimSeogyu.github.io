@@ -5,12 +5,6 @@
     <loc>https://kimseogyu.github.io/ai-ml/faiss-wa-opensearch-begteo-geomsaeg-bigyo</loc>
     <lastmod>2025-12-31T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/ai-ml/gpu-serving-comparison-2026</loc>
-    <lastmod>2026-01-12T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/ai-ml/langchain-langgraph-practical-guide</loc>
-    <lastmod>2026-01-02T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/ai-ml/llm-memory</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
@@ -23,9 +17,6 @@
     <loc>https://kimseogyu.github.io/ai-ml/personal-llm-memory-architecture-evaluation-2026-07-15</loc>
     <lastmod>2026-07-15T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/ai-ml/personal-llm-memory-lab</loc>
-    <lastmod>2026-07-15T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/ai-ml/personal-memory-next-goal-2026-07-15</loc>
     <lastmod>2026-07-15T00:00:00.000Z</lastmod>
   </url><url>
@@ -35,14 +26,8 @@
     <loc>https://kimseogyu.github.io/ai-ml/search-ranking</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/backend/append-only-versioning</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/backend/backend-testing-strategy</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/buf-protobuf-management</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/backend/build-and-release-practices</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
@@ -50,43 +35,16 @@
     <loc>https://kimseogyu.github.io/backend/connection-resource-limits</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/backend/dekoreiteo-decorator</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/docker-multistage-build-optimization</loc>
-    <lastmod>2026-01-02T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/backend/domain-modeling</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/backend/eaddrnotavail</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/enterprise-go-1-project-structure</loc>
-    <lastmod>2026-01-01T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/enterprise-go-2-http-server</loc>
-    <lastmod>2026-01-01T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/enterprise-go-3-context</loc>
-    <lastmod>2026-01-01T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/backend/enterprise-go-4-goroutine-channel</loc>
-    <lastmod>2026-01-01T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/enterprise-go-5-database</loc>
     <lastmod>2026-01-01T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/backend/enterprise-go-6-resilient-communication</loc>
     <lastmod>2026-01-01T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/backend/enterprise-go-7-testing</loc>
-    <lastmod>2026-01-01T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/backend/enterprise-go-8-observability</loc>
-    <lastmod>2026-01-01T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/enterprise-go-9-makefile</loc>
     <lastmod>2026-01-01T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/backend/enterprise-go</loc>
@@ -95,16 +53,7 @@
     <loc>https://kimseogyu.github.io/backend/error-handling-strategy</loc>
     <lastmod>2026-01-02T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/backend/functional-options-pattern</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/gaece-jihyang-peurogeuraeming-object-oriented-programming</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/backend/gc-tuning-experience</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/ginkgo-bdd-testing</loc>
     <lastmod>2025-12-30T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/backend/gitlab-ci-01-fundamentals</loc>
@@ -158,12 +107,6 @@
     <loc>https://kimseogyu.github.io/backend/grpc-gateway-dual-protocol</loc>
     <lastmod>2025-12-30T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/backend/helm-environment-management</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/hwagjang-ganeunghan-silsigan-websocket-seobeo-akitegceo-seolgye</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/backend/interface-design-principles</loc>
     <lastmod>2026-01-02T00:00:00.000Z</lastmod>
   </url><url>
@@ -188,12 +131,6 @@
     <loc>https://kimseogyu.github.io/backend/kubernetes</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/backend/linux-ulimit-guide</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/locust-e2e-testing</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/backend/markdown-pipelines</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
@@ -203,20 +140,8 @@
     <loc>https://kimseogyu.github.io/backend/sayu-day-static-publishing-pipeline</loc>
     <lastmod>2026-07-24T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/backend/seobiseu-gyumoe-ddareun-seukeilring-jeonryag</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/seupaikeu-teuraepig-daeeung-jeonryag</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/backend/traffic-scaling-patterns</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/trunk-based-development</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/backend/type-and-state-design</loc>
-    <lastmod>2026-11-15T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/backend/undocx-document-conversion-architecture</loc>
     <lastmod>2026-07-24T00:00:00.000Z</lastmod>
@@ -227,23 +152,11 @@
     <loc>https://kimseogyu.github.io/blockchain/aa-jigabeul-seolgyehamyeo-baeun-solidity-paeteongwa-gaseu-coejeoghwa</loc>
     <lastmod>2026-05-13T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/aptos-move-structure</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/blockchain/aptos-move</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/beulrogceinyi-ihae</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/blockchain/bitcoin-protocol</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/bitcoin-script</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/biteukoin-nftwa-brc-20-ft</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/blockchain/blockchain-fundamentals</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
@@ -251,68 +164,14 @@
     <loc>https://kimseogyu.github.io/blockchain/blockchain-indexer</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/celestia-deiteo-gayongseong-saempeulring-das-bunseog</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/celestia-node-file-paekiji-bunseog</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/celestiaga-teuraenjaegsyeon-baeyeoleul-odsro-byeonhwanhaneun-bangbeob</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/celestiayi-deiteo-gayongseong-jeungmyeong-data-availability-proof-mekeonijeum</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/celestiayi-eds-extended-data-square</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/dansun-haesi-geomjeung-yi-hangyewa-deiteo-gayongseong-munje</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/blockchain/data-availability</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/blockchain/frost-musig2-threshold-ecdsa-caiwa-raibeureori-seontaeg</loc>
     <lastmod>2026-05-13T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/hd-hierachy-deterministic-wallet</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/how-base-gas-works</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/blockchain/hyperliquid-core-execution-appchain</loc>
     <lastmod>2026-05-06T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/indexer-01-introduction</loc>
-    <lastmod>2026-01-05T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/indexer-02-architecture</loc>
-    <lastmod>2026-01-05T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/indexer-03-database-design</loc>
-    <lastmod>2026-01-05T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/indexer-04-rust-sdk</loc>
-    <lastmod>2026-01-05T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/indexer-05-diesel-orm</loc>
-    <lastmod>2026-01-05T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/indexer-06-idempotency</loc>
-    <lastmod>2026-01-05T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/interact-with-the-move-vm</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/istanbul-byzantine-fault</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/merkle-trie-integrity</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/move-on-aptos</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/blockchain/non-custodial-wallet-ux-aa-passkey</loc>
     <lastmod>2026-05-05T00:00:00.000Z</lastmod>
@@ -326,9 +185,6 @@
     <loc>https://kimseogyu.github.io/blockchain/oracle-push-pull-risk-model</loc>
     <lastmod>2026-05-07T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/blockchain/upgrade-move-code</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/blockchain/waas-non-custodial-design-1</loc>
     <lastmod>2026-05-08T00:00:00.000Z</lastmod>
   </url><url>
@@ -338,14 +194,8 @@
     <loc>https://kimseogyu.github.io/blockchain/wallet-key-management</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/data-engineering/external-data-point-in-time</loc>
-    <lastmod>2026-11-15T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/data-engineering/point-in-time-data</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/database/acid</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/database/mongodb-operations</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
@@ -359,47 +209,14 @@
     <loc>https://kimseogyu.github.io/database/postgresql-performance</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/database/postgresql-query-tuning-guide</loc>
-    <lastmod>2026-01-02T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/database/redis-giban-bunsan-rag-gaideu</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/database/redis-patterns</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/database/sharding-guide</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/database/streams-audit-pipeline</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/database/transactions-and-isolation</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/database/upsert-vs-unique-key-constraint</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/database/which-is-best-isolation-level-for-a-common-situation</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/database/wiredtiger-storage-engine</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/distributed-systems/ceph-erasure-coding-deiteo-jeojang-heureum</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/distributed-systems/ceph-erasure-coding-deiteo-johoe-heureum</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/distributed-systems/ceph-erasure-coding-metadeiteo-gwanri</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/distributed-systems/ceph-storage</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/distributed-systems/crush-controlled-replication-under-scalable-hashing</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/distributed-systems/erasure-coding</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
@@ -407,29 +224,11 @@
     <loc>https://kimseogyu.github.io/distributed-systems/minio-storage</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/distributed-systems/minioyi-hilring-healing-mekeonijeum</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/distributed-systems/minioyi-ireijeo-koding-guhyeon</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/distributed-systems/minioyi-sonsang-gamji-algorijeum</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/distributed-systems/rideu-solromon-kodeuyi-suhagjeog-weonri</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/frontend/mapbox-gl-guide</loc>
-    <lastmod>2025-12-30T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/frontend/turf-polygon-operations</loc>
     <lastmod>2025-12-30T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/frontend/web-maps</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/languages/asyncio-concurrency-guide</loc>
-    <lastmod>2026-01-02T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/languages/biteu-yeonsan-hwalyong</loc>
     <lastmod>2025-12-27T00:00:00.000Z</lastmod>
@@ -440,17 +239,8 @@
     <loc>https://kimseogyu.github.io/languages/programming-language-notes</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
   </url><url>
-    <loc>https://kimseogyu.github.io/languages/typescript-5-0-rc-balpyoeseo-dekoreiteo-bubun-yoyag</loc>
-    <lastmod>2025-12-27T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/misc/dokgeomi-silent-bada-switch-review</loc>
-    <lastmod>2026-02-21T00:00:00.000Z</lastmod>
-  </url><url>
     <loc>https://kimseogyu.github.io/misc/keyboard-setup</loc>
     <lastmod>2026-11-16T00:00:00.000Z</lastmod>
-  </url><url>
-    <loc>https://kimseogyu.github.io/quant/backtest-research-hygiene</loc>
-    <lastmod>2026-11-15T00:00:00.000Z</lastmod>
   </url><url>
     <loc>https://kimseogyu.github.io/quant/quant-finance-study-notes</loc>
     <lastmod>2026-03-20T00:00:00.000Z</lastmod>
