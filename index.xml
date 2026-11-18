@@ -6,65 +6,65 @@
       <description>최근 10 건 on Seogyu Kim</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>BM25: 검색 엔진의 핵심 랭킹 알고리즘</title>
+    <link>https://kimseogyu.github.io/ai-ml/bm25-geomsaeg-enjinyi-haegsim-raengking-algorijeum</link>
+    <guid>https://kimseogyu.github.io/ai-ml/bm25-geomsaeg-enjinyi-haegsim-raengking-algorijeum</guid>
+    <description><![CDATA[ 현대 검색 엔진의 표준 랭킹 알고리즘인 BM25의 수학적 원리와 구현 방법, 그리고 실무 활용법을 상세히 분석합니다. ]]></description>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Faiss와 OpenSearch 벡터 검색 비교</title>
+    <link>https://kimseogyu.github.io/ai-ml/faiss-wa-opensearch-begteo-geomsaeg-bigyo</link>
+    <guid>https://kimseogyu.github.io/ai-ml/faiss-wa-opensearch-begteo-geomsaeg-bigyo</guid>
+    <description><![CDATA[ Facebook의 Faiss와 AWS의 OpenSearch가 제공하는 벡터 검색 기술을 비교하고, 각 도구의 강점과 적합한 사용 사례를 분석합니다. ]]></description>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
     <title>LLM 지식베이스와 메모리</title>
     <link>https://kimseogyu.github.io/ai-ml/llm-memory</link>
     <guid>https://kimseogyu.github.io/ai-ml/llm-memory</guid>
     <description><![CDATA[ LLM이 오래 쓰는 지식베이스는 정교한 구조보다 싸게 기록하고 정확히 회수하는 것이 먼저이며, 실제로 막히는 지점은 검색보다 기록(컴파일) 단계였다. ]]></description>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>로컬 LLM과 에이전트 프레임워크</title>
-    <link>https://kimseogyu.github.io/ai-ml/llm-runtime-stack</link>
-    <guid>https://kimseogyu.github.io/ai-ml/llm-runtime-stack</guid>
-    <description><![CDATA[ 로컬 LLM 장비는 목표 모델이 메모리에 안정적으로 올라가는지로 고르고, 에이전트 흐름은 호출 계층과 상태 제어 계층을 나눠 짠다. ]]></description>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
+    <title>RRF: 하이브리드 검색의 핵심 랭크 퓨전 알고리즘</title>
+    <link>https://kimseogyu.github.io/ai-ml/rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum</link>
+    <guid>https://kimseogyu.github.io/ai-ml/rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum</guid>
+    <description><![CDATA[ 키워드 검색과 벡터 검색을 결합하는 Reciprocal Rank Fusion(RRF) 알고리즘의 원리와 실무 적용 방법을 상세히 분석합니다. ]]></description>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>검색 랭킹과 하이브리드 검색</title>
     <link>https://kimseogyu.github.io/ai-ml/search-ranking</link>
     <guid>https://kimseogyu.github.io/ai-ml/search-ranking</guid>
     <description><![CDATA[ 키워드 랭킹(BM25)과 벡터 검색은 서로 다른 곳에서 실패하므로 함께 돌리고, 두 결과는 점수가 아니라 순위로 합친다. ]]></description>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>통합 테스트와 E2E 테스트</title>
-    <link>https://kimseogyu.github.io/backend/backend-testing-strategy</link>
-    <guid>https://kimseogyu.github.io/backend/backend-testing-strategy</guid>
-    <description><![CDATA[ mock으로 잡히지 않는 장애를 배포 전에 찾기 위해 실제 의존성을 띄운 통합 테스트와 환경별로 계층을 나눈 E2E 테스트를 함께 둔다. ]]></description>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>빌드와 릴리스 운영</title>
-    <link>https://kimseogyu.github.io/backend/build-and-release-practices</link>
-    <guid>https://kimseogyu.github.io/backend/build-and-release-practices</guid>
-    <description><![CDATA[ 작은 변경을 자주 통합하고, 이미지와 설정을 매번 같은 방식으로 만들어 배포 결과를 예측 가능하게 하는 운영 규칙이다. ]]></description>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>연결 자원 고갈</title>
-    <link>https://kimseogyu.github.io/backend/connection-resource-limits</link>
-    <guid>https://kimseogyu.github.io/backend/connection-resource-limits</guid>
-    <description><![CDATA[ 포트나 파일 디스크립터가 바닥나 연결이 실패하는 문제로, 커널 한도를 올리기 전에 애플리케이션의 연결 관리부터 고쳐야 재발하지 않는다. ]]></description>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>도메인 모델링과 상태 설계</title>
     <link>https://kimseogyu.github.io/backend/domain-modeling</link>
     <guid>https://kimseogyu.github.io/backend/domain-modeling</guid>
     <description><![CDATA[ 비즈니스 규칙이 깨지지 않도록 상태를 바꾸는 경로를 좁히는 설계로, 잘못된 연산은 검사하기보다 아예 표현할 수 없게 만든다. ]]></description>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Enterprise Go 시리즈 #4: Goroutine과 Channel 실전 활용</title>
+    <link>https://kimseogyu.github.io/backend/enterprise-go-4-goroutine-channel</link>
+    <guid>https://kimseogyu.github.io/backend/enterprise-go-4-goroutine-channel</guid>
+    <description><![CDATA[ ExecutorService, Worker Threads에 익숙한 개발자를 위한 Go 동시성 모델 가이드. Goroutine의 메모리 특성과 안전한 패턴을 다룹니다. ]]></description>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Enterprise Go 시리즈 #8: Observability와 Debugging</title>
+    <link>https://kimseogyu.github.io/backend/enterprise-go-8-observability</link>
+    <guid>https://kimseogyu.github.io/backend/enterprise-go-8-observability</guid>
+    <description><![CDATA[ Micrometer, Winston에 익숙한 개발자를 위한 Go Observability 가이드. Grafana 대시보드와 Alert 연동까지 다룹니다. ]]></description>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>Enterprise Go</title>
     <link>https://kimseogyu.github.io/backend/enterprise-go</link>
     <guid>https://kimseogyu.github.io/backend/enterprise-go</guid>
     <description><![CDATA[ 운영 가능한 Go 서비스를 만드는 구조, 서버, 동시성, DB, 외부 통신, 테스트, 관측성, 빌드 표준을 묶은 실무 기준이다. ]]></description>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
-    <title>GitLab CI/CD</title>
-    <link>https://kimseogyu.github.io/backend/gitlab-ci</link>
-    <guid>https://kimseogyu.github.io/backend/gitlab-ci</guid>
-    <description><![CDATA[ GitLab CI/CD는 저장소의 .gitlab-ci.yml에 Stage와 Job을 정의하고 Runner가 실행하는 GitLab 내장 파이프라인이다. ]]></description>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>GitOps</title>
-    <link>https://kimseogyu.github.io/backend/gitops</link>
-    <guid>https://kimseogyu.github.io/backend/gitops</guid>
-    <description><![CDATA[ GitOps는 Git을 유일한 원본으로 두고 클러스터 안의 에이전트가 그 상태를 끌어와 계속 맞추는 배포 방식이다. ]]></description>
-    <pubDate>Mon, 16 Nov 2026 00:00:00 GMT</pubDate>
+    <title>Go 가비지 컬렉터(GC) 이해와 튜닝 경험</title>
+    <link>https://kimseogyu.github.io/backend/gc-tuning-experience</link>
+    <guid>https://kimseogyu.github.io/backend/gc-tuning-experience</guid>
+    <description><![CDATA[ Go GC 튜닝에서 실제로 효과가 큰 순서와 운영 체크포인트를 정리합니다. ]]></description>
+    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
   </item>
     </channel>
   </rss>
