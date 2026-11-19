@@ -6,10 +6,28 @@
       <description>최근 10 건 on Seogyu Kim</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>도메인 모델링과 상태 설계</title>
+    <link>https://kimseogyu.github.io/backend/domain-modeling</link>
+    <guid>https://kimseogyu.github.io/backend/domain-modeling</guid>
+    <description><![CDATA[ 비즈니스 규칙이 깨지지 않도록 상태를 바꾸는 경로를 좁히는 설계로, 잘못된 연산은 검사하기보다 아예 표현할 수 없게 만든다. ]]></description>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
     <title>Enterprise Go</title>
     <link>https://kimseogyu.github.io/backend/enterprise-go</link>
     <guid>https://kimseogyu.github.io/backend/enterprise-go</guid>
     <description><![CDATA[ 운영 가능한 Go 서비스를 만드는 구조, 서버, 동시성, DB, 외부 통신, 테스트, 관측성, 빌드 표준을 묶은 실무 기준이다. ]]></description>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>GitOps</title>
+    <link>https://kimseogyu.github.io/backend/gitops</link>
+    <guid>https://kimseogyu.github.io/backend/gitops</guid>
+    <description><![CDATA[ GitOps는 Git을 유일한 원본으로 두고 클러스터 안의 에이전트가 그 상태를 끌어와 계속 맞추는 배포 방식이다. ]]></description>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Aptos와 Move</title>
+    <link>https://kimseogyu.github.io/blockchain/aptos-move</link>
+    <guid>https://kimseogyu.github.io/blockchain/aptos-move</guid>
+    <description><![CDATA[ Aptos는 합의로 순서를 정하고 Move VM으로 상태를 바꾸는 체인이며, Move는 자산 소유권과 조작 권한을 언어가 강제한다. ]]></description>
     <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
   </item><item>
     <title>블록체인 인덱서</title>
@@ -46,24 +64,6 @@
     <link>https://kimseogyu.github.io/ai-ml/faiss-wa-opensearch-begteo-geomsaeg-bigyo</link>
     <guid>https://kimseogyu.github.io/ai-ml/faiss-wa-opensearch-begteo-geomsaeg-bigyo</guid>
     <description><![CDATA[ Facebook의 Faiss와 AWS의 OpenSearch가 제공하는 벡터 검색 기술을 비교하고, 각 도구의 강점과 적합한 사용 사례를 분석합니다. ]]></description>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>LLM 지식베이스와 메모리</title>
-    <link>https://kimseogyu.github.io/ai-ml/llm-memory</link>
-    <guid>https://kimseogyu.github.io/ai-ml/llm-memory</guid>
-    <description><![CDATA[ LLM이 오래 쓰는 지식베이스는 정교한 구조보다 싸게 기록하고 정확히 회수하는 것이 먼저이며, 실제로 막히는 지점은 검색보다 기록(컴파일) 단계였다. ]]></description>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>RRF: 하이브리드 검색의 핵심 랭크 퓨전 알고리즘</title>
-    <link>https://kimseogyu.github.io/ai-ml/rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum</link>
-    <guid>https://kimseogyu.github.io/ai-ml/rrf-haibeurideu-geomsaegyi-haegsim-raengkeu-pyujeon-algorijeum</guid>
-    <description><![CDATA[ 키워드 검색과 벡터 검색을 결합하는 Reciprocal Rank Fusion(RRF) 알고리즘의 원리와 실무 적용 방법을 상세히 분석합니다. ]]></description>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>검색 랭킹과 하이브리드 검색</title>
-    <link>https://kimseogyu.github.io/ai-ml/search-ranking</link>
-    <guid>https://kimseogyu.github.io/ai-ml/search-ranking</guid>
-    <description><![CDATA[ 키워드 랭킹(BM25)과 벡터 검색은 서로 다른 곳에서 실패하므로 함께 돌리고, 두 결과는 점수가 아니라 순위로 합친다. ]]></description>
     <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
   </item>
     </channel>
