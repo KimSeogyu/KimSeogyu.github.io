@@ -6,6 +6,36 @@
       <description>최근 10 건 on Seogyu Kim</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>Enterprise Go</title>
+    <link>https://kimseogyu.github.io/backend/enterprise-go</link>
+    <guid>https://kimseogyu.github.io/backend/enterprise-go</guid>
+    <description><![CDATA[ 운영 가능한 Go 서비스를 만드는 구조, 서버, 동시성, DB, 외부 통신, 테스트, 관측성, 빌드 표준을 묶은 실무 기준이다. ]]></description>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>블록체인 인덱서</title>
+    <link>https://kimseogyu.github.io/blockchain/blockchain-indexer</link>
+    <guid>https://kimseogyu.github.io/blockchain/blockchain-indexer</guid>
+    <description><![CDATA[ 블록체인 인덱서는 체인 이벤트를 수집하고 파싱해 조회하기 좋은 DB에 적재하는 오프체인 읽기 최적화 계층이다. ]]></description>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>데이터 가용성</title>
+    <link>https://kimseogyu.github.io/blockchain/data-availability</link>
+    <guid>https://kimseogyu.github.io/blockchain/data-availability</guid>
+    <description><![CDATA[ 데이터 가용성은 해시가 맞는지가 아니라 데이터를 실제로 받을 수 있는지의 문제이며, Celestia는 2D 이레이저 코딩과 무작위 샘플링으로 이를 확률적으로 확인한다. ]]></description>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>트랜잭션과 격리수준</title>
+    <link>https://kimseogyu.github.io/database/transactions-and-isolation</link>
+    <guid>https://kimseogyu.github.io/database/transactions-and-isolation</guid>
+    <description><![CDATA[ ACID는 이론이 아니라 운영 계약이며, 트랜잭션 경계와 격리수준과 Upsert는 도메인이 견딜 수 있는 이상현상에 맞춰 고른다. ]]></description>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Ceph</title>
+    <link>https://kimseogyu.github.io/distributed-systems/ceph-storage</link>
+    <guid>https://kimseogyu.github.io/distributed-systems/ceph-storage</guid>
+    <description><![CDATA[ Ceph는 CRUSH로 중앙 조회 없이 데이터 위치를 계산하는 분산 스토리지로, 이레이저 코딩 풀에서는 배치 규칙과 메타데이터 일관성이 내구성을 좌우한다. ]]></description>
+    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
     <title>BM25: 검색 엔진의 핵심 랭킹 알고리즘</title>
     <link>https://kimseogyu.github.io/ai-ml/bm25-geomsaeg-enjinyi-haegsim-raengking-algorijeum</link>
     <guid>https://kimseogyu.github.io/ai-ml/bm25-geomsaeg-enjinyi-haegsim-raengking-algorijeum</guid>
@@ -34,36 +64,6 @@
     <link>https://kimseogyu.github.io/ai-ml/search-ranking</link>
     <guid>https://kimseogyu.github.io/ai-ml/search-ranking</guid>
     <description><![CDATA[ 키워드 랭킹(BM25)과 벡터 검색은 서로 다른 곳에서 실패하므로 함께 돌리고, 두 결과는 점수가 아니라 순위로 합친다. ]]></description>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>도메인 모델링과 상태 설계</title>
-    <link>https://kimseogyu.github.io/backend/domain-modeling</link>
-    <guid>https://kimseogyu.github.io/backend/domain-modeling</guid>
-    <description><![CDATA[ 비즈니스 규칙이 깨지지 않도록 상태를 바꾸는 경로를 좁히는 설계로, 잘못된 연산은 검사하기보다 아예 표현할 수 없게 만든다. ]]></description>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>Enterprise Go 시리즈 #4: Goroutine과 Channel 실전 활용</title>
-    <link>https://kimseogyu.github.io/backend/enterprise-go-4-goroutine-channel</link>
-    <guid>https://kimseogyu.github.io/backend/enterprise-go-4-goroutine-channel</guid>
-    <description><![CDATA[ ExecutorService, Worker Threads에 익숙한 개발자를 위한 Go 동시성 모델 가이드. Goroutine의 메모리 특성과 안전한 패턴을 다룹니다. ]]></description>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>Enterprise Go 시리즈 #8: Observability와 Debugging</title>
-    <link>https://kimseogyu.github.io/backend/enterprise-go-8-observability</link>
-    <guid>https://kimseogyu.github.io/backend/enterprise-go-8-observability</guid>
-    <description><![CDATA[ Micrometer, Winston에 익숙한 개발자를 위한 Go Observability 가이드. Grafana 대시보드와 Alert 연동까지 다룹니다. ]]></description>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>Enterprise Go</title>
-    <link>https://kimseogyu.github.io/backend/enterprise-go</link>
-    <guid>https://kimseogyu.github.io/backend/enterprise-go</guid>
-    <description><![CDATA[ 운영 가능한 Go 서비스를 만드는 구조, 서버, 동시성, DB, 외부 통신, 테스트, 관측성, 빌드 표준을 묶은 실무 기준이다. ]]></description>
-    <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>Go 가비지 컬렉터(GC) 이해와 튜닝 경험</title>
-    <link>https://kimseogyu.github.io/backend/gc-tuning-experience</link>
-    <guid>https://kimseogyu.github.io/backend/gc-tuning-experience</guid>
-    <description><![CDATA[ Go GC 튜닝에서 실제로 효과가 큰 순서와 운영 체크포인트를 정리합니다. ]]></description>
     <pubDate>Wed, 18 Nov 2026 00:00:00 GMT</pubDate>
   </item>
     </channel>
