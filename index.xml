@@ -6,6 +6,24 @@
       <description>최근 10 건 on Seogyu Kim</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>빌드와 릴리스 운영</title>
+    <link>https://kimseogyu.github.io/backend/build-and-release-practices</link>
+    <guid>https://kimseogyu.github.io/backend/build-and-release-practices</guid>
+    <description><![CDATA[ 작은 변경을 자주 통합하고, 이미지와 설정을 매번 같은 방식으로 만들어 배포 결과를 예측 가능하게 하는 운영 규칙이다. ]]></description>
+    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>연결 자원 고갈</title>
+    <link>https://kimseogyu.github.io/backend/connection-resource-limits</link>
+    <guid>https://kimseogyu.github.io/backend/connection-resource-limits</guid>
+    <description><![CDATA[ 포트나 파일 디스크립터가 바닥나 연결이 실패하는 문제로, 커널 한도를 올리기 전에 애플리케이션의 연결 관리부터 고쳐야 재발하지 않는다. ]]></description>
+    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>PostgreSQL 인덱스와 쿼리 튜닝</title>
+    <link>https://kimseogyu.github.io/database/postgresql-performance</link>
+    <guid>https://kimseogyu.github.io/database/postgresql-performance</guid>
+    <description><![CDATA[ 데이터의 모양에 맞는 인덱스를 고르고, 실행 계획과 통계를 근거로 작은 변경부터 적용하는 PostgreSQL 성능 관리 방법이다. ]]></description>
+    <pubDate>Mon, 23 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
     <title>통합 테스트와 E2E 테스트</title>
     <link>https://kimseogyu.github.io/backend/backend-testing-strategy</link>
     <guid>https://kimseogyu.github.io/backend/backend-testing-strategy</guid>
@@ -46,24 +64,6 @@
     <link>https://kimseogyu.github.io/blockchain/aptos-move</link>
     <guid>https://kimseogyu.github.io/blockchain/aptos-move</guid>
     <description><![CDATA[ Aptos는 합의로 순서를 정하고 Move VM으로 상태를 바꾸는 체인이며, Move는 자산 소유권과 조작 권한을 언어가 강제한다. ]]></description>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>블록체인 인덱서</title>
-    <link>https://kimseogyu.github.io/blockchain/blockchain-indexer</link>
-    <guid>https://kimseogyu.github.io/blockchain/blockchain-indexer</guid>
-    <description><![CDATA[ 블록체인 인덱서는 체인 이벤트를 수집하고 파싱해 조회하기 좋은 DB에 적재하는 오프체인 읽기 최적화 계층이다. ]]></description>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>데이터 가용성</title>
-    <link>https://kimseogyu.github.io/blockchain/data-availability</link>
-    <guid>https://kimseogyu.github.io/blockchain/data-availability</guid>
-    <description><![CDATA[ 데이터 가용성은 해시가 맞는지가 아니라 데이터를 실제로 받을 수 있는지의 문제이며, Celestia는 2D 이레이저 코딩과 무작위 샘플링으로 이를 확률적으로 확인한다. ]]></description>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>트랜잭션과 격리수준</title>
-    <link>https://kimseogyu.github.io/database/transactions-and-isolation</link>
-    <guid>https://kimseogyu.github.io/database/transactions-and-isolation</guid>
-    <description><![CDATA[ ACID는 이론이 아니라 운영 계약이며, 트랜잭션 경계와 격리수준과 Upsert는 도메인이 견딜 수 있는 이상현상에 맞춰 고른다. ]]></description>
     <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
   </item>
     </channel>
