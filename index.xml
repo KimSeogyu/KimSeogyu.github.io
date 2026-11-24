@@ -6,6 +6,24 @@
       <description>최근 10 건 on Seogyu Kim</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>gRPC와 Protobuf API 계약</title>
+    <link>https://kimseogyu.github.io/backend/grpc-api-contracts</link>
+    <guid>https://kimseogyu.github.io/backend/grpc-api-contracts</guid>
+    <description><![CDATA[ 하나의 Proto 정의로 gRPC와 HTTP/JSON을 함께 제공한다. Buf는 스키마 변경을 검사하고, gRPC-Gateway는 HTTP 요청을 같은 서비스 구현에 연결한다. ]]></description>
+    <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>Redis 활용 패턴</title>
+    <link>https://kimseogyu.github.io/database/redis-patterns</link>
+    <guid>https://kimseogyu.github.io/database/redis-patterns</guid>
+    <description><![CDATA[ Redis 락은 작업 경합을 줄이고, Streams는 처리하거나 다시 보낼 이벤트를 기록한다. 실시간 라우팅에서는 Hash로 세션 위치를 찾고 Pub/Sub로 메시지를 전달한다. ]]></description>
+    <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>이레이저 코딩</title>
+    <link>https://kimseogyu.github.io/distributed-systems/erasure-coding</link>
+    <guid>https://kimseogyu.github.io/distributed-systems/erasure-coding</guid>
+    <description><![CDATA[ 리드-솔로몬 코드는 데이터 조각 k개에 패리티 조각 m개를 더해 최대 m개가 사라져도 원본을 복구한다. 복제보다 저장 공간을 아끼지만 복구할 때 계산이 더 필요하다. ]]></description>
+    <pubDate>Tue, 24 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
     <title>빌드와 릴리스 운영</title>
     <link>https://kimseogyu.github.io/backend/build-and-release-practices</link>
     <guid>https://kimseogyu.github.io/backend/build-and-release-practices</guid>
@@ -46,24 +64,6 @@
     <link>https://kimseogyu.github.io/backend/domain-modeling</link>
     <guid>https://kimseogyu.github.io/backend/domain-modeling</guid>
     <description><![CDATA[ 비즈니스 규칙이 깨지지 않도록 상태를 바꾸는 경로를 좁히는 설계로, 잘못된 연산은 검사하기보다 아예 표현할 수 없게 만든다. ]]></description>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>Enterprise Go</title>
-    <link>https://kimseogyu.github.io/backend/enterprise-go</link>
-    <guid>https://kimseogyu.github.io/backend/enterprise-go</guid>
-    <description><![CDATA[ 운영 가능한 Go 서비스를 만드는 구조, 서버, 동시성, DB, 외부 통신, 테스트, 관측성, 빌드 표준을 묶은 실무 기준이다. ]]></description>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>GitOps</title>
-    <link>https://kimseogyu.github.io/backend/gitops</link>
-    <guid>https://kimseogyu.github.io/backend/gitops</guid>
-    <description><![CDATA[ GitOps는 Git을 유일한 원본으로 두고 클러스터 안의 에이전트가 그 상태를 끌어와 계속 맞추는 배포 방식이다. ]]></description>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>Aptos와 Move</title>
-    <link>https://kimseogyu.github.io/blockchain/aptos-move</link>
-    <guid>https://kimseogyu.github.io/blockchain/aptos-move</guid>
-    <description><![CDATA[ Aptos는 합의로 순서를 정하고 Move VM으로 상태를 바꾸는 체인이며, Move는 자산 소유권과 조작 권한을 언어가 강제한다. ]]></description>
     <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
   </item>
     </channel>
