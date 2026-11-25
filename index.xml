@@ -6,6 +6,24 @@
       <description>최근 10 건 on Seogyu Kim</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>LLM 지식베이스와 메모리</title>
+    <link>https://kimseogyu.github.io/ai-ml/llm-memory</link>
+    <guid>https://kimseogyu.github.io/ai-ml/llm-memory</guid>
+    <description><![CDATA[ LLM이 오래 쓰는 지식베이스는 정교한 구조보다 싸게 기록하고 정확히 회수하는 것이 먼저이며, 실제로 막히는 지점은 검색보다 기록(컴파일) 단계였다. ]]></description>
+    <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>지갑 키 관리와 다자 서명</title>
+    <link>https://kimseogyu.github.io/blockchain/wallet-key-management</link>
+    <guid>https://kimseogyu.github.io/blockchain/wallet-key-management</guid>
+    <description><![CDATA[ 키는 시드 하나에서 계층적으로 파생해 복구를 단순하게 하고, 여러 참여자가 서명해야 하면 검증식과 요구 정족수에 맞춰 FROST, MuSig2, Threshold ECDSA를 고른다. ]]></description>
+    <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
+    <title>MongoDB 샤딩과 스토리지 엔진</title>
+    <link>https://kimseogyu.github.io/database/mongodb-operations</link>
+    <guid>https://kimseogyu.github.io/database/mongodb-operations</guid>
+    <description><![CDATA[ MongoDB 운영은 샤드 키 선택과 WiredTiger의 캐시·체크포인트·저널 정책 두 가지가 성패를 가른다. ]]></description>
+    <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+  </item><item>
     <title>gRPC와 Protobuf API 계약</title>
     <link>https://kimseogyu.github.io/backend/grpc-api-contracts</link>
     <guid>https://kimseogyu.github.io/backend/grpc-api-contracts</guid>
@@ -47,24 +65,6 @@
     <guid>https://kimseogyu.github.io/backend/backend-testing-strategy</guid>
     <description><![CDATA[ mock으로 잡히지 않는 장애를 배포 전에 찾기 위해 실제 의존성을 띄운 통합 테스트와 환경별로 계층을 나눈 E2E 테스트를 함께 둔다. ]]></description>
     <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>GitLab CI/CD</title>
-    <link>https://kimseogyu.github.io/backend/gitlab-ci</link>
-    <guid>https://kimseogyu.github.io/backend/gitlab-ci</guid>
-    <description><![CDATA[ GitLab CI/CD는 저장소의 .gitlab-ci.yml에 Stage와 Job을 정의하고 Runner가 실행하는 GitLab 내장 파이프라인이다. ]]></description>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>Kubernetes</title>
-    <link>https://kimseogyu.github.io/backend/kubernetes</link>
-    <guid>https://kimseogyu.github.io/backend/kubernetes</guid>
-    <description><![CDATA[ Kubernetes는 원하는 상태를 선언하면 컨트롤러가 현재 상태를 계속 그 상태로 맞추는 컨테이너 오케스트레이션 플랫폼이다. ]]></description>
-    <pubDate>Fri, 20 Nov 2026 00:00:00 GMT</pubDate>
-  </item><item>
-    <title>도메인 모델링과 상태 설계</title>
-    <link>https://kimseogyu.github.io/backend/domain-modeling</link>
-    <guid>https://kimseogyu.github.io/backend/domain-modeling</guid>
-    <description><![CDATA[ 비즈니스 규칙이 깨지지 않도록 상태를 바꾸는 경로를 좁히는 설계로, 잘못된 연산은 검사하기보다 아예 표현할 수 없게 만든다. ]]></description>
-    <pubDate>Thu, 19 Nov 2026 00:00:00 GMT</pubDate>
   </item>
     </channel>
   </rss>
